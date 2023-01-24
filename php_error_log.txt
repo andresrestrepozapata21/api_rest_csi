@@ -1,0 +1,78 @@
+[24-Jan-2023 14:32:08 Europe/Berlin] PHP Warning:  require_once(models/get.model.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\models\connection.php on line 3
+[24-Jan-2023 14:32:08 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'models/get.model.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\models\connection.php:3
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\index.php(15): require_once()
+#1 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\connection.php on line 3
+[24-Jan-2023 15:03:17 Europe/Berlin] PHP Warning:  include(services/post.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 16
+[24-Jan-2023 15:03:17 Europe/Berlin] PHP Warning:  include(): Failed opening 'services/post.php' for inclusion (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 16
+[24-Jan-2023 15:03:38 Europe/Berlin] PHP Warning:  include(services/post.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 16
+[24-Jan-2023 15:03:38 Europe/Berlin] PHP Warning:  include(): Failed opening 'services/post.php' for inclusion (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 16
+[24-Jan-2023 15:03:43 Europe/Berlin] PHP Warning:  include(services/post.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 16
+[24-Jan-2023 15:03:43 Europe/Berlin] PHP Warning:  include(): Failed opening 'services/post.php' for inclusion (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 16
+[24-Jan-2023 15:19:55 Europe/Berlin] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 17
+[24-Jan-2023 15:20:02 Europe/Berlin] PHP Warning:  Undefined array key "nombre" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 17
+[24-Jan-2023 15:38:03 Europe/Berlin] PHP Warning:  require_once(controllers/post.controller.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\routes\services\post.customerRecord.php on line 4
+[24-Jan-2023 15:38:03 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'controllers/post.controller.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\routes\services\post.customerRecord.php:4
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\routes.php(47): include()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#3 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\routes\services\post.customerRecord.php on line 4
+[24-Jan-2023 16:13:53 Europe/Berlin] PHP Warning:  Undefined array key "email_usuario_cliente" in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 20
+[24-Jan-2023 16:13:53 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "PostModel" not found in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php:65
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerLogin.php(9): PostController::postLogin(Array)
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(51): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 65
+[24-Jan-2023 16:15:04 Europe/Berlin] PHP Warning:  Undefined array key "email_usuario_cliente" in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 20
+[24-Jan-2023 16:15:04 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "PostModel" not found in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php:65
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerLogin.php(9): PostController::postLogin(Array)
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(51): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 65
+[24-Jan-2023 16:15:27 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "PostModel" not found in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php:65
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerLogin.php(9): PostController::postLogin(Array)
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(51): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 65
+[24-Jan-2023 16:18:21 Europe/Berlin] PHP Warning:  Undefined variable $response in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 18
+[24-Jan-2023 16:33:22 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'cedula_usuario_agente' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.customerRecord.model.php:33
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.customerRecord.model.php(33): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php(13): PostModel::postData(Array)
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerRecord.php(9): PostController::postRegister(Array)
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(47): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.customerRecord.model.php on line 33
+[24-Jan-2023 16:40:35 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "GetModel" not found in C:\xampp\htdocs\api_rest_csi\models\post.customerLogin.model.php:17
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php(44): LoginModel::loginModel('usuarios_client...', Array, 4, 'id_usuario_clie...')
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerLogin.php(9): PostController::postLogin(Array)
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(51): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.customerLogin.model.php on line 17
+[24-Jan-2023 16:42:00 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'token_usuario_cliente' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.customerLogin.model.php:46
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.customerLogin.model.php(46): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php(44): LoginModel::loginModel('usuarios_client...', Array, '4', 'id_usuario_clie...')
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerLogin.php(9): PostController::postLogin(Array)
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(51): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.customerLogin.model.php on line 46
