@@ -18,7 +18,7 @@ class PostController
         /*=============================================
         Validar el ID
         =============================================*/
-        $response = GetLoginModel::getDataFilter("usuarios_agentes", "*", "email", $data['email'], null, null, null, null);
+        $response = GetLoginModel::getDataFilter("usuarios_agentes", "id_usuario_agente, email, password, token, token_exp", "email", $data['email']);
 
         if (!empty($response)) {
             /*=============================================
@@ -47,16 +47,6 @@ class PostController
 
                     $response[0]->{"token"} = $jwt;
                     $response[0]->{"token_exp"} = $token["exp"];
-                    $email = $response[0]->{"email"};
-                    $id = $response[0]->{"id_usuario_agente"};
-
-                    /*
-                    $respuesta = array(
-                        'id' =>  $id,
-                        'email' => $email,
-                        'token' => $jwt,
-                        'token_exp' => $token["exp"]
-                    );*/
 
                     $return = new PostController();
                     $return->fncResponse($response);
@@ -81,7 +71,7 @@ class PostController
     {
         if (!empty($response)) {
 
-            unset($response[0]->{"cedula_usuario_agente"},$response[0]->{"nombre_usuario_agente"},$response[0]->{"apellido_usuario_agente"},$response[0]->{"telefono_usuario_agente"},$response[0]->{"direccion_usuario_agente"},$response[0]->{"password"},$response[0]->{"activo_usuario_agente"},$response[0]->{"estado_usuario_agente"},$response[0]->{"eliminado_usuario_agente"},$response[0]->{"date_created_usuario_agente"},$response[0]->{"date_update_usuario_agente"},$response[0]->{"fk_id_tipo_usuario_usuario_agente"},$response[0]->{"lastlogin_usuario_agente"},$response[0]->{"foto_perfil_usuario_agente"});
+            unset($response[0]->{"password"});
 
             $json  = array(
                 'status' => 200,

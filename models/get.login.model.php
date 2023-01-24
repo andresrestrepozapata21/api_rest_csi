@@ -5,60 +5,22 @@ class GetLoginModel
 {
 
     /*=============================================
-    Peticiones GET con filtro
+    Peticiones GET con filtro para ver si existe el usuario cliente o agente que se necesite para logear
     =============================================*/
-    static public function getDataFilter($table, $select, $linkTo, $equalTo, $orderBy, $orderMode, $starAt, $endAt)
+    static public function getDataFilter($table, $select, $linkTo, $equalTo)
     {
 
-        
         /*=============================================
         Validar exitencia de una tabla en la BD
         =============================================*/
         $linkToArray = explode(",", $linkTo);
-        $selectArray = explode(",", $select);
-
-        foreach ($linkToArray as $key => $value) {
-            array_push($selectArray, $value);
-        }
-
-        $selectArray = array_unique($selectArray);
 
         $equalToArray = explode("_", $equalTo);
-        $linkToText = "";
-
-        if (count($linkToArray) > 1) {
-            foreach ($linkToArray as $key => $value) {
-                if ($key > 0) {
-                    $linkToText .= "AND " . $value . " = :" . $value . " ";
-                }
-            }
-        }
 
         /*=============================================
-        Sin ordenar y sin limitar datos
+        Consulta SQL
         =============================================*/
-        $sql = "SELECT $select FROM $table WHERE $linkToArray[0] = '$equalToArray[0]' $linkToText";
-
-        /*=============================================
-        Ordenar sin limitar datos
-        =============================================*/
-        if ($orderBy != null && $orderMode != null && $starAt == null && $endAt == null) {
-            $sql = "SELECT $select FROM $table WHERE $linkToArray[0] = :$linkToArray[0] $linkToText ORDER BY $orderBy $orderMode";
-        }
-
-        /*=============================================
-        Ordenar y limitar datos
-        =============================================*/
-        if ($orderBy != null && $orderMode != null && $starAt != null && $endAt != null) {
-            $sql = "SELECT $select FROM $table WHERE $linkToArray[0] = :$linkToArray[0] $linkToText ORDER BY $orderBy $orderMode LIMIT $starAt, $endAt";
-        }
-
-        /*=============================================
-        Sin ordenar y limitando datos
-        =============================================*/
-        if ($orderBy == null && $orderMode == null && $starAt != null && $endAt != null) {
-            $sql = "SELECT $select FROM $table WHERE $linkToArray[0] = :$linkToArray[0] $linkToText LIMIT $starAt, $endAt";
-        }
+        $sql = "SELECT $select FROM $table WHERE $linkToArray[0] = '$equalToArray[0]'";
 
         $stmt = Connection::connect()->prepare($sql);
 

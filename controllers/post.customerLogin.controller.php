@@ -18,7 +18,7 @@ class PostController
         /*=============================================
         Validar el ID
         =============================================*/
-        $response = GetLoginModel::getDataFilter("usuarios_clientes", "*", "email", $data['email'], null, null, null, null);
+        $response = GetLoginModel::getDataFilter("usuarios_clientes", "id_usuario_cliente, email, password, token, token_exp", "email", $data['email']);
 
         if (!empty($response)) {
             /*=============================================
@@ -71,8 +71,8 @@ class PostController
     {
         if (!empty($response)) {
 
-            unset($response[0]->{"cedula_usuario_cliente"},$response[0]->{"nombre_usuario_cliente"},$response[0]->{"apellido_usuario_cliente"},$response[0]->{"telefono_usuario_cliente"},$response[0]->{"direccion_usuario_cliente"},$response[0]->{"password"},$response[0]->{"activo_usuario_cliente"},$response[0]->{"estado_usuario_cliente"},$response[0]->{"eliminado_usuario_cliente"},$response[0]->{"date_created_usuario_cliente"},$response[0]->{"date_update_usuario_cliente"},$response[0]->{"fk_id_tipo_usuario_usuario_cliente"},$response[0]->{"lastlogin_usuario_cliente"},$response[0]->{"foto_perfil_usuario_cliente"},$response[0]->{"presentacion_inicial_popup_usuario_cliente"},$response[0]->{"anuncio_popup_usuario_cliente"});
-
+            unset($response[0]->{"password"});
+            
             $json  = array(
 
                 'status' => 200,
