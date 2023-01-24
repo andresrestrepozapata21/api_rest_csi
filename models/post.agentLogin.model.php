@@ -12,9 +12,9 @@ class LoginModel
     {
 
         /*=============================================
-        Validar el ID
+        Validamos que 
         =============================================*/
-        $response = GetLoginModel::getDataFilter($table, $nameId, $nameId, $id, null, null, null, null);
+        $response = GetLoginModel::getDataFilter($table, $nameId, $nameId, $id);
 
         if(empty($response)){
             return null;
