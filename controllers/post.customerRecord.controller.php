@@ -2,6 +2,7 @@
 
 require_once "models/connection.php";
 require_once "models/post.customerRecord.model.php";
+require_once "models/get.login.model.php";
 
 class PostController
 {
@@ -10,13 +11,27 @@ class PostController
     =============================================*/
     static public function postRegister($data)
     {
-        $crypt = crypt($data['password'], '$2a$07$azybxcags23425sdg23sdfhsd$');
-        $data['password'] = $crypt;
-        
-        $response = PostModel::postData($data);
+        /*=============================================
+        Validamos que el correo No exista en base de datos
+        =============================================*/
+        $response = GetLoginModel::getDataFilter("usuarios_agentes", "id_usuario_agente, email", "email", $data->email);
 
-        $return = new PostController();
-        $return->fncResponse($response);
+        if (empty($response)) {
+
+            $crypt = crypt($data->password, '$2a$07$azybxcags23425sdg23sdfhsd$');
+            $data->password = $crypt;
+
+            $response = PostModel::postData($data);
+
+            $return = new PostController();
+            $return->fncResponse($response);
+        } else {
+            $response = array(
+                "comment" => "This email is already in use"
+            );
+            $return = new PostController();
+            $return->fncResponse($response);
+        }
     }
 
     /*=============================================

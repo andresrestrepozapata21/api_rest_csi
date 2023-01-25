@@ -19,13 +19,13 @@ class PostController
         /*=============================================
         Validamos que el correo exita en base de datos
         =============================================*/
-        $response = GetLoginModel::getDataFilter("usuarios_clientes", "id_usuario_cliente, email, password, token, token_exp", "email", $data['email']);
+        $response = GetLoginModel::getDataFilter("usuarios_clientes", "id_usuario_cliente, email, password, token, token_exp", "email", $data->email);
 
         if (!empty($response)) {
             /*=============================================
             Encriptamos la contraseña
             =============================================*/
-            $crypt = crypt($data['password'], '$2a$07$azybxcags23425sdg23sdfhsd$');
+            $crypt = crypt($data->password, '$2a$07$azybxcags23425sdg23sdfhsd$');
 
             if ($response[0]->{"password"} == $crypt) {
 
@@ -42,7 +42,7 @@ class PostController
                     "token_exp" => $token["exp"]
                 );
 
-                $update = LoginModel::loginModel("usuarios_clientes", $data, $response[0]->{"id_usuario_cliente"}, "id_usuario_cliente");
+                $update = LoginModel::login("usuarios_clientes", $data, $response[0]->{"id_usuario_cliente"}, "id_usuario_cliente");
 
                 if (isset($update['comment']) && $update['comment'] == "The process was successful") {
 

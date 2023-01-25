@@ -8,7 +8,7 @@ class LoginModel
     /*=============================================
     Peticion put para editar datos
     =============================================*/
-    static public function loginModel($table, $data, $id, $nameId)
+    static public function login($table, $data, $id, $nameId)
     {
 
         /*=============================================

@@ -77,3 +77,101 @@ Stack trace:
 #6 {main}
   thrown in C:\xampp\htdocs\api_rest_csi\models\post.customerLogin.model.php on line 46
 [24-Jan-2023 19:02:22 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$password in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 29
+[24-Jan-2023 23:06:09 Europe/Berlin] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 22
+[24-Jan-2023 23:06:58 Europe/Berlin] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 22
+[24-Jan-2023 23:07:29 Europe/Berlin] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 22
+[24-Jan-2023 23:07:41 Europe/Berlin] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 22
+[24-Jan-2023 23:13:26 Europe/Berlin] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 22
+[24-Jan-2023 23:15:27 Europe/Berlin] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 22
+[24-Jan-2023 23:15:53 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php:22
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.agentLogin.php(9): PostController::postLogin(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(54): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 22
+[24-Jan-2023 23:15:59 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php:22
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.agentLogin.php(9): PostController::postLogin(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(54): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 22
+[24-Jan-2023 23:16:03 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 22
+[24-Jan-2023 23:16:16 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php:22
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.agentLogin.php(9): PostController::postLogin(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(54): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 22
+[24-Jan-2023 23:16:22 Europe/Berlin] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 22
+[24-Jan-2023 23:17:38 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php:22
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.agentLogin.php(9): PostController::postLogin(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(54): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 22
+[24-Jan-2023 23:18:49 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php:22
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.agentLogin.php(9): PostController::postLogin(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(54): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 22
+[24-Jan-2023 23:19:13 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php:22
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.agentLogin.php(9): PostController::postLogin(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(54): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 22
+[24-Jan-2023 23:21:41 Europe/Berlin] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php:22
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.agentLogin.php(10): PostController::postLogin('{\r\n    "email":...')
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(54): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 22
+[24-Jan-2023 23:34:42 Europe/Berlin] PHP Warning:  Undefined array key "password" in C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php on line 13
+[25-Jan-2023 14:53:42 Europe/Berlin] PHP Fatal error:  Uncaught Error: Non-static method LoginModel::loginModel() cannot be called statically in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php:45
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerLogin.php(9): PostController::postLogin(Array)
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(52): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 45
+[25-Jan-2023 14:55:00 Europe/Berlin] PHP Fatal error:  Uncaught Error: Non-static method LoginModel::loginModel() cannot be called statically in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php:45
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerLogin.php(9): PostController::postLogin(Array)
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(52): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 45
+[25-Jan-2023 14:59:06 Europe/Berlin] PHP Fatal error:  Uncaught Error: Non-static method LoginModel::loginModel() cannot be called statically in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php:45
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerLogin.php(9): PostController::postLogin(Array)
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(52): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 45
+[25-Jan-2023 14:59:13 Europe/Berlin] PHP Fatal error:  Uncaught Error: Non-static method LoginModel::loginModel() cannot be called statically in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php:45
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerLogin.php(9): PostController->postLogin(Array)
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(52): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(20): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 45
+[25-Jan-2023 14:59:23 Europe/Berlin] PHP Parse error:  syntax error, unexpected token ":" in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 45

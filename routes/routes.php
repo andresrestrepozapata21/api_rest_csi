@@ -14,7 +14,7 @@ if (count($routesArray) == 0) {
     $json  = array(
 
         'status' => 404,
-        'result' => 'Not Found'
+        'result' => 'Enter a request'
     );
 
     echo json_encode($json, http_response_code($json["status"]));
@@ -29,6 +29,7 @@ Cuando si se hace una peticion a la API
 if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
     $table = explode("?", $routesArray[1])[0];
+    $data = json_decode(file_get_contents("php://input"));
 
     /*=============================================
     Peticiones GET
@@ -51,6 +52,16 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             include "services/post.customerLogin.php";   
         }else if($table=="agentLogin"){
             include "services/post.agentLogin.php";   
+        }else{
+            $json  = array(
+
+                'status' => 404,
+                'result' => 'Enter a valid request'
+            );
+        
+            echo json_encode($json, http_response_code($json["status"]));
+        
+            return;
         }
     }
 

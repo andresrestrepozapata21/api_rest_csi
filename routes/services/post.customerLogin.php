@@ -6,6 +6,6 @@ require_once "controllers/post.customerLogin.controller.php";
 if (isset($_POST)) {
 
     $response = new PostController();
-    $response->postLogin($_POST);
+    $response->postLogin($data);
 
 }
