@@ -1,6 +1,6 @@
 <?php
 
-require_once "models/get.passwordCustomer.model.php";
+require_once "models/get.filter.model.php";
 
 class GetController
 {

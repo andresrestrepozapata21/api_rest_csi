@@ -2,7 +2,7 @@
 
 require_once "models/connection.php";
 require_once "models/post.customerLogin.model.php";
-require_once "models/get.login.model.php";
+require_once "models/get.filter.model.php";
 
 require_once "vendor/autoload.php";
 
@@ -19,7 +19,7 @@ class PostController
         /*=============================================
         Validamos que el correo exita en base de datos
         =============================================*/
-        $response = GetLoginModel::getDataFilter("usuarios_clientes", "id_usuario_cliente, email, password, token, token_exp", "email", $data->email);
+        $response = GetModel::getDataFilter("usuarios_clientes", "id_usuario_cliente, email, password, token, token_exp", "email", $data->email);
 
         if (!empty($response)) {
             /*=============================================

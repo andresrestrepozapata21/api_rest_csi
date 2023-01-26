@@ -1,7 +1,6 @@
 <?php
 
 require_once "models/connection.php";
-require_once "models/get.login.model.php";
 
 class LoginModel
 {
@@ -10,15 +9,6 @@ class LoginModel
     =============================================*/
     static public function login($table, $data, $id, $nameId)
     {
-
-        /*=============================================
-        Validar el ID
-        =============================================*/
-        $response = GetLoginModel::getDataFilter($table, $nameId, $nameId, $id);
-
-        if(empty($response)){
-            return null;
-        }
 
         /*=============================================
         Actualizamos registros

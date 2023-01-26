@@ -2,7 +2,7 @@
 
 require_once "models/connection.php";
 require_once "models/post.agentRecord.model.php";
-require_once "models/get.login.model.php";
+require_once "models/get.filter.model.php";
 
 class PostController
 {
@@ -14,7 +14,7 @@ class PostController
         /*=============================================
         Validamos que el correo No exista en base de datos
         =============================================*/
-        $response = GetLoginModel::getDataFilter("usuarios_agentes", "id_usuario_agente, email", "email", $data->email);
+        $response = GetModel::getDataFilter("usuarios_agentes", "id_usuario_agente, email", "email", $data->email);
 
         if (empty($response)) {
             //$crypt = crypt($data->password, '$2a$07$azybxcags23425sdg23sdfhsd$');

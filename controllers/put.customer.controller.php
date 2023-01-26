@@ -1,7 +1,7 @@
 <?php
 
 require_once "models/put.customer.model.php";
-require_once "models/get.id.model.php";
+require_once "models/get.filter.model.php";
 
 class PutController
 {
@@ -15,7 +15,7 @@ class PutController
         /*=============================================
         Validamos que el ID exista en base de datos
         =============================================*/
-        $response = GetIdModel::getDataFilter("usuarios_clientes", "id_usuario_cliente", "id_usuario_cliente", $data->id_usuario_cliente);
+        $response = GetModel::getDataFilter("usuarios_clientes", "id_usuario_cliente", "id_usuario_cliente", $data->id_usuario_cliente);
 
         if (!empty($response)) {
 

@@ -18,14 +18,10 @@ class PostModel
             $params .= ":" . $key . ",";
         }
 
-        $verificationCode = random_int(1000, 9999);
-        $columns .= "codigo_verificacion,";
-        $params .= $verificationCode .",";
-
         $columns = substr($columns, 0, -1);
         $params = substr($params, 0, -1);
 
-        $sql = "INSERT INTO usuarios_agentes ($columns) VALUES ($params)";
+        $sql = "INSERT INTO contactos ($columns) VALUES ($params)";
 
         $link = Connection::connect();
         $stmt = $link->prepare($sql);

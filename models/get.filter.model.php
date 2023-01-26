@@ -1,7 +1,7 @@
 <?php
 require_once "connection.php";
 
-class GetLoginModel
+class GetModel
 {
 
     /*=============================================
@@ -9,18 +9,10 @@ class GetLoginModel
     =============================================*/
     static public function getDataFilter($table, $select, $linkTo, $equalTo)
     {
-
-        /*=============================================
-        Validar exitencia de una tabla en la BD
-        =============================================*/
-        $linkToArray = explode(",", $linkTo);
-
-        $equalToArray = explode("_", $equalTo);
-
         /*=============================================
         Consulta SQL
         =============================================*/
-        $sql = "SELECT $select FROM $table WHERE $linkToArray[0] = '$equalToArray[0]'";
+        $sql = "SELECT $select FROM $table WHERE $linkTo = '$equalTo'";
 
         $stmt = Connection::connect()->prepare($sql);
 

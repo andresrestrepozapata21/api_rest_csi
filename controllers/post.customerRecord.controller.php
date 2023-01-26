@@ -2,7 +2,7 @@
 
 require_once "models/connection.php";
 require_once "models/post.customerRecord.model.php";
-require_once "models/get.login.model.php";
+require_once "models/get.filter.model.php";
 
 class PostController
 {
@@ -14,7 +14,7 @@ class PostController
         /*=============================================
         Validamos que el correo No exista en base de datos
         =============================================*/
-        $response = GetLoginModel::getDataFilter("usuarios_clientes", "id_usuario_cliente, email", "email", $data->email);
+        $response = GetModel::getDataFilter("usuarios_clientes", "id_usuario_cliente, email", "email", $data->email);
 
         if (empty($response)) {
 

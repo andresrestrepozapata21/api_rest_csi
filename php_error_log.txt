@@ -363,3 +363,91 @@ Stack trace:
 [26-Jan-2023 21:55:56 Europe/Berlin] PHP Warning:  Attempt to read property "id_usuario_agente" on null in C:\xampp\htdocs\api_rest_csi\controllers\put.agent.controller.php on line 18
 [26-Jan-2023 21:56:19 Europe/Berlin] PHP Warning:  Attempt to read property "id_usuario_cliente" on null in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php on line 18
 [26-Jan-2023 22:06:31 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$email in C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php on line 17
+[26-Jan-2023 22:56:23 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'nombre_contacto' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.agentRecord.model.php:33
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.agentRecord.model.php(33): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.contact.controller.php(23): PostModel::postData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.contact.php(9): PostController::postRegister(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(74): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.agentRecord.model.php on line 33
+[26-Jan-2023 22:58:29 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'nombre_contacto' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.contact.model.php:33
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.contact.model.php(33): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.contact.controller.php(23): PostModel::postData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.contact.php(9): PostController::postRegister(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(74): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.contact.model.php on line 33
+[26-Jan-2023 23:02:41 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`backend_csi`.`contactos`, CONSTRAINT `fk_contactos_usuarios_clientes_1` FOREIGN KEY (`fk_id_usuario_cliente_contacto`) REFERENCES `usuarios_clientes` (`id_usuario_cliente`)) in C:\xampp\htdocs\api_rest_csi\models\post.contact.model.php:33
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.contact.model.php(33): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.contact.controller.php(23): PostModel::postData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.contact.php(9): PostController::postRegister(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(74): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.contact.model.php on line 33
+[26-Jan-2023 23:14:35 Europe/Berlin] PHP Warning:  require_once(models/get.filter.model.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\controllers\get.passwordCustomer.controller.php on line 3
+[26-Jan-2023 23:14:35 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'models/get.filter.model.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\controllers\get.passwordCustomer.controller.php:3
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\get.passwordCustomer.php(4): require_once()
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(46): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\get.passwordCustomer.controller.php on line 3
+[26-Jan-2023 23:16:09 Europe/Berlin] PHP Warning:  Attempt to read property "email" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.passwordAgent.controller.php on line 17
+[26-Jan-2023 23:17:28 Europe/Berlin] PHP Warning:  require_once(models/post.filter.model.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 4
+[26-Jan-2023 23:17:28 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'models/post.filter.model.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php:4
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.agentLogin.php(4): require_once()
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(72): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 4
+[26-Jan-2023 23:18:06 Europe/Berlin] PHP Warning:  require_once(models/get.login.model.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\models\post.agentLogin.model.php on line 4
+[26-Jan-2023 23:18:06 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'models/get.login.model.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\models\post.agentLogin.model.php:4
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php(4): require_once()
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\post.agentLogin.php(4): require_once('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(72): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.agentLogin.model.php on line 4
+[26-Jan-2023 23:21:53 Europe/Berlin] PHP Warning:  require_once(models/post.filter.model.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\controllers\post.agentRecord.controller.php on line 4
+[26-Jan-2023 23:21:53 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'models/post.filter.model.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\controllers\post.agentRecord.controller.php:4
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.agentRecord.php(4): require_once()
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(68): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.agentRecord.controller.php on line 4
+[26-Jan-2023 23:24:12 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'nombre_usuario_agefdasfnte' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.agentRecord.model.php:33
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.agentRecord.model.php(33): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.agentRecord.controller.php(23): PostModel::postData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.agentRecord.php(9): PostController::postRegister(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(68): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.agentRecord.model.php on line 33
+[26-Jan-2023 23:29:01 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'nombre_usuario_cliefdsante' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.customerRecord.model.php:33
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.customerRecord.model.php(33): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php(24): PostModel::postData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerRecord.php(9): PostController::postRegister(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(66): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.customerRecord.model.php on line 33

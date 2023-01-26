@@ -70,6 +70,8 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             include "services/post.customerLogin.php";   
         }else if($table=="agentLogin"){
             include "services/post.agentLogin.php";   
+        }else if($table=="addContract"){
+            include "services/post.contact.php";   
         }else{
             $json  = array(
 
