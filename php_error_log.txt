@@ -316,3 +316,50 @@ Stack trace:
 [26-Jan-2023 19:50:12 Europe/Berlin] PHP Warning:  Undefined array key "code" in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 80
 [26-Jan-2023 19:50:12 Europe/Berlin] PHP Warning:  Undefined array key "code" in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 90
 [26-Jan-2023 19:50:31 Europe/Berlin] PHP Warning:  Undefined array key "code" in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 80
+[26-Jan-2023 21:07:55 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "GetModel" not found in C:\xampp\htdocs\api_rest_csi\controllers\get.passwordAgent.controller.php:14
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\get.passwordAgent.php(9): GetController->getData(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(44): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\get.passwordAgent.controller.php on line 14
+[26-Jan-2023 21:11:15 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "PostController" not found in C:\xampp\htdocs\api_rest_csi\controllers\get.passwordAgent.controller.php:26
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\get.passwordAgent.php(9): GetController->getData(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(44): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\get.passwordAgent.controller.php on line 26
+[26-Jan-2023 21:12:27 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "PostController" not found in C:\xampp\htdocs\api_rest_csi\controllers\get.passwordAgent.controller.php:26
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\get.passwordAgent.php(9): GetController->getData(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(44): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\get.passwordAgent.controller.php on line 26
+[26-Jan-2023 21:13:53 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$email in C:\xampp\htdocs\api_rest_csi\controllers\get.passwordAgent.controller.php on line 17
+[26-Jan-2023 21:14:10 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$email in C:\xampp\htdocs\api_rest_csi\controllers\get.passwordAgent.controller.php on line 17
+[26-Jan-2023 21:47:35 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php:100
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php(53): PostController->fncResponse(Array)
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerLogin.php(9): PostController::postLogin(Array)
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(68): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 100
+[26-Jan-2023 21:50:09 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php:100
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php(53): PostController->fncResponse(Array)
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerLogin.php(9): PostController::postLogin(Array)
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(68): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 100
+[26-Jan-2023 21:55:56 Europe/Berlin] PHP Warning:  Attempt to read property "id_usuario_agente" on null in C:\xampp\htdocs\api_rest_csi\controllers\put.agent.controller.php on line 18
+[26-Jan-2023 21:56:19 Europe/Berlin] PHP Warning:  Attempt to read property "id_usuario_cliente" on null in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php on line 18
+[26-Jan-2023 22:06:31 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$email in C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php on line 17

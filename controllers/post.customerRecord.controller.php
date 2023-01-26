@@ -14,12 +14,12 @@ class PostController
         /*=============================================
         Validamos que el correo No exista en base de datos
         =============================================*/
-        $response = GetLoginModel::getDataFilter("usuarios_agentes", "id_usuario_agente, email", "email", $data->email);
+        $response = GetLoginModel::getDataFilter("usuarios_clientes", "id_usuario_cliente, email", "email", $data->email);
 
         if (empty($response)) {
 
-            $crypt = crypt($data->password, '$2a$07$azybxcags23425sdg23sdfhsd$');
-            $data->password = $crypt;
+            //$crypt = crypt($data->password, '$2a$07$azybxcags23425sdg23sdfhsd$');
+            //$data->password = $crypt;
 
             $response = PostModel::postData($data);
 
@@ -43,13 +43,13 @@ class PostController
             if($response['code'] == 3){
                 $json  = array(
                     
-                    'status' => 201,
+                    'status' => 200,
                     'result' => $response["code"],
                     'method' => $_SERVER['REQUEST_METHOD']
                 );
             }else{
                 $json = array(
-                    'status' => 400,
+                    'status' => 200,
                     'result' => $response['code'],
                     'method' => $_SERVER['REQUEST_METHOD']
                 );

@@ -48,7 +48,7 @@ class PutController
                 );
             } else {
                 $json = array(
-                    'status' => 400,
+                    'status' => 200,
                     'result' => $response['code'],
                     'method' => $_SERVER['REQUEST_METHOD']
                 );

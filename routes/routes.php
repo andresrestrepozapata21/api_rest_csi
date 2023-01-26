@@ -40,6 +40,10 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             include "services/get.arl.php";
         }else if($table=="getEps"){
             include "services/get.eps.php";
+        }else if($table=="getPasswordAgent"){
+            include "services/get.passwordAgent.php";
+        }else if($table=="getPasswordCustomer"){
+            include "services/get.passwordCustomer.php";
         }else{
             $json  = array(
 

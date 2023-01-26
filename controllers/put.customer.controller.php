@@ -40,6 +40,7 @@ class PutController
 
         if (!empty($response)) {
             if ($response['code'] == 3) {
+                
                 $json  = array(
 
                     'status' => 200,
@@ -48,7 +49,7 @@ class PutController
                 );
             } else {
                 $json = array(
-                    'status' => 400,
+                    'status' => 200,
                     'result' => $response['code'],
                     'method' => $_SERVER['REQUEST_METHOD']
                 );

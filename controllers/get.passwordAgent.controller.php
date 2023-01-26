@@ -1,34 +1,30 @@
 <?php
 
-require_once "models/connection.php";
-require_once "models/post.agentRecord.model.php";
-require_once "models/get.login.model.php";
+require_once "models/get.passwordAgent.model.php";
 
-class PostController
+class GetController
 {
+
     /*=============================================
-    Peticion post para crear cliente
+    Peticiones GET contraseña
     =============================================*/
-    static public function postRegister($data)
+    public function getData($data)
     {
+
         /*=============================================
-        Validamos que el correo No exista en base de datos
+        Llamamos al modelo para consultar el EMAIL
         =============================================*/
-        $response = GetLoginModel::getDataFilter("usuarios_agentes", "id_usuario_agente, email", "email", $data->email);
+        $response = GetModel::getDataFilter("usuarios_agentes", "password", "email", $data->email);
 
-        if (empty($response)) {
-            //$crypt = crypt($data->password, '$2a$07$azybxcags23425sdg23sdfhsd$');
-            //$data->password = $crypt;
+        if (!empty($response)) {
 
-            $response = PostModel::postData($data);
-
-            $return = new PostController();
+            $return = new GetController();
             $return->fncResponse($response);
         } else {
             $response = array(
-                "code" => 2
+                "code" => 1
             );
-            $return = new PostController();
+            $return = new GetController();
             $return->fncResponse($response);
         }
     }
@@ -38,19 +34,18 @@ class PostController
     =============================================*/
     public function fncResponse($response)
     {
+
         if (!empty($response)) {
-            if($response['code'] == 3){
+            if(isset($response['code'])){
                 $json  = array(
-                    
                     'status' => 200,
-                    'result' => $response["code"],
-                    'method' => $_SERVER['REQUEST_METHOD']
+                    'result' => $response['code']
                 );
             }else{
-                $json = array(
+                $json  = array(
                     'status' => 200,
-                    'result' => $response['code'],
-                    'method' => $_SERVER['REQUEST_METHOD']
+                    'result' => 3,
+                    'detail' => $response
                 );
             }
         } else {

@@ -25,7 +25,8 @@ class GetController{
 
                 'status' => 200,
                 'total' => count($response),
-                'result' => $response
+                'result' => 3,
+                'detail' => $response
             );
         }else{
             $json = array(

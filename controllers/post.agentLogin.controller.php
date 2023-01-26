@@ -25,9 +25,9 @@ class PostController
             /*=============================================
             Encriptamos la contraseña
             =============================================*/
-            $crypt = crypt($data->password, '$2a$07$azybxcags23425sdg23sdfhsd$');
+            //$crypt = crypt($data->password, '$2a$07$azybxcags23425sdg23sdfhsd$');
 
-            if ($response[0]->{"password"} == $crypt) {
+            if ($response[0]->{"password"} == $data->password) {
 
                 $token = Connection::jwt($response[0]->{"id_usuario_agente"}, $response[0]->{"email"});
 
@@ -79,13 +79,14 @@ class PostController
 
             if(isset($response['code'])){
                 $json  = array(
-                    'status' => 400,
+                    'status' => 200,
                     'result' => $response['code']
                 );
             }else{
                 $json  = array(
                     'status' => 200,
-                    'result' => $response
+                    'result' => 3,
+                    'detail' => $response
                 );
             }
         } else {
