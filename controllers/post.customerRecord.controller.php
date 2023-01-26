@@ -27,7 +27,7 @@ class PostController
             $return->fncResponse($response);
         } else {
             $response = array(
-                "comment" => "This email is already in use"
+                "code" => 2
             );
             $return = new PostController();
             $return->fncResponse($response);
@@ -40,11 +40,20 @@ class PostController
     public function fncResponse($response)
     {
         if (!empty($response)) {
-            $json  = array(
-
-                'status' => 200,
-                'result' => $response
-            );
+            if($response['code'] == 3){
+                $json  = array(
+                    
+                    'status' => 201,
+                    'result' => $response["code"],
+                    'method' => $_SERVER['REQUEST_METHOD']
+                );
+            }else{
+                $json = array(
+                    'status' => 400,
+                    'result' => $response['code'],
+                    'method' => $_SERVER['REQUEST_METHOD']
+                );
+            }
         } else {
             $json = array(
                 'status' => 404,

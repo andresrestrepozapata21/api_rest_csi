@@ -45,7 +45,7 @@ class LoginModel
 
         if ($stmt->execute()) {
             $response = array(
-                'comment' => "The process was successful"
+                'code' => 3
             );
 
             return $response;

@@ -44,7 +44,7 @@ class PostController
 
                 $update = LoginModel::login("usuarios_clientes", $data, $response[0]->{"id_usuario_cliente"}, "id_usuario_cliente");
 
-                if (isset($update['comment']) && $update['comment'] == "The process was successful") {
+                if (isset($update['code']) && $update['code'] == 3) {
 
                     $response[0]->{"token"}  = $jwt;
                     $response[0]->{"token_exp"}  = $token["exp"];
@@ -54,14 +54,14 @@ class PostController
                 }
             } else {
                 $response = array(
-                    "comment" => "Password incorrect"
+                    "code" => 0
                 );
                 $return = new PostController();
                 $return->fncResponse($response);
             }
         } else {
             $response = array(
-                "comment" => "The mail does not exist"
+                "code" => 1
             );
             $return = new PostController();
             $return->fncResponse($response);
@@ -77,23 +77,17 @@ class PostController
 
             unset($response[0]->{"password"});
 
-            $json  = array(
-
-                'status' => 200,
-                'result' => $response
-            );
-        } else if (isset($response['comment']) && $response['comment'] == "Password incorrect") {
-            $json  = array(
-
-                'status' => 400,
-                'result' => $response
-            );
-        } else if (isset($response['comment']) && $response['comment'] == "The mail does not exist") {
-            $json  = array(
-
-                'status' => 400,
-                'result' => $response
-            );
+            if(isset($response['code'])){
+                $json  = array(
+                    'status' => 400,
+                    'result' => $response['code']
+                );
+            }else{
+                $json  = array(
+                    'status' => 200,
+                    'result' => $response
+                );
+            }
         } else {
             $json = array(
                 'status' => 404,

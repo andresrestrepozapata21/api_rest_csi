@@ -13,8 +13,8 @@ if (count($routesArray) == 0) {
 
     $json  = array(
 
-        'status' => 404,
-        'result' => 'Enter a request'
+        'status' => 400,
+        'result' => 5
     );
 
     echo json_encode($json, http_response_code($json["status"]));
@@ -36,7 +36,21 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
     =============================================*/
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
-        echo "GET";
+        if($table=="getArl"){
+            include "services/get.arl.php";
+        }else if($table=="getEps"){
+            include "services/get.eps.php";
+        }else{
+            $json  = array(
+
+                'status' => 400,
+                'result' => 6
+            );
+        
+            echo json_encode($json, http_response_code($json["status"]));
+        
+            return;
+        }
     }
 
     /*=============================================
@@ -55,8 +69,8 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
         }else{
             $json  = array(
 
-                'status' => 404,
-                'result' => 'Enter a valid request'
+                'status' => 400,
+                'result' => 6
             );
         
             echo json_encode($json, http_response_code($json["status"]));
@@ -70,7 +84,21 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
     =============================================*/
     if ($_SERVER['REQUEST_METHOD'] == "PUT") {
 
-        echo "PUT";
+        if($table=="putCustomer"){
+            include "services/put.customer.php";
+        }else if($table=="putAgent"){
+            include "services/put.agent.php";
+        }else{
+            $json  = array(
+
+                'status' => 400,
+                'result' => 6
+            );
+        
+            echo json_encode($json, http_response_code($json["status"]));
+        
+            return;
+        }
     }
 
     /*=============================================

@@ -175,3 +175,144 @@ Stack trace:
 #4 {main}
   thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 45
 [25-Jan-2023 14:59:23 Europe/Berlin] PHP Parse error:  syntax error, unexpected token ":" in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 45
+[26-Jan-2023 16:40:31 Europe/Berlin] PHP Warning:  Attempt to read property "id_usuario_cliente" on null in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php on line 17
+[26-Jan-2023 16:45:18 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, string given in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php on line 21
+[26-Jan-2023 16:45:18 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, string given in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php on line 32
+[26-Jan-2023 16:45:18 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE id_usuario_cliente = '4'' at line 1 in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php:38
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php(38): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php(21): PutModel::putData('usuarios_client...', '*', 'id_usuario_clie...', '4')
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\put.customer.php(7): PutController->putData(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(88): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php on line 38
+[26-Jan-2023 16:46:22 Europe/Berlin] PHP Warning:  foreach() argument must be of type array|object, string given in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php on line 21
+[26-Jan-2023 16:46:22 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "GetController" not found in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php:23
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\put.customer.php(7): PutController->putData(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(88): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php on line 23
+[26-Jan-2023 16:48:10 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "GetController" not found in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php:23
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\put.customer.php(7): PutController->putData(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(88): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php on line 23
+[26-Jan-2023 16:49:09 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "GetController" not found in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php:23
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\put.customer.php(7): PutController->putData(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(88): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php on line 23
+[26-Jan-2023 16:50:39 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php:33
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php(21): PutModel::putData('usuarios_client...', Object(stdClass), 'id_usuario_clie...', 4)
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\put.customer.php(7): PutController->putData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(88): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php on line 33
+[26-Jan-2023 16:59:53 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php:44
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php(44): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php(21): PutModel::putData('usuarios_client...', Object(stdClass), 'id_usuario_clie...', '4')
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\put.customer.php(7): PutController->putData(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(88): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php on line 44
+[26-Jan-2023 17:36:46 Europe/Berlin] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\post.agentRecord.controller.php on line 42
+[26-Jan-2023 17:38:44 Europe/Berlin] PHP Warning:  Undefined array key "result" in C:\xampp\htdocs\api_rest_csi\controllers\post.agentRecord.controller.php on line 45
+[26-Jan-2023 19:34:03 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "PostController" not found in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php:30
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\put.customer.php(7): PutController->putData(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(88): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php on line 30
+[26-Jan-2023 19:34:12 Europe/Berlin] PHP Warning:  Attempt to read property "id_usuario_cliente" on null in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php on line 18
+[26-Jan-2023 19:34:12 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "PostController" not found in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php:30
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\put.customer.php(7): PutController->putData(NULL)
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(88): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php on line 30
+[26-Jan-2023 19:34:16 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "PostController" not found in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php:30
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\put.customer.php(7): PutController->putData(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(88): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php on line 30
+[26-Jan-2023 19:36:07 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'nombre_usuario_client' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php:33
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php(33): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php(22): PutModel::putData('usuarios_client...', Object(stdClass), 'id_usuario_clie...', 4)
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\put.customer.php(7): PutController->putData(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(88): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php on line 33
+[26-Jan-2023 19:38:05 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'nombre_usuario_client' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php:33
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php(33): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php(22): PutModel::putData('usuarios_client...', Object(stdClass), 'id_usuario_clie...', 4)
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\put.customer.php(7): PutController->putData(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(88): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php on line 33
+[26-Jan-2023 19:38:54 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'nombre_usuario_client' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php:33
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php(33): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php(22): PutModel::putData('usuarios_client...', Object(stdClass), 'id_usuario_clie...', 4)
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\put.customer.php(7): PutController->putData(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(88): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php on line 33
+[26-Jan-2023 19:39:02 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'nombre_usuario_client' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php:33
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php(33): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\put.customer.controller.php(22): PutModel::putData('usuarios_client...', Object(stdClass), 'id_usuario_clie...', 4)
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\put.customer.php(7): PutController->putData(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(88): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\put.customer.model.php on line 33
+[26-Jan-2023 19:42:05 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "PostController" not found in C:\xampp\htdocs\api_rest_csi\controllers\put.agent.controller.php:30
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\put.agent.php(7): PutController->putData(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(90): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\put.agent.controller.php on line 30
+[26-Jan-2023 19:47:08 Europe/Berlin] PHP Warning:  Undefined array key "code" in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 80
+[26-Jan-2023 19:47:08 Europe/Berlin] PHP Warning:  Undefined array key "code" in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 90
+[26-Jan-2023 19:48:18 Europe/Berlin] PHP Warning:  Undefined array key "code" in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 80
+[26-Jan-2023 19:48:18 Europe/Berlin] PHP Warning:  Undefined array key "code" in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 90
+[26-Jan-2023 19:50:04 Europe/Berlin] PHP Warning:  Undefined array key "code" in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 80
+[26-Jan-2023 19:50:04 Europe/Berlin] PHP Warning:  Undefined array key "code" in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 90
+[26-Jan-2023 19:50:12 Europe/Berlin] PHP Warning:  Undefined array key "code" in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 80
+[26-Jan-2023 19:50:12 Europe/Berlin] PHP Warning:  Undefined array key "code" in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 90
+[26-Jan-2023 19:50:31 Europe/Berlin] PHP Warning:  Undefined array key "code" in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 80

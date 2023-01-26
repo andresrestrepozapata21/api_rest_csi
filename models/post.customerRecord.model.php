@@ -33,7 +33,7 @@ class PostModel
         if ($stmt->execute()) {
             $response = array(
                 'lastId' => $link->lastInsertId(),
-                'comment' => "The process was successful"
+                'code' => 3
             );
 
             return $response;

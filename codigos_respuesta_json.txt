@@ -1,0 +1,10 @@
+------------- Estos son los códigos de respuesta de los JSON y su significado -------------------
+
+0 -> Password incorrecto
+1 -> Email no exitenten en base de datos
+2 -> El correo ya existe en base de datos
+3 -> La petición ha sido realizada satisfactoriamente
+4 -> ID no existente en base de datos
+5 -> Ingrese una petición en la URL de forma domicio.com/peticion
+6 -> Ingrese una peticion valida
+7 -> Uno o varios de los nombres de las columnas no coinciden con la base de datos 
