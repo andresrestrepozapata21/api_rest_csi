@@ -1,15 +1,15 @@
 <?php
 
-require_once "models/get.arl.model.php";
+require_once "models/get.arlAndEps.model.php";
 
 class GetController{
 
     /*=============================================
     Peticiones GET sin filtro
     =============================================*/
-    public function getData(){
+    public function getData($table, $select){
 
-        $response = GetModel::getData();
+        $response = GetModel::getData($table, $select);
         
         $return = new GetController();
         $return -> fncResponse($response);

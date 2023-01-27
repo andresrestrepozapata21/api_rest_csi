@@ -1,33 +1,30 @@
 <?php
 
-require_once "models/put.agent.model.php";
 require_once "models/get.filter.model.php";
 
-class PutController
+class GetController
 {
 
     /*=============================================
-    Peticiones PUT
+    Peticiones GET contraseña
     =============================================*/
-    public function putData($data)
+    public function getData($table, $data)
     {
 
         /*=============================================
-        Validamos que el ID exista en base de datos
+        Llamamos al modelo para consultar el EMAIL
         =============================================*/
-        $response = GetModel::getDataFilter("usuarios_agentes", "id_usuario_agente", "id_usuario_agente", $data->id_usuario_agente);
+        $response = GetModel::getDataFilter($table, "password", "email", $data->email);
 
         if (!empty($response)) {
 
-            $response = PutModel::putData("usuarios_agentes", $data, "id_usuario_agente", $data->id_usuario_agente);
-
-            $return = new PutController();
+            $return = new GetController();
             $return->fncResponse($response);
         } else {
             $response = array(
-                "code" => 4
+                "code" => 1
             );
-            $return = new PutController();
+            $return = new GetController();
             $return->fncResponse($response);
         }
     }
@@ -39,18 +36,16 @@ class PutController
     {
 
         if (!empty($response)) {
-            if ($response['code'] == 3) {
+            if(isset($response['code'])){
                 $json  = array(
-
                     'status' => 200,
-                    'result' => $response["code"],
-                    'method' => $_SERVER['REQUEST_METHOD']
+                    'result' => $response['code']
                 );
-            } else {
-                $json = array(
+            }else{
+                $json  = array(
                     'status' => 200,
-                    'result' => $response['code'],
-                    'method' => $_SERVER['REQUEST_METHOD']
+                    'result' => 3,
+                    'detail' => $response
                 );
             }
         } else {

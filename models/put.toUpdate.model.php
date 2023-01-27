@@ -1,14 +1,16 @@
 <?php
 
-require_once "models/connection.php";
+require_once "connection.php";
 
-class LoginModel
+class PutModel
 {
+
     /*=============================================
-    Peticion put para editar datos
+    Peticiones GET sin filtro
     =============================================*/
-    static public function login($table, $data, $id, $nameId)
+    static public function putData($table, $data, $nameId, $id)
     {
+
         /*=============================================
         Actualizamos registros
         =============================================*/
@@ -16,30 +18,31 @@ class LoginModel
         $set = "";
 
         foreach ($data as $key => $value) {
-            $set .= $key . " = :" . $key . ",";
+            if($key != $nameId){
+                $set .= $key . " = '" . $data->$key . "' ,";
+            }
         }
 
         $set = substr($set, 0, -1);
 
-        $sql = "UPDATE $table SET $set WHERE $nameId = :$nameId";
+        $sql = "UPDATE $table SET $set WHERE $nameId = $id";
 
         $link = Connection::connect();
         $stmt = $link->prepare($sql);
 
-        foreach ($data as $key => $value) {
-            $stmt->bindParam(":" . $key, $data[$key], PDO::PARAM_STR);
-        }
-        
-        $stmt->bindParam(":" . $nameId, $id, PDO::PARAM_STR);
-
-        if ($stmt->execute()) {
+        try {
+            $stmt->execute();
             $response = array(
                 'code' => 3
             );
 
             return $response;
-        } else {
-            return $link->errorInfo();
+        } catch (PDOException $e) {
+            $response = array(
+                'code' => 7
+            );
+
+            return $response;
         }
     }
 }

@@ -10,22 +10,11 @@ class PutModel
     =============================================*/
     static public function putData($table, $data, $nameId, $id)
     {
-
         /*=============================================
         Actualizamos registros
         =============================================*/
 
-        $set = "";
-
-        foreach ($data as $key => $value) {
-            if ($key != "id_usuario_cliente") {
-                $set .= $key . " = '" . $data->$key . "' ,";
-            }
-        }
-
-        $set = substr($set, 0, -1);
-
-        $sql = "UPDATE $table SET $set WHERE $nameId = $id";
+        $sql = "UPDATE $table SET codigo_verificacion = $data WHERE $nameId = $id";
 
         $link = Connection::connect();
         $stmt = $link->prepare($sql);

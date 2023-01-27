@@ -1,11 +1,11 @@
 <?php
 
 require_once "models/connection.php";
-require_once "controllers/post.customerRecord.controller.php";
+require_once "controllers/post.record.controller.php";
 
 if (isset($_POST)) {
 
     $response = new PostController();
-    $response->postRegister($data);
+    $response->postRegister($table, $suffix, $data);
 
 }

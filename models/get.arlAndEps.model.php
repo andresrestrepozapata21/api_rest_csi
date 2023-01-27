@@ -8,10 +8,10 @@ class GetModel
     /*=============================================
     Peticiones GET sin filtro
     =============================================*/
-    static public function getData()
+    static public function getData($table, $select)
     {
 
-        $sql = "SELECT nombre_arl FROM arl_vigentes";
+        $sql = "SELECT $select FROM $table";
 
         $stmt = Connection::connect()->prepare($sql);
         try{

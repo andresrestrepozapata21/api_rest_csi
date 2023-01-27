@@ -37,13 +37,27 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         if($table=="getArl"){
-            include "services/get.arl.php";
+
+            $table = "arl_vigentes";
+            $select = "nombre_arl";
+            include "services/get.arlAndEps.php";
+
         }else if($table=="getEps"){
-            include "services/get.eps.php";
+
+            $table = "eps_vigentes";
+            $select = "nombre_eps";
+            include "services/get.arlAndEps.php";
+
         }else if($table=="getPasswordAgent"){
-            include "services/get.passwordAgent.php";
+
+            $table = "usuarios_agentes";
+            include "services/get.password.php";
+
         }else if($table=="getPasswordCustomer"){
-            include "services/get.passwordCustomer.php";
+
+            $table = "usuarios_clientes";
+            include "services/get.password.php";
+
         }else{
             $json  = array(
 
@@ -63,15 +77,37 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         if($table=="customerRecord"){
-            include "services/post.customerRecord.php";   
+
+            $table = "usuarios_clientes";
+            $suffix  = "usuario_cliente";
+
+            include "services/post.record.php";  
+
         }else if($table=="agentRecord"){
-            include "services/post.agentRecord.php";   
+
+            $table = "usuarios_agentes";
+            $suffix  = "usuario_agente";
+
+            include "services/post.record.php";  
+
         }else if($table=="customerLogin"){
-            include "services/post.customerLogin.php";   
+
+            $table = "usuarios_clientes";
+            $suffix  = "usuario_cliente";
+
+            include "services/post.Login.php";   
+
         }else if($table=="agentLogin"){
-            include "services/post.agentLogin.php";   
+
+            $table = "usuarios_agentes";
+            $suffix  = "usuario_agente";
+
+            include "services/post.Login.php";    
+
         }else if($table=="addContract"){
+
             include "services/post.contact.php";   
+
         }else{
             $json  = array(
 
@@ -91,9 +127,53 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
     if ($_SERVER['REQUEST_METHOD'] == "PUT") {
 
         if($table=="putCustomer"){
-            include "services/put.customer.php";
+
+            $table = "usuarios_clientes";
+            $suffix = "usuario_cliente";
+            $select = "id_usuario_cliente";
+
+            include "services/put.toUpdate.php";
+
         }else if($table=="putAgent"){
-            include "services/put.agent.php";
+
+            $table = "usuarios_agentes";
+            $suffix = "usuario_agente";
+            $select = "id_usuario_agente";
+
+            include "services/put.toUpdate.php";
+
+        }else if($table=="resendMessageCustomer"){
+
+            $table = "usuarios_clientes";
+            $suffix = "usuario_cliente";
+            $select = "id_usuario_cliente";
+
+            include "services/put.resendMessage.php";
+
+        }else if($table=="resendMessageAgent"){
+
+            $table = "usuarios_agentes";
+            $suffix = "usuario_agente";
+            $select = "id_usuario_agente";
+
+            include "services/put.resendMessage.php";
+
+        }else if($table=="activateAccountCustomer"){
+
+            $table = "usuarios_clientes";
+            $suffix = "usuario_cliente";
+            $select = "id_usuario_cliente";
+
+            include "services/put.activateAccount.php";
+
+        }else if($table=="activateAccountAgent"){
+
+            $table = "usuarios_agentes";
+            $suffix = "usuario_agente";
+            $select = "id_usuario_agente";
+
+            include "services/put.activateAccount.php";
+
         }else{
             $json  = array(
 

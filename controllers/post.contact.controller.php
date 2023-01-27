@@ -17,8 +17,6 @@ class PostController
         $response = GetModel::getDataFilter("contactos", "id_contacto, email_contacto, telefono_contacto", "telefono_contacto", $data->telefono_contacto);
 
         if (empty($response)) {
-            //$crypt = crypt($data->password, '$2a$07$azybxcags23425sdg23sdfhsd$');
-            //$data->password = $crypt;
 
             $response = PostModel::postData($data);
 
@@ -26,7 +24,7 @@ class PostController
             $return->fncResponse($response);
         } else {
             $response = array(
-                "code" => 2
+                "code" => 10
             );
             $return = new PostController();
             $return->fncResponse($response);

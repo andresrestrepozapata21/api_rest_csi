@@ -7,7 +7,7 @@ class PostModel
     /*=============================================
     Peticion post para crear datos
     =============================================*/
-    static public function postData($data)
+    static public function postData($table, $suffix, $data)
     {
 
         $columns = "";
@@ -18,6 +18,9 @@ class PostModel
             $params .= ":" . $key . ",";
         }
 
+        $columns .= "activo_$suffix,";
+        $params .= 0 .",";
+
         $verificationCode = random_int(1000, 9999);
         $columns .= "codigo_verificacion,";
         $params .= $verificationCode .",";
@@ -25,7 +28,7 @@ class PostModel
         $columns = substr($columns, 0, -1);
         $params = substr($params, 0, -1);
 
-        $sql = "INSERT INTO usuarios_agentes ($columns) VALUES ($params)";
+        $sql = "INSERT INTO $table ($columns) VALUES ($params)";
 
         $link = Connection::connect();
         $stmt = $link->prepare($sql);

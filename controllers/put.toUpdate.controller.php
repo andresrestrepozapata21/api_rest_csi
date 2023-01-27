@@ -1,6 +1,6 @@
 <?php
 
-require_once "models/put.customer.model.php";
+require_once "models/put.toUpdate.model.php";
 require_once "models/get.filter.model.php";
 
 class PutController
@@ -9,17 +9,17 @@ class PutController
     /*=============================================
     Peticiones PUT
     =============================================*/
-    public function putData($data)
+    public function putData($table, $suffix, $select, $data)
     {
 
         /*=============================================
         Validamos que el ID exista en base de datos
         =============================================*/
-        $response = GetModel::getDataFilter("usuarios_clientes", "id_usuario_cliente", "id_usuario_cliente", $data->id_usuario_cliente);
+        $response = GetModel::getDataFilter($table, $select, $select, $data->$select);
 
         if (!empty($response)) {
 
-            $response = PutModel::putData("usuarios_clientes", $data, "id_usuario_cliente", $data->id_usuario_cliente);
+            $response = PutModel::putData($table, $data, $select, $data->$select);
 
             $return = new PutController();
             $return->fncResponse($response);
@@ -40,7 +40,6 @@ class PutController
 
         if (!empty($response)) {
             if ($response['code'] == 3) {
-                
                 $json  = array(
 
                     'status' => 200,

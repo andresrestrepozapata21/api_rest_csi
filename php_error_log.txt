@@ -451,3 +451,103 @@ Stack trace:
 #5 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
 #6 {main}
   thrown in C:\xampp\htdocs\api_rest_csi\models\post.customerRecord.model.php on line 33
+[27-Jan-2023 14:44:23 Europe/Berlin] PHP Warning:  Array to string conversion in C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php on line 36
+[27-Jan-2023 14:44:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined function CallAPI() in C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php:40
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerRecord.php(9): PostController::postRegister(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(66): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php on line 40
+[27-Jan-2023 14:45:25 Europe/Berlin] PHP Warning:  Array to string conversion in C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php on line 36
+[27-Jan-2023 14:45:25 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined function CallAPI() in C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php:40
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerRecord.php(9): PostController::postRegister(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(66): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php on line 40
+[27-Jan-2023 14:47:05 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to undefined function CallAPI() in C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php:42
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerRecord.php(9): PostController::postRegister(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(66): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php on line 42
+[27-Jan-2023 14:50:17 Europe/Berlin] PHP Fatal error:  Uncaught Error: Object of class PostController could not be converted to string in C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php:47
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerRecord.php(9): PostController::postRegister(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(66): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php on line 47
+[27-Jan-2023 14:53:21 Europe/Berlin] PHP Fatal error:  Uncaught Error: Cannot use object of type PostController as array in C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php:47
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.customerRecord.php(9): PostController::postRegister(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(66): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.customerRecord.controller.php on line 47
+[27-Jan-2023 14:59:49 Europe/Berlin] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\post.agentRecord.controller.php on line 33
+[27-Jan-2023 14:59:49 Europe/Berlin] PHP Warning:  Attempt to read property "codigo_verificacion" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.agentRecord.controller.php on line 33
+[27-Jan-2023 14:59:49 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$telefono_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\post.agentRecord.controller.php on line 34
+[27-Jan-2023 14:59:49 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$nombre_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\post.agentRecord.controller.php on line 35
+[27-Jan-2023 15:00:58 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$telefono_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\post.agentRecord.controller.php on line 34
+[27-Jan-2023 15:00:58 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$nombre_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\post.agentRecord.controller.php on line 35
+[27-Jan-2023 15:07:58 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$activo_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 25
+[27-Jan-2023 15:08:36 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$activo_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\post.customerLogin.controller.php on line 25
+[27-Jan-2023 15:15:34 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$activo_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\post.agentLogin.controller.php on line 25
+[27-Jan-2023 16:28:03 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$id_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\put.resendMessageCustomer.controller.php on line 24
+[27-Jan-2023 16:33:20 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$telefono_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\put.resendMessageCustomer.controller.php on line 30
+[27-Jan-2023 16:33:20 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$nombre_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\put.resendMessageCustomer.controller.php on line 31
+[27-Jan-2023 16:33:20 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "PostController" not found in C:\xampp\htdocs\api_rest_csi\controllers\put.resendMessageCustomer.controller.php:37
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\put.resendMessageCustomer.php(7): PutController->putData(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(98): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\put.resendMessageCustomer.controller.php on line 37
+[27-Jan-2023 16:36:12 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "PostController" not found in C:\xampp\htdocs\api_rest_csi\controllers\put.resendMessageCustomer.controller.php:39
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\put.resendMessageCustomer.php(7): PutController->putData(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(98): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\put.resendMessageCustomer.controller.php on line 39
+[27-Jan-2023 17:11:31 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$email in C:\xampp\htdocs\api_rest_csi\controllers\put.activateAccount.controller.php on line 18
+[27-Jan-2023 17:12:04 Europe/Berlin] PHP Fatal error:  Uncaught Error: Object of class stdClass could not be converted to string in C:\xampp\htdocs\api_rest_csi\models\put.activateAccount.model.php:17
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\put.activateAccount.controller.php(22): PutModel::putData('usuarios_client...', Object(stdClass), 'id_usuario_clie...', 31, 'usuario_cliente')
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\put.activateAccount.php(7): PutController->putData('usuarios_client...', 'id_usuario_clie...', 'usuario_cliente', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(103): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\put.activateAccount.model.php on line 17
+[27-Jan-2023 17:18:24 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function PutModel::putData(), 4 passed in C:\xampp\htdocs\api_rest_csi\controllers\put.activateAccount.controller.php on line 24 and exactly 5 expected in C:\xampp\htdocs\api_rest_csi\models\put.activateAccount.model.php:11
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\put.activateAccount.controller.php(24): PutModel::putData('usuarios_client...', 'id_usuario_clie...', 31, 'usuario_cliente')
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\put.activateAccount.php(7): PutController->putData('usuarios_client...', 'id_usuario_clie...', 'usuario_cliente', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(103): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\put.activateAccount.model.php on line 11
+[27-Jan-2023 17:43:09 Europe/Berlin] PHP Warning:  require_once(models/post.Login.model.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 4
+[27-Jan-2023 17:43:09 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'models/post.Login.model.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php:4
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.Login.php(4): require_once()
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(92): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 4
+[27-Jan-2023 19:05:08 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$telefono_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\put.resendMessage.controller.php on line 24
+[27-Jan-2023 19:05:08 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$nombre_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\put.resendMessage.controller.php on line 26

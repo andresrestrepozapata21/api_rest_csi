@@ -1,7 +1,7 @@
 <?php
 
 require_once "models/connection.php";
-require_once "models/post.customerLogin.model.php";
+require_once "models/post.Login.model.php";
 require_once "models/get.filter.model.php";
 
 require_once "vendor/autoload.php";
@@ -13,48 +13,51 @@ class PostController
     /*=============================================
     Peticion post para crear cliente
     =============================================*/
-    static public function postLogin($data)
+    static public function postLogin($table, $suffix,$data)
     {
 
         /*=============================================
         Validamos que el correo exita en base de datos
         =============================================*/
-        $response = GetModel::getDataFilter("usuarios_clientes", "id_usuario_cliente, email, password, token, token_exp", "email", $data->email);
+        $response = GetModel::getDataFilter($table, "id_$suffix, email, password, token, token_exp, activo_$suffix", "email", $data->email);
 
         if (!empty($response)) {
-            /*=============================================
-            Encriptamos la contraseña
-            =============================================*/
-            //$crypt = crypt($data->password, '$2a$07$azybxcags23425sdg23sdfhsd$');
+            if ($response[0]->{"activo_$suffix"} == 1) {
+                if ($response[0]->{"password"} == $data->password) {
 
-            if ($response[0]->{"password"} == $data->password) {
+                    $token = Connection::jwt($response[0]->{"id_$suffix"}, $response[0]->{"email"});
 
-                $token = Connection::jwt($response[0]->{"id_usuario_cliente"}, $response[0]->{"email"});
+                    $jwt = JWT::encode($token, "dfhsdfg34dfchs4xgsrsdry46", "HS256");
 
-                $jwt = JWT::encode($token, "dfhsdfg34dfchs4xgsrsdry46", "HS256");
+                    /*=============================================
+                    Actualizamos la base de datos con el token del usuario
+                    =============================================*/
 
-                /*=============================================
-                Actualizamos la base de datos con el token del usuario
-                =============================================*/
+                    $data = array(
+                        "token" => $jwt,
+                        "token_exp" => $token["exp"]
+                    );
 
-                $data = array(
-                    "token" => $jwt,
-                    "token_exp" => $token["exp"]
-                );
+                    $update = LoginModel::login($table, $data, $response[0]->{"id_$suffix"}, "id_$suffix");
 
-                $update = LoginModel::login("usuarios_clientes", $data, $response[0]->{"id_usuario_cliente"}, "id_usuario_cliente");
+                    if (isset($update['code']) && $update['code'] == 3) {
 
-                if (isset($update['code']) && $update['code'] == 3) {
+                        $response[0]->{"token"} = $jwt;
+                        $response[0]->{"token_exp"} = $token["exp"];
 
-                    $response[0]->{"token"}  = $jwt;
-                    $response[0]->{"token_exp"}  = $token["exp"];
-
+                        $return = new PostController();
+                        $return->fncResponse($response);
+                    }
+                } else {
+                    $response = array(
+                        "code" => 0
+                    );
                     $return = new PostController();
                     $return->fncResponse($response);
                 }
             } else {
                 $response = array(
-                    "code" => 0
+                    "code" => 8
                 );
                 $return = new PostController();
                 $return->fncResponse($response);
@@ -77,12 +80,12 @@ class PostController
 
             unset($response[0]->{"password"});
 
-            if(isset($response['code'])){
+            if (isset($response['code'])) {
                 $json  = array(
                     'status' => 200,
                     'result' => $response['code']
                 );
-            }else{
+            } else {
                 $json  = array(
                     'status' => 200,
                     'result' => 3,
