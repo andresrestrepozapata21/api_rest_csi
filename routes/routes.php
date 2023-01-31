@@ -36,37 +36,38 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
     =============================================*/
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
-        if($table=="getArl"){
+        if ($table == "getArl") {
 
             $table = "arl_vigentes";
-            $select = "nombre_arl";
-            include "services/get.arlAndEps.php";
-
-        }else if($table=="getEps"){
+            $select = "id_arl,nombre_arl";
+            include "services/get.data.php";
+        } else if ($table == "getEps") {
 
             $table = "eps_vigentes";
-            $select = "nombre_eps";
-            include "services/get.arlAndEps.php";
-
-        }else if($table=="getPasswordAgent"){
+            $select = "id_eps,nombre_eps";
+            include "services/get.data.php";
+        } else if ($table == "getPasswordAgent") {
 
             $table = "usuarios_agentes";
             include "services/get.password.php";
-
-        }else if($table=="getPasswordCustomer"){
+        } else if ($table == "getPasswordCustomer") {
 
             $table = "usuarios_clientes";
             include "services/get.password.php";
+        } else if ($table == "getTipoUsuarios") {
 
-        }else{
+            $table = "tipos_usuarios";
+            $select = "id_tipo_usuario, descricion_tipo_usuario";
+            include "services/get.data.php";
+        } else {
             $json  = array(
 
                 'status' => 400,
                 'result' => 6
             );
-        
+
             echo json_encode($json, http_response_code($json["status"]));
-        
+
             return;
         }
     }
@@ -76,47 +77,61 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
     =============================================*/
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-        if($table=="customerRecord"){
+        if ($table == "customerRecord") {
 
             $table = "usuarios_clientes";
             $suffix  = "usuario_cliente";
 
-            include "services/post.record.php";  
-
-        }else if($table=="agentRecord"){
+            include "services/post.record.php";
+        } else if ($table == "agentRecord") {
 
             $table = "usuarios_agentes";
             $suffix  = "usuario_agente";
 
-            include "services/post.record.php";  
-
-        }else if($table=="customerLogin"){
+            include "services/post.record.php";
+        } else if ($table == "customerLogin") {
 
             $table = "usuarios_clientes";
             $suffix  = "usuario_cliente";
 
-            include "services/post.Login.php";   
-
-        }else if($table=="agentLogin"){
+            include "services/post.Login.php";
+        } else if ($table == "agentLogin") {
 
             $table = "usuarios_agentes";
             $suffix  = "usuario_agente";
 
-            include "services/post.Login.php";    
+            include "services/post.Login.php";
+        } else if ($table == "addContract") {
 
-        }else if($table=="addContract"){
+            include "services/post.contact.php";
+        } else if ($table == "createTypeUser") {
 
-            include "services/post.contact.php";   
+            include "services/post.typeUserrecord.php";
+        } else if ($table == "uploadDocumentsCustomer") {
 
-        }else{
+            $file = $_FILES['file'];
+            $id = $_POST['id'];
+            $table = "usuarios_clientes";
+            $suffix  = "usuario_cliente";
+
+            include "services/post.uploadDocumentsCustomer.php";
+        } else if ($table == "uploadDocumentsAgent") {
+
+            $file = $_FILES['file'];
+            $id = $_POST['id'];
+            $table = "usuarios_agentes";
+            $suffix  = "usuario_agente";
+
+            include "services/post.uploadDocumentsAgent.php";
+        } else {
             $json  = array(
 
                 'status' => 400,
                 'result' => 6
             );
-        
+
             echo json_encode($json, http_response_code($json["status"]));
-        
+
             return;
         }
     }
@@ -126,63 +141,64 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
     =============================================*/
     if ($_SERVER['REQUEST_METHOD'] == "PUT") {
 
-        if($table=="putCustomer"){
+        if ($table == "putCustomer") {
 
             $table = "usuarios_clientes";
             $suffix = "usuario_cliente";
             $select = "id_usuario_cliente";
 
             include "services/put.toUpdate.php";
-
-        }else if($table=="putAgent"){
+        } else if ($table == "putAgent") {
 
             $table = "usuarios_agentes";
             $suffix = "usuario_agente";
             $select = "id_usuario_agente";
 
             include "services/put.toUpdate.php";
-
-        }else if($table=="resendMessageCustomer"){
+        } else if ($table == "resendMessageCustomer") {
 
             $table = "usuarios_clientes";
             $suffix = "usuario_cliente";
             $select = "id_usuario_cliente";
 
             include "services/put.resendMessage.php";
-
-        }else if($table=="resendMessageAgent"){
+        } else if ($table == "resendMessageAgent") {
 
             $table = "usuarios_agentes";
             $suffix = "usuario_agente";
             $select = "id_usuario_agente";
 
             include "services/put.resendMessage.php";
-
-        }else if($table=="activateAccountCustomer"){
+        } else if ($table == "checkAccountCustomer") {
 
             $table = "usuarios_clientes";
             $suffix = "usuario_cliente";
             $select = "id_usuario_cliente";
 
-            include "services/put.activateAccount.php";
-
-        }else if($table=="activateAccountAgent"){
+            include "services/put.checkAccount.php";
+        } else if ($table == "checkAccountAgent") {
 
             $table = "usuarios_agentes";
             $suffix = "usuario_agente";
             $select = "id_usuario_agente";
 
-            include "services/put.activateAccount.php";
+            include "services/put.checkAccount.php";
+        } else if ($table == "typeUserUpdate") {
 
-        }else{
+            $table = "tipos_usuarios";
+            $suffix = "tipo_usuario";
+            $select = "id_tipo_usuario";
+
+            include "services/put.toUpdate.php";
+        } else {
             $json  = array(
 
                 'status' => 400,
                 'result' => 6
             );
-        
+
             echo json_encode($json, http_response_code($json["status"]));
-        
+
             return;
         }
     }
@@ -191,7 +207,24 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
     Peticiones DELETE
     =============================================*/
     if ($_SERVER['REQUEST_METHOD'] == "DELETE") {
-        
-        echo "DELETE";
+
+        if ($table == "deleteTypeUser") {
+
+            $table = "tipos_usuarios";
+            $nameId = "id_tipo_usuario";
+            $id = $data->id_tipo_usuario;
+
+            include "services/delete.php";
+        } else {
+            $json  = array(
+
+                'status' => 400,
+                'result' => 6
+            );
+
+            echo json_encode($json, http_response_code($json["status"]));
+
+            return;
+        }
     }
 }

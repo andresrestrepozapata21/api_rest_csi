@@ -38,7 +38,7 @@ class PostController
                         "token_exp" => $token["exp"]
                     );
 
-                    $update = LoginModel::login($table, $data, $response[0]->{"id_$suffix"}, "id_$suffix");
+                    $update = LoginModel::login($table, $data, $response[0]->{"id_$suffix"}, "id_$suffix", $suffix);
 
                     if (isset($update['code']) && $update['code'] == 3) {
 

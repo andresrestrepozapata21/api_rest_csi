@@ -14,7 +14,7 @@ class PutModel
         Actualizamos registros
         =============================================*/
 
-        $sql = "UPDATE $table SET activo_$suffix = 1 WHERE $nameId = $id";
+        $sql = "UPDATE $table SET activo_$suffix = 3 WHERE $nameId = $id";
 
         $link = Connection::connect();
         $stmt = $link->prepare($sql);

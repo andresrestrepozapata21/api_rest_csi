@@ -7,7 +7,7 @@ class LoginModel
     /*=============================================
     Peticion put para editar datos
     =============================================*/
-    static public function login($table, $data, $id, $nameId)
+    static public function login($table, $data, $id, $nameId, $suffix)
     {
 
         /*=============================================
@@ -20,9 +20,13 @@ class LoginModel
             $set .= $key . " = :" . $key . ",";
         }
 
+        $set .= " lastlogin_$suffix = '" . date('Y-m-d H:i:s') . "',";
+
         $set = substr($set, 0, -1);
 
         $sql = "UPDATE $table SET $set WHERE $nameId = :$nameId";
+
+ 
 
         $link = Connection::connect();
         $stmt = $link->prepare($sql);

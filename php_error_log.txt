@@ -551,3 +551,117 @@ Stack trace:
   thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 4
 [27-Jan-2023 19:05:08 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$telefono_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\put.resendMessage.controller.php on line 24
 [27-Jan-2023 19:05:08 Europe/Berlin] PHP Warning:  Undefined property: stdClass::$nombre_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\put.resendMessage.controller.php on line 26
+[30-Jan-2023 18:18:39 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '18:18:39 WHERE id_usuario_cliente = '31'' at line 1 in C:\xampp\htdocs\api_rest_csi\models\post.Login.model.php:38
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.Login.model.php(38): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php(41): LoginModel::login('usuarios_client...', Array, '31', 'id_usuario_clie...', 'usuario_cliente')
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.Login.php(9): PostController::postLogin('usuarios_client...', 'usuario_cliente', Array)
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(98): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.Login.model.php on line 38
+[30-Jan-2023 18:23:10 Europe/Berlin] PHP Warning:  Undefined variable $select in C:\xampp\htdocs\api_rest_csi\routes\services\get.arlAndEps.php on line 9
+[30-Jan-2023 14:49:07 America/Bogota] PHP Warning:  Undefined property: stdClass::$email in C:\xampp\htdocs\api_rest_csi\controllers\post.record.controller.php on line 20
+[30-Jan-2023 14:49:07 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'backend_csi.tipos_usuario' doesn't exist in C:\xampp\htdocs\api_rest_csi\models\post.record.model.php:56
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.record.model.php(56): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.record.controller.php(26): PostModel::postData('tipos_usuario', 'tipo_usuario', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.record.php(9): PostController::postRegister('tipos_usuario', 'tipo_usuario', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(122): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.record.model.php on line 56
+[31-Jan-2023 10:28:46 America/Bogota] PHP Warning:  include_once(../cors.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\controllers\post.uploadDocumentsCustomer.controller.php on line 9
+[31-Jan-2023 10:28:46 America/Bogota] PHP Warning:  include_once(): Failed opening '../cors.php' for inclusion (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\controllers\post.uploadDocumentsCustomer.controller.php on line 9
+[31-Jan-2023 10:28:46 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:28:46 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:28:46 America/Bogota] Exito! Carpeta creada:documentos/34/
+[31-Jan-2023 10:29:21 America/Bogota] PHP Warning:  include_once(../cors.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\controllers\post.uploadDocumentsCustomer.controller.php on line 9
+[31-Jan-2023 10:29:21 America/Bogota] PHP Warning:  include_once(): Failed opening '../cors.php' for inclusion (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\controllers\post.uploadDocumentsCustomer.controller.php on line 9
+[31-Jan-2023 10:29:21 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:29:21 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:29:21 America/Bogota] Carpeta existente:documentos/34/
+[31-Jan-2023 10:29:56 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:29:56 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:29:56 America/Bogota] Carpeta existente:documentos/34/
+[31-Jan-2023 10:36:21 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:36:21 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:36:21 America/Bogota] Carpeta existente:documentos/34/
+[31-Jan-2023 10:36:32 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:36:32 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:36:32 America/Bogota] Carpeta existente:documentos/34/
+[31-Jan-2023 10:36:53 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:36:53 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:36:53 America/Bogota] Carpeta existente:documentos/34/
+[31-Jan-2023 10:37:08 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:37:08 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:37:08 America/Bogota] Carpeta existente:documentos/34/
+[31-Jan-2023 10:37:22 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:37:22 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:37:22 America/Bogota] Carpeta existente:documentos/34/
+[31-Jan-2023 10:37:22 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'date_create_documento' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.uploadDocumentsCustomer.model.php:22
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.uploadDocumentsCustomer.model.php(22): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.uploadDocumentsCustomer.controller.php(49): PostModel::postData('documentos', 'usuario_cliente', 34, 'documentos/34/d...')
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.uploadDocumentsCustomer.php(9): PostController::postRegister('documentos', 'usuario_cliente', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(115): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.uploadDocumentsCustomer.model.php on line 22
+[31-Jan-2023 10:37:41 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:37:41 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:37:41 America/Bogota] Carpeta existente:documentos/34/
+[31-Jan-2023 10:42:02 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:42:02 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:42:02 America/Bogota] Exito! Carpeta creada:documentos/34/
+[31-Jan-2023 10:44:20 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:44:20 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:44:20 America/Bogota] Carpeta existente:documentos/34/
+[31-Jan-2023 10:44:47 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:44:47 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:44:47 America/Bogota] Exito! Carpeta creada:documentos/34/
+[31-Jan-2023 10:46:33 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:46:33 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:46:33 America/Bogota] Exito! Carpeta creada:documentos/34/
+[31-Jan-2023 10:47:19 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:47:19 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:47:19 America/Bogota] Exito! Carpeta creada:documentos/34/
+[31-Jan-2023 10:57:47 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:57:47 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:57:47 America/Bogota] Carpeta existente:documentos/34/
+[31-Jan-2023 10:57:47 America/Bogota] PHP Fatal error:  Uncaught Error: Class "PutPendingModel" not found in C:\xampp\htdocs\api_rest_csi\controllers\post.uploadDocumentsCustomer.controller.php:51
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.uploadDocumentsCustomer.php(9): PostController::postRegister('usuarios_client...', 'usuario_cliente', Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(115): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.uploadDocumentsCustomer.controller.php on line 51
+[31-Jan-2023 10:58:16 America/Bogota] PHP Warning:  require_once(models/post.updatePending.model.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\controllers\post.uploadDocumentsCustomer.controller.php on line 8
+[31-Jan-2023 10:58:16 America/Bogota] PHP Fatal error:  Uncaught Error: Failed opening required 'models/post.updatePending.model.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\controllers\post.uploadDocumentsCustomer.controller.php:8
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.uploadDocumentsCustomer.php(4): require_once()
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(115): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.uploadDocumentsCustomer.controller.php on line 8
+[31-Jan-2023 10:58:39 America/Bogota] PHP Warning:  require_once(models/put.updatePending.model.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\controllers\post.uploadDocumentsCustomer.controller.php on line 8
+[31-Jan-2023 10:58:39 America/Bogota] PHP Fatal error:  Uncaught Error: Failed opening required 'models/put.updatePending.model.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\controllers\post.uploadDocumentsCustomer.controller.php:8
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.uploadDocumentsCustomer.php(4): require_once()
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(115): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(27): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.uploadDocumentsCustomer.controller.php on line 8
+[31-Jan-2023 10:59:04 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:59:04 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:59:04 America/Bogota] Carpeta existente:documentos/34/
+[31-Jan-2023 10:59:33 America/Bogota] Path: uploads/documento1.png
+[31-Jan-2023 10:59:33 America/Bogota] Nuevo Path: documentos/34/
+[31-Jan-2023 10:59:33 America/Bogota] Carpeta existente:documentos/34/
+[31-Jan-2023 17:12:04 Europe/Berlin] PHP Warning:  Undefined array key "file" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 112

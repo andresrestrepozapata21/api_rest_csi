@@ -1,6 +1,6 @@
 <?php
 
-require_once "models/get.arlAndEps.model.php";
+require_once "models/get.data.model.php";
 
 class GetController{
 

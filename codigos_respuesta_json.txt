@@ -11,3 +11,6 @@
 8 -> El usuario no esta activo, valide el codigo de verificacion.
 9 -> El código de verificación no coincide.
 10-> El teléfono ya existe en uno de los contactos de emergencia.
+11-> Petición POST fallida.
+12-> Petición DELETE fallida.
+13-> Hay un documento con el mismo nombre en la carpeta que intentas cargar

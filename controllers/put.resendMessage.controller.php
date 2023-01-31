@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Bogota');
 
 require_once "models/put.resendMessage.model.php";
 require_once "models/get.filter.model.php";
@@ -27,27 +28,31 @@ class PutController
 
             $response = PutModel::putData($table, $verificationCode, $select, $response[0]->$select);
 
-            $return = new PutController();
-            $return->fncResponse($response);
+            
 
             /*=============================================
             Enviamos mensaje de texto con el nuevo codigo
             =============================================*/
-            $mensaje = "Hola agente $nombre, tu código de verificacion CSI es: $verificationCode, ingresa este codigo en tu APP CSI para completar tu registro";
+            $mensaje = "Hola%20agente%20$nombre,%20tu%20codigo%20de%20verificacion%20CSI%20es:%20$verificationCode,%20ingresa%20este%20codigo%20en%20tu%20APP%20CSI%20para%20completar%20tu%20registro.";
 
-            $url = 'http://api.mipgenlinea.com/serviceSMS.php';
-            $datos = ['usuario' => 'smsFoxUser', 'password' => 'rhjIMEI3*', 'telefono' => '+57' . $telefono, 'mensaje' => $mensaje, 'fecha' => 'NA', 'aplicacion' => 'CSI ALERTA'];
+            $url = 'http://api.mipgenlinea.com/serviceSMS2.php';
+            $datos = ['usuario' => '00486966949', 'password' => 'Juryzu57', 'telefono' => $telefono, 'mensaje' => $mensaje, 'fecha' => 'NA', 'aplicacion' => 'CSI ALERTA'];
 
             $resultado_sms = new  PutController();
             $result = $resultado_sms -> CallAPI("POST", $url, json_encode($datos));
-            file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> $result \r\n", FILE_APPEND);
+
+            
+            $return = new PutController();
+            $return->fncResponse($response, $result);
+
+            file_put_contents('./log_fecha: ' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> $result \r\n", FILE_APPEND);
 
         } else {
             $response = array(
                 "code" => 1
             );
             $return = new PutController();
-            $return->fncResponse($response);
+            $return->fncResponse($response, "No se envio mensaje");
         }
     }
 
@@ -85,7 +90,7 @@ class PutController
     /*=============================================
     Respuestas del controlador
     =============================================*/
-    public function fncResponse($response)
+    public function fncResponse($response, $result)
     {
 
         if (!empty($response)) {
@@ -95,13 +100,15 @@ class PutController
 
                     'status' => 200,
                     'result' => $response["code"],
-                    'method' => $_SERVER['REQUEST_METHOD']
+                    'method' => $_SERVER['REQUEST_METHOD'],
+                    'detail' => $result
                 );
             } else {
                 $json = array(
                     'status' => 200,
                     'result' => $response['code'],
-                    'method' => $_SERVER['REQUEST_METHOD']
+                    'method' => $_SERVER['REQUEST_METHOD'],
+                    'detail' => $result
                 );
             }
         } else {

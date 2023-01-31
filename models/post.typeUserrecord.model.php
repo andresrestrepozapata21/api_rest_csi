@@ -18,13 +18,13 @@ class PostModel
             $params .= ":" . $key . ",";
         }
 
-        $columns .= " date_created_contacto,";
+        $columns .= " date_created_tipo_usuario,";
         $params .= "'" . date('Y-m-d H:i:s') ."',";
-
+        
         $columns = substr($columns, 0, -1);
         $params = substr($params, 0, -1);
 
-        $sql = "INSERT INTO contactos ($columns) VALUES ($params)";
+        $sql = "INSERT INTO tipos_usuarios ($columns) VALUES ($params)";
 
         $link = Connection::connect();
         $stmt = $link->prepare($sql);

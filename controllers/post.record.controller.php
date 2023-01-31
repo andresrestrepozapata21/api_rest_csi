@@ -25,9 +25,6 @@ class PostController
 
             $response = PostModel::postData($table, $suffix, $data);
 
-            $return = new PostController();
-            $return->fncResponse($response);
-
             /*=============================================
             Obtenemos el codigo de verificaion de base de datos
             =============================================*/
@@ -39,21 +36,26 @@ class PostController
             $nombre = "nombre_$suffix";
             $nombre = $data->$nombre;
 
-            $mensaje = "Hola agente $nombre, tu código de verificacion CSI es: $codigo, ingresa este codigo en tu APP CSI para completar tu registro";
+            $mensaje = "Hola%20agente%20$nombre,%20tu%20codigo%20de%20verificacion%20CSI%20es:%20$codigo,%20ingresa%20este%20codigo%20en%20tu%20APP%20CSI%20para%20completar%20tu%20registro.";
 
-            $url = 'http://api.mipgenlinea.com/serviceSMS.php';
-            $datos = ['usuario' => 'smsFoxUser', 'password' => 'rhjIMEI3*', 'telefono' => '+57' . $telefono, 'mensaje' => $mensaje, 'fecha' => 'NA', 'aplicacion' => 'CSI ALERTA'];
+            $url = 'http://api.mipgenlinea.com/serviceSMS2.php';
+            $datos = ['usuario' => '00486966949', 'password' => 'Juryzu57', 'telefono' => $telefono, 'mensaje' => $mensaje, 'fecha' => 'NA', 'aplicacion' => 'CSI ALERTA'];
 
             $resultado_sms = new  PostController();
-            $resultado_sms -> CallAPI("POST", $url, json_encode($datos));
-            file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API ->", FILE_APPEND);
-
+            $result = $resultado_sms -> CallAPI("POST", $url, json_encode($datos));
+            
+            
+            file_put_contents('./log_fecha: ' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> $result \r\n", FILE_APPEND);
+            
+            $return = new PostController();
+            $return->fncResponse($response, $result);
+            
         } else {
             $response = array(
                 "code" => 2
             );
             $return = new PostController();
-            $return->fncResponse($response);
+            $return->fncResponse($response, "No se envio mensaje");
         }
     }
 
@@ -91,7 +93,7 @@ class PostController
     /*=============================================
     Respuestas del controlador
     =============================================*/
-    public function fncResponse($response)
+    public function fncResponse($response, $result)
     {
         if (!empty($response)) {
             if($response['code'] == 3){
@@ -99,13 +101,15 @@ class PostController
                     
                     'status' => 200,
                     'result' => $response["code"],
-                    'method' => $_SERVER['REQUEST_METHOD']
+                    'method' => $_SERVER['REQUEST_METHOD'],
+                    'detail' => $result
                 );
             }else{
                 $json = array(
                     'status' => 200,
                     'result' => $response['code'],
-                    'method' => $_SERVER['REQUEST_METHOD']
+                    'method' => $_SERVER['REQUEST_METHOD'],
+                    'detail' => $result
                 );
             }
         } else {

@@ -1,7 +1,7 @@
 <?php
 
 require_once "models/connection.php";
-require_once "controllers/get.arlAndEps.controller.php";
+require_once "controllers/get.data.controller.php";
 
 if (isset($_GET)) {
 

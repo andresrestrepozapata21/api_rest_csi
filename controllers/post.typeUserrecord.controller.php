@@ -1,42 +1,26 @@
 <?php
 
-require_once "models/put.activateAccount.model.php";
-require_once "models/get.filter.model.php";
+require_once "models/connection.php";
+require_once "models/post.typeUserrecord.model.php";
 
-class PutController
+class PostController
 {
-
     /*=============================================
-    Peticiones PUT
+    Peticion post para crear cliente
     =============================================*/
-    public function putData($table, $select, $suffix, $data)
+    static public function postRegister($data)
     {
+        if (empty($response)) {
 
-        /*=============================================
-        Validamos que el ID exista en base de datos
-        =============================================*/
-        $response = GetModel::getDataFilter($table, $select.",codigo_verificacion", "email", $data->email);
+            $response = PostModel::postData($data);
 
-        if (!empty($response)) {
-
-            if($response[0]->codigo_verificacion == $data->codigo_verificacion){
-
-                $response = PutModel::putData($table, $select, $response[0]->$select, $suffix);
-
-                $return = new PutController();
-                $return->fncResponse($response);
-            }else{
-                $response = array(
-                    "code" =>9
-                );
-                $return = new PutController();
-                $return->fncResponse($response);
-            }
+            $return = new PostController();
+            $return->fncResponse($response);
         } else {
             $response = array(
-                "code" => 1
+                "code" => 11
             );
-            $return = new PutController();
+            $return = new PostController();
             $return->fncResponse($response);
         }
     }
@@ -46,17 +30,15 @@ class PutController
     =============================================*/
     public function fncResponse($response)
     {
-
         if (!empty($response)) {
-            if ($response['code'] == 3) {
-                
+            if($response['code'] == 3){
                 $json  = array(
-
+                    
                     'status' => 200,
                     'result' => $response["code"],
                     'method' => $_SERVER['REQUEST_METHOD']
                 );
-            } else {
+            }else{
                 $json = array(
                     'status' => 200,
                     'result' => $response['code'],

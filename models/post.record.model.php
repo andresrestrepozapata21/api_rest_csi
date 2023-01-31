@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('America/Bogota');
+
 require_once "models/connection.php";
 
 class PostModel
@@ -19,11 +21,29 @@ class PostModel
         }
 
         $columns .= "activo_$suffix,";
+        $params .= 4 .",";
+
+        $columns .= "estado_$suffix,";
+        $params .= 1 .",";
+
+        $columns .= "eliminado_$suffix,";
         $params .= 0 .",";
 
+        
+        if($table == "usuarios_clientes"){
+            $columns .= "presentacion_inicial_popup_$suffix,";
+            $params .= 1 .",";
+            
+            $columns .= "anuncio_popup_$suffix,";
+            $params .= 0 .",";
+        }
+        
         $verificationCode = random_int(1000, 9999);
         $columns .= "codigo_verificacion,";
         $params .= $verificationCode .",";
+        
+        $columns .= " date_created_$suffix,";
+        $params .= "'" . date('Y-m-d H:i:s') ."',";
 
         $columns = substr($columns, 0, -1);
         $params = substr($params, 0, -1);
