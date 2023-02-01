@@ -10,19 +10,10 @@ class PostController
     =============================================*/
     static public function postRegister($data)
     {
-        if (empty($response)) {
+        $response = PostModel::postData($data);
 
-            $response = PostModel::postData($data);
-
-            $return = new PostController();
-            $return->fncResponse($response);
-        } else {
-            $response = array(
-                "code" => 11
-            );
-            $return = new PostController();
-            $return->fncResponse($response);
-        }
+        $return = new PostController();
+        $return->fncResponse($response);
     }
 
     /*=============================================
@@ -31,14 +22,14 @@ class PostController
     public function fncResponse($response)
     {
         if (!empty($response)) {
-            if($response['code'] == 3){
+            if ($response['code'] == 3) {
                 $json  = array(
-                    
+
                     'status' => 200,
                     'result' => $response["code"],
                     'method' => $_SERVER['REQUEST_METHOD']
                 );
-            }else{
+            } else {
                 $json = array(
                     'status' => 200,
                     'result' => $response['code'],

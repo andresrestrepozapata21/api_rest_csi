@@ -54,12 +54,30 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
             $table = "usuarios_clientes";
             include "services/get.password.php";
-        } else if ($table == "getTipoUsuarios") {
+        } else if ($table == "getUserTypes") {
 
             $table = "tipos_usuarios";
             $select = "id_tipo_usuario, descricion_tipo_usuario";
             include "services/get.data.php";
-        } else {
+        } else if ($table == "getPlans") {
+
+            $table = "planes";
+            $select = "*";
+            include "services/get.data.php";
+        } else if ($table == "getPlan") {
+
+            $table = "planes";
+            $select = "*";
+            $id_plan = "id_plan";
+            include "services/get.dataFilter.php";
+        } else if ($table == "validateExistingPlan") {
+
+            $table = "planes_comprados";
+            include "services/get.dataFilter.php";
+        } else if ($table == "homePage") {
+
+            include "services/get.homePage.php";
+        }else {
             $json  = array(
 
                 'status' => 400,
@@ -123,6 +141,11 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $suffix  = "usuario_agente";
 
             include "services/post.uploadDocumentsAgent.php";
+        } else if ($table == "activatePlan") {
+
+            $table = "planes_comprados";
+
+            include "services/post.activatePlan.php";
         } else {
             $json  = array(
 

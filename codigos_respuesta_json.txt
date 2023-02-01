@@ -14,3 +14,6 @@
 11-> Petición POST fallida.
 12-> Petición DELETE fallida.
 13-> Hay un documento con el mismo nombre en la carpeta que intentas cargar
+14-> Código de activacion no esta activo o no existe en base de datos
+15-> El código que ingresaste no coincide con algun codigo de la base de datos
+16-> El usuario ya tiene un plan activo

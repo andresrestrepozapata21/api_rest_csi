@@ -59,4 +59,19 @@ class Connection
 
         return $token;
     }
+
+    /*=============================================
+    Conexion alternativa
+    =============================================*/
+    static public function conexionAlternativa()
+    {
+
+        $db_host = "localhost";
+        $db_user = "root";
+        $db_pass = "";
+        $db_name = "backend_csi";
+        $conexion = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+        return $conexion;
+    }
 }
