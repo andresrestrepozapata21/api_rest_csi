@@ -29,34 +29,97 @@ class GetController
         $longitud = $data->longitud;
 
         error_log("Parametros recibidos " . $latitud . " - " . $longitud);
+
+        /*=============================================
+        Consultamos en que zona estamos
+        =============================================*/
+        $conexion = Connection::conexionAlternativa();
+        $sentencia_listar = "select * from zonas";
+        $resultado_listado = mysqli_query($conexion, $sentencia_listar);
         
+        $filasZonas = array();
+        
+        while ($valor = mysqli_fetch_assoc($resultado_listado)) {
+             
+            $distancia = GetController::distance($valor["latitud_zona"], $valor["longitud_zona"], $latitud, $longitud, "K");
+            
+            if ($distancia <= 100) {
+                if(round($distancia * 1000) <= 200){
+                    
+                    $valor["distancia"] = '' . round(($distancia * 1000)) . '';
+                    
+                    $filasZonas[] = $valor;
+                }
+            }else{
+                echo '<pre>'; print_r("zona"); echo '</pre>\n';
+                
+            }
+        }
+        
+        if(empty($filasZonas)){
+            $filasZonas["comentario"] = "No estas cerca de alguna zona registrada";
+        }
+        
+        /*=============================================
+        Consultamos cuales son las alertas cercanas
+        =============================================*/
         $conexion = Connection::conexionAlternativa();
         $sentencia_listar = "select * from alertas";
         $resultado_listado = mysqli_query($conexion, $sentencia_listar);
         
-        $filas = array();
+        $filasAlertas = array();
 
         while ($valor = mysqli_fetch_assoc($resultado_listado)) {
 
             $distancia = GetController::distance($valor["latitud_alerta"], $valor["longitud_alerta"], $latitud, $longitud, "K");
         
             if ($distancia <= 100) {
-                $valor["distancia"] = '' . round(($distancia * 1000)) . '';
-                $valor["dias"] = '' . GetController::contarDias(date('Y-m-d'), $valor["date_created_alerta"]) . '';
+                if(round($distancia * 1000) <= 200){
 
-                $filas[] = $valor;
-            }else{
-                echo '<pre>'; print_r("zona Insegura"); echo '</pre>\n';
-
+                    $valor["distancia"] = '' . round(($distancia * 1000)) . '';
+                    $valor["dias"] = '' . GetController::contarDias(date('Y-m-d'), $valor["date_created_alerta"]) . '';
+                    
+                    $filasAlertas[] = $valor;
+                }
             }
+        }
 
+        if(empty($filasAlertas)){
+            $filasAlertas["comentario"] = "No hay alertas cercanas";
+        }
+
+        /*=============================================
+        Consultamos los servicios por zona
+        =============================================*/
+
+        if(!isset($filasZonas["comentario"])){
+
+            $id_zona = $filasZonas[0]["id_zona"];
+            
+            $conexion = Connection::conexionAlternativa();
+            $sentencia_listar = "SELECT * FROM servicios_por_zona sz INNER JOIN servicios s ON sz.fk_id_servicio_servicos_por_zona = s.id_servicio  WHERE fk_id_zona_servicos_por_zona = $id_zona";
+            $resultado_listado = mysqli_query($conexion, $sentencia_listar);
+            
+            $filasServicios = array();
+            
+            while ($valor = mysqli_fetch_assoc($resultado_listado)) {
+                $filasServicios[] = $valor;
+            }
+            
+            if(empty($filasAlertas)){
+                $filasServicios["comentario"] = "No hay servicios en tu zona cercanas";
+            }
+        }else{
+            $filasServicios["comentario"] = "No se encontro una zona cercana por eso no hay servicios en tu zona";
         }
 
         $response = array(
             'nombre_usuario_cliente' => $nombre,
             'tipo_plan' => $tipo_plan,
             'vencimiento' => $fecha_vencimiento,
-            'alertas_cercanas' => $filas
+            'zona' => $filasZonas,
+            'alertas_cercanas' => $filasAlertas,
+            'servicios_zona' => $filasServicios,
         );
 
         $return = new GetController();
@@ -102,7 +165,6 @@ class GetController
 
         if (!empty($response)) {
             $json  = array(
-
                 'status' => 200,
                 'result' => 3,
                 'detail' => $response

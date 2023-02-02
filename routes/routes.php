@@ -74,10 +74,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
             $table = "planes_comprados";
             include "services/get.dataFilter.php";
-        } else if ($table == "homePage") {
-
-            include "services/get.homePage.php";
-        }else {
+        } else {
             $json  = array(
 
                 'status' => 400,
@@ -146,7 +143,10 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "planes_comprados";
 
             include "services/post.activatePlan.php";
-        } else {
+        } else if ($table == "homePage") {
+
+            include "services/get.homePage.php";
+        }else {
             $json  = array(
 
                 'status' => 400,
