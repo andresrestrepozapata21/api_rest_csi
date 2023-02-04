@@ -28,25 +28,31 @@ class PutController
 
             $response = PutModel::putData($table, $verificationCode, $select, $response[0]->$select);
 
-            
-
             /*=============================================
             Enviamos mensaje de texto con el nuevo codigo
             =============================================*/
-            $mensaje = "Hola%20agente%20$nombre,%20tu%20codigo%20de%20verificacion%20CSI%20es:%20$verificationCode,%20ingresa%20este%20codigo%20en%20tu%20APP%20CSI%20para%20completar%20tu%20registro.";
+            $mensaje = "Hola agente $nombre, tu codigo de verificacion CSI es: $verificationCode, ingresa este codigo en tu APP CSI para completar tu registro.";
 
             $url = 'http://api.mipgenlinea.com/serviceSMS2.php';
-            $datos = ['usuario' => '00486966949', 'password' => 'Juryzu57', 'telefono' => $telefono, 'mensaje' => $mensaje, 'fecha' => 'NA', 'aplicacion' => 'CSI ALERTA'];
+            //$datos = ['usuario' => '00486966949', 'password' => 'Juryzu57', 'telefono' => $telefono, 'mensaje' => $mensaje, 'fecha' => 'NA', 'aplicacion' => 'CSI ALERTA'];
+
+            $data = array(
+                "usuario" => "00486966949",
+                "password" => "Juryzu57",
+                "telefono" => $telefono,
+                "mensaje" => $mensaje,
+                "aplicacion" => "SMS Test Unitario"
+            );
+            $json = json_encode($data);
+            $header = array('Content-Type: application/json');
 
             $resultado_sms = new  PutController();
-            $result = $resultado_sms -> CallAPI("POST", $url, json_encode($datos));
+            $result = $resultado_sms->CallAPI($url, $json, $header);
 
-            
             $return = new PutController();
             $return->fncResponse($response, $result);
 
             file_put_contents('./log_fecha: ' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> $result \r\n", FILE_APPEND);
-
         } else {
             $response = array(
                 "code" => 1
@@ -57,34 +63,25 @@ class PutController
     }
 
     /*=============================================
-    METODO PARA LLAMAR EL API SMS DE TWILIO
-    Method: POST, PUT, GET etc
-    Data: array("param" => "value") ==> index.php?param=value
+    METODO PARA LLAMAR EL API serviceSMS2
     =============================================*/
-    public function CallAPI($method, $url, $data=false)
+    function CallAPI($url, $json, $header)
     {
         $curl = curl_init();
 
-        switch ($method) {
-            case "POST":
-                curl_setopt($curl, CURLOPT_POST, 1);
-
-                if ($data)
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-                break;
-            case "PUT":
-                curl_setopt($curl, CURLOPT_PUT, 1);
-                break;
-        }
-
         curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
 
-        $result = curl_exec($curl);
+        $response = curl_exec($curl);
+        $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         curl_close($curl);
 
-        return $result;
+        return $response;
     }
 
     /*=============================================
@@ -95,20 +92,19 @@ class PutController
 
         if (!empty($response)) {
             if ($response['code'] == 3) {
-                
+
                 $json  = array(
 
                     'status' => 200,
                     'result' => $response["code"],
                     'method' => $_SERVER['REQUEST_METHOD'],
-                    'detail' => $result
+                    'detail' => json_decode($result)
                 );
             } else {
                 $json = array(
                     'status' => 200,
                     'result' => $response['code'],
                     'method' => $_SERVER['REQUEST_METHOD'],
-                    'detail' => $result
                 );
             }
         } else {

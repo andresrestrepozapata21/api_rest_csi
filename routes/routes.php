@@ -74,7 +74,22 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
             $table = "planes_comprados";
             include "services/get.dataFilter.php";
-        } else {
+        } else if ($table == "getServices") {
+
+            $table = "servicios";
+            $select = "*";
+            include "services/get.data.php";
+        } else if ($table == "getZones") {
+
+            $table = "zonas";
+            $select = "*";
+            include "services/get.data.php";
+        } else if ($table == "getAlerts") {
+
+            $table = "alertas";
+            $select = "*";
+            include "services/get.data.php";
+        }else {
             $json  = array(
 
                 'status' => 400,
@@ -146,7 +161,16 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
         } else if ($table == "homePage") {
 
             include "services/get.homePage.php";
-        }else {
+        } else if ($table == "recordService") {
+
+            $table = "servicios";
+            $file = $_FILES['file'];
+
+            $data = '{"descripcion_servicio":"'.$_POST["descripcion_servicio"].'","puntos_servicio":'.$_POST["puntos_servicio"].'}';
+            $data = json_decode($data);
+            
+            include "services/post.php";
+        } else {
             $json  = array(
 
                 'status' => 400,

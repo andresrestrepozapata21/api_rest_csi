@@ -1103,3 +1103,35 @@ Stack trace:
 [02-Feb-2023 11:22:54 America/Bogota] Parametros recibidos 4.265434 - -75.928713
 [02-Feb-2023 14:19:48 America/Bogota] Parametros recibidos 4.265434 - -75.928713
 [02-Feb-2023 14:35:06 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[03-Feb-2023 16:36:21 Europe/Berlin] PHP Warning:  Undefined variable $select in C:\xampp\htdocs\api_rest_csi\routes\services\get.data.php on line 9
+[03-Feb-2023 17:02:56 Europe/Berlin] PHP Warning:  Undefined array key "file" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 168
+[03-Feb-2023 17:02:56 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'descripcion_servicio' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:36
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(36): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(13): PostModel::postData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(13): PostController::postRegister(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(170): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 36
+[03-Feb-2023 17:03:05 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'descripcion_servicio' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:36
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(36): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(13): PostModel::postData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(13): PostController::postRegister(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(170): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 36
+[03-Feb-2023 17:04:57 Europe/Berlin] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'descripcion_servicio' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:36
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(36): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(13): PostModel::postData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(13): PostController::postRegister(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(170): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 36
