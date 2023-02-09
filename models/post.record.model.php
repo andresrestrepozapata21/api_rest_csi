@@ -38,7 +38,7 @@ class PostModel
             $params .= 0 .",";
         }
         
-        $verificationCode = random_int(1000, 9999);
+        $verificationCode = random_int(100000, 999999);
         $columns .= "codigo_verificacion,";
         $params .= $verificationCode .",";
         

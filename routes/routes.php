@@ -78,7 +78,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $select = "*";
             include "services/get.data.php";
 
-        }else {
+        } else {
             $json  = array(
 
                 'status' => 400,
@@ -119,7 +119,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $suffix  = "usuario_agente";
             include "services/post.Login.php";
 
-        } else if ($table == "addContract") {
+        } else if ($table == "addContact") {
 
             include "services/post.contact.php";
 
@@ -129,7 +129,9 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
         } else if ($table == "uploadDocumentsCustomer") {
 
-            $file = $_FILES['file'];
+            $file1 = $_FILES['file1'];
+            $file2 = $_FILES['file2'];
+            $file3 = $_FILES['file3'];
             $id = $_POST['id'];
             $table = "usuarios_clientes";
             $suffix  = "usuario_cliente";
@@ -137,7 +139,9 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
         } else if ($table == "uploadDocumentsAgent") {
 
-            $file = $_FILES['file'];
+            $file1 = $_FILES['file1'];
+            $file2 = $_FILES['file2'];
+            $file3 = $_FILES['file3'];
             $id = $_POST['id'];
             $table = "usuarios_agentes";
             $suffix  = "usuario_agente";
@@ -180,7 +184,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
             $table = "planes";
             $select = "*";
-            $id_plan = "id_plan";
+            $id = "id_plan";
             include "services/get.dataFilter.php";
 
         } else if ($table == "validateExistingPlan") {
@@ -197,6 +201,13 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
             $table = "usuarios_clientes";
             include "services/get.password.php";
+
+        } else if ($table == "getContacts") {
+
+            $table = "contactos";
+            $select = "*";
+            $id = "fk_id_usuario_cliente_contacto";
+            include "services/get.dataFilter.php";
 
         } else {
             $json  = array(
@@ -302,6 +313,13 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $id = $data->id_tipo_usuario;
             include "services/delete.php";
 
+        } else if($table == "contactDelete"){
+            
+            $table = "contactos";
+            $nameId = "id_contacto";
+            $id = $data->id_contacto;
+            include "services/delete.php";
+            
         } else {
             $json  = array(
 

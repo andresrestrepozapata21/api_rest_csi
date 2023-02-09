@@ -15,7 +15,7 @@ class PutController
         /*=============================================
         Validamos que el ID exista en base de datos
         =============================================*/
-        $response = GetModel::getDataFilter($table, $select.",codigo_verificacion", "email", $data->email);
+        $response = GetModel::getDataFilter($table, $select.",codigo_verificacion", "id_usuario_cliente", $data->id_usuario_cliente);
 
         if (!empty($response)) {
 

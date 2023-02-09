@@ -16,11 +16,11 @@ class PutController
         /*=============================================
         Validamos que el ID exista en base de datos
         =============================================*/
-        $response = GetModel::getDataFilter($table, "$select, telefono_$suffix, nombre_$suffix", "email", $data->email);
+        $response = GetModel::getDataFilter($table, "$select, telefono_$suffix, nombre_$suffix", "id_usuario_cliente", $data->id_usuario_cliente);
 
         if (!empty($response)) {
 
-            $verificationCode = random_int(1000, 9999);
+            $verificationCode = random_int(100000, 999999);
             $telefono = "telefono_$suffix";
             $telefono = $response[0]->$telefono;
             $nombre = "nombre_$suffix";

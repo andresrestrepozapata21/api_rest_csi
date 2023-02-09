@@ -7,9 +7,9 @@ class GetController{
     /*=============================================
     Peticiones GET sin filtro
     =============================================*/
-    public function getData($table, $select, $data, $id_plan){
+    public function getData($table, $select, $data, $id){
 
-        $response = GetModel::getDataFilter($table, $select, $id_plan, $data->id_plan);
+        $response = GetModel::getDataFilter($table, $select, $id, $data->id_contacto);
         
         $return = new GetController();
         $return -> fncResponse($response);

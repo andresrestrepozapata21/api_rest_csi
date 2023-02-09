@@ -1,5 +1,8 @@
 <?php
 
+date_default_timezone_set('America/Bogota');
+require_once "models/get.filter.model.php";
+
 use FTP\Connection as FTPConnection;
 
 class Connection
@@ -79,5 +82,32 @@ class Connection
         }
         
         return $conexion;
+    }
+
+    /*=============================================
+    Validar el token de seguridad
+    =============================================*/
+    static public function tokenValidate($token, $table){
+
+        /*=============================================
+        Traemos el usuario de acuerdo al token
+        =============================================*/
+        $user = GetModel::getDataFilter($table, "token_exp", "token", $token);
+            
+        if(!empty($user)){
+            /*=============================================
+            Validamos que el token no haya expirado
+            =============================================*/
+
+            $time = time();
+
+            if($time < $user[0]->{"token_exp"}){
+                return "ok";
+            }else{
+                return "expired";
+            }
+        }else{
+            return "no-auth";
+        }
     }
 }
