@@ -19,7 +19,7 @@ class PutController
 
         if (!empty($response)) {
 
-            $response = PutModel::putData($table, $data, $select, $data->$select);
+            $response = PutModel::putData($table, $data, $select, $data->$select, $suffix);
 
             $return = new PutController();
             $return->fncResponse($response);

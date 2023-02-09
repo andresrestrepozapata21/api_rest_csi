@@ -1,0 +1,15 @@
+
+
+
+
+Repaso de Servicios
+
+1. agregar el timezone de php en bogota date_default_timezone_set('America/Bogota');
+2. Siempre tener una variable status que sirve para definir cual fue el resultado del proceso
+3. Siempre ejemplos de peticion, respuesta, completos
+4. Siempre tener un array llamado detalle que nos sirve para obtener mas variables
+5. Servicio de carga de archivos cuando se registra el usuario, tanto para el usuario de reaccion como para el usuario cliente
+6. Por defecto cuando un usuario se registra y carga documentos, su estado es pendiente.
+7. Put para modificar telefono cuando el usuario se equivoca
+8. metodo para volver a enviar el codigo cuando no llega
+9. 

@@ -25,7 +25,7 @@ class GetModel
     }
 
     /*=============================================
-    Peticiones GET con filtro para saber que usuario tiene el usuario
+    Peticiones GET con filtro para saber si el usuario tiene un plan comprado y activado
     =============================================*/
     static public function getDataFilterPlanExistente($table, $data)
     {

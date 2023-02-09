@@ -33,7 +33,6 @@ class GetController{
 
         if(!empty($response)){
             $json  = array(
-
                 'status' => 200,
                 'total' => count($response),
                 'result' => 3,

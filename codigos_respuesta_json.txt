@@ -17,3 +17,4 @@
 14-> Código de activacion no esta activo o no existe en base de datos
 15-> El código que ingresaste no coincide con algun codigo de la base de datos
 16-> El usuario ya tiene un plan activo
+17-> El usuario no tiene plan activado
