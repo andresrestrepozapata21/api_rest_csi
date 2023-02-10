@@ -103,6 +103,7 @@ class PostController
 
                     'status' => 200,
                     'result' => $response["code"],
+                    'lastId' => $response["lastId"],
                     'method' => $_SERVER['REQUEST_METHOD'],
                     'detail' => json_decode($result)
                 );
