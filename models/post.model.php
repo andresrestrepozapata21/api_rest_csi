@@ -88,4 +88,48 @@ class PostModel
             return $link->errorInfo();
         }
     }
+
+    /*=============================================
+    Peticion post para crear planes
+    =============================================*/
+    static public function postPlan($data, $target_path_nuevo)
+    {
+
+        $columns = "";
+        $params = "";
+
+        foreach ($data as $key => $value) {
+            $columns .= $key . ",";
+            $params .= "'".$value . "',";
+        }
+
+        $columns .= "ruta_imagen_plan,";
+        $params .= "'" . $target_path_nuevo . "',";
+
+        $columns .= " date_created_plan,";
+        $params .= "'" . date('Y-m-d H:i:s') . "',";
+
+        $columns = substr($columns, 0, -1);
+        $params = substr($params, 0, -1);
+
+        $sql = "INSERT INTO planes ($columns) VALUES ($params)";
+        
+        $link = Connection::connect();
+        $stmt = $link->prepare($sql);
+
+        foreach ($data as $key => $value) {
+            $stmt->bindParam(":" . $key, $data->$key, PDO::PARAM_STR);
+        }
+
+        if ($stmt->execute()) {
+            $response = array(
+                'lastId' => $link->lastInsertId(),
+                'code' => 3
+            );
+
+            return $response;
+        } else {
+            return $link->errorInfo();
+        }
+    }
 }

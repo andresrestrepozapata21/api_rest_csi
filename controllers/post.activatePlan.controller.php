@@ -14,12 +14,19 @@ class PostController
     {
 
         /*=============================================
-        Llamamos al modelo para consultar el EMAIL
+        Llamamos al modelo para consultar si el codigo es valido
         =============================================*/
-        $response = GetModel::getDataFilter($data);
+        $response = GetCodeModel::getDataFilter($data);
 
         if (!empty($response)) {
-            if($response[0]->{"codigo_activacion"} == $data->codigo_activacion){
+
+            $id_usuario_cliente = $data->id_usuario_cliente;
+            /*=============================================
+            Llamamos al modelo para consultar si el usuario ya tiene un plan activo
+            =============================================*/
+            $responseUsuarioPlan = GetCodeModel::getPlanUsuario($id_usuario_cliente);
+
+            if(empty($responseUsuarioPlan)){
 
                 $id_codigo = $response[0]->id_codigo_activacion;
 

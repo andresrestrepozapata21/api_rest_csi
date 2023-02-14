@@ -46,35 +46,38 @@ class PostController
                         $response[0]->{"token_exp"} = $token["exp"];
 
                         $return = new PostController();
-                        $return->fncResponse($response);
+                        $return->fncResponse($response, $suffix);
                     }
                 } else {
                     $response = array(
+                        "activo" => $response[0]->{"activo_$suffix"},
                         "code" => 0
                     );
                     $return = new PostController();
-                    $return->fncResponse($response);
+                    $return->fncResponse($response, $suffix);
                 }
             } else {
                 $response = array(
+                    "activo" => $response[0]->{"activo_$suffix"},
                     "code" => 8
                 );
                 $return = new PostController();
-                $return->fncResponse($response);
+                $return->fncResponse($response, $suffix);
             }
         } else {
             $response = array(
+                "activo" => "no existe",
                 "code" => 1
             );
             $return = new PostController();
-            $return->fncResponse($response);
+            $return->fncResponse($response, $suffix);
         }
     }
 
     /*=============================================
     Respuestas del controlador
     =============================================*/
-    public function fncResponse($response)
+    public function fncResponse($response, $suffix)
     {
         if (!empty($response)) {
 
@@ -83,12 +86,15 @@ class PostController
             if (isset($response['code'])) {
                 $json  = array(
                     'status' => 200,
-                    'result' => $response['code']
+                    'result' => $response['code'],
+                    'activo_'.$suffix => $response['activo']
                 );
             } else {
+                $select = "activo_" . $suffix;
                 $json  = array(
                     'status' => 200,
                     'result' => 3,
+                    'activo_'.$suffix => (int) $response[0]->$select,
                     'detail' => $response
                 );
             }

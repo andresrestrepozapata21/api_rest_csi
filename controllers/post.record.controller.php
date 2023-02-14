@@ -39,7 +39,7 @@ class PostController
             /*=============================================
             Enviamos mensaje de texto con el nuevo codigo
             =============================================*/
-            $mensaje = "Hola agente $nombre, tu codigo de verificacion CSI es: $codigo, ingresa este codigo en tu APP CSI para completar tu registro.";
+            $mensaje = "Hola $nombre, tu codigo de verificacion CSI es: $codigo, ingresa este codigo en tu APP CSI para completar tu registro.";
 
             $url = 'http://api.mipgenlinea.com/serviceSMS2.php';
             //$datos = ['usuario' => '00486966949', 'password' => 'Juryzu57', 'telefono' => $telefono, 'mensaje' => $mensaje, 'fecha' => 'NA', 'aplicacion' => 'CSI ALERTA'];

@@ -12,9 +12,9 @@
 9 -> El código de verificación no coincide.
 10-> El teléfono ya existe en uno de los contactos de emergencia.
 11-> Petición POST fallida.
-12-> Petición DELETE fallida.
+12-> Petición DELETE fallida, no se puede eliminar por integridad de la base de datos 
 13-> Hay un documento con el mismo nombre en la carpeta que intentas cargar
 14-> Código de activacion no esta activo o no existe en base de datos
-15-> El código que ingresaste no coincide con algun codigo de la base de datos
-16-> El usuario ya tiene un plan activo
+15-> El usuario ya tiene un plan activo, no se pueden tener dos planes al tiempo
+16-> El usuario no tiene un plan activo
 17-> El usuario no tiene plan activado

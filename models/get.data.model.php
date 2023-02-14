@@ -2,7 +2,7 @@
 
 require_once "connection.php";
 
-class GetModel
+class GetAllModel
 {
 
     /*=============================================

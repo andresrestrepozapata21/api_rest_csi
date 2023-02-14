@@ -9,7 +9,7 @@ class GetController{
     =============================================*/
     public function getData($table, $select, $data, $id){
 
-        $response = GetModel::getDataFilter($table, $select, $id, $data->id_contacto);
+        $response = GetModel::getDataFilter($table, $select, $id, $data->$id);
         
         $return = new GetController();
         $return -> fncResponse($response);

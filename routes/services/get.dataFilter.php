@@ -7,7 +7,7 @@ if (isset($_GET)) {
 
     if (isset($data->token)) {
 
-        $validate = Connection::tokenValidate($data->token, "usuarios_clientes");
+        $validate = Connection::tokenValidate($data->token, $userToken);
 
         if ($validate == "ok") {
             unset($data->token);

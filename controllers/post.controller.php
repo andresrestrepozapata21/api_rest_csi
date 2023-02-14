@@ -54,6 +54,43 @@ class PostController
     }
 
     /*=============================================
+    Peticion post para planes
+    =============================================*/
+    static public function postPlan($data, $file)
+    {
+
+        /*=============================================
+        Cargamos la imagen del plan
+        =============================================*/
+        $target_path = "uploads/";
+        $target_path = $target_path . basename($file['name']);
+
+        error_log("Path: " . $target_path);
+
+        $nombreArchivo = $file['name'];
+
+        $target_path_nuevo = "src/images_plans/";
+        error_log("Nuevo Path: " . $target_path_nuevo);
+
+        $target_path_nuevo = $target_path_nuevo . $nombreArchivo;
+
+        if (file_exists("./" . $target_path_nuevo)) {
+            $response = array(
+                "code" => 13
+            );
+            $return = new PostController();
+            $return->fncResponse($response);
+        } else {
+
+            $response = PostModel::postPlan($data, $target_path_nuevo);
+            move_uploaded_file($file['tmp_name'], "./" . $target_path_nuevo);
+
+            $return = new PostController();
+            $return->fncResponse($response);
+        }
+    }
+
+    /*=============================================
     Respuestas del controlador
     =============================================*/
     public function fncResponse($response)

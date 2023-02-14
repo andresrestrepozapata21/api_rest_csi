@@ -2,16 +2,16 @@
 
 require_once "connection.php";
 
-class GetModel
+class GetHomePageModel
 {
 
     /*=============================================
     Peticiones GET para traer los datos del usuario
     =============================================*/
-    static public function getUsuario($email)
+    static public function getUsuario($id_usuario_cliente)
     {
 
-        $sql = "SELECT * FROM usuarios_clientes WHERE email = '$email'";
+        $sql = "SELECT * FROM usuarios_clientes WHERE id_usuario_cliente = '$id_usuario_cliente'";
 
         $stmt = Connection::connect()->prepare($sql);
         try{

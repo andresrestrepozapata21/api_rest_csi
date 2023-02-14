@@ -1148,3 +1148,133 @@ Stack trace:
 [09-Feb-2023 16:16:08 America/Bogota] PHP Warning:  Undefined property: stdClass::$id in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
 [09-Feb-2023 16:17:47 America/Bogota] PHP Warning:  Undefined property: stdClass::$id in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
 [09-Feb-2023 16:19:34 America/Bogota] PHP Warning:  Undefined property: stdClass::$id in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[10-Feb-2023 14:35:05 America/Bogota] PHP Warning:  Undefined property: stdClass::$activo_ in C:\xampp\htdocs\api_rest_csi\models\post.record.model.php on line 69
+[10-Feb-2023 15:10:52 America/Bogota] PHP Warning:  Undefined array key "activo" in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 88
+[10-Feb-2023 15:11:00 America/Bogota] PHP Warning:  Undefined array key "activo_usuario_cliente" in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 94
+[10-Feb-2023 15:11:05 America/Bogota] PHP Warning:  Undefined array key "activo" in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 88
+[10-Feb-2023 15:11:08 America/Bogota] PHP Warning:  Undefined array key "activo_usuario_cliente" in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 94
+[10-Feb-2023 15:11:12 America/Bogota] PHP Warning:  Undefined array key "activo" in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 88
+[10-Feb-2023 15:11:15 America/Bogota] PHP Warning:  Undefined array key "activo" in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 88
+[10-Feb-2023 15:11:50 America/Bogota] PHP Warning:  Undefined array key "activo_usuario_cliente" in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 96
+[13-Feb-2023 14:55:59 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 69
+[13-Feb-2023 14:55:59 America/Bogota] PHP Warning:  Attempt to read property "activo_usuario_agente" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 69
+[13-Feb-2023 14:56:52 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 69
+[13-Feb-2023 14:56:52 America/Bogota] PHP Warning:  Attempt to read property "activo_usuario_agente" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 69
+[13-Feb-2023 14:57:11 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 69
+[13-Feb-2023 14:57:11 America/Bogota] PHP Warning:  Attempt to read property "activo_usuario_agente" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 69
+[13-Feb-2023 14:57:23 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 69
+[13-Feb-2023 14:57:23 America/Bogota] PHP Warning:  Attempt to read property "activo_usuario_cliente" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 69
+[13-Feb-2023 15:12:22 America/Bogota] PHP Warning:  Undefined property: stdClass::$id_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:13:22 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.data.model.php on line 5
+[13-Feb-2023 15:13:30 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.data.model.php on line 5
+[13-Feb-2023 15:14:28 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.data.model.php on line 5
+[13-Feb-2023 15:14:31 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.data.model.php on line 5
+[13-Feb-2023 15:15:46 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.data.model.php on line 5
+[13-Feb-2023 15:15:59 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.data.model.php on line 5
+[13-Feb-2023 15:16:25 America/Bogota] PHP Warning:  Undefined property: stdClass::$id_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:16:47 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.data.model.php on line 5
+[13-Feb-2023 15:18:22 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.data.model.php on line 5
+[13-Feb-2023 15:18:34 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.data.model.php on line 5
+[13-Feb-2023 15:20:12 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.data.model.php on line 5
+[13-Feb-2023 15:22:08 America/Bogota] PHP Warning:  Undefined property: stdClass::$id_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:24:48 America/Bogota] PHP Warning:  Undefined property: stdClass::$id_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:26:03 America/Bogota] PHP Warning:  Undefined property: stdClass::$id_usuario_cliente in C:\xampp\htdocs\api_rest_csi\models\get.filter.model.php on line 35
+[13-Feb-2023 15:32:21 America/Bogota] PHP Warning:  Undefined property: stdClass::$id_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:33:55 America/Bogota] PHP Warning:  Undefined property: stdClass::$id in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:35:31 America/Bogota] PHP Warning:  Undefined variable $userToken in C:\xampp\htdocs\api_rest_csi\routes\services\get.dataFilter.php on line 10
+[13-Feb-2023 15:37:39 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.homePage.model.php on line 5
+[13-Feb-2023 15:39:49 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.homePage.model.php on line 5
+[13-Feb-2023 15:41:03 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[13-Feb-2023 15:41:38 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.homePage.model.php on line 5
+[13-Feb-2023 15:42:13 America/Bogota] PHP Warning:  Undefined variable $userToken in C:\xampp\htdocs\api_rest_csi\routes\services\get.dataFilter.php on line 10
+[13-Feb-2023 15:42:56 America/Bogota] PHP Warning:  Undefined property: stdClass::$fk_id_usuario_cliente_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:44:22 America/Bogota] PHP Warning:  Undefined property: stdClass::$fk_id_usuario_cliente_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:44:25 America/Bogota] PHP Warning:  Undefined property: stdClass::$fk_id_usuario_cliente_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:44:36 America/Bogota] PHP Warning:  Undefined property: stdClass::$fk_id_usuario_cliente_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:46:02 America/Bogota] PHP Warning:  Undefined property: stdClass::$fk_id_usuario_cliente_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:48:50 America/Bogota] PHP Warning:  Undefined property: stdClass::$fk_id_usuario_cliente_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:49:00 America/Bogota] PHP Warning:  Undefined property: stdClass::$fk_id_usuario_cliente_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:49:10 America/Bogota] PHP Warning:  Undefined property: stdClass::$fk_id_usuario_cliente_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:49:29 America/Bogota] PHP Warning:  Undefined property: stdClass::$fk_id_usuario_cliente_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:49:46 America/Bogota] PHP Warning:  Undefined property: stdClass::$fk_id_usuario_cliente_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:49:53 America/Bogota] PHP Warning:  Undefined property: stdClass::$fk_id_usuario_cliente_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:50:00 America/Bogota] PHP Warning:  Undefined property: stdClass::$fk_id_usuario_cliente_contacto in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 12
+[13-Feb-2023 15:54:04 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'token' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.typeUserrecord.model.php:36
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.typeUserrecord.model.php(36): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.typeUserrecord.controller.php(13): PostModel::postData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.typeUserrecord.php(9): PostController::postRegister(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(128): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.typeUserrecord.model.php on line 36
+[13-Feb-2023 16:30:56 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.consultarCodigoActivacion.model.php on line 4
+[13-Feb-2023 16:31:40 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.consultarCodigoActivacion.model.php on line 4
+[13-Feb-2023 16:32:03 America/Bogota] PHP Warning:  Undefined variable $userToken in C:\xampp\htdocs\api_rest_csi\routes\services\post.activatePlan.php on line 10
+[13-Feb-2023 16:32:50 America/Bogota] PHP Warning:  Undefined variable $userToken in C:\xampp\htdocs\api_rest_csi\routes\services\post.activatePlan.php on line 10
+[13-Feb-2023 17:03:54 America/Bogota] PHP Warning:  Undefined variable $userToken in C:\xampp\htdocs\api_rest_csi\routes\services\put.toUpdate.php on line 8
+[13-Feb-2023 17:04:35 America/Bogota] PHP Warning:  Undefined variable $userToken in C:\xampp\htdocs\api_rest_csi\routes\services\put.toUpdate.php on line 8
+[13-Feb-2023 17:11:24 America/Bogota] PHP Warning:  Undefined property: stdClass::$id_usuario_agentes in C:\xampp\htdocs\api_rest_csi\controllers\put.toUpdate.controller.php on line 18
+[13-Feb-2023 17:18:56 America/Bogota] PHP Warning:  Undefined property: stdClass::$id_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\put.resendMessage.controller.php on line 19
+[13-Feb-2023 18:14:19 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.consultarCodigoActivacion.model.php on line 4
+[13-Feb-2023 18:14:37 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.consultarCodigoActivacion.model.php on line 4
+[13-Feb-2023 18:16:24 America/Bogota] PHP Fatal error:  Cannot declare class GetModel, because the name is already in use in C:\xampp\htdocs\api_rest_csi\models\get.consultarCodigoActivacion.model.php on line 4
+[14-Feb-2023 11:00:18 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'lastlogin_administrador' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.Login.model.php:40
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.Login.model.php(40): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php(41): LoginModel::login('administradores', Array, '1', 'id_administrado...', 'administrador')
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.Login.php(9): PostController::postLogin('administradores', 'administrador', Array)
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(126): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.Login.model.php on line 40
+[14-Feb-2023 14:44:18 America/Bogota] PHP Warning:  Undefined property: stdClass::$email in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 17
+[14-Feb-2023 14:44:18 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 19
+[14-Feb-2023 14:44:18 America/Bogota] PHP Warning:  Attempt to read property "id_usuario_cliente" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 19
+[14-Feb-2023 14:44:18 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 20
+[14-Feb-2023 14:44:18 America/Bogota] PHP Warning:  Attempt to read property "nombre_usuario_cliente" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 20
+[14-Feb-2023 14:44:18 America/Bogota] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 24
+[14-Feb-2023 14:44:18 America/Bogota] PHP Warning:  Attempt to read property "tipo_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 24
+[14-Feb-2023 14:44:18 America/Bogota] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 26
+[14-Feb-2023 14:44:18 America/Bogota] PHP Warning:  Attempt to read property "date_created_plan_comprado" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 26
+[14-Feb-2023 14:44:18 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 14:49:20 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 24
+[14-Feb-2023 14:49:20 America/Bogota] PHP Warning:  Attempt to read property "tipo_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 24
+[14-Feb-2023 14:49:20 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 26
+[14-Feb-2023 14:49:20 America/Bogota] PHP Warning:  Attempt to read property "date_created_plan_comprado" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 26
+[14-Feb-2023 14:49:20 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 14:50:51 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 14:52:31 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 24
+[14-Feb-2023 14:52:31 America/Bogota] PHP Warning:  Attempt to read property "tipo_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 24
+[14-Feb-2023 14:52:31 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 26
+[14-Feb-2023 14:52:31 America/Bogota] PHP Warning:  Attempt to read property "date_created_plan_comprado" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 26
+[14-Feb-2023 14:52:31 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 14:53:08 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 15:00:12 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 15:00:21 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 24
+[14-Feb-2023 15:00:21 America/Bogota] PHP Warning:  Attempt to read property "tipo_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 24
+[14-Feb-2023 15:00:21 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 25
+[14-Feb-2023 15:00:21 America/Bogota] PHP Warning:  Attempt to read property "id_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 25
+[14-Feb-2023 15:00:21 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 36
+[14-Feb-2023 15:00:21 America/Bogota] PHP Warning:  Attempt to read property "date_created_plan_comprado" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 36
+[14-Feb-2023 15:00:21 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 15:00:41 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 24
+[14-Feb-2023 15:00:41 America/Bogota] PHP Warning:  Attempt to read property "tipo_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 24
+[14-Feb-2023 15:00:41 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 25
+[14-Feb-2023 15:00:41 America/Bogota] PHP Warning:  Attempt to read property "id_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 25
+[14-Feb-2023 15:06:58 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 15:07:06 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 15:08:28 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 15:29:23 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 15:29:28 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 15:29:32 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 15:29:45 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 15:29:49 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 15:29:54 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 19
+[14-Feb-2023 15:29:54 America/Bogota] PHP Warning:  Attempt to read property "id_usuario_cliente" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 19
+[14-Feb-2023 15:29:54 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 20
+[14-Feb-2023 15:29:54 America/Bogota] PHP Warning:  Attempt to read property "nombre_usuario_cliente" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 20
+[14-Feb-2023 15:35:03 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[14-Feb-2023 15:35:10 America/Bogota] Parametros recibidos 4.265434 - -75.928713
