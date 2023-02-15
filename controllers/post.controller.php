@@ -2,20 +2,10 @@
 
 require_once "models/connection.php";
 require_once "models/post.model.php";
+require_once "models/get.filter.model.php";
 
 class PostController
 {
-    /*=============================================
-    Peticion POST para registrar algo
-    =============================================*/
-    static public function postRegister($data)
-    {
-        $response = PostModel::postData($data);
-
-        $return = new PostController();
-        $return->fncResponse($response);
-    }
-
     /*=============================================
     Peticion post para servicio
     =============================================*/
@@ -89,6 +79,29 @@ class PostController
             $return->fncResponse($response);
         }
     }
+
+    /*=============================================
+    Peticion post para servicios por zona
+    =============================================*/
+    static public function postServicePerZone($data)
+    {
+
+        $responseServicePerZone = GetModel::getDataFilterServicePerZone("servicios_por_zona", $data);
+
+        if (empty($responseServicePerZone)) {
+            $response = PostModel::postServicePerZone($data);
+
+            $return = new PostController();
+            $return->fncResponse($response);
+        } else {
+            $response = array(
+                "code" => 18
+            );
+            $return = new PostController();
+            $return->fncResponse($response);
+        }
+    }
+
 
     /*=============================================
     Respuestas del controlador

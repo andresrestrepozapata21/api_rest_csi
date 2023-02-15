@@ -18,3 +18,4 @@
 15-> El usuario ya tiene un plan activo, no se pueden tener dos planes al tiempo
 16-> El usuario no tiene un plan activo
 17-> El usuario no tiene plan activado
+18-> La zona ya tiene este Servicio

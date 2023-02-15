@@ -200,6 +200,28 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $data = json_decode($data);
             include "services/post.php";
 
+        } else if ($table == "planImageUpdate") {
+
+            $file = $_FILES['file'];
+            $id = $_POST['id'];
+            $token = $_POST['token'];
+            $table = "planes";
+            $suffix  = "plan";
+            $userToken = "administradores";
+            $ruta = "src/images_plans/";
+            include "services/put.updateImage.php";
+
+        } else if ($table == "serviceImageUpdate") {
+
+            $file = $_FILES['file'];
+            $id = $_POST['id'];
+            $token = $_POST['token'];
+            $table = "servicios";
+            $suffix  = "servicio";
+            $userToken = "administradores";
+            $ruta = "src/images_services/";
+            include "services/put.updateImage.php";
+
         }else if ($table == "getPlan") {
 
             $userToken = "usuarios_clientes";
@@ -232,7 +254,15 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $id = "fk_id_usuario_cliente_contacto";
             include "services/get.dataFilter.php";
 
-        } else {
+        } else if ($table == "servicesPerZoneRecord") {
+
+            $userToken = "administradores";
+            $table = "servicos_por_zona";
+            $select = "*";
+            $id = "fk_id_usuario_cliente_contacto";
+            include "services/post.php";
+
+        }else {
             $json  = array(
 
                 'status' => 400,

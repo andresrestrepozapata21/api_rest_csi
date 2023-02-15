@@ -43,4 +43,24 @@ class GetModel
         }
         return $stmt->fetchAll(PDO::FETCH_CLASS);
     }
+
+    /*=============================================
+    Peticiones GET con filtro para saber si el servicio ya esta registrado en la zona a la que lo quieres agregar
+    =============================================*/
+    static public function getDataFilterServicePerZone($table, $data)
+    {
+        /*=============================================
+        Consulta SQL
+        =============================================*/
+        $sql = "SELECT * FROM $table WHERE fk_id_servicio_servicos_por_zona = $data->id_servicio AND fk_id_zona_servicos_por_zona = $data->id_zona";
+
+        $stmt = Connection::connect()->prepare($sql);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            return null;
+        }
+        return $stmt->fetchAll(PDO::FETCH_CLASS);
+    }
 }

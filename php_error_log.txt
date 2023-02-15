@@ -1278,3 +1278,54 @@ Stack trace:
 [14-Feb-2023 15:29:54 America/Bogota] PHP Warning:  Attempt to read property "nombre_usuario_cliente" on null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 20
 [14-Feb-2023 15:35:03 America/Bogota] Parametros recibidos 4.265434 - -75.928713
 [14-Feb-2023 15:35:10 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[15-Feb-2023 09:24:05 America/Bogota] PHP Fatal error:  Uncaught Error: Call to undefined method PostModel::postData() in C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php:87
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(87): PostController::postServicePerZone(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(241): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php on line 87
+[15-Feb-2023 09:24:54 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'backend_csi.servicos_por_zona' doesn't exist in C:\xampp\htdocs\api_rest_csi\models\post.model.php:124
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(124): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(87): PostModel::postServicePerZone(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(87): PostController::postServicePerZone(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(241): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 124
+[15-Feb-2023 09:25:10 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id_servicio' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:124
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(124): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(87): PostModel::postServicePerZone(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(87): PostController::postServicePerZone(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(241): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 124
+[15-Feb-2023 09:27:17 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fk_id_servicio_servicios_por_zona' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:124
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(124): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(87): PostModel::postServicePerZone(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(87): PostController::postServicePerZone(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(241): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 124
+[15-Feb-2023 09:29:47 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`backend_csi`.`servicios_por_zona`, CONSTRAINT `fk_servicios_por_zona_zonas_1` FOREIGN KEY (`fk_id_zona_servicos_por_zona`) REFERENCES `zonas` (`id_zona`)) in C:\xampp\htdocs\api_rest_csi\models\post.model.php:127
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(127): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(87): PostModel::postServicePerZone(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(87): PostController::postServicePerZone(Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(241): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 127
+[15-Feb-2023 10:36:30 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[15-Feb-2023 10:37:53 America/Bogota] Parametros recibidos 4.26587 - -75.9353
+[15-Feb-2023 10:38:15 America/Bogota] Parametros recibidos 4.265434 - -75.928713
