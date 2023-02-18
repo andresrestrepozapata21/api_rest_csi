@@ -222,7 +222,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $ruta = "src/images_services/";
             include "services/put.updateImage.php";
 
-        }else if ($table == "getPlan") {
+        } else if ($table == "getPlan") {
 
             $userToken = "usuarios_clientes";
             $table = "planes";
@@ -262,7 +262,24 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $id = "fk_id_usuario_cliente_contacto";
             include "services/post.php";
 
-        }else {
+        } else if ($table == "alertRecord") {
+
+            $userToken = "usuarios_clientes";
+            $table = "alertas";
+            $file = $_FILES['file'];  
+            $data = '{"token":"'.$_POST["token"].'","latitud_alerta":'.$_POST["latitud_alerta"].',"longitud_alerta":'.$_POST["longitud_alerta"].',"comentario_alerta":"'.$_POST["comentario_alerta"].'","fk_id_usuario_cliente_alerta":'.$_POST["fk_id_usuario_cliente_alerta"].',"fk_id_servicio_por_zona_alerta":'.$_POST["fk_id_servicio_por_zona_alerta"].'}';
+            $data = json_decode($data);
+            include "services/post.php";
+
+        } else if ($table == "checkZoneCode") {
+
+            $userToken = "usuarios_clientes";
+            $table = "zonas";
+            $select = "*";
+            $id = "id_zona";
+            include "services/get.dataFilter.php";
+
+        } else {
             $json  = array(
 
                 'status' => 400,

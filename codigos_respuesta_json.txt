@@ -19,3 +19,5 @@
 16-> El usuario no tiene un plan activo
 17-> El usuario no tiene plan activado
 18-> La zona ya tiene este Servicio
+19-> Codigo de zona invalido
+20-> La zona no tiene establecimientos registrados

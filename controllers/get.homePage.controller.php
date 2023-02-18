@@ -57,7 +57,7 @@ class GetController
             $distancia = GetController::distance($valor["latitud_zona"], $valor["longitud_zona"], $latitud, $longitud, "K");
 
             if ($distancia <= 100) {
-                if (round($distancia * 1000) <= 200) {
+                if (round($distancia * 1000) <= $valor["radio_zona"]) {
 
                     $valor["distancia"] = '' . round(($distancia * 1000)) . '';
 
@@ -128,6 +128,7 @@ class GetController
         }
 
         $response = array(
+            'id_usuario_cliente' => $id,
             'nombre_usuario_cliente' => $nombre,
             'id_plan' => $id_plan,
             'tipo_plan' => $tipo_plan,
@@ -183,14 +184,14 @@ class GetController
                 $json  = array(
                     'status' => 200,
                     'result' => 3,
-                    'id_plan' => $response["id_plan"],
+                    'id_plan' => (int) $response["id_plan"],
                     'detail' => $response
                 );
             } else {
                 $json  = array(
                     'status' => 200,
                     'result' => 16,
-                    'id_plan' => $response["id_plan"],
+                    'id_plan' => (int) $response["id_plan"],
                 );
             }
         } else {

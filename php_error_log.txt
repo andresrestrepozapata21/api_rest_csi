@@ -1329,3 +1329,13 @@ Stack trace:
 [15-Feb-2023 10:36:30 America/Bogota] Parametros recibidos 4.265434 - -75.928713
 [15-Feb-2023 10:37:53 America/Bogota] Parametros recibidos 4.26587 - -75.9353
 [15-Feb-2023 10:38:15 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[16-Feb-2023 08:36:45 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[16-Feb-2023 09:12:26 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[16-Feb-2023 09:12:41 America/Bogota] Parametros recibidos 4.26543443141 - -75.928713431413
+[16-Feb-2023 09:12:51 America/Bogota] Parametros recibidos 4.26554325432 - -75.954325432
+[16-Feb-2023 09:58:27 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[16-Feb-2023 11:30:55 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[16-Feb-2023 11:31:19 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[16-Feb-2023 11:31:42 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[16-Feb-2023 11:35:23 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[16-Feb-2023 11:41:07 America/Bogota] Parametros recibidos 4.265434 - -75.928713

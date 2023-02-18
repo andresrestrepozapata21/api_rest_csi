@@ -14,6 +14,9 @@ if (isset($_GET)) {
             if ($table == "planes_comprados") {
                 $response = new GetController();
                 $response->getDataPlanExistente($table, $data);
+            } else if ($table == "zonas") {
+                $response = new GetController();
+                $response->getLocalZone($table, $data, $id, $select);
             } else {
                 $response = new GetController();
                 $response->getData($table, $select, $data, $id);
