@@ -133,7 +133,9 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
         } else if ($table == "createTypeUser") {
 
             $userToken = "administradores";
-            include "services/post.typeUserrecord.php";
+            $table = "tipos_usuarios";
+            $suffix = "tipo_usuario";
+            include "services/post.php";
 
         } else if ($table == "uploadDocumentsCustomer") {
 
@@ -279,6 +281,36 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $id = "id_zona";
             include "services/get.dataFilter.php";
 
+        } else if ($table == "positionCustomerRecord") {
+
+            $userToken = "usuarios_clientes";
+            $table = "posiciones_clientes";
+            $suffix = "posicion_cliente";
+            $id = "id_posicion_cliente";
+            include "services/post.php";
+
+        } else if ($table == "positionAgentRecord") {
+
+            $userToken = "usuarios_agentes";
+            $table = "posiciones_agentes";
+            $suffix = "posicion_agente";
+            $id = "id_posicion_agente";
+            include "services/post.php";
+
+        } else if ($table == "getCloseCustomers") {
+
+            $userToken = "usuarios_clientes";
+            $table = "posiciones_clientes";
+            $suffix = "posicion_cliente";
+            include "services/post.closePosition.php";
+
+        } else if ($table == "getCloseAgents") {
+
+            $userToken = "usuarios_agentes";
+            $table = "posiciones_agentes";
+            $suffix = "posicion_agente";
+            include "services/post.closePosition.php";
+
         } else {
             $json  = array(
 
@@ -386,6 +418,20 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $suffix = "usuario_agente";
             $select = "id_usuario_agente";
             include "services/put.toActivete.php";
+
+        } else if ($table == "putUpdateCustomerDeviceToken") {
+
+            $table = "usuarios_clientes";
+            $suffix = "usuario_cliente";
+            $select = "id_usuario_cliente";
+            include "services/put.toUpdateDeviceToken.php";
+
+        } else if ($table == "putUpdateAgentDeviceToken") {
+
+            $table = "usuarios_agentes";
+            $suffix = "usuario_agente";
+            $select = "id_usuario_agente";
+            include "services/put.toUpdateDeviceToken.php";
 
         } else {
             $json  = array(

@@ -13,8 +13,11 @@ class GetController
     =============================================*/
     public function getData($data)
     {
+        $latitud = $data->latitud;
+        $longitud = $data->longitud;
 
         $responseUser = GetHomePageModel::getUsuario($data->id_usuario_cliente);
+
 
         if (empty($responseUser)) {
             return GetController::fncResponse(null);
@@ -22,12 +25,18 @@ class GetController
 
         $id = $responseUser[0]->id_usuario_cliente;
         $nombre = $responseUser[0]->nombre_usuario_cliente;
+        $cedula = $responseUser[0]->cedula_usuario_cliente;
 
         $responsePlan = GetHomePageModel::getPlanUsuario($id);
 
         if (!isset($responsePlan[0]->id_plan)) {
+            $filasZonas = GetController::validarZonaCercana($latitud, $longitud);
             $response = array(
                 'id_plan' => 0,
+                'id_usuario_cliente' => $id,
+                'nombre_usuario_cliente' => $nombre,
+                "codigo_QR" => "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http%3A%2F%2Fwww.yosoyfan.com%2Fluisalbertoposada%2Fvalidador_qr.php?cedula=$cedula",
+                'zona' => $filasZonas
             );
             $return = new GetController();
             return $return->fncResponse($response);
@@ -35,50 +44,19 @@ class GetController
 
         $tipo_plan = $responsePlan[0]->tipo_plan;
         $id_plan = $responsePlan[0]->id_plan;
+        $contactos_emergencia_plan = $responsePlan[0]->contactos_emergencia_plan;
 
         $fecha_vencimiento = date("d-m-Y", strtotime($responsePlan[0]->date_created_plan_comprado . "+ 30 days"));
 
-        $latitud = $data->latitud;
-        $longitud = $data->longitud;
-
         error_log("Parametros recibidos " . $latitud . " - " . $longitud);
 
-        /*=============================================
-        Consultamos en que zona estamos
-        =============================================*/
-        $conexion = Connection::conexionAlternativa();
-        $sentencia_listar = "select * from zonas";
-        $resultado_listado = mysqli_query($conexion, $sentencia_listar);
-
-        $filasZonas = array();
-
-        while ($valor = mysqli_fetch_assoc($resultado_listado)) {
-
-            $distancia = GetController::distance($valor["latitud_zona"], $valor["longitud_zona"], $latitud, $longitud, "K");
-
-            if ($distancia <= 100) {
-                if (round($distancia * 1000) <= $valor["radio_zona"]) {
-
-                    $valor["distancia"] = '' . round(($distancia * 1000)) . '';
-
-                    $filasZonas[] = $valor;
-                }
-            } else {
-                echo '<pre>';
-                print_r("zona");
-                echo '</pre>\n';
-            }
-        }
-
-        if (empty($filasZonas)) {
-            $filasZonas["comentario"] = "No estas cerca de alguna zona registrada";
-        }
+        $filasZonas = GetController::validarZonaCercana($latitud, $longitud);
 
         /*=============================================
         Consultamos cuales son las alertas cercanas
         =============================================*/
         $conexion = Connection::conexionAlternativa();
-        $sentencia_listar = "select * from alertas";
+        $sentencia_listar = "SELECT * FROM alertas";
         $resultado_listado = mysqli_query($conexion, $sentencia_listar);
 
         $filasAlertas = array();
@@ -99,7 +77,7 @@ class GetController
         }
 
         if (empty($filasAlertas)) {
-            $filasAlertas["comentario"] = "No hay alertas cercanas";
+            $filasAlertas["comentario"] = 0;
         }
 
         /*=============================================
@@ -116,23 +94,35 @@ class GetController
 
             $filasServicios = array();
 
-            while ($valor = mysqli_fetch_assoc($resultado_listado)) {
-                $filasServicios[] = $valor;
-            }
-
-            if (empty($filasAlertas)) {
-                $filasServicios["comentario"] = "No hay servicios en tu zona cercanas";
+            if($resultado_listado){
+                while ($valor = mysqli_fetch_assoc($resultado_listado)) {
+                    $filasServicios[] = $valor;
+                }
+            }else{
+                $filasServicios["comentario"] = 0;
             }
         } else {
-            $filasServicios["comentario"] = "No se encontro una zona cercana por eso no hay servicios en tu zona";
+            $filasServicios["comentario"] = 0;
+        }
+
+        if (isset($filasAlertas["comentario"])) {
+            unset($filasAlertas["comentario"]);
+            $filasAlertas = 0;
+        }
+
+        if (isset($filasServicios["comentario"])) {
+            unset($filasServicios["comentario"]);
+            $filasServicios = 0;
         }
 
         $response = array(
             'id_usuario_cliente' => $id,
             'nombre_usuario_cliente' => $nombre,
-            'id_plan' => $id_plan,
+            "codigo_QR" => "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http%3A%2F%2Fwww.yosoyfan.com%2Fluisalbertoposada%2Fvalidador_qr.php?cedula=$cedula",
+            'id_plan' => (int) $id_plan,
             'tipo_plan' => $tipo_plan,
             'vencimiento' => $fecha_vencimiento,
+            'contactos_emergencia_plan' => (int) $contactos_emergencia_plan,
             'zona' => $filasZonas,
             'alertas_cercanas' => $filasAlertas,
             'servicios_zona' => $filasServicios,
@@ -140,6 +130,38 @@ class GetController
 
         $return = new GetController();
         $return->fncResponse($response);
+    }
+
+    /*=============================================
+    Consultamos en que zona estamos
+    =============================================*/
+    function validarZonaCercana($latitud, $longitud)
+    {
+        $conexion = Connection::conexionAlternativa();
+        $sentencia_listar = "select * from zonas";
+        $resultado_listado = mysqli_query($conexion, $sentencia_listar);
+
+        $filasZonas = array();
+
+        while ($valor = mysqli_fetch_assoc($resultado_listado)) {
+
+            $distancia = GetController::distance($valor["latitud_zona"], $valor["longitud_zona"], $latitud, $longitud, "K");
+
+            if ($distancia <= 100) {
+                if (round($distancia * 1000) <= $valor["radio_zona"]) {
+
+                    $valor["distancia"] = '' . round(($distancia * 1000)) . '';
+
+                    $filasZonas[] = $valor;
+                }
+            }
+        }
+
+        if (empty($filasZonas)) {
+            return  $filasZonas["comentario"] = 0;
+        }
+
+        return $filasZonas;
     }
 
     public function distance($lat1, $lon1, $lat2, $lon2, $unit)
@@ -172,7 +194,6 @@ class GetController
         return $numberDays;
     }
 
-
     /*=============================================
     Respuestas del controlador
     =============================================*/
@@ -192,6 +213,7 @@ class GetController
                     'status' => 200,
                     'result' => 16,
                     'id_plan' => (int) $response["id_plan"],
+                    'detail' => $response
                 );
             }
         } else {

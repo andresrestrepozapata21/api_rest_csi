@@ -12,8 +12,6 @@ class PostController
     =============================================*/
     static public function postRegister($table, $suffix, $data)
     {
-
-
         /*=============================================
         Validamos que el correo No exista en base de datos
         =============================================*/
