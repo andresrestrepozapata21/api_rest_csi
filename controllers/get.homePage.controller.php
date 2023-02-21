@@ -35,7 +35,7 @@ class GetController
                 'id_plan' => 0,
                 'id_usuario_cliente' => $id,
                 'nombre_usuario_cliente' => $nombre,
-                "codigo_QR" => "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http%3A%2F%2Fwww.yosoyfan.com%2Fluisalbertoposada%2Fvalidador_qr.php?cedula=$cedula",
+                "codigo_QR" => "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http%3A%2F%2Fpruebas.mipgenlinea.com%2Fvalidador_qr.php?cedula=$cedula",
                 'zona' => $filasZonas
             );
             $return = new GetController();
@@ -118,7 +118,7 @@ class GetController
         $response = array(
             'id_usuario_cliente' => $id,
             'nombre_usuario_cliente' => $nombre,
-            "codigo_QR" => "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http%3A%2F%2Fwww.yosoyfan.com%2Fluisalbertoposada%2Fvalidador_qr.php?cedula=$cedula",
+            "codigo_QR" => "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http%3A%2F%2Fpruebas.mipgenlinea.com%2Fvalidador_qr.php?cedula=$cedula",
             'id_plan' => (int) $id_plan,
             'tipo_plan' => $tipo_plan,
             'vencimiento' => $fecha_vencimiento,

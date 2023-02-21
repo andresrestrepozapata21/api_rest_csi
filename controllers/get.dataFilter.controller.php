@@ -88,7 +88,7 @@ class GetController
         $longitud = $data->longitud;
 
         /*=============================================
-        Consultamos cuales son las alertas cercanas
+        Consultamos las posiciones cercanas
         =============================================*/
         $conexion = Connection::conexionAlternativa();
         $sentencia_listar = "SELECT * FROM $table";
@@ -149,7 +149,7 @@ class GetController
         $startTimeStamp = strtotime($fecha1);
         $endTimeStamp = strtotime($fecha2);
         $timeDiff = abs($endTimeStamp - $startTimeStamp);
-        $numberDays = $timeDiff / 60;  // 3600 seconds in one hour
+        $numberDays = $timeDiff / 60;  // 60 seconds in one minute
         // and you might want to convert to integer
         $numberDays = intval($numberDays);
         return $numberDays;
