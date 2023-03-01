@@ -1621,3 +1621,41 @@ Stack trace:
 #4 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
 #5 {main}
   thrown in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 173
+[27-Feb-2023 12:12:09 America/Bogota] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in C:\xampp\htdocs\api_rest_csi\controllers\post.contact.controller.php:16
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.contact.php(15): PostController::postRegister(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(131): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.contact.controller.php on line 16
+[27-Feb-2023 22:57:25 Europe/Berlin] PHP Warning:  Undefined array key "token" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:57:25 Europe/Berlin] PHP Warning:  Undefined array key "latitud_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:57:25 Europe/Berlin] PHP Warning:  Undefined array key "longitud_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:57:25 Europe/Berlin] PHP Warning:  Undefined array key "fk_id_usuario_agente_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:57:25 Europe/Berlin] PHP Warning:  Undefined array key "fk_id_alerta_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:58:23 Europe/Berlin] PHP Warning:  Undefined array key "token" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:58:23 Europe/Berlin] PHP Warning:  Undefined array key "latitud_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:58:23 Europe/Berlin] PHP Warning:  Undefined array key "longitud_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:58:23 Europe/Berlin] PHP Warning:  Undefined array key "fk_id_usuario_agente_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:58:23 Europe/Berlin] PHP Warning:  Undefined array key "fk_id_alerta_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 17:48:22 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'latitud_reaccion_agente_reaccion_agente' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:260
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(260): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(196): PostModel::postReactionAgentAlert('reacciones_agen...', 'reaccion_agente', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(26): PostController::postReactionAgentAlert('reacciones_agen...', 'reaccion_agente', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(286): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 260
+[27-Feb-2023 17:48:46 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fk_id_alerta_reaccion_reaccion_agente' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:260
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(260): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(196): PostModel::postReactionAgentAlert('reacciones_agen...', 'reaccion_agente', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(26): PostController::postReactionAgentAlert('reacciones_agen...', 'reaccion_agente', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(286): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 260

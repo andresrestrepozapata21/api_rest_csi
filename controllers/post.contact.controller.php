@@ -11,6 +11,15 @@ class PostController
     =============================================*/
     static public function postRegister($data)
     {
+
+        //Sanitizamos el telefono del usuario para que se normalice si tiene caracteres especiales como "(",")","-" o espacios en blanco
+        $contacto_contacto = $data->telefono_contacto;
+        $contacto_contacto = str_replace("(", "", $contacto_contacto);
+        $contacto_contacto = str_replace(")", "", $contacto_contacto);
+        $contacto_contacto = str_replace("-", "", $contacto_contacto);
+        $contacto_contacto = str_replace(" ", "", $contacto_contacto);
+        $data->telefono_contacto = $contacto_contacto;
+
         /*=============================================
         Validamos que el correo No exista en base de datos
         =============================================*/

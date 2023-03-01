@@ -202,6 +202,34 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $data = json_decode($data);
             include "services/post.php";
 
+        } else if ($table == "putCustomer") {
+
+            $userToken = "usuarios_clientes";
+            $table = "usuarios_clientes";
+            $suffix = "usuario_cliente";
+            $select = "id_usuario_cliente";
+            $id = $_POST["id_usuario_cliente"];
+            $file = $_FILES['file'];
+            $data = '{"token":"'.$_POST["token"].'","id_usuario_cliente":"'.$_POST["id_usuario_cliente"].'","Enfermedades_base":"'.$_POST["Enfermedades_base"].'","nombre_usuario_cliente":"'.$_POST["nombre_usuario_cliente"].'","apellido_usuario_cliente":"'.$_POST["apellido_usuario_cliente"].'","telefono_usuario_cliente":'.$_POST["telefono_usuario_cliente"].',"cedula_usuario_cliente":"'.$_POST["cedula_usuario_cliente"].'","tipo_de_sangre":"'.$_POST["tipo_de_sangre"].'","direccion_usuario_cliente":"'.$_POST["direccion_usuario_cliente"].'","email":"'.$_POST["email"].'","arl":"'.$_POST["arl"].'","password":'.$_POST["password"].',"alergias":"'.$_POST["alergias"].'","eps":"'.$_POST["eps"].'"}';
+            $data = json_decode($data);
+            $ruta = "src/perfile_pictures/clients/".$id."/";
+
+            include "services/put.toUpdate.php";
+
+        } else if ($table == "putAgent") {
+
+            $userToken = "usuarios_agentes";
+            $table = "usuarios_agentes";
+            $suffix = "usuario_agente";
+            $select = "id_usuario_agente";
+            $id = $_POST["id_usuario_agente"];
+            $file = $_FILES['file'];
+            $data = '{"token":"'.$_POST["token"].'","id_usuario_agente":"'.$_POST["id_usuario_agente"].'","Enfermedades_base":"'.$_POST["Enfermedades_base"].'","nombre_usuario_agente":"'.$_POST["nombre_usuario_agente"].'","apellido_usuario_agente":"'.$_POST["apellido_usuario_agente"].'","telefono_usuario_agente":'.$_POST["telefono_usuario_agente"].',"cedula_usuario_agente":"'.$_POST["cedula_usuario_agente"].'","tipo_de_sangre":"'.$_POST["tipo_de_sangre"].'","direccion_usuario_agente":"'.$_POST["direccion_usuario_agente"].'","email":"'.$_POST["email"].'","arl":"'.$_POST["arl"].'","password":'.$_POST["password"].',"alergias":"'.$_POST["alergias"].'","eps":"'.$_POST["eps"].'","fk_id_tipo_usuario_usuario_agente":"'.$_POST["fk_id_tipo_usuario_usuario_agente"].'"}';
+            $data = json_decode($data);
+            $ruta = "src/perfile_pictures/agents/".$id."/";
+
+            include "services/put.toUpdate.php";
+
         } else if ($table == "planImageUpdate") {
 
             $file = $_FILES['file'];
@@ -268,9 +296,28 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
             $userToken = "usuarios_clientes";
             $table = "alertas";
-            $file = $_FILES['file'];  
+            $file1 = $_FILES['file1'];
+            $file2 = $_FILES['file2'];
+            $file3 = $_FILES['file3'];
+            $file = array();
+            array_push($file, $file1, $file2, $file3);
             $data = '{"token":"'.$_POST["token"].'","latitud_alerta":'.$_POST["latitud_alerta"].',"longitud_alerta":'.$_POST["longitud_alerta"].',"comentario_alerta":"'.$_POST["comentario_alerta"].'","fk_id_usuario_cliente_alerta":'.$_POST["fk_id_usuario_cliente_alerta"].',"fk_id_servicio_por_zona_alerta":'.$_POST["fk_id_servicio_por_zona_alerta"].'}';
             $data = json_decode($data);
+
+            include "services/post.php";
+
+        } else if ($table == "reactionAgentAlert") {            
+
+            $userToken = "usuarios_agentes";
+            $table = "reacciones_agentes";
+            $suffix = "reaccion_agente";
+            include "services/post.php";
+
+        } else if ($table == "reactionCustomerAlert") {            
+
+            $userToken = "usuarios_clientes";
+            $table = "reacciones_cliente_cliente";
+            $suffix = "reaccion_cliente_cliente";
             include "services/post.php";
 
         } else if ($table == "checkZoneCode") {
@@ -328,23 +375,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
     =============================================*/
     if ($_SERVER['REQUEST_METHOD'] == "PUT") {
 
-        if ($table == "putCustomer") {
-
-            $userToken = "usuarios_clientes";
-            $table = "usuarios_clientes";
-            $suffix = "usuario_cliente";
-            $select = "id_usuario_cliente";
-            include "services/put.toUpdate.php";
-
-        } else if ($table == "putAgent") {
-
-            $userToken = "usuarios_agentes";
-            $table = "usuarios_agentes";
-            $suffix = "usuario_agente";
-            $select = "id_usuario_agente";
-            include "services/put.toUpdate.php";
-
-        } else if ($table == "resendMessageCustomer") {
+        if ($table == "resendMessageCustomer") {
 
             $table = "usuarios_clientes";
             $suffix = "usuario_cliente";

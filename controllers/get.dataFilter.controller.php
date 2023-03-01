@@ -45,7 +45,7 @@ class GetController
                 Consultamos en que zona estamos
                 =============================================*/
                 $conexion = Connection::conexionAlternativa();
-                $sentencia_listar = "SELECT * FROM `establecimientos` WHERE fk_id_zona_establecimiento = $data->id_zona";
+                $sentencia_listar = "SELECT * FROM establecimientos e INNER JOIN promociones_por_establecimiento pe ON e.id_establecimiento=pe.fk_id_establecimiento_promocion_por_establecimiento INNER JOIN promociones p ON pe.fk_id_promocion_promocion_por_establecimiento=p.id_promocion WHERE e.fk_id_zona_establecimiento = $data->id_zona";
                 $resultado_listado = mysqli_query($conexion, $sentencia_listar);
 
                 $filaslocals = array();
@@ -125,6 +125,10 @@ class GetController
         $return->fncResponse($response);
     }
 
+
+    /*=============================================
+    METODOS AUXILIARES
+    =============================================*/
     public function distance($lat1, $lon1, $lat2, $lon2, $unit)
     {
 

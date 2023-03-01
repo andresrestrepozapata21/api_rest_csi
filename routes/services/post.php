@@ -21,6 +21,12 @@ if (isset($_POST)) {
             } else if ($table == "alertas") {
                 $response = new PostController();
                 $response->postAlert($data, $file);
+            } else if ($table == "reacciones_agentes") {
+                $response = new PostController();
+                $response->postReactionAgentAlert($table, $suffix, $data);
+            } else if ($table == "reacciones_cliente_cliente") {
+                $response = new PostController();
+                $response->postReactionCustomerAlert($table, $suffix, $data);
             } else if ($table == "posiciones_clientes" || $table == "posiciones_agentes") {
                 $response = new PostController();
                 $response->postPosition($table, $suffix, $data);
