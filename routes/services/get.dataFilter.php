@@ -15,6 +15,15 @@ if (isset($data->token)) {
         } else if ($table == "zonas") {
             $response = new GetController();
             $response->getLocalZone($table, $data, $id, $select);
+        } else if ($table == "zona") {
+            $response = new GetController();
+            $response->getZone($data);
+        } else if ($table == "establecimientos") {
+            $response = new GetController();
+            $response->getLocal($data);
+        } else if ($table == "servicios_por_zona") {
+            $response = new GetController();
+            $response->getServicesPerZone($data);
         } else {
             $response = new GetController();
             $response->getData($table, $select, $data, $id);

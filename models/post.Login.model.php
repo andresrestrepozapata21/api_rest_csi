@@ -26,8 +26,6 @@ class LoginModel
 
         $sql = "UPDATE $table SET $set WHERE $nameId = :$nameId";
 
- 
-
         $link = Connection::connect();
         $stmt = $link->prepare($sql);
 

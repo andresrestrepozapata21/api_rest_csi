@@ -28,8 +28,8 @@ function enviar_correo_confirmacion($destinatario1, $nombre, $servicio)
     $mail->Port = 587;
     $mail->SMTPSecure = 'tls';
     $mail->SMTPAuth = true;
-    $mail->Username = "AKIAVHKQVZ4UQMHKXDHZ";
-    $mail->Password = "BIdvprThst2JBj9orUTftvHoVxMj3kIiJ6eKB7jDTIkO";
+    $mail->Username = "AKIAVHKQVZ4UZADJC5IV";
+    $mail->Password = "BLlaf3qmSV4BfliI0CiOl1xVUU4Z85XsFS7rbOygG0sG";
     $mail->CharSet = 'UTF-8';
     $mail->setFrom('alertas@mipgenlinea.com', 'Administrador CSI');
     $mail->addReplyTo('alertas@mipgenlinea.com', 'Administrador CSI');

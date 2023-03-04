@@ -189,7 +189,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $userToken = "administradores";
             $table = "servicios";
             $file = $_FILES['file'];
-            $data = '{"token":"'.$_POST["token"].'","descripcion_servicio":"'.$_POST["descripcion_servicio"].'","puntos_servicio":'.$_POST["puntos_servicio"].'}';
+            $data = '{"token":"'.$_POST["token"].'","descripcion_servicio":"'.$_POST["descripcion_servicio"].'","puntos_servicio":'.$_POST["puntos_servicio"].',"color_sombra_servicio":"'.$_POST["color_sombra_servicio"].'"}';
             $data = json_decode($data);
             include "services/post.php";
 
@@ -230,34 +230,32 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
             include "services/put.toUpdate.php";
 
-        } else if ($table == "planImageUpdate") {
-
-            $file = $_FILES['file'];
-            $id = $_POST['id'];
-            $token = $_POST['token'];
-            $table = "planes";
-            $suffix  = "plan";
-            $userToken = "administradores";
-            $ruta = "src/images_plans/";
-            include "services/put.updateImage.php";
-
-        } else if ($table == "serviceImageUpdate") {
-
-            $file = $_FILES['file'];
-            $id = $_POST['id'];
-            $token = $_POST['token'];
-            $table = "servicios";
-            $suffix  = "servicio";
-            $userToken = "administradores";
-            $ruta = "src/images_services/";
-            include "services/put.updateImage.php";
-
         } else if ($table == "getPlan") {
 
             $userToken = "usuarios_clientes";
             $table = "planes";
             $select = "*";
             $id = "id_plan";
+            include "services/get.dataFilter.php";
+
+        } else if ($table == "getLocal") {
+
+            $userToken = "usuarios_clientes";
+            $table = "establecimientos";
+            include "services/get.dataFilter.php";
+
+        } else if ($table == "getServicesPerZone") {
+
+            $userToken = "usuarios_clientes";
+            $table = "servicios_por_zona";
+            
+            include "services/get.dataFilter.php";
+
+        } else if ($table == "getZone") {
+
+            $userToken = "usuarios_clientes";
+            $table = "zona";
+            
             include "services/get.dataFilter.php";
 
         } else if ($table == "validateExistingPlan") {
@@ -306,7 +304,33 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
             include "services/post.php";
 
-        } else if ($table == "reactionAgentAlert") {            
+        } else if ($table == "planUpdate") {
+
+            $userToken = "administradores";
+            $table = "planes";
+            $suffix = "plan";
+            $select = "id_plan";
+            $id = $_POST["id_plan"];
+            $file = $_FILES['file'];
+            $data = '{"token":"'.$_POST["token"].'","id_plan":"'.$_POST["id_plan"].'","tipo_plan":"'.$_POST["tipo_plan"].'","precio_plan":"'.$_POST["precio_plan"].'","descripcion_plan":"'.$_POST["descripcion_plan"].'"}';
+            $data = json_decode($data);
+            $ruta = "src/images_plans/";
+            include "services/put.toUpdate.php";
+
+        } else if ($table == "serviceUpdate") {
+
+            $userToken = "administradores";
+            $table = "servicios";
+            $suffix = "servicio";
+            $select = "id_servicio";
+            $id = $_POST["id_servicio"];
+            $file = $_FILES['file'];
+            $data = '{"token":"'.$_POST["token"].'","id_servicio":"'.$_POST["id_servicio"].'","descripcion_servicio":"'.$_POST["descripcion_servicio"].'","puntos_servicio":"'.$_POST["puntos_servicio"].'","color_sombra_servicio":"'.$_POST["color_sombra_servicio"].'"}';
+            $data = json_decode($data);
+            $ruta = "src/images_services/";
+            include "services/put.toUpdate.php";
+
+        }else if ($table == "reactionAgentAlert") {            
 
             $userToken = "usuarios_agentes";
             $table = "reacciones_agentes";
@@ -411,14 +435,6 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $select = "id_tipo_usuario";
             include "services/put.toUpdate.php";
 
-        } else if ($table == "planUpdate") {
-
-            $userToken = "administradores";
-            $table = "planes";
-            $suffix = "plan";
-            $select = "id_plan";
-            include "services/put.toUpdate.php";
-
         } else if ($table == "contactUpdate") {
 
             $userToken = "usuarios_clientes";
@@ -503,6 +519,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "usuarios_clientes";
             $nameId = "id_usuario_cliente";
             $id = $data->id_usuario_cliente;
+            $suffix = "usuario_cliente";
             include "services/delete.php";
             
         } else if($table == "deleteAgent"){
@@ -511,6 +528,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "usuarios_agentes";
             $nameId = "id_usuario_agente";
             $id = $data->id_usuario_agente;
+            $suffix = "usuario_agente";
             include "services/delete.php";
             
         } else if($table == "deletePlan"){
@@ -519,9 +537,19 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "planes";
             $nameId = "id_plan";
             $id = $data->id_plan;
+            $suffix = "plan";
             include "services/delete.php";
             
-        } else {
+        } else if($table == "deleteService"){
+            
+            $userToken = "administradores";
+            $table = "servicios";
+            $nameId = "id_servicio";
+            $id = $data->id_servicio;
+            $suffix = "servicio";
+            include "services/delete.php";
+            
+        }else {
             $json  = array(
 
                 'status' => 400,

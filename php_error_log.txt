@@ -1659,3 +1659,23 @@ Stack trace:
 #5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
 #6 {main}
   thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 260
+[04-Mar-2023 08:27:21 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[04-Mar-2023 08:27:39 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[04-Mar-2023 08:28:29 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 55
+[04-Mar-2023 08:28:29 America/Bogota] PHP Warning:  Attempt to read property "id_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 55
+[04-Mar-2023 08:30:00 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 61
+[04-Mar-2023 08:30:00 America/Bogota] PHP Warning:  Attempt to read property "id_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 61
+[04-Mar-2023 08:30:27 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 57
+[04-Mar-2023 08:30:27 America/Bogota] PHP Warning:  Attempt to read property "id_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 57
+[04-Mar-2023 08:35:26 America/Bogota] PHP Warning:  Undefined array key "id_plan" in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 112
+[04-Mar-2023 08:35:53 America/Bogota] PHP Warning:  Undefined array key "id_plan" in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 109
+[04-Mar-2023 08:36:42 America/Bogota] PHP Warning:  Array to string conversion in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:36:42 America/Bogota] PHP Warning:  Undefined variable $Array in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:36:42 America/Bogota] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:37:03 America/Bogota] PHP Warning:  Array to string conversion in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:37:03 America/Bogota] PHP Warning:  Undefined variable $Array in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:37:03 America/Bogota] PHP Warning:  Attempt to read property "id_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:37:10 America/Bogota] PHP Warning:  Array to string conversion in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:37:10 America/Bogota] PHP Warning:  Undefined variable $Array in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:37:10 America/Bogota] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:37:10 America/Bogota] PHP Warning:  Attempt to read property "id_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62

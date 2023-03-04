@@ -3,7 +3,7 @@
 require_once "models/connection.php";
 require_once "models/post.model.php";
 require_once "models/get.filter.model.php";
-//include("correos/enviar_correo.php");
+include("correos/enviar_correo.php");
 
 class PostController
 {
@@ -472,8 +472,8 @@ class PostController
             $json = json_encode($data);
             $header = array('Content-Type: application/json');
             $resultado_sms = new  PostController();
-            $result_sms2 = $resultado_sms->CallAPI($url, $json, $header);
-            file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms2 . ",\n\r", FILE_APPEND);
+           $result_sms2 = $resultado_sms->CallAPI($url, $json, $header);
+           file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms2 . ",\n\r", FILE_APPEND);
 
 
             //Llamada a los contactos de emergencia
@@ -563,7 +563,7 @@ class PostController
                 $header = array('Content-Type: application/json');
                 $resultado_sms = new  PostController();
                 $result = $resultado_sms->CallAPI($url, $json, $header);
-                file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> $result\n\r", FILE_APPEND);
+                file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " -> TELEFONO:" . $telefonoLider . "SMS API -> $result\n\r", FILE_APPEND);
             }
         }
         /*=============================================

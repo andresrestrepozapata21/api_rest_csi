@@ -211,7 +211,7 @@ class GetController
             } else {
                 $json  = array(
                     'status' => 200,
-                    'result' => 16,
+                    'result' => 3,
                     'id_plan' => (int) $response["id_plan"],
                     'detail' => $response
                 );
