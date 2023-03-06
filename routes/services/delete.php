@@ -10,8 +10,22 @@ if (isset($data->token)) {
 
     if ($validate == "ok") {
         unset($data->token);
-        $response = new DeleteController();
-        $response->deleteData($table, $id, $nameId);
+        if ($table == "usuarios_clientes") {
+            $response = new DeleteController();
+            $response->deleteUser($table, $id, $nameId, $suffix);
+        } else if ($table == "usuarios_agentes") {
+            $response = new DeleteController();
+            $response->deleteUser($table, $id, $nameId, $suffix);
+        } else if ($table == "planes") {
+            $response = new DeleteController();
+            $response->deleteWithImage($table, $id, $nameId, $suffix);
+        } else if ($table == "servicios") {
+            $response = new DeleteController();
+            $response->deleteWithImage($table, $id, $nameId, $suffix);
+        } else{
+            $response = new DeleteController();
+            $response->deleteData($table, $id, $nameId);
+        }
     }
 
     if ($validate == "expired") {

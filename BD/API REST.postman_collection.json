@@ -1,0 +1,1696 @@
+{
+	"info": {
+		"_postman_id": "b98a0384-aaed-40d2-a5a1-785cd02e8c7e",
+		"name": "API REST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET - ARL",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/getArl",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"getArl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - EPS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/getEps",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"getEps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Obtener Tipos de usuarios",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/getUserTypes",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"getUserTypes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Obtener Planes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/getPlans",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"getPlans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Obtener Servicios",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/getServices",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"getServices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Obtener Zonas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/getZones",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"getZones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - Obtener Alertas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/getAlerts",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"getAlerts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Obtener Plan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzYzODg4MDQsImV4cCI6MTY3NjQ3NTIwNCwiZGF0YSI6eyJpZCI6IjEzIiwiZW1haWwiOiJkaWVnb2FyYmVsYWV6LmNvQGdtYWlsLmNvbSJ9fQ.qgguMiTLrbubVX_5QKJtwNYv3Vp3KqWjE9x3Ydt3hKw\",\r\n    \"id_plan\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/getPlan",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"getPlan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Obtener Contactos del usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzYzMjc0MjksImV4cCI6MTY3NjQxMzgyOSwiZGF0YSI6eyJpZCI6IjEzIiwiZW1haWwiOiJkaWVnb2FyYmVsYWV6LmNvQGdtYWlsLmNvbSJ9fQ.79ro7ibMi1KglnWA6K6FflYz8uYvSa57zwxOBe0LpQs\",\r\n    \"fk_id_usuario_cliente_contacto\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/getContacts",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"getContacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Obtener Establecimiento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Nzc5NDE1ODIsImV4cCI6MTY5MjQ1Njc4MiwiZGF0YSI6eyJpZCI6Ijc3IiwiZW1haWwiOiJhcnouMzY1QGdtYWlsLmNvbSJ9fQ.BZE2zMfkR35pgypIQwt-cuRfpR8eIdVmr7nul3imcoc\",\r\n    \"id_establecimiento\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/getLocal",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"getLocal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Obtener servicios por zona",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Nzc5NDE1ODIsImV4cCI6MTY5MjQ1Njc4MiwiZGF0YSI6eyJpZCI6Ijc3IiwiZW1haWwiOiJhcnouMzY1QGdtYWlsLmNvbSJ9fQ.BZE2zMfkR35pgypIQwt-cuRfpR8eIdVmr7nul3imcoc\",\r\n    \"id_zona\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/getServicesPerZone",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"getServicesPerZone"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Obtener Zona y sus servicios",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Nzc5NDE1ODIsImV4cCI6MTY5MjQ1Njc4MiwiZGF0YSI6eyJpZCI6Ijc3IiwiZW1haWwiOiJhcnouMzY1QGdtYWlsLmNvbSJ9fQ.BZE2zMfkR35pgypIQwt-cuRfpR8eIdVmr7nul3imcoc\",\r\n    \"latitud\": 4.265434,\r\n    \"longitud\": -75.928713\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/getZone",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"getZone"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Verificar si el usuario tiene un plan comprado y activo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzY2NjUxMDIsImV4cCI6MTY3Njc1MTUwMiwiZGF0YSI6eyJpZCI6IjYiLCJlbWFpbCI6ImFyekBnbWFpbC5jb20ifX0.zmKeKS4GzCVNJANV5fbpq__8hVyUoFEYYTRMG8lK9XU\",\r\n    \"id_usuario_cliente\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/validateExistingPlan",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"validateExistingPlan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Recuperar Contraseña Cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"arz.95@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/getPasswordCustomer",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"getPasswordCustomer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Recuperar Contraseña Agente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"arz.955@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/getPasswordAgent",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"getPasswordAgent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - MASTER",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzgwMzQwMjEsImV4cCI6MTY5MjU0OTIyMSwiZGF0YSI6eyJpZCI6Ijc3IiwiZW1haWwiOiJhcnouMzY1QGdtYWlsLmNvbSJ9fQ.DG3zKoj18GEV_2DmXU0rmTxkJ7L4ZXUvl1e-eAmYlMQ\",\r\n    \"id_usuario_cliente\": 6,\r\n    \"latitud\": 4.265434,\r\n    \"longitud\": -75.928713\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/master",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"master"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Login agente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"arz.95@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/agentLogin",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"agentLogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Login cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"arz.365@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/customerLogin",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"customerLogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Login Administrador",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"arz.950203@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/LoginAdmin",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"LoginAdmin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Registro agente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cedula_usuario_agente\": \"1113331782\",\r\n    \"nombre_usuario_agente\": \"Andres\",\r\n    \"apellido_usuario_agente\": \"Zapata\",\r\n    \"telefono_usuario_agente\": \"3186337855\",\r\n    \"direccion_usuario_agente\": \"reservada\",\r\n    \"email\": \"arz.9521@gmail.com\",\r\n    \"password\": \"12345\",\r\n    \"tipo_de_sangre\": \"O+\",\r\n    \"Enfermedades_base\": \"alergias, diabetes\",\r\n    \"alergias\": \"renitis\",\r\n    \"eps\": \"neuva EPS\",\r\n    \"arl\": \"Positiva\",\r\n    \"fk_id_tipo_usuario_usuario_agente\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/agentRecord",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"agentRecord"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Registro cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Enfermedades_base\": \"alergias, diabetes\",\r\n    \"nombre_usuario_cliente\": \"Andres\",\r\n    \"apellido_usuario_cliente\": \"Zapata\",\r\n    \"telefono_usuario_cliente\": \"3186337855\",\r\n    \"cedula_usuario_cliente\": \"1113331782\",\r\n    \"tipo_de_sangre\": \"O+\",\r\n    \"direccion_usuario_cliente\": \"reservada\",\r\n    \"email\": \"arz.3333@gmail.com\",\r\n    \"arl\": \"Positiva\",\r\n    \"password\": \"12345\",\r\n    \"alergias\": \"renitis\",\r\n    \"eps\": \"neuva EPS\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/customerRecord",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"customerRecord"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Cargar foto de perfil",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_usuario_cliente\": 4,\r\n    \"foto_perfil_usuario_cliente\": \"foto\"\r\n}\r\n\r\nEn el FormData se envia el ID del usuario y el documento \r\n\r\n- loadPerfilePictureCustomer\r\n- loadPerfilePictureAgent",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/loadPerfilePictureCustomer",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"loadPerfilePictureCustomer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Registrar Alerta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"llenar fomulario FormData\": \"POST\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/alertRecord",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"alertRecord"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Registrar Reaccion Agente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Nzc1MzgwOTMsImV4cCI6MTY5MjA1MzI5MywiZGF0YSI6eyJpZCI6MjQsImVtYWlsIjoiYXJ6QGdtYWlsLmNvbSJ9fQ.HghADOO_WX2ETV69TNJbqbRk4Eq4jH6FBXSiyvjTQSw\",\r\n    \"latitud\": 4.265434,\r\n    \"longitud\": -75.928713,\r\n    \"fk_id_usuario_agente\": 24,\r\n    \"fk_id_alerta\": 122\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/reactionAgentAlert",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"reactionAgentAlert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Registrar Reaccion Cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Nzc1Mzk3MTUsImV4cCI6MTY5MjA1NDkxNSwiZGF0YSI6eyJpZCI6Ijc3IiwiZW1haWwiOiJhcnouMzY1QGdtYWlsLmNvbSJ9fQ.itq_1ZnzeWUsX5fQAmytPtK8VW3BEKVGc_xvvkvXNKM\",\r\n    \"latitud\": 4.265434,\r\n    \"longitud\": -75.928713,\r\n    \"fk_id_usuario_cliente\": 28,\r\n    \"fk_id_alerta\": 122\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/reactionCustomerAlert",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"reactionCustomerAlert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Registrar Documento Cliente y Agente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_usuario_cliente\": 4,\r\n    \"documentos\": \"documento\"\r\n}\r\n\r\nen el FormData se envia el ID del usuario y el documento \r\n\r\n- uploadDocumentsCustomer\r\n- uploadDocumentsAgent",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/uploadDocumentsCustomer",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"uploadDocumentsCustomer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Registrar Contacto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Nzc1MTY2MDMsImV4cCI6MTY5MjAzMTgwMywiZGF0YSI6eyJpZCI6NDMsImVtYWlsIjoiYXJ6LjM2NUBnbWFpbC5jb20ifX0.kqMH7Z7keIpDvtgRiIqBwHadEwZzmXCuTrs5gJ5RgBA\",\r\n    \"nombre_contacto\": \"Andres\",\r\n    \"telefono_contacto\": \"(318)-633 7856\",\r\n    \"email_contacto\": \"arz.950203@gmail.com\",\r\n    \"descripcion_contacto\": \"yo\",\r\n    \"fk_id_usuario_cliente_contacto\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/addContact",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"addContact"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Registrar Servicio",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"se debe enviar un formulario\": \"Formulario POST\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/serviceRecord",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"serviceRecord"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Registrar Servicio por Zona",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzY0Njk4NjAsImV4cCI6MTY3NjU1NjI2MCwiZGF0YSI6eyJpZCI6MSwiZW1haWwiOiJhcnouOTUwMjAzQGdtYWlsLmNvbSJ9fQ.Dw6rz63tFq9ZsczQLZgId8pgau-TE-q731pyhDpvgcw\",\r\n    \"id_servicio\": 1,\r\n    \"id_zona\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/servicesPerZoneRecord",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"servicesPerZoneRecord"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Registrar Plan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"se debe enviar un formulario\": \"Formulario POST\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/planRecord",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"planRecord"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Registrar Tipo de Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzY5MTM1NTYsImV4cCI6MTY5MTQyODc1NiwiZGF0YSI6eyJpZCI6MSwiZW1haWwiOiJhcnouOTUwMjAzQGdtYWlsLmNvbSJ9fQ.WxPxacgOQJVtA_I1Zi5Zor1xgOJPM_oQllxBhL8wRCI\",\r\n    \"descricion\": \"Guardia Civil Sevilla\",\r\n    \"activado\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/createTypeUser",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"createTypeUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Activar plan para un usuario, desactivar codigo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzY0MDM4NDksImV4cCI6MTY3NjQ5MDI0OSwiZGF0YSI6eyJpZCI6NDMsImVtYWlsIjoiYXJ6LjM2NUBnbWFpbC5jb20ifX0.6couBitIcXPsQ2bJs0eEt2gRjC_PX2P0WLn0DfZJTM8\",\r\n    \"id_usuario_cliente\": 31,\r\n    \"id_plan\": 1,\r\n    \"codigo_activacion\": \"25JESG\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/activatePlan",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"activatePlan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Validar Codigo de zona y devuelve los establecimientos de la zona",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Nzc5NDE1ODIsImV4cCI6MTY5MjQ1Njc4MiwiZGF0YSI6eyJpZCI6Ijc3IiwiZW1haWwiOiJhcnouMzY1QGdtYWlsLmNvbSJ9fQ.BZE2zMfkR35pgypIQwt-cuRfpR8eIdVmr7nul3imcoc\",\r\n    \"id_zona\": 3,\r\n    \"codigo_zona\": \"PAL2023\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/checkZoneCode",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"checkZoneCode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Registrar posición del cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzY5MjE4MTksImV4cCI6MTY5MTQzNzAxOSwiZGF0YSI6eyJpZCI6NDMsImVtYWlsIjoiYXJ6LjM2NUBnbWFpbC5jb20ifX0.noxV0JsUJJ_cYeR67szkOIDx4_zVHvcEl7XTOo7h-H8\",\r\n    \"latitud\": 4.265434,\r\n    \"longitud\": -75.928713,\r\n    \"origen\": \"app\",\r\n    \"id_dispositivo\": \"evjgSDgCa0TmjVF6mcBCg8:APA91bGRyQMmYVQ6YvyMJYztvJEnjcy9Kgn0ZDUuauoqgGKSCynufI_Whk2gKe4dVxoxfrvfQK0XTbstNNOHTKk-w2A4J7pN4J3_4JTp_ijkQ0xJLSDjtvuPxW8DSXkMKrlFQ0GixAZ3\",\r\n    \"fk_id_usuario_cliente\": 44\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/positionCustomerRecord",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"positionCustomerRecord"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Registrar posición del agente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzY5MjMxMzgsImV4cCI6MTY5MTQzODMzOCwiZGF0YSI6eyJpZCI6MzksImVtYWlsIjoiYXJ6Ljk1QGdtYWlsLmNvbSJ9fQ.77YGBdihEPnCwX5nD46MvAVqThxofbx35HWtM3VWY4s\",\r\n    \"latitud\": 4.265434,\r\n    \"longitud\": -75.928713,\r\n    \"origen\": \"app\",\r\n    \"id_dispositivo\": \"evjgSDgCa0TmjVF6mcBCg8:APA91bGRyQMmYVQ6YvyMJYztvJEnjcy9Kgn0ZDUuauoqgGKSCynufI_Whk2gKe4dVxoxfrvfQK0XTbstNNOHTKk-w2A4J7pN4J3_4JTp_ijkQ0xJLSDjtvuPxW8DSXkMKrlFQ0GixAZ3\",\r\n    \"fk_id_usuario_agente\": 39\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/positionAgentRecord",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"positionAgentRecord"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Obtener Clientes Cercanos en menos de 1 hora",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"latitud\": 4.265434,\r\n    \"longitud\": -75.928713\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/getCloseCustomers",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"getCloseCustomers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Obtener Agentes Cercanos en menos de 1 hora",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"latitud\": 4.265434,\r\n    \"longitud\": -75.928713\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/getCloseAgents",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"getCloseAgents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Obtener token CellVoz",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"account\": \"00486966949\",\r\n  \"password\": \"Juryzu57\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.cellvoz.com/v2/auth/login",
+					"protocol": "https",
+					"host": [
+						"api",
+						"cellvoz",
+						"com"
+					],
+					"path": [
+						"v2",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - CellVoz desde serviceSMS2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"usuario\": \"00486966949\",\r\n  \"password\": \"Juryzu57\",\r\n  \"telefono\": \"3186337855\",\r\n  \"mensaje\": \"Prueba despues de 1 hora\",\r\n  \"aplicacion\": \"SMS Test Unitario\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "api.mipgenlinea.com/serviceSMS2.php",
+					"host": [
+						"api",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"serviceSMS2.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - LLamada por Twilio",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\": \"smsFoxUser\",\r\n    \"password\": \"rhjIMEI3*\",\r\n    \"telefono\": \"3186337855\",\r\n    \"mensaje\": \"https://csi.mipgenlinea.com/audiosAlerta/xml-message-csi.xml\",\r\n    \"fecha\": \"NA\",\r\n    \"aplicacion\": \"CSI LLAMADA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://api.mipgenlinea.com/serviceIVR.php",
+					"protocol": "http",
+					"host": [
+						"api",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"serviceIVR.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Actualizar Agente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    FormData Method POST\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/putAgent",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"putAgent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Actualizar Cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    FormData Method POST\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/putCustomer",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"putCustomer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Actualizar Plan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    FormData() POST\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/planUpdate",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"planUpdate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST - Actualizar Servicio",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    FormData() POST\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/serviceUpdate",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"serviceUpdate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Actualizar Tipo Usuario",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzYzOTEwMDQsImV4cCI6MTY3NjQ3NzQwNCwiZGF0YSI6eyJpZCI6MSwiZW1haWwiOiJhcnouOTUwMjAzQGdtYWlsLmNvbSJ9fQ.ECptaUqftKdX0aouipFPTHbSUWHMAWWgvnWRl3ghR1s\",\r\n    \"id_tipo_usuario\": 11,\r\n    \"descricion_tipo_usuario\": \"Escaus Sevilla\",\r\n    \"activado_tipo_usuario\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/typeUserUpdate",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"typeUserUpdate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Actualizar numero del cliente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_usuario_cliente\": 79,\r\n    \"telefono_usuario_cliente\": \"1846\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/putCustomerNumberPhone",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"putCustomerNumberPhone"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Actualizar Contacto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Nzc2OTg5OTcsImV4cCI6MTY5MjIxNDE5NywiZGF0YSI6eyJpZCI6Ijc3IiwiZW1haWwiOiJhcnouMzY1QGdtYWlsLmNvbSJ9fQ.kIQQZcrhk_mGqWaNmZgICcKLq35GMBGK60_n_TqP3p0\",\r\n    \"id_contacto\": 16,\r\n    \"nombre_contacto\": \"Alejandro\",\r\n    \"telefono_contacto\": 45678915,\r\n    \"email_contacto\": \"angie@gmail.com\",\r\n    \"descripcion_contacto\": \"Primo\",\r\n    \"fk_id_usuario_cliente_contacto\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/contactUpdate",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"contactUpdate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Activar Cliente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n     \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzYzOTEwMDQsImV4cCI6MTY3NjQ3NzQwNCwiZGF0YSI6eyJpZCI6MSwiZW1haWwiOiJhcnouOTUwMjAzQGdtYWlsLmNvbSJ9fQ.ECptaUqftKdX0aouipFPTHbSUWHMAWWgvnWRl3ghR1s\",\r\n    \"id_usuario_cliente\": 12,\r\n    \"activo_usuario_cliente\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/putCustomerActivate",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"putCustomerActivate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Activar Agente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzYzOTEwMDQsImV4cCI6MTY3NjQ3NzQwNCwiZGF0YSI6eyJpZCI6MSwiZW1haWwiOiJhcnouOTUwMjAzQGdtYWlsLmNvbSJ9fQ.ECptaUqftKdX0aouipFPTHbSUWHMAWWgvnWRl3ghR1s\",\r\n    \"id_usuario_agente\": 24,\r\n    \"activo_usuario_agente\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/putAgentActivate",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"putAgentActivate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Reenviar código de verificación Clientes",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_usuario_cliente\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/resendMessageCustomer",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"resendMessageCustomer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Reenviar código de verificación Agentes",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_usuario_agente\": 39\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/resendMessageAgent",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"resendMessageAgent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Verificar Cuenta Cliente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigo_verificacion\": 422644,\r\n    \"id_usuario_cliente\": 72\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/checkAccountCustomer",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"checkAccountCustomer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Verificar Cuenta Agente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigo_verificacion\": 457845,\r\n    \"id_usuario_cliente\": 22,\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/checkAccountAgent",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"checkAccountAgent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Actualizar token del dispositivo del cliente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_usuario_cliente\": 4,\r\n    \"token_dispositivo\": \"HFJKAHUE7897UKA8H8h8h8\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/putUpdateCustomerDeviceToken",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"putUpdateCustomerDeviceToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT - Actualizar token del dispositivo del agente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_usuario_agente\": 36,\r\n    \"token_dispositivo\": \"HFJKAHUE7897UKA8H8h8h8\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/putUpdateAgentDeviceToken",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"putUpdateAgentDeviceToken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - Eliminar Tipo Usuario",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzYzOTEwMDQsImV4cCI6MTY3NjQ3NzQwNCwiZGF0YSI6eyJpZCI6MSwiZW1haWwiOiJhcnouOTUwMjAzQGdtYWlsLmNvbSJ9fQ.ECptaUqftKdX0aouipFPTHbSUWHMAWWgvnWRl3ghR1s\",\r\n    \"id_tipo_usuario\": 9\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "apirest.com/deleteTypeUser",
+					"host": [
+						"apirest",
+						"com"
+					],
+					"path": [
+						"deleteTypeUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - Eliminar Contacto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzYzMjc0MjksImV4cCI6MTY3NjQxMzgyOSwiZGF0YSI6eyJpZCI6IjEzIiwiZW1haWwiOiJkaWVnb2FyYmVsYWV6LmNvQGdtYWlsLmNvbSJ9fQ.79ro7ibMi1KglnWA6K6FflYz8uYvSa57zwxOBe0LpQs\",\r\n    \"id_contacto\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/contactDelete",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"contactDelete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - Eliminar Cliente",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Nzc3ODQ0MDUsImV4cCI6MTY5MjI5OTYwNSwiZGF0YSI6eyJpZCI6IjEiLCJlbWFpbCI6ImFyei45NTAyMDNAZ21haWwuY29tIn19.N2NdDBg2b60CUG14PNc2qufC79SYGckEhUw_Duc4N6c\",\r\n    \"id_usuario_cliente\": 12\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/deleteCustomer",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"deleteCustomer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - Eliminar Agente",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Nzc3ODQ0MDUsImV4cCI6MTY5MjI5OTYwNSwiZGF0YSI6eyJpZCI6IjEiLCJlbWFpbCI6ImFyei45NTAyMDNAZ21haWwuY29tIn19.N2NdDBg2b60CUG14PNc2qufC79SYGckEhUw_Duc4N6c\",\r\n    \"id_usuario_agente\": 26\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/deleteAgent",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"deleteAgent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - Eliminar Plan",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Nzc3ODQ0MDUsImV4cCI6MTY5MjI5OTYwNSwiZGF0YSI6eyJpZCI6IjEiLCJlbWFpbCI6ImFyei45NTAyMDNAZ21haWwuY29tIn19.N2NdDBg2b60CUG14PNc2qufC79SYGckEhUw_Duc4N6c\",\r\n    \"id_plan\": 16\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/deletePlan",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"deletePlan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE - Eliminar Servicio",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Nzc3ODQ0MDUsImV4cCI6MTY5MjI5OTYwNSwiZGF0YSI6eyJpZCI6IjEiLCJlbWFpbCI6ImFyei45NTAyMDNAZ21haWwuY29tIn19.N2NdDBg2b60CUG14PNc2qufC79SYGckEhUw_Duc4N6c\",\r\n    \"id_servicio\": 21\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "pruebas.mipgenlinea.com/deleteService",
+					"host": [
+						"pruebas",
+						"mipgenlinea",
+						"com"
+					],
+					"path": [
+						"deleteService"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

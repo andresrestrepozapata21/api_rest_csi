@@ -3,6 +3,8 @@
 require_once "models/connection.php";
 require_once "models/post.Login.model.php";
 require_once "models/get.filter.model.php";
+require_once "models/get.homePage.model.php";
+
 
 require_once "vendor/autoload.php";
 
@@ -44,6 +46,19 @@ class PostController
 
                         $response[0]->{"token"} = $jwt;
                         $response[0]->{"token_exp"} = $token["exp"];
+
+                        $id_ = "id_$suffix";
+                        $id = $response[0]->$id_;
+
+                        $responsePlan = GetHomePageModel::getPlanUsuario($id);
+
+                        
+                        if (isset($responsePlan[0]->id_plan)) {
+                            $id_plan = $responsePlan[0]->id_plan;
+                            $response[0]->{"id_plan"} = (int) $id_plan;
+                        }else{
+                            $response[0]->{"id_plan"} = 0;
+                        }
 
                         $return = new PostController();
                         $return->fncResponse($response, $suffix);
@@ -95,6 +110,7 @@ class PostController
                     'status' => 200,
                     'result' => 3,
                     'activo_'.$suffix => (int) $response[0]->$select,
+                    'id_plan' => $response[0]->id_plan,
                     'detail' => $response
                 );
             }

@@ -1339,3 +1339,343 @@ Stack trace:
 [16-Feb-2023 11:31:42 America/Bogota] Parametros recibidos 4.265434 - -75.928713
 [16-Feb-2023 11:35:23 America/Bogota] Parametros recibidos 4.265434 - -75.928713
 [16-Feb-2023 11:41:07 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[20-Feb-2023 08:52:27 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fk_latitud_posicion_cliente_posicion_cliente' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:209
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(209): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(157): PostModel::postWithoutPhoto('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(159): PostController::postPosition('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(288): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 209
+[20-Feb-2023 08:53:08 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fk_latitud_posicion_cliente' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:209
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(209): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(157): PostModel::postWithoutPhoto('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(159): PostController::postPosition('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(288): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 209
+[20-Feb-2023 08:53:23 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fk_idlatitud_posicion_cliente' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:209
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(209): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(157): PostModel::postWithoutPhoto('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(159): PostController::postPosition('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(288): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 209
+[20-Feb-2023 08:53:29 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fk_id_latitud_posicion_cliente' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:209
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(209): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(157): PostModel::postWithoutPhoto('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(159): PostController::postPosition('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(288): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 209
+[20-Feb-2023 08:53:44 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'date_created_servicos_posicion_cliente' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:209
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(209): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(157): PostModel::postWithoutPhoto('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(159): PostController::postPosition('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(288): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 209
+[20-Feb-2023 08:53:56 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'date_created_posicion_cliente' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:209
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(209): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(157): PostModel::postWithoutPhoto('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(159): PostController::postPosition('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(288): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 209
+[20-Feb-2023 08:59:44 America/Bogota] PHP Fatal error:  Uncaught Error: Call to undefined method PostController::postRegister() in C:\xampp\htdocs\api_rest_csi\routes\services\post.php:189
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\routes.php(296): include()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#3 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\routes\services\post.php on line 189
+[20-Feb-2023 09:01:14 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fk_id_usuario_agente_posicion_agente' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:209
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(209): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(157): PostModel::postWithoutPhoto('posiciones_agen...', 'posicion_agente', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(159): PostController::postPosition('posiciones_agen...', 'posicion_agente', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(296): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 209
+[20-Feb-2023 09:33:18 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[20-Feb-2023 09:34:19 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[20-Feb-2023 09:35:41 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[20-Feb-2023 09:35:57 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[20-Feb-2023 09:36:56 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[20-Feb-2023 09:37:52 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[20-Feb-2023 09:39:55 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[20-Feb-2023 09:41:22 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[20-Feb-2023 09:51:59 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[20-Feb-2023 09:56:04 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[20-Feb-2023 09:56:04 America/Bogota] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 82
+[20-Feb-2023 09:56:04 America/Bogota] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 82
+[20-Feb-2023 09:56:04 America/Bogota] PHP Fatal error:  Uncaught mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php:86
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php(86): mysqli_query(Object(mysqli), 'SELECT * FROM s...')
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\get.homePage.php(13): GetController->getData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(183): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 86
+[20-Feb-2023 09:57:01 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[20-Feb-2023 09:58:40 America/Bogota] PHP Warning:  Undefined array key "id_plan" in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 190
+[20-Feb-2023 09:58:40 America/Bogota] PHP Warning:  Undefined array key "id_plan" in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 201
+[20-Feb-2023 09:59:18 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[20-Feb-2023 10:00:02 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[20-Feb-2023 10:00:41 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[20-Feb-2023 11:48:25 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`backend_csi`.`posiciones_clientes`, CONSTRAINT `fk_posiciones_clientes_usuarios_clientes_1` FOREIGN KEY (`fk_id_usuario_cliente_posicion_cliente`) REFERENCES `usuarios_clientes` (`id_usuario_) in C:\xampp\htdocs\api_rest_csi\models\post.model.php:209
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(209): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(157): PostModel::postWithoutPhoto('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(159): PostController::postPosition('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(288): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 209
+[20-Feb-2023 11:48:37 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`backend_csi`.`posiciones_clientes`, CONSTRAINT `fk_posiciones_clientes_usuarios_clientes_1` FOREIGN KEY (`fk_id_usuario_cliente_posicion_cliente`) REFERENCES `usuarios_clientes` (`id_usuario_) in C:\xampp\htdocs\api_rest_csi\models\post.model.php:209
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(209): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(157): PostModel::postWithoutPhoto('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(159): PostController::postPosition('posiciones_clie...', 'posicion_client...', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(288): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 209
+[20-Feb-2023 12:19:24 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'descricion_tipo_usuario_tipo_usuario' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:209
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(209): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(168): PostModel::postWithoutPhoto('tipos_usuarios', 'tipo_usuario', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(195): PostController::postTypeUser('tipos_usuarios', 'tipo_usuario', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(138): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 209
+[20-Feb-2023 15:20:53 America/Bogota] PHP Warning:  require_once(controllers/get.dataFilter.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\routes\services\post.closePosition.php on line 4
+[20-Feb-2023 15:20:53 America/Bogota] PHP Fatal error:  Uncaught Error: Failed opening required 'controllers/get.dataFilter.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\routes\services\post.closePosition.php:4
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\routes.php(305): include()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#3 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\routes\services\post.closePosition.php on line 4
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Attempt to read property "latitud" on string in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 87
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Attempt to read property "longitud" on string in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 88
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:21:27 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Attempt to read property "latitud" on string in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 87
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Attempt to read property "longitud" on string in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 88
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:23:59 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:24:05 America/Bogota] PHP Warning:  Attempt to read property "latitud" on string in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 87
+[20-Feb-2023 15:24:57 America/Bogota] PHP Warning:  Attempt to read property "latitud" on string in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 87
+[20-Feb-2023 15:25:27 America/Bogota] PHP Warning:  Attempt to read property "latitud" on string in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 87
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Attempt to read property "latitud" on string in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 88
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Attempt to read property "longitud" on string in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 89
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 101
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 101
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 107
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 101
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 101
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 107
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 101
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 101
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 107
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 101
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 101
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 107
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 101
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 101
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 107
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 101
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 101
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 107
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 101
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 101
+[20-Feb-2023 15:25:33 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 107
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined variable $latitud in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined variable $longitud in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 105
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined variable $latitud in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined variable $longitud in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 105
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined variable $latitud in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined variable $longitud in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 105
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined variable $latitud in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined variable $longitud in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 105
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined variable $latitud in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined variable $longitud in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 105
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined variable $latitud in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined variable $longitud in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 105
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined variable $latitud in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined variable $longitud in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 99
+[20-Feb-2023 15:25:50 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 105
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Attempt to read property "latitud" on string in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 96
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Attempt to read property "longitud" on string in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 97
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "latitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "longitud_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 100
+[20-Feb-2023 15:26:02 America/Bogota] PHP Warning:  Undefined array key "date_created_alerta" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 106
+[20-Feb-2023 16:02:18 America/Bogota] PHP Warning:  Undefined array key "posiciones_cercanas" in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 173
+[20-Feb-2023 16:02:18 America/Bogota] PHP Fatal error:  Uncaught TypeError: count(): Argument #1 ($value) must be of type Countable|array, null given in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php:173
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php(17): GetController->fncResponse(Array)
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\get.dataFilter.php(20): GetController->getData('planes', '*', Object(stdClass), 'id_plan')
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(233): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\get.dataFilter.controller.php on line 173
+[27-Feb-2023 12:12:09 America/Bogota] PHP Fatal error:  Uncaught Error: Cannot use object of type stdClass as array in C:\xampp\htdocs\api_rest_csi\controllers\post.contact.controller.php:16
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\post.contact.php(15): PostController::postRegister(Object(stdClass))
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(131): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\post.contact.controller.php on line 16
+[27-Feb-2023 22:57:25 Europe/Berlin] PHP Warning:  Undefined array key "token" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:57:25 Europe/Berlin] PHP Warning:  Undefined array key "latitud_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:57:25 Europe/Berlin] PHP Warning:  Undefined array key "longitud_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:57:25 Europe/Berlin] PHP Warning:  Undefined array key "fk_id_usuario_agente_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:57:25 Europe/Berlin] PHP Warning:  Undefined array key "fk_id_alerta_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:58:23 Europe/Berlin] PHP Warning:  Undefined array key "token" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:58:23 Europe/Berlin] PHP Warning:  Undefined array key "latitud_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:58:23 Europe/Berlin] PHP Warning:  Undefined array key "longitud_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:58:23 Europe/Berlin] PHP Warning:  Undefined array key "fk_id_usuario_agente_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 22:58:23 Europe/Berlin] PHP Warning:  Undefined array key "fk_id_alerta_reaccion_agente" in C:\xampp\htdocs\api_rest_csi\routes\routes.php on line 286
+[27-Feb-2023 17:48:22 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'latitud_reaccion_agente_reaccion_agente' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:260
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(260): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(196): PostModel::postReactionAgentAlert('reacciones_agen...', 'reaccion_agente', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(26): PostController::postReactionAgentAlert('reacciones_agen...', 'reaccion_agente', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(286): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 260
+[27-Feb-2023 17:48:46 America/Bogota] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fk_id_alerta_reaccion_reaccion_agente' in 'field list' in C:\xampp\htdocs\api_rest_csi\models\post.model.php:260
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\models\post.model.php(260): PDOStatement->execute()
+#1 C:\xampp\htdocs\api_rest_csi\controllers\post.controller.php(196): PostModel::postReactionAgentAlert('reacciones_agen...', 'reaccion_agente', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\services\post.php(26): PostController::postReactionAgentAlert('reacciones_agen...', 'reaccion_agente', Object(stdClass))
+#3 C:\xampp\htdocs\api_rest_csi\routes\routes.php(286): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#6 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\models\post.model.php on line 260
+[04-Mar-2023 08:27:21 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[04-Mar-2023 08:27:39 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[04-Mar-2023 08:28:29 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 55
+[04-Mar-2023 08:28:29 America/Bogota] PHP Warning:  Attempt to read property "id_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 55
+[04-Mar-2023 08:30:00 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 61
+[04-Mar-2023 08:30:00 America/Bogota] PHP Warning:  Attempt to read property "id_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 61
+[04-Mar-2023 08:30:27 America/Bogota] PHP Warning:  Undefined array key 0 in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 57
+[04-Mar-2023 08:30:27 America/Bogota] PHP Warning:  Attempt to read property "id_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 57
+[04-Mar-2023 08:35:26 America/Bogota] PHP Warning:  Undefined array key "id_plan" in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 112
+[04-Mar-2023 08:35:53 America/Bogota] PHP Warning:  Undefined array key "id_plan" in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 109
+[04-Mar-2023 08:36:42 America/Bogota] PHP Warning:  Array to string conversion in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:36:42 America/Bogota] PHP Warning:  Undefined variable $Array in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:36:42 America/Bogota] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:37:03 America/Bogota] PHP Warning:  Array to string conversion in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:37:03 America/Bogota] PHP Warning:  Undefined variable $Array in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:37:03 America/Bogota] PHP Warning:  Attempt to read property "id_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:37:10 America/Bogota] PHP Warning:  Array to string conversion in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:37:10 America/Bogota] PHP Warning:  Undefined variable $Array in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:37:10 America/Bogota] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[04-Mar-2023 08:37:10 America/Bogota] PHP Warning:  Attempt to read property "id_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62

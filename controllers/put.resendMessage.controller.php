@@ -37,8 +37,8 @@ class PutController
             //$datos = ['usuario' => '00486966949', 'password' => 'Juryzu57', 'telefono' => $telefono, 'mensaje' => $mensaje, 'fecha' => 'NA', 'aplicacion' => 'CSI ALERTA'];
 
             $data = array(
-                "usuario" => "00486966949",
-                "password" => "Juryzu57",
+                "usuario" => "smsFoxUser",
+                "password" => "rhjIMEI3*",
                 "telefono" => $telefono,
                 "mensaje" => $mensaje,
                 "aplicacion" => "SMS Test Unitario"

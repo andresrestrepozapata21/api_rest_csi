@@ -12,8 +12,6 @@ class PostController
     =============================================*/
     static public function postRegister($table, $suffix, $data)
     {
-
-
         /*=============================================
         Validamos que el correo No exista en base de datos
         =============================================*/
@@ -45,8 +43,8 @@ class PostController
             //$datos = ['usuario' => '00486966949', 'password' => 'Juryzu57', 'telefono' => $telefono, 'mensaje' => $mensaje, 'fecha' => 'NA', 'aplicacion' => 'CSI ALERTA'];
 
             $data = array(
-                "usuario" => "00486966949",
-                "password" => "Juryzu57",
+                "usuario" => "smsFoxUser",
+                "password" => "rhjIMEI3*",
                 "telefono" => $telefono,
                 "mensaje" => $mensaje,
                 "aplicacion" => "SMS Test Unitario"
