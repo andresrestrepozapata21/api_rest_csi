@@ -3,23 +3,26 @@
 require_once "models/delete.model.php";
 require_once "models/get.filter.model.php";
 
-class DeleteController{
+class DeleteController
+{
 
     /*=============================================
     Peticion Delete para eliminar datos
     =============================================*/
-    static public function deleteData($table, $id, $nameId){
+    static public function deleteData($table, $id, $nameId)
+    {
 
         $response = DeleteModel::deleteData($table, $id, $nameId);
 
         $return = new DeleteController();
-        $return -> fncResponse($response);
+        $return->fncResponse($response);
     }
 
     /*=============================================
     Peticion Delete para eliminar usuario
     =============================================*/
-    static public function deleteUser($table, $id, $nameId, $suffix){
+    static public function deleteUser($table, $id, $nameId, $suffix)
+    {
 
         $response = GetModel::getDataFilter($table, "foto_perfil_$suffix", "id_$suffix", $id);
 
@@ -31,20 +34,20 @@ class DeleteController{
             $response = DeleteModel::deleteData($table, $id, $nameId);
 
             $return = new DeleteController();
-            $return -> fncResponse($response);
-        }else{
+            $return->fncResponse($response);
+        } else {
             $response = null;
 
             $return = new DeleteController();
             $return->fncResponse($response);
         }
-        
     }
 
     /*=============================================
     Peticion Delete para eliminar registros con imagenes
     =============================================*/
-    static public function deleteWithImage($table, $id, $nameId, $suffix){
+    static public function deleteWithImage($table, $id, $nameId, $suffix)
+    {
 
         $response = GetModel::getDataFilter($table, "ruta_imagen_$suffix", "id_$suffix", $id);
 
@@ -56,20 +59,20 @@ class DeleteController{
             $response = DeleteModel::deleteData($table, $id, $nameId);
 
             $return = new DeleteController();
-            $return -> fncResponse($response);
-        }else{
+            $return->fncResponse($response);
+        } else {
             $response = null;
 
             $return = new DeleteController();
             $return->fncResponse($response);
         }
-        
     }
 
     /*=============================================
     Respuestas del controlador
     =============================================*/
-    public function fncResponse($response){
+    public function fncResponse($response)
+    {
 
         if (!empty($response)) {
             if ($response['code'] == 3) {

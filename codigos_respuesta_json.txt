@@ -19,6 +19,8 @@
 16-> El usuario no tiene un plan activo
 17-> El usuario no tiene plan activado
 18-> La zona ya tiene este Servicio
-19-> Codigo de zona invalido
+19-> Codigo de zona invalido o vencido
 20-> La zona no tiene establecimientos registrados
-21-> El codigo de la zona esta vencido
+22-> El token a expirado
+23-> El usuario no esta autorizado
+24-> Autorización Requerida

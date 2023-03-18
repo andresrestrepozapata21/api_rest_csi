@@ -22,7 +22,10 @@ if (isset($data->token)) {
         } else if ($table == "servicios") {
             $response = new DeleteController();
             $response->deleteWithImage($table, $id, $nameId, $suffix);
-        } else{
+        }  else if ($table == "registros_fotograficos_viajes") {
+            $response = new DeleteController();
+            $response->deleteWithImage($table, $id, $nameId, $suffix);
+        }  else{
             $response = new DeleteController();
             $response->deleteData($table, $id, $nameId);
         }
@@ -30,8 +33,8 @@ if (isset($data->token)) {
 
     if ($validate == "expired") {
         $json = array(
-            'status' => 303,
-            'result' => 'Error: El token a expirado'
+            'status' => 200,
+            'result' => 22
         );
         echo json_encode($json, http_response_code($json["status"]));
         return;
@@ -39,16 +42,16 @@ if (isset($data->token)) {
 
     if ($validate == "no-auth") {
         $json = array(
-            'status' => 400,
-            'result' => 'Error: El usuario no esta autorizado'
+            'status' => 200,
+            'result' => 23
         );
         echo json_encode($json, http_response_code($json["status"]));
         return;
     }
 } else {
     $json = array(
-        'status' => 400,
-        'result' => 'Error: Autorización Requerida'
+        'status' => 200,
+        'result' => 24
     );
     echo json_encode($json, http_response_code($json["status"]));
     return;

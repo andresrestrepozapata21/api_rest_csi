@@ -17,8 +17,8 @@ if (isset($_POST)) {
 
         if ($validate == "expired") {
             $json = array(
-                'status' => 303,
-                'result' => 'Error: El token a expirado'
+                'status' => 200,
+                'result' => 22
             );
             echo json_encode($json, http_response_code($json["status"]));
             return;
@@ -26,16 +26,16 @@ if (isset($_POST)) {
 
         if ($validate == "no-auth") {
             $json = array(
-                'status' => 400,
-                'result' => 'Error: El usuario no esta autorizado'
+                'status' => 200,
+                'result' => 23
             );
             echo json_encode($json, http_response_code($json["status"]));
             return;
         }
     }else{
         $json = array(
-            'status' => 400,
-            'result' => 'Error: Autorización Requerida'
+            'status' => 200,
+            'result' => 24
         );
         echo json_encode($json, http_response_code($json["status"]));
         return;

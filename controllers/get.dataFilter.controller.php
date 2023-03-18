@@ -32,72 +32,37 @@ class GetController
     /*=============================================
     Peticiones GET para traer los establecimientos de la zona
     =============================================*/
-    public function getLocalZone($table, $data, $id, $select)
+    public function getCodeZone($data)
     {
+        $codigo_ingresado = $data->codigo_zona;
+        $conexion = Connection::conexionAlternativa();
 
-        $response_zone = GetModel::getDataFilter($table, $select, $id, $data->id_zona);
+        $sentencia_listar = "SELECT * FROM codigos_zonas WHERE fk_id_zona_codigo_zona = $data->id_zona";
+        $resultado_listado = mysqli_query($conexion, $sentencia_listar);
 
-        if (!empty($response_zone)) {
-            if ($response_zone[0]->codigo_zona == $data->codigo_zona) {
-                $fecha_fin_codigo_zona = new DateTime($response_zone[0]->vencimiento_codigo_zona);
+        $codigo_valido = false;
+        while ($valor = mysqli_fetch_assoc($resultado_listado)) {
+            if ($codigo_ingresado == $valor["codigo_zona"]) {
+                $fecha_fin_codigo_zona = new DateTime($valor["vencimiento_codigo_zona"]);
                 $timestamp = $fecha_fin_codigo_zona->format("U");
                 $time = time();
-
                 if ($time < $timestamp) {
-                    /*=============================================
-                    Consultamos en que zona estamos
-                    =============================================*/
-                    $conexion = Connection::conexionAlternativa();
-                    $sentencia_listar = "SELECT id_establecimiento, nombre_establecimiento, ruta_imagen_establecimiento, nombre_promocion, descripcion_corta_promocion, url_detalle_establecimiento FROM establecimientos e INNER JOIN promociones_por_establecimiento pe ON e.id_establecimiento=pe.fk_id_establecimiento_promocion_por_establecimiento INNER JOIN promociones p ON pe.fk_id_promocion_promocion_por_establecimiento=p.id_promocion WHERE e.fk_id_zona_establecimiento = $data->id_zona";
-                    $resultado_listado = mysqli_query($conexion, $sentencia_listar);
-
-                    $filaslocals = array();
-
-                    while ($valor = mysqli_fetch_assoc($resultado_listado)) {
-                        $filaslocals[] = $valor;
-                    }
-
-                    if (empty($filaslocals)) {
-                        $filaslocals["code"] = 20;
-                    }
-
-                    $sentencia_listar = "SELECT id_servicos_por_zona, id_servicio, descripcion_servicio, ruta_imagen_servicio, puntos_servicio, color_sombra_servicio FROM servicios_por_zona sz INNER JOIN servicios s ON sz.fk_id_servicio_servicos_por_zona = s.id_servicio  WHERE fk_id_zona_servicos_por_zona = $data->id_zona";
-                    $resultado_listado = mysqli_query($conexion, $sentencia_listar);
-
-                    $filasServicios = array();
-
-                    if ($resultado_listado) {
-                        while ($valor = mysqli_fetch_assoc($resultado_listado)) {
-                            $filasServicios[] = $valor;
-                        }
-                    } else {
-                        $filasServicios["comentario"] = 0;
-                    }
-
-                    $response = array(
-                        'zona' => $response_zone[0],
-                        'servicios_por_zona' => $filasServicios,
-                        'establecimientos' => $filaslocals
-                    );
-
-                    $return = new GetController();
-                    $return->fncResponse($response);
-                } else {
-                    $response = array(
-                        'code' => 21
-                    );
-                    $return = new GetController();
-                    $return->fncResponse($response);
+                    $codigo_valido = true;
                 }
-            } else {
-                $response = array(
-                    'code' => 19
-                );
-                $return = new GetController();
-                $return->fncResponse($response);
             }
+        }
+
+        if ($codigo_valido) {
+            $response = array(
+                'codigo' => 3
+            );
+
+            $return = new GetController();
+            $return->fncResponse($response);
         } else {
-            $response = null;
+            $response = array(
+                'code' => 19
+            );
             $return = new GetController();
             $return->fncResponse($response);
         }
@@ -106,7 +71,7 @@ class GetController
     /*=============================================
     Peticiones GET para los planes existentes
     =============================================*/
-    public function getClosePosition($table, $suffix, $data)
+    public function getClosePosition($table, $suffix, $table2, $suffix2, $data)
     {
         $latitud = $data->latitud;
         $longitud = $data->longitud;
@@ -115,9 +80,8 @@ class GetController
         Consultamos las posiciones cercanas
         =============================================*/
         $conexion = Connection::conexionAlternativa();
-        $sentencia_listar = "SELECT * FROM $table";
+        $sentencia_listar = "SELECT id_$suffix, id_dispositivo_$suffix, id_$suffix2, cedula_$suffix2, nombre_$suffix2, apellido_$suffix2, telefono_$suffix2, email, date_created_$suffix,latitud_$suffix, longitud_$suffix, activo_$suffix2 FROM $table p INNER JOIN $table2 u ON u.id_$suffix2=p.fk_id_$suffix2" . "_$suffix WHERE activo_$suffix2 = 1";
         $resultado_listado = mysqli_query($conexion, $sentencia_listar);
-
         $filasPosiciones = array();
 
         while ($valor = mysqli_fetch_assoc($resultado_listado)) {
@@ -323,8 +287,8 @@ class GetController
             }
         } else {
             $json = array(
-                'status' => 404,
-                'result' => 'Not Found',
+                'status' => 200,
+                'result' => 4,
                 'method' => $_SERVER['REQUEST_METHOD']
             );
         }

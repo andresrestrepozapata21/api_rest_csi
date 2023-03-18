@@ -32,11 +32,13 @@ class GetController
         if (isset($responsePlan[0]->tipo_plan)) {
             $tipo_plan = $responsePlan[0]->tipo_plan;
             $id_plan = $responsePlan[0]->id_plan;
+            $codigo_plan = $responsePlan[0]->codigo_plan;
             $contactos_emergencia_plan = $responsePlan[0]->contactos_emergencia_plan;
             $fecha_vencimiento = date("d-m-Y", strtotime($responsePlan[0]->date_created_plan_comprado . "+ 30 days"));
         } else {
             $tipo_plan = 0;
             $id_plan = 0;
+            $codigo_plan = 0;
             $contactos_emergencia_plan = 0;
             $fecha_vencimiento = 0;
         }
@@ -65,7 +67,23 @@ class GetController
                     $valor["distancia"] = '' . round(($distancia * 1000)) . '';
                     $valor["dias"] = '' . GetController::contarDias(date('Y-m-d'), $valor["date_created_alerta"]) . '';
 
+                    $valor["imagenes"] = array();
+
+                    if($valor["ruta1_imagen_alerta"]){
+                        array_push($valor["imagenes"], $valor["ruta1_imagen_alerta"]);
+                        if($valor["ruta2_imagen_alerta"]){
+                            array_push($valor["imagenes"], $valor["ruta2_imagen_alerta"]);
+                            if($valor["ruta3_imagen_alerta"]){
+                                array_push($valor["imagenes"], $valor["ruta3_imagen_alerta"]);
+                            }
+                        }
+                    }
+
+                    unset($valor["ruta1_imagen_alerta"]);
+                    unset($valor["ruta2_imagen_alerta"]);
+                    unset($valor["ruta3_imagen_alerta"]);
                     $filasAlertas[] = $valor;
+                    
                 }
             }
         }
@@ -77,9 +95,8 @@ class GetController
         /*=============================================
         Consultamos los servicios por zona
         =============================================*/
-
         if ($filasZonas != 0) {
-
+            unset($filasZonas[0]["codigo_zona"]);
             $id_zona = $filasZonas[0]["id_zona"];
 
             $conexion = Connection::conexionAlternativa();
@@ -130,6 +147,9 @@ class GetController
             $numero_zonas = count($filasZonas);
         }
 
+        /*=============================================
+        Consultamos los puntos acumulados del usuario
+        =============================================*/
         $sentencia_puntos = "SELECT pg.acumulado_puntos_punto_ganado FROM puntos_ganados pg WHERE fk_id_usuario_cliente_punto_ganado = $id ORDER BY acumulado_puntos_punto_ganado DESC LIMIT 1";
         $consulta_puntos = mysqli_query($conexion, $sentencia_puntos);
         $fila_puntos = mysqli_fetch_assoc($consulta_puntos);
@@ -139,6 +159,48 @@ class GetController
             $puntos_usuario = $fila_puntos["acumulado_puntos_punto_ganado"];
         }
 
+        /*=============================================
+        Consultamos los productos fisico que el usuario puede comprar
+        =============================================*/
+        $sentencia_fisicos = "SELECT * FROM productos_fisicos";
+        $consulta_fisicos = mysqli_query($conexion, $sentencia_fisicos);
+
+        $filasFisicos = array();
+
+        if ($consulta_fisicos) {
+            while ($valor = mysqli_fetch_assoc($consulta_fisicos)) {
+                $filasFisicos[] = $valor;
+            }
+        }
+
+        /*=============================================
+        Consultamos la informacion de los cuadrantes de la zona
+        =============================================*/
+        $sentencia_cuadrantes = "SELECT * FROM cuadrantes_por_zonas WHERE fk_id_zona_cuadrante_por_zona=$id_zona";
+        $consulta_cuadrantes = mysqli_query($conexion, $sentencia_cuadrantes);
+
+        $filasCuadrantes = array();
+
+        if ($consulta_cuadrantes) {
+            while ($valor = mysqli_fetch_assoc($consulta_cuadrantes)) {
+                $filasCuadrantes[] = $valor;
+            }
+        }
+
+        /*=============================================
+        Consultamos los contactos de emergencia que esten en la zona (bomberos, guardia civil, etc...)
+        =============================================*/
+        $sentencia_contactos_seguridad = "SELECT * FROM contactos_seguridad WHERE fk_id_zona_contacto_seguridad=$id_zona";
+        $consulta_contactos_seguridad = mysqli_query($conexion, $sentencia_contactos_seguridad);
+
+        $filasContactosSeguridad = array();
+
+        if ($consulta_contactos_seguridad) {
+            while ($valor = mysqli_fetch_assoc($consulta_contactos_seguridad)) {
+                $filasContactosSeguridad[] = $valor;
+            }
+        }
+
         $response = array(
             'id_usuario_cliente' => $id,
             'nombre_usuario_cliente' => $nombre,
@@ -146,20 +208,24 @@ class GetController
             'puntos_ganados' => $puntos_usuario,
             'id_plan' => (int) $id_plan,
             'tipo_plan' => $tipo_plan,
+            'codigo_plan' => (int) $codigo_plan,
             'vencimiento' => $fecha_vencimiento,
             'contactos_emergencia_plan' => (int) $contactos_emergencia_plan,
             'cantidad_zonas' => $numero_zonas,
             'zona' => $filasZonas,
             'alertas_cercanas' => $filasAlertas,
             'servicios_zona' => $filasServicios,
-            'establecimientos' => $filaslocals
+            'establecimientos' => $filaslocals,
+            'productos_fisicos' => $filasFisicos,
+            'cuadrantes' => $filasCuadrantes,
+            "contactos_seguridad_zona" => $filasContactosSeguridad
         );
 
         $return = new GetController();
         $return->fncResponse($response);
     }
     /*=============================================
-    Consultamos en que zona estamos
+    METODOS UTILES PARA REGRESAR EL MASTER
     =============================================*/
     function validarZonaCercana($latitud, $longitud)
     {

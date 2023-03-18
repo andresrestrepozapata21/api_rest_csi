@@ -82,6 +82,53 @@ class PostController
     }
 
     /*=============================================
+    Peticion post para foto de un viaje
+    =============================================*/
+    static public function postTripPicture($data, $file)
+    {
+
+        /*=============================================
+        Cargamos la imagen del plan
+        =============================================*/
+        $target_path = "uploads/";
+        $target_path = $target_path . basename($file['name']);
+
+        error_log("Path: " . $target_path);
+
+        $nombreArchivo = $file['name'];
+
+        $target_path_nuevo = "src/images_trip_pictures/" . $data->fk_id_viaje_registro_fotografico_viaje . "/";
+        error_log("Nuevo Path: " . $target_path_nuevo);
+
+        if (!file_exists("./" . $target_path_nuevo)) {
+            if (mkdir("./" . $target_path_nuevo, 0777, true)) {
+                error_log("Exito! Carpeta creada:" . $target_path_nuevo);
+            } else {
+                error_log(" :( No pudo crear:" . $target_path_nuevo);
+            }
+        } else {
+            error_log("Carpeta existente:" . $target_path_nuevo);
+        }
+        
+        $target_path_nuevo = $target_path_nuevo . $nombreArchivo;
+
+        if (file_exists("./" . $target_path_nuevo)) {
+            $response = array(
+                "code" => 13
+            );
+            $return = new PostController();
+            $return->fncResponse($response);
+        } else {
+
+            $response = PostModel::postTripPicture($data, $target_path_nuevo);
+            move_uploaded_file($file['tmp_name'], "./" . $target_path_nuevo);
+
+            $return = new PostController();
+            $return->fncResponse($response, null);
+        }
+    }
+
+    /*=============================================
     Peticion post para las alertas
     =============================================*/
     static public function postAlert($data, $file)
@@ -350,6 +397,28 @@ class PostController
     }
 
     /*=============================================
+    Peticion post para registrar el viaje de un usuario
+    =============================================*/
+    static public function postTrip($table, $suffix, $data)
+    {
+        $response = PostModel::postTrip($table, $suffix, $data);
+
+        $return = new PostController();
+        $return->fncResponse($response, null);
+    }
+
+    /*=============================================
+    Peticion post para registrar las paradas del viaje
+    =============================================*/
+    static public function postStop($table, $suffix, $data)
+    {
+        $response = PostModel::postStop($table, $suffix, $data);
+
+        $return = new PostController();
+        $return->fncResponse($response, null);
+    }
+
+    /*=============================================
     METODOS AUXILIARES
     =============================================*/
     function enviar_SMS_llamada_push_email($response, $latitud, $longitud, $id_usuario_cliente, $id_servicio_por_zona)
@@ -449,7 +518,7 @@ class PostController
             $data = array(
                 "usuario" => "smsFoxUser",
                 "password" => "rhjIMEI3*",
-                "telefono" => "+57" . $telefonoContacto,
+                "telefono" => $telefonoContacto,
                 "mensaje" => $mensaje1,
                 "aplicacion" => "SMS Test Unitario",
 
@@ -464,7 +533,7 @@ class PostController
             $data = array(
                 "usuario" => "smsFoxUser",
                 "password" => "rhjIMEI3*",
-                "telefono" => "+57" . $telefonoContacto,
+                "telefono" => $telefonoContacto,
                 "mensaje" => $mensaje2,
                 "aplicacion" => "SMS Test Unitario",
 
@@ -526,7 +595,7 @@ class PostController
             }
 
             if (!empty($arrayTokenDevices)) {
-                //PostController::sendGCM($arrayTokenDevices, "psuh de prueba"); ------------------------------------ notificacines push por configurar --------------------------------------------
+                //PostController::sendGCM($arrayTokenDevices, "CSI Reaccion - Una alerta fue enviada cerca de donde te encuentas"); ------------------------------------ notificacines push por configurar --------------------------------------------
             }
         }
         /*=============================================
@@ -594,7 +663,7 @@ class PostController
                 }
             }
             if (!empty($arrayTokenDevices)) {
-                //PostController::sendGCM($arrayTokenDevices,, "psuh de prueba"); ------------------------------------ notificacines push por configurar --------------------------------------------
+                //PostController::sendGCM($arrayTokenDevices,, "CSI Reaccion - Una alerta fue enviada cerca de donde te encuentas"); ------------------------------------ notificacines push por configurar --------------------------------------------
             }
         }
 
@@ -686,7 +755,7 @@ class PostController
 
     public function sendGCM($deviceToken, $body)
     {
-        define('API_ACCESS_KEY', 'key=AAAA2NHxz-Q:APA91bEtlZR2cBYFQEpOtveMP4I3cpbcWJC_A25JPYsqSNvA6KBnDU62NFzY0XNb9NQV8eNRNh7S70yO4-zvfLM8QRdMNa3Vr04JhFq93aCE7mpLfSBnTcTbDoGa76EcQy6PJjiQ4XIJ');
+        define('API_ACCESS_KEY', 'key=AAAAPBpq6KE:APA91bH4B4CF3XR6gXosqn317XPu02riJ6u7aBNOIYgYak363HaD23k5oii4FvZ90sC1NV19-Mi8xW1aqhRTPnymGXeNhzjXihZJljEywO5h9YDBL5q64l-ty-eWbxNDe5LuF9f0tlrh');
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
 
         $notification_id = $deviceToken;
@@ -697,7 +766,7 @@ class PostController
         );
 
         $notification = [
-            'title'  => '' . "Notificaciones CSI Segurity" . '',
+            'title'  => '' . "Atención Emergencia Reportada por CSI" . '',
             'body'   => '' . $body . ''
         ];
         $extraNotificationData = ["message" => $notification, "moredata" => 'dd'];
