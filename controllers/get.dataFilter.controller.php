@@ -101,10 +101,6 @@ class GetController
             }
         }
 
-        if (empty($filasPosiciones)) {
-            $filasPosiciones = 0;
-        }
-
         $response = array(
             'posiciones_cercanas' => $filasPosiciones
         );
