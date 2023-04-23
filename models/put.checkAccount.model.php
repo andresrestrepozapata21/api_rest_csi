@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Bogota');
 
 require_once "connection.php";
 
@@ -14,7 +15,9 @@ class PutModel
         Actualizamos registros
         =============================================*/
 
-        $sql = "UPDATE $table SET activo_$suffix = 3 WHERE $nameId = $id";
+        $fecha = date('Y-m-d H:i:s');
+
+        $sql = "UPDATE $table SET activo_$suffix = 1, fecha_verificacion_pin = '$fecha' WHERE $nameId = $id";
 
         $link = Connection::connect();
         $stmt = $link->prepare($sql);

@@ -477,6 +477,12 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $suffix = "parada";
             $select = "id_parada";
             include "services/put.toUpdate.php";
+        } else if ($table == "putCustomerData") {
+
+            $table = "usuarios_clientes";
+            $suffix = "usuario_cliente";
+            $select = "id_usuario_cliente";
+            include "services/put.toUpdateCustomerData.php";
         } else if ($table == "putCustomerNumberPhone") {
 
             $table = "usuarios_clientes";

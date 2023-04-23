@@ -18,6 +18,18 @@ class GetController
     }
 
     /*=============================================
+    Peticiones GET
+    =============================================*/
+    public function getDataTrip($table, $select, $data, $id)
+    {
+
+        $response = GetModel::getDataFilterTrips($table, $select, $id, $data->$id);
+
+        $return = new GetController();
+        $return->fncResponse($response);
+    }
+
+    /*=============================================
     Peticiones GET para los planes existentes
     =============================================*/
     public function getDataPlanExistente($table, $data)
@@ -80,7 +92,8 @@ class GetController
         Consultamos las posiciones cercanas
         =============================================*/
         $conexion = Connection::conexionAlternativa();
-        $sentencia_listar = "SELECT id_$suffix, id_dispositivo_$suffix, id_$suffix2, cedula_$suffix2, nombre_$suffix2, apellido_$suffix2, telefono_$suffix2, email, date_created_$suffix,latitud_$suffix, longitud_$suffix, activo_$suffix2 FROM $table p INNER JOIN $table2 u ON u.id_$suffix2=p.fk_id_$suffix2" . "_$suffix WHERE activo_$suffix2 = 1";
+        //$sentencia_listar = "SELECT id_$suffix, id_dispositivo_$suffix, id_$suffix2, cedula_$suffix2, nombre_$suffix2, apellido_$suffix2, telefono_$suffix2, email, date_created_$suffix,latitud_$suffix, longitud_$suffix, activo_$suffix2 FROM $table p INNER JOIN $table2 u ON u.id_$suffix2=p.fk_id_$suffix2" . "_$suffix WHERE activo_$suffix2 = 1";
+        $sentencia_listar = "SELECT id_$suffix, id_dispositivo_$suffix, id_$suffix2, cedula_$suffix2, nombre_$suffix2, apellido_$suffix2, telefono_$suffix2, email, foto_perfil_$suffix2, lastlogin_$suffix2 ,date_created_$suffix, latitud_$suffix, longitud_$suffix, activo_$suffix2 FROM $table p INNER JOIN $table2 u ON u.id_$suffix2=p.fk_id_$suffix2" . "_$suffix WHERE activo_$suffix2 = 1";
         $resultado_listado = mysqli_query($conexion, $sentencia_listar);
         $filasPosiciones = array();
 

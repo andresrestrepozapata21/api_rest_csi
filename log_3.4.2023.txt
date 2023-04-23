@@ -1,0 +1,3 @@
+[2023-04-03 10:43:07]SMS API -> "SM1e6a52c4c5e197fd6d71d75956d6c196"
+[2023-04-03 10:44:16]Traker cumplido sin confirmacion - SMS API -> "SMc11f0c501aff14d00ee0c6378eaa102c"
+

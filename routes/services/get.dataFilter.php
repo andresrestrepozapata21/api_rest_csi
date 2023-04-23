@@ -24,7 +24,10 @@ if (isset($data->token)) {
         } else if ($table == "servicios_por_zona") {
             $response = new GetController();
             $response->getServicesPerZone($data);
-        } else {
+        }  else if ($table == "viajes") {
+            $response = new GetController();
+            $response->getDataTrip($table, $select, $data, $id);
+        }else {
             $response = new GetController();
             $response->getData($table, $select, $data, $id);
         }

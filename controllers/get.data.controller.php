@@ -16,6 +16,17 @@ class GetController{
     }
 
     /*=============================================
+    Peticiones GET sin filtro
+    =============================================*/
+    public function getDataAlerts($table, $select){
+
+        $response = GetAllModel::getDataAlerts($table, $select);
+        
+        $return = new GetController();
+        $return -> fncResponse($response);
+    }
+
+    /*=============================================
     Respuestas del controlador
     =============================================*/
     public function fncResponse($response){

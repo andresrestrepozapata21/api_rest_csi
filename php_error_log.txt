@@ -1679,3 +1679,136 @@ Stack trace:
 [04-Mar-2023 08:37:10 America/Bogota] PHP Warning:  Undefined variable $Array in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
 [04-Mar-2023 08:37:10 America/Bogota] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
 [04-Mar-2023 08:37:10 America/Bogota] PHP Warning:  Attempt to read property "id_plan" on null in C:\xampp\htdocs\api_rest_csi\controllers\post.Login.controller.php on line 62
+[30-Mar-2023 16:32:54 America/Bogota] PHP Warning:  Undefined property: stdClass::$url_cargar_info_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 31
+[30-Mar-2023 16:32:54 America/Bogota] PHP Warning:  Undefined property: stdClass::$codigo_plan in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 38
+[30-Mar-2023 16:32:54 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[30-Mar-2023 16:32:54 America/Bogota] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'descripcion_corta_promocion' in 'field list' in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php:134
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php(134): mysqli_query(Object(mysqli), 'SELECT id_estab...')
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\get.homePage.php(13): GetController->getData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(178): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 134
+[30-Mar-2023 16:33:47 America/Bogota] PHP Warning:  Undefined property: stdClass::$url_cargar_info_usuario_cliente in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 31
+[30-Mar-2023 16:33:47 America/Bogota] PHP Warning:  Undefined property: stdClass::$codigo_plan in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 38
+[30-Mar-2023 16:33:47 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[30-Mar-2023 16:33:47 America/Bogota] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'descripcion_corta_promocion' in 'field list' in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php:134
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php(134): mysqli_query(Object(mysqli), 'SELECT id_estab...')
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\get.homePage.php(13): GetController->getData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(178): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 134
+[30-Mar-2023 16:35:45 America/Bogota] PHP Warning:  Undefined property: stdClass::$codigo_plan in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 38
+[30-Mar-2023 16:35:45 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[30-Mar-2023 16:35:45 America/Bogota] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'descripcion_corta_promocion' in 'field list' in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php:134
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php(134): mysqli_query(Object(mysqli), 'SELECT id_estab...')
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\get.homePage.php(13): GetController->getData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(178): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 134
+[30-Mar-2023 16:36:51 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[30-Mar-2023 16:36:51 America/Bogota] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'descripcion_corta_promocion' in 'field list' in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php:134
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php(134): mysqli_query(Object(mysqli), 'SELECT id_estab...')
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\get.homePage.php(13): GetController->getData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(178): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 134
+[30-Mar-2023 16:38:08 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[30-Mar-2023 16:38:08 America/Bogota] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'url_detalle_establecimiento' in 'field list' in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php:134
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php(134): mysqli_query(Object(mysqli), 'SELECT id_estab...')
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\get.homePage.php(13): GetController->getData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(178): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 134
+[30-Mar-2023 16:38:50 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[30-Mar-2023 16:38:50 America/Bogota] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 162
+[30-Mar-2023 16:38:50 America/Bogota] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'backend_csi.productos_fisicos' doesn't exist in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php:170
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php(170): mysqli_query(Object(mysqli), 'SELECT * FROM p...')
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\get.homePage.php(13): GetController->getData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(178): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 170
+[30-Mar-2023 16:40:55 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[30-Mar-2023 16:40:55 America/Bogota] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'backend_csi.productos_fisicos' doesn't exist in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php:170
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php(170): mysqli_query(Object(mysqli), 'SELECT * FROM p...')
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\get.homePage.php(13): GetController->getData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(178): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 170
+[30-Mar-2023 16:41:29 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[30-Mar-2023 16:41:29 America/Bogota] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'backend_csi.cuadrantes_por_zonas' doesn't exist in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php:184
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php(184): mysqli_query(Object(mysqli), 'SELECT * FROM c...')
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\get.homePage.php(13): GetController->getData(Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(178): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 184
+[30-Mar-2023 16:47:18 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[30-Mar-2023 16:47:18 America/Bogota] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 162
+[30-Mar-2023 16:48:23 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[30-Mar-2023 17:42:24 America/Bogota] PHP Warning:  require_once(connection.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\api_rest_csi\controllers\put.checkAccount.controller.php on line 3
+[30-Mar-2023 17:42:24 America/Bogota] PHP Fatal error:  Uncaught Error: Failed opening required 'connection.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\api_rest_csi\controllers\put.checkAccount.controller.php:3
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\routes\services\put.checkAccount.php(4): require_once()
+#1 C:\xampp\htdocs\api_rest_csi\routes\routes.php(445): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\put.checkAccount.controller.php on line 3
+[30-Mar-2023 17:42:48 America/Bogota] PHP Warning:  Undefined property: stdClass::$email in C:\xampp\htdocs\api_rest_csi\controllers\put.checkAccount.controller.php on line 21
+[30-Mar-2023 17:43:51 America/Bogota] PHP Fatal error:  Uncaught mysqli_sql_exception: Cannot add or update a child row: a foreign key constraint fails (`backend_csi`.`planes_comprados`, CONSTRAINT `fk_planes_comprados_planes_1` FOREIGN KEY (`fk_id_plan_plan_comprado`) REFERENCES `planes` (`id_plan`)) in C:\xampp\htdocs\api_rest_csi\controllers\put.checkAccount.controller.php:42
+Stack trace:
+#0 C:\xampp\htdocs\api_rest_csi\controllers\put.checkAccount.controller.php(42): mysqli_query(Object(mysqli), 'INSERT INTO `pl...')
+#1 C:\xampp\htdocs\api_rest_csi\routes\services\put.checkAccount.php(7): PutController->putData('usuarios_client...', 'id_usuario_clie...', 'usuario_cliente', Object(stdClass))
+#2 C:\xampp\htdocs\api_rest_csi\routes\routes.php(445): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\api_rest_csi\controllers\routes.controller.php(10): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\api_rest_csi\index.php(26): RoutesController->index()
+#5 {main}
+  thrown in C:\xampp\htdocs\api_rest_csi\controllers\put.checkAccount.controller.php on line 42
+[31-Mar-2023 09:55:32 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 09:55:45 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 09:55:45 America/Bogota] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 162
+[31-Mar-2023 09:57:17 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 09:57:41 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 09:58:02 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:06:47 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:07:03 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:07:03 America/Bogota] PHP Warning:  Undefined variable $fecha_compra_plan in C:\xampp\htdocs\api_rest_csi\controllers\get.homePage.controller.php on line 235
+[31-Mar-2023 10:09:04 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:09:12 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:09:17 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:09:25 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:09:29 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:24:05 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:24:13 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:24:21 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:25:17 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:26:30 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:27:02 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:27:17 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:27:21 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:27:30 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:29:15 America/Bogota] Parametros recibidos 4.265434 - -75.928713
+[31-Mar-2023 10:29:19 America/Bogota] Parametros recibidos 4.265434 - -75.928713

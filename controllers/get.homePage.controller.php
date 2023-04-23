@@ -24,16 +24,47 @@ class GetController
         }
 
         $id = $responseUser[0]->id_usuario_cliente;
+        $email = $responseUser[0]->email;
+
+        /*=============================================
+        Valido que el usuario que ya esta registrado y activo sea un usuario beneficiario
+        =============================================*/
+        $sentencia_beneficiario = "SELECT * FROM usuario_beneficiarios WHERE correo_usuario_beneficiario = '$email'";
+        $resultado_beneficiario = mysqli_query($conexion, $sentencia_beneficiario);
+
+        if (mysqli_num_rows($resultado_beneficiario) > 0) {
+            $fila_beneficiario = mysqli_fetch_assoc($resultado_beneficiario);
+            $id_plan = $fila_beneficiario["fk_id_plan_usuario_beneficiario"];
+            $fecha_compra = $fila_beneficiario["fecha_compra_plan"];
+
+            $sentencia_aux = "SELECT * FROM planes_comprados WHERE fk_id_usuario_cliente_plan_comprado = $id AND activo_plan_comprado = 1";
+            $resultado_aux = mysqli_query($conexion, $sentencia_aux);
+
+            if(mysqli_num_rows($resultado_aux) == 0){
+                $sentencia_insertar_plan_beneficiario = "INSERT INTO `planes_comprados`(`activo_plan_comprado`, `fk_id_plan_plan_comprado`, `fk_id_usuario_cliente_plan_comprado`, `date_created_plan_comprado`) VALUES (1,$id_plan,$id,'$fecha_compra')";
+                $resultado_insertar_plan_beneficiario = mysqli_query($conexion, $sentencia_insertar_plan_beneficiario);
+            }
+        }
+
+        /*=============================================
+        Continuo con la ejecucion del Master
+        =============================================*/
         $nombre = $responseUser[0]->nombre_usuario_cliente;
         $cedula = $responseUser[0]->cedula_usuario_cliente;
+        $popup_inicio = $responseUser[0]->presentacion_inicial_popup_usuario_cliente;
+        $popup_anuncio = $responseUser[0]->anuncio_popup_usuario_cliente;
+        $url_cargar_info = $responseUser[0]->url_cargar_info_usuario_cliente;
 
         $responsePlan = GetHomePageModel::getPlanUsuario($id);
+
+        $fecha_compra_plan = "";
 
         if (isset($responsePlan[0]->tipo_plan)) {
             $tipo_plan = $responsePlan[0]->tipo_plan;
             $id_plan = $responsePlan[0]->id_plan;
             $codigo_plan = $responsePlan[0]->codigo_plan;
             $contactos_emergencia_plan = $responsePlan[0]->contactos_emergencia_plan;
+            $fecha_compra_plan = $responsePlan[0]->date_created_plan_comprado;
             $fecha_vencimiento = date("d-m-Y", strtotime($responsePlan[0]->date_created_plan_comprado . "+ 30 days"));
         } else {
             $tipo_plan = 0;
@@ -51,7 +82,6 @@ class GetController
         /*=============================================
         Consultamos cuales son las alertas cercanas
         =============================================*/
-        $conexion = Connection::conexionAlternativa();
         $sentencia_listar = "SELECT * FROM alertas";
         $resultado_listado = mysqli_query($conexion, $sentencia_listar);
 
@@ -69,11 +99,11 @@ class GetController
 
                     $valor["imagenes"] = array();
 
-                    if($valor["ruta1_imagen_alerta"]){
+                    if ($valor["ruta1_imagen_alerta"]) {
                         array_push($valor["imagenes"], $valor["ruta1_imagen_alerta"]);
-                        if($valor["ruta2_imagen_alerta"]){
+                        if ($valor["ruta2_imagen_alerta"]) {
                             array_push($valor["imagenes"], $valor["ruta2_imagen_alerta"]);
-                            if($valor["ruta3_imagen_alerta"]){
+                            if ($valor["ruta3_imagen_alerta"]) {
                                 array_push($valor["imagenes"], $valor["ruta3_imagen_alerta"]);
                             }
                         }
@@ -83,7 +113,6 @@ class GetController
                     unset($valor["ruta2_imagen_alerta"]);
                     unset($valor["ruta3_imagen_alerta"]);
                     $filasAlertas[] = $valor;
-                    
                 }
             }
         }
@@ -99,7 +128,6 @@ class GetController
             unset($filasZonas[0]["codigo_zona"]);
             $id_zona = $filasZonas[0]["id_zona"];
 
-            $conexion = Connection::conexionAlternativa();
             $sentencia_listar = "SELECT * FROM servicios_por_zona sz INNER JOIN servicios s ON sz.fk_id_servicio_servicos_por_zona = s.id_servicio  WHERE fk_id_zona_servicos_por_zona = $id_zona";
             $resultado_listado = mysqli_query($conexion, $sentencia_listar);
 
@@ -155,8 +183,8 @@ class GetController
         $fila_puntos = mysqli_fetch_assoc($consulta_puntos);
         $puntos_usuario = 0;
 
-        if ($fila_puntos["acumulado_puntos_punto_ganado"]) {
-            $puntos_usuario = $fila_puntos["acumulado_puntos_punto_ganado"];
+        if (isset($fila_puntos["acumulado_puntos_punto_ganado"])) {
+            $puntos_usuario = (int) $fila_puntos["acumulado_puntos_punto_ganado"];
         }
 
         /*=============================================
@@ -204,11 +232,15 @@ class GetController
         $response = array(
             'id_usuario_cliente' => $id,
             'nombre_usuario_cliente' => $nombre,
+            'url_cargar_info' => $url_cargar_info,
+            'modal_inicio' => $popup_inicio,
+            'modal_anuncio' => $popup_anuncio,
             "codigo_QR" => "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http%3A%2F%2Fpruebas.mipgenlinea.com%2Fvalidador_qr.php?cedula=$cedula",
             'puntos_ganados' => $puntos_usuario,
             'id_plan' => (int) $id_plan,
             'tipo_plan' => $tipo_plan,
             'codigo_plan' => (int) $codigo_plan,
+            'fecha_compra_plan' => $fecha_compra_plan,
             'vencimiento' => $fecha_vencimiento,
             'contactos_emergencia_plan' => (int) $contactos_emergencia_plan,
             'cantidad_zonas' => $numero_zonas,
