@@ -127,7 +127,9 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
             $userToken = "usuarios_clientes";
             $table = "paradas";
-            $suffix  = "parada";
+            $file = $_FILES['file'];
+            $data = '{"token":"' . $_POST["token"] . '","descripcion_parada":"' . $_POST["descripcion_parada"] . '","place_id_parada":"' . $_POST["place_id_parada"] . '","fk_id_viaje_parada":"' . $_POST["fk_id_viaje_parada"] . '"}';
+            $data = json_decode($data);
             include "services/post.php";
         } else if ($table == "createTypeUser") {
 
@@ -254,6 +256,14 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $select = "*";
             $id = "fk_id_viaje_registro_fotografico_viaje";
             include "services/get.dataFilter.php";
+        } 
+        else if ($table == "getTrip") {
+
+            $userToken = "usuarios_clientes";
+            $table = "viaje";
+            $select = "*";
+            $id = "id_viaje";
+            include "services/get.dataFilter.php";
         } else if ($table == "getLocal") {
 
             $userToken = "usuarios_clientes";
@@ -341,6 +351,18 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $data = '{"token":"' . $_POST["token"] . '","id_servicio":"' . $_POST["id_servicio"] . '","descripcion_servicio":"' . $_POST["descripcion_servicio"] . '","puntos_servicio":"' . $_POST["puntos_servicio"] . '","color_sombra_servicio":"' . $_POST["color_sombra_servicio"] . '"}';
             $data = json_decode($data);
             $ruta = "src/images_services/";
+            include "services/put.toUpdate.php";
+        }  else if ($table == "stopUpdate") {
+
+            $userToken = "usuarios_clientes";
+            $table = "paradas";
+            $suffix = "parada";
+            $select = "id_parada";
+            $id = $_POST["id_parada"];
+            $file = $_FILES['file'];
+            $data = '{"token":"' . $_POST["token"] . '","id_parada":"' . $_POST["id_parada"] . '","descripcion_parada":"' . $_POST["descripcion_parada"] . '","place_id_parada":"' . $_POST["place_id_parada"] . '","fk_id_viaje_parada":"' . $_POST["fk_id_viaje_parada"] . '"}';
+            $data = json_decode($data);
+            $ruta = "src/images_stops/";
             include "services/put.toUpdate.php";
         } else if ($table == "reactionAgentAlert") {
 
@@ -469,13 +491,6 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "viajes";
             $suffix = "viaje";
             $select = "id_viaje";
-            include "services/put.toUpdate.php";
-        } else if ($table == "stopUpdate") {
-
-            $userToken = "usuarios_clientes";
-            $table = "paradas";
-            $suffix = "parada";
-            $select = "id_parada";
             include "services/put.toUpdate.php";
         } else if ($table == "putCustomerData") {
 

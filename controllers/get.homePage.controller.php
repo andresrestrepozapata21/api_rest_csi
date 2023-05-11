@@ -229,6 +229,20 @@ class GetController
             }
         }
 
+        /*=============================================
+        Consultamos cuantos Agentes activos hay en CSI
+        =============================================*/
+        $sentencia_agentes_activos = "SELECT count(*) as cantidad_agentes_activos FROM usuarios_agentes WHERE activo_usuario_agente=1";
+        $consulta_agentes_activos = mysqli_query($conexion, $sentencia_agentes_activos);
+        $dato_agentes_activos = mysqli_fetch_assoc($consulta_agentes_activos);
+
+        /*=============================================
+        Consultamos cuantos Agentes activos hay en CSI
+        =============================================*/
+        $sentencia_clientes_activos = "SELECT count(*) as cantidad_clientes_activos FROM usuarios_clientes WHERE activo_usuario_cliente=1";
+        $consulta_clientes_activos = mysqli_query($conexion, $sentencia_clientes_activos);
+        $dato_clientes_activos = mysqli_fetch_assoc($consulta_clientes_activos);
+
         $response = array(
             'id_usuario_cliente' => $id,
             'nombre_usuario_cliente' => $nombre,
@@ -244,6 +258,8 @@ class GetController
             'vencimiento' => $fecha_vencimiento,
             'contactos_emergencia_plan' => (int) $contactos_emergencia_plan,
             'cantidad_zonas' => $numero_zonas,
+            'cantidad_agentes_activos' => $dato_agentes_activos["cantidad_agentes_activos"],
+            'cantidad_clientes_activos' => $dato_clientes_activos["cantidad_clientes_activos"],
             'zona' => $filasZonas,
             'alertas_cercanas' => $filasAlertas,
             'servicios_zona' => $filasServicios,

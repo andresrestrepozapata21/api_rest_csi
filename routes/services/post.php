@@ -38,7 +38,7 @@ if (isset($_POST)) {
                 $response->postTrip($table, $suffix, $data);
             } else if ($table == "paradas") {
                 $response = new PostController();
-                $response->postStop($table, $suffix, $data);
+                $response->postStop($data, $file);
             } else if ($table == "registros_fotograficos_viajes") {
                 $response = new PostController();
                 $response->postTripPicture($data, $file);

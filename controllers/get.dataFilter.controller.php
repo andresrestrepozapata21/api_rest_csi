@@ -1,6 +1,8 @@
 <?php
 date_default_timezone_set('America/Bogota');
 require_once "models/get.filter.model.php";
+require_once "models/connection.php";
+
 
 class GetController
 {
@@ -24,6 +26,53 @@ class GetController
     {
 
         $response = GetModel::getDataFilterTrips($table, $select, $id, $data->$id);
+
+        $return = new GetController();
+        $return->fncResponse($response);
+    }
+
+    /*=============================================
+    Peticiones GET pra traer todos los datos del viaje
+    =============================================*/
+    public function getTrip($table, $select, $data, $id)
+    {
+        $conexion = Connection::conexionAlternativa();
+
+        $response_viaje = GetModel::getTrip($table, $select, $id, $data->$id);
+
+        /*=============================================
+        Consultamos los contactos de emergencia que esten en la zona (bomberos, guardia civil, etc...)
+        =============================================*/
+        $sql_paradas = "SELECT * FROM paradas WHERE fk_id_viaje_parada=". $data->$id;
+        $consulta_parada = mysqli_query($conexion, $sql_paradas);
+
+        $filas_paradas = array();
+
+        if ($consulta_parada) {
+            while ($valor = mysqli_fetch_assoc($consulta_parada)) {
+                $filas_paradas[] = $valor;
+            }
+        }
+
+        /*=============================================
+        Consultamos los contactos de emergencia que esten en la zona (bomberos, guardia civil, etc...)
+        =============================================*/
+        $sql_fotos = "SELECT * FROM registros_fotograficos_viajes WHERE fk_id_viaje_registro_fotografico_viaje =" . $data->$id;
+        $consulta_fotos = mysqli_query($conexion, $sql_fotos);
+
+        $filas_fotos = array();
+
+        if ($consulta_fotos) {
+            while ($valor = mysqli_fetch_assoc($consulta_fotos)) {
+                $filas_fotos[] = $valor;
+            }
+        }
+
+        $response = array(
+            'informacion_viaje' => $response_viaje,
+            'paradas_viaje' => $filas_paradas,
+            'fotos_viaje' => $filas_fotos,
+        );
 
         $return = new GetController();
         $return->fncResponse($response);

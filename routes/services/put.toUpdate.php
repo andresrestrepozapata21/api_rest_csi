@@ -21,6 +21,9 @@ if (isset($data->token)) {
         } else if ($table == "servicios") {
             $response = new PutController();
             $response->putWithImageAux($table, $suffix, $id, $file, $ruta, $data, $select);
+        } else if ($table == "paradas") {
+            $response = new PutController();
+            $response->putStop($table, $suffix, $id, $file, $ruta, $data, $select);
         } else {
             $response = new PutController();
             $response->putData($table, $suffix, $select, $data);

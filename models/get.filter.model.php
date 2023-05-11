@@ -45,6 +45,26 @@ class GetModel
     }
 
     /*=============================================
+    Peticiones GET con filtro
+    =============================================*/
+    static public function getTrip($table, $select, $linkTo, $equalTo)
+    {
+        /*=============================================
+        Consulta SQL
+        =============================================*/
+        $sql = "SELECT $select FROM $table WHERE $linkTo = '$equalTo'";
+
+        $stmt = Connection::connect()->prepare($sql);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            return null;
+        }
+        return $stmt->fetchAll(PDO::FETCH_CLASS);
+    }
+
+    /*=============================================
     Peticiones GET con filtro para saber si el usuario tiene un plan comprado y activado
     =============================================*/
     static public function getDataFilterPlanExistente($table, $data)

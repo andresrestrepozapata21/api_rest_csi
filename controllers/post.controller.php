@@ -12,7 +12,6 @@ class PostController
     =============================================*/
     static public function postService($data, $file)
     {
-
         /*=============================================
         Cargamos la imagen del servicio
         =============================================*/
@@ -86,7 +85,6 @@ class PostController
     =============================================*/
     static public function postTripPicture($data, $file)
     {
-
         /*=============================================
         Cargamos la imagen del plan
         =============================================*/
@@ -109,7 +107,7 @@ class PostController
         } else {
             error_log("Carpeta existente:" . $target_path_nuevo);
         }
-        
+
         $target_path_nuevo = $target_path_nuevo . $nombreArchivo;
 
         if (file_exists("./" . $target_path_nuevo)) {
@@ -159,11 +157,11 @@ class PostController
             $resultado_acumularo = mysqli_query($conexion, $sentencia_acumulado);
             $puntos_acumulado = 0;
 
-            if($resultado_acumularo){
+            if ($resultado_acumularo) {
                 $fila_aculumado = mysqli_fetch_assoc($resultado_acumularo);
                 $puntos_acumulado = $fila_aculumado['acumulado_puntos_punto_ganado'];
             }
-            
+
             //consultamos los datos que faltan para registrar los puntos ganados de este usuario
             $sentencia_servicio = "SELECT * FROM servicios_por_zona sz INNER JOIN servicios s ON sz.fk_id_servicio_servicos_por_zona=s.id_servicio WHERE sz.id_servicos_por_zona = $id_servicio_por_zona";
             $resultado_servicio = mysqli_query($conexion, $sentencia_servicio);
@@ -180,7 +178,7 @@ class PostController
 
             //Registramos los puntos ganados
             $response = PostModel::postWithoutPhoto("puntos_ganados", "punto_ganado", $datos_puntos_ganados);
-            
+
             //Mandamos a registrar y enviar toda la mensajeria
             PostController::enviar_SMS_llamada_push_email($response_alert, $latitud, $longitud, $id_usuario_cliente, $id_servicio_por_zona);
         } else {
@@ -232,7 +230,7 @@ class PostController
             $resultado_acumularo = mysqli_query($conexion, $sentencia_acumulado);
             $puntos_acumulado = 0;
 
-            if($resultado_acumularo){
+            if ($resultado_acumularo) {
                 $fila_aculumado = mysqli_fetch_assoc($resultado_acumularo);
                 $puntos_acumulado = $fila_aculumado['acumulado_puntos_punto_ganado'];
             }
@@ -410,12 +408,45 @@ class PostController
     /*=============================================
     Peticion post para registrar las paradas del viaje
     =============================================*/
-    static public function postStop($table, $suffix, $data)
+    static public function postStop($data, $file)
     {
-        $response = PostModel::postStop($table, $suffix, $data);
+        /*=============================================
+        Cargamos la imagen del servicio
+        =============================================*/
+        $target_path = "uploads/";
+        $target_path = $target_path . basename($file['name']);
 
-        $return = new PostController();
-        $return->fncResponse($response, null);
+        error_log("Path: " . $target_path);
+
+        if (empty($file['name'])) {
+            $response = PostModel::postStop($data, null);
+
+            $return = new PostController();
+            $return->fncResponse($response, null);
+
+        } else {
+            $nombreArchivo = $file['name'];
+
+            $target_path_nuevo = "src/images_stops/";
+            error_log("Nuevo Path: " . $target_path_nuevo);
+
+            $target_path_nuevo = $target_path_nuevo . $nombreArchivo;
+
+            if (file_exists("./" . $target_path_nuevo)) {
+                $response = array(
+                    "code" => 13
+                );
+                $return = new PostController();
+                $return->fncResponse($response);
+            } else {
+
+                $response = PostModel::postStop($data, $target_path_nuevo);
+                move_uploaded_file($file['tmp_name'], "./" . $target_path_nuevo);
+
+                $return = new PostController();
+                $return->fncResponse($response, null);
+            }
+        }
     }
 
     /*=============================================
@@ -541,8 +572,8 @@ class PostController
             $json = json_encode($data);
             $header = array('Content-Type: application/json');
             $resultado_sms = new  PostController();
-           $result_sms2 = $resultado_sms->CallAPI($url, $json, $header);
-           file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms2 . ",\n\r", FILE_APPEND);
+            $result_sms2 = $resultado_sms->CallAPI($url, $json, $header);
+            file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms2 . ",\n\r", FILE_APPEND);
 
 
             //Llamada a los contactos de emergencia

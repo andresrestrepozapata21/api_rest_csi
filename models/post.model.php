@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Bogota');
 
 require_once "models/connection.php";
 
@@ -314,27 +315,30 @@ class PostModel
     /*=============================================
     Peticion post para crear un viaje
     =============================================*/
-    static public function postStop($table, $suffix, $data)
+    static public function postStop($data, $target_path_nuevo)
     {
         $columns = "";
         $params = "";
 
         foreach ($data as $key => $value) {
-            $columns .=  $key . ",";
-            $params .= ":" . $key . ",";
+            $columns .= $key . ",";
+            $params .= "'" . $value . "',";
         }
 
-        $columns .= " date_created_$suffix,";
+        $columns .= "foto_parada,";
+        $params .= "'" . $target_path_nuevo . "',";
+
+        $columns .= " date_created_parada,";
         $params .= "'" . date('Y-m-d H:i:s') . "',";
 
         $columns = substr($columns, 0, -1);
         $params = substr($params, 0, -1);
 
-        $sql = "INSERT INTO $table ($columns) VALUES ($params)";
+        $sql = "INSERT INTO paradas ($columns) VALUES ($params)";
 
         $link = Connection::connect();
         $stmt = $link->prepare($sql);
-        
+
         foreach ($data as $key => $value) {
             $stmt->bindParam(":" . $key, $data->$key, PDO::PARAM_STR);
         }
