@@ -15,6 +15,17 @@ class GetController{
         $return -> fncResponse($response);
     }
 
+     /*=============================================
+    Peticiones GET sin filtro
+    =============================================*/
+    public function getDataPlans($table, $select){
+
+        $response = GetAllModel::getDataPlans($table, $select);
+        
+        $return = new GetController();
+        $return -> fncResponse($response);
+    }
+
     /*=============================================
     Peticiones GET sin filtro
     =============================================*/

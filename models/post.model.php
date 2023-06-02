@@ -196,6 +196,9 @@ class PostModel
             }
         }
 
+        $columns .= " estado_alerta,";
+        $params .= "1,";
+
         $columns .= " date_created_alerta,";
         $params .= "'" . date('Y-m-d H:i:s') . "',";
 

@@ -128,7 +128,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $userToken = "usuarios_clientes";
             $table = "paradas";
             $file = $_FILES['file'];
-            $data = '{"token":"' . $_POST["token"] . '","descripcion_parada":"' . $_POST["descripcion_parada"] . '","place_id_parada":"' . $_POST["place_id_parada"] . '","fk_id_viaje_parada":"' . $_POST["fk_id_viaje_parada"] . '"}';
+            $data = '{"token":"' . $_POST["token"] . '","descripcion_parada":"' . $_POST["descripcion_parada"] . '","latitud_parada":"' . $_POST["latitud_parada"] . '","longitud_parada":"' . $_POST["longitud_parada"] . '","fk_id_viaje_parada":"' . $_POST["fk_id_viaje_parada"] . '"}';
             $data = json_decode($data);
             include "services/post.php";
         } else if ($table == "createTypeUser") {
@@ -256,8 +256,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $select = "*";
             $id = "fk_id_viaje_registro_fotografico_viaje";
             include "services/get.dataFilter.php";
-        } 
-        else if ($table == "getTrip") {
+        } else if ($table == "getTrip") {
 
             $userToken = "usuarios_clientes";
             $table = "viaje";
@@ -324,9 +323,8 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $file3 = $_FILES['file3'];
             $file = array();
             array_push($file, $file1, $file2, $file3);
-            $data = '{"token":"' . $_POST["token"] . '","latitud_alerta":' . $_POST["latitud_alerta"] . ',"longitud_alerta":' . $_POST["longitud_alerta"] . ',"comentario_alerta":"' . $_POST["comentario_alerta"] . '","fk_id_usuario_cliente_alerta":' . $_POST["fk_id_usuario_cliente_alerta"] . ',"fk_id_servicio_por_zona_alerta":' . $_POST["fk_id_servicio_por_zona_alerta"] . '}';
+            $data = '{"token":"' . $_POST["token"] . '","latitud_alerta":' . $_POST["latitud_alerta"] . ',"longitud_alerta":' . $_POST["longitud_alerta"] . ',"comentario_alerta":"' . $_POST["comentario_alerta"] . '","notificar_contactos":' . $_POST["notificar_contactos"] . ',"fk_id_usuario_cliente_alerta":' . $_POST["fk_id_usuario_cliente_alerta"] . ',"fk_id_servicio_por_zona_alerta":' . $_POST["fk_id_servicio_por_zona_alerta"] . '}';
             $data = json_decode($data);
-
             include "services/post.php";
         } else if ($table == "planUpdate") {
 
@@ -352,7 +350,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $data = json_decode($data);
             $ruta = "src/images_services/";
             include "services/put.toUpdate.php";
-        }  else if ($table == "stopUpdate") {
+        } else if ($table == "stopUpdate") {
 
             $userToken = "usuarios_clientes";
             $table = "paradas";
@@ -387,6 +385,13 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "posiciones_clientes";
             $suffix = "posicion_cliente";
             $id = "id_posicion_cliente";
+            include "services/post.php";
+        } else if ($table == "positionCustomerRecordWithoutZone") {
+
+            $userToken = "usuarios_clientes";
+            $table = "posiciones_sin_cobertura";
+            $suffix = "posicion_sin_cobertura";
+            $id = "id_posicion_sin_cobertura";
             include "services/post.php";
         } else if ($table == "positionAgentRecord") {
 
@@ -430,6 +435,19 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $suffix = "usuario_agente";
             $select = "id_usuario_agente";
             include "services/put.toUpdateDeviceToken.php";
+        } else if ($table == "TripUpdate") {
+
+            $userToken = "usuarios_clientes";
+            $table = "viajes";
+            $suffix = "viaje";
+            $select = "id_viaje";
+            include "services/put.toUpdate.php";
+        } else if ($table == "getAlertsCostumer") {
+
+            $userToken = "usuarios_clientes";
+            $table = "alertas";
+
+            include "services/get.dataFilter.php";
         } else {
             $json  = array(
 
@@ -484,13 +502,6 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "contactos";
             $suffix = "contacto";
             $select = "id_contacto";
-            include "services/put.toUpdate.php";
-        } else if ($table == "TripUpdate") {
-
-            $userToken = "usuarios_clientes";
-            $table = "viajes";
-            $suffix = "viaje";
-            $select = "id_viaje";
             include "services/put.toUpdate.php";
         } else if ($table == "putCustomerData") {
 

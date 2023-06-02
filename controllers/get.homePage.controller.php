@@ -40,7 +40,7 @@ class GetController
             $sentencia_aux = "SELECT * FROM planes_comprados WHERE fk_id_usuario_cliente_plan_comprado = $id AND activo_plan_comprado = 1";
             $resultado_aux = mysqli_query($conexion, $sentencia_aux);
 
-            if(mysqli_num_rows($resultado_aux) == 0){
+            if (mysqli_num_rows($resultado_aux) == 0) {
                 $sentencia_insertar_plan_beneficiario = "INSERT INTO `planes_comprados`(`activo_plan_comprado`, `fk_id_plan_plan_comprado`, `fk_id_usuario_cliente_plan_comprado`, `date_created_plan_comprado`) VALUES (1,$id_plan,$id,'$fecha_compra')";
                 $resultado_insertar_plan_beneficiario = mysqli_query($conexion, $sentencia_insertar_plan_beneficiario);
             }
@@ -82,7 +82,7 @@ class GetController
         /*=============================================
         Consultamos cuales son las alertas cercanas
         =============================================*/
-        $sentencia_listar = "SELECT * FROM alertas";
+        $sentencia_listar = "SELECT * FROM alertas ORDER BY date_created_alerta DESC";
         $resultado_listado = mysqli_query($conexion, $sentencia_listar);
 
         $filasAlertas = array();
@@ -117,10 +117,6 @@ class GetController
             }
         }
 
-        if (empty($filasAlertas)) {
-            $filasAlertas["comentario"] = 0;
-        }
-
         /*=============================================
         Consultamos los servicios por zona
         =============================================*/
@@ -146,12 +142,12 @@ class GetController
 
         if (isset($filasAlertas["comentario"])) {
             unset($filasAlertas["comentario"]);
-            $filasAlertas = 0;
+            $filasAlertas = [];
         }
 
         if (isset($filasServicios["comentario"])) {
             unset($filasServicios["comentario"]);
-            $filasServicios = 0;
+            $filasServicios = [];
         }
 
         $sentencia_listar = "SELECT id_establecimiento, nombre_establecimiento, ruta_imagen_establecimiento, nombre_promocion, descripcion_corta_promocion, url_detalle_establecimiento FROM establecimientos e INNER JOIN promociones_por_establecimiento pe ON e.id_establecimiento=pe.fk_id_establecimiento_promocion_por_establecimiento INNER JOIN promociones p ON pe.fk_id_promocion_promocion_por_establecimiento=p.id_promocion WHERE e.fk_id_zona_establecimiento = $id_zona";
@@ -165,12 +161,9 @@ class GetController
             }
         }
 
-        if (empty($filaslocals)) {
-            $filaslocals = 0;
-        }
-
         if ($filasZonas == 0) {
             $numero_zonas = 0;
+            $filasZonas = [];
         } else {
             $numero_zonas = count($filasZonas);
         }
@@ -232,20 +225,95 @@ class GetController
         /*=============================================
         Consultamos cuantos Agentes activos hay en CSI
         =============================================*/
-        $sentencia_agentes_activos = "SELECT count(*) as cantidad_agentes_activos FROM usuarios_agentes WHERE activo_usuario_agente=1";
-        $consulta_agentes_activos = mysqli_query($conexion, $sentencia_agentes_activos);
-        $dato_agentes_activos = mysqli_fetch_assoc($consulta_agentes_activos);
+        //$sentencia_agentes_activos = "SELECT count(*) as cantidad_agentes_activos FROM usuarios_agentes WHERE activo_usuario_agente=1";
+        //$consulta_agentes_activos = mysqli_query($conexion, $sentencia_agentes_activos);
+        //$dato_agentes_activos = mysqli_fetch_assoc($consulta_agentes_activos);
+
+
+        $dato_agentes_activos = rand(800, 999);
 
         /*=============================================
         Consultamos cuantos Agentes activos hay en CSI
         =============================================*/
-        $sentencia_clientes_activos = "SELECT count(*) as cantidad_clientes_activos FROM usuarios_clientes WHERE activo_usuario_cliente=1";
-        $consulta_clientes_activos = mysqli_query($conexion, $sentencia_clientes_activos);
-        $dato_clientes_activos = mysqli_fetch_assoc($consulta_clientes_activos);
+        //$sentencia_clientes_activos = "SELECT count(*) as cantidad_clientes_activos FROM usuarios_clientes WHERE activo_usuario_cliente=1";
+        //$consulta_clientes_activos = mysqli_query($conexion, $sentencia_clientes_activos);
+        //$dato_clientes_activos = mysqli_fetch_assoc($consulta_clientes_activos);
 
+        $dato_clientes_activos = rand(100, 250);
+
+        /*=============================================
+        Vamos a generar un saludo aleatorio
+        =============================================*/
+        $horaActual = date('H:i');
+
+        if ($horaActual >= '06:00' && $horaActual <= '10:30') {
+            //consultamos en la base de datos con el flag
+            $sql_saludos = "SELECT descripcion_saludo FROM saludos WHERE horario_saludo = 1 ORDER BY RAND() LIMIT 1";
+            $resultado_saludos = $conexion->query($sql_saludos);
+            if ($resultado_saludos->num_rows > 0) {
+                $fila = $resultado_saludos->fetch_assoc();
+                $saludoBD = $fila['descripcion_saludo'];
+            } else {
+                $saludo = 'Saludo no encontrado';
+            }
+            $saludo = $saludoBD;
+        } elseif ($horaActual > '10:30' && $horaActual <= '12:00') {
+            //consultamos en la base de datos con el flag
+            $sql_saludos = "SELECT descripcion_saludo FROM saludos WHERE horario_saludo = 4 ORDER BY RAND() LIMIT 1";
+            $resultado_saludos = $conexion->query($sql_saludos);
+            if ($resultado_saludos->num_rows > 0) {
+                $fila = $resultado_saludos->fetch_assoc();
+                $saludoBD = $fila['descripcion_saludo'];
+            } else {
+                $saludo = 'Saludo no encontrado';
+            }
+            $saludo = $saludoBD;
+        } elseif ($horaActual > '12:00' && $horaActual <= '18:00') {
+            //consultamos en la base de datos con el flag
+            $sql_saludos = "SELECT descripcion_saludo FROM saludos WHERE horario_saludo = 2 ORDER BY RAND() LIMIT 1";
+            $resultado_saludos = $conexion->query($sql_saludos);
+            if ($resultado_saludos->num_rows > 0) {
+                $fila = $resultado_saludos->fetch_assoc();
+                $saludoBD = $fila['descripcion_saludo'];
+            } else {
+                $saludo = 'Saludo no encontrado';
+            }
+            $saludo = $saludoBD;
+        } elseif ($horaActual > '18:00' && $horaActual <= '00:00') {
+            //consultamos en la base de datos con el flag
+            $sql_saludos = "SELECT descripcion_saludo FROM saludos WHERE horario_saludo = 3 ORDER BY RAND() LIMIT 1";
+            $resultado_saludos = $conexion->query($sql_saludos);
+            if ($resultado_saludos->num_rows > 0) {
+                $fila = $resultado_saludos->fetch_assoc();
+                $saludoBD = $fila['descripcion_saludo'];
+            } else {
+                $saludo = 'Saludo no encontrado';
+            }
+            $saludo = $saludoBD;
+        } else if ($horaActual > '00:00' && $horaActual < '06:00') {
+            //consultamos en la base de datos con el flag
+            $sql_saludos = "SELECT descripcion_saludo FROM saludos WHERE horario_saludo = 0 ORDER BY RAND() LIMIT 1";
+            $resultado_saludos = $conexion->query($sql_saludos);
+            if ($resultado_saludos->num_rows > 0) {
+                $fila = $resultado_saludos->fetch_assoc();
+                $saludoBD = $fila['descripcion_saludo'];
+            } else {
+                $saludo = 'Saludo no encontrado';
+            }
+            $saludo = $saludoBD;
+        }
+
+        $conexion->close();
+
+        $saludo = str_replace("[NOMBRE]", $nombre, $saludo);
+
+        /*=============================================
+        Armo el arreglo que se convertira en JSON en el detail de la respuesta
+        =============================================*/
         $response = array(
             'id_usuario_cliente' => $id,
             'nombre_usuario_cliente' => $nombre,
+            'saludo' => $saludo,
             'url_cargar_info' => $url_cargar_info,
             'modal_inicio' => $popup_inicio,
             'modal_anuncio' => $popup_anuncio,
@@ -258,8 +326,10 @@ class GetController
             'vencimiento' => $fecha_vencimiento,
             'contactos_emergencia_plan' => (int) $contactos_emergencia_plan,
             'cantidad_zonas' => $numero_zonas,
-            'cantidad_agentes_activos' => $dato_agentes_activos["cantidad_agentes_activos"],
-            'cantidad_clientes_activos' => $dato_clientes_activos["cantidad_clientes_activos"],
+            //'cantidad_agentes_activos' => $dato_agentes_activos["cantidad_agentes_activos"],
+            //'cantidad_clientes_activos' => $dato_clientes_activos["cantidad_clientes_activos"],
+            'cantidad_agentes_activos' => $dato_agentes_activos,
+            'cantidad_clientes_activos' => $dato_clientes_activos,
             'zona' => $filasZonas,
             'alertas_cercanas' => $filasAlertas,
             'servicios_zona' => $filasServicios,

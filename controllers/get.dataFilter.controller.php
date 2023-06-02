@@ -43,7 +43,7 @@ class GetController
         /*=============================================
         Consultamos los contactos de emergencia que esten en la zona (bomberos, guardia civil, etc...)
         =============================================*/
-        $sql_paradas = "SELECT * FROM paradas WHERE fk_id_viaje_parada=". $data->$id;
+        $sql_paradas = "SELECT * FROM paradas WHERE fk_id_viaje_parada=" . $data->$id;
         $consulta_parada = mysqli_query($conexion, $sql_paradas);
 
         $filas_paradas = array();
@@ -108,6 +108,11 @@ class GetController
                 $timestamp = $fecha_fin_codigo_zona->format("U");
                 $time = time();
                 if ($time < $timestamp) {
+
+                    $fecha = date('Y-m-d H:i:s');
+                    $sentencia_plan_codigo_zona = "INSERT INTO `planes_comprados`(`activo_plan_comprado`, `fk_id_plan_plan_comprado`, `fk_id_usuario_cliente_plan_comprado`, `date_created_plan_comprado`) VALUES (1,19,$data->id_usuario_cliente,'$fecha')";
+                    $consulta_plan_codigo_zona = mysqli_query($conexion, $sentencia_plan_codigo_zona);
+
                     $codigo_valido = true;
                 }
             }
@@ -211,6 +216,43 @@ class GetController
         }
 
         $response = $filasServicios;
+
+        $return = new GetController();
+        $return->fncResponse($response);
+    }
+
+    /*=============================================
+    Peticiones GET obtener alertas por usuario cliente
+    =============================================*/
+    public function getAlertsCostumer($data)
+    {
+        /*=============================================
+        Consultamos las alertas que tienes la foranea del usuario
+        =============================================*/
+        $conexion = Connection::conexionAlternativa();
+        $sentencia_listar = "SELECT * FROM alertas WHERE fk_id_usuario_cliente_alerta = $data->fk_id_usuario_cliente_alerta ORDER BY date_created_alerta DESC";
+        $resultado_listado = mysqli_query($conexion, $sentencia_listar);
+
+        $filasAlertasCostumer = array();
+        while ($valor = mysqli_fetch_assoc($resultado_listado)) {
+            $valor["imagenes"] = array();
+
+            if ($valor["ruta1_imagen_alerta"]) {
+                array_push($valor["imagenes"], $valor["ruta1_imagen_alerta"]);
+                if ($valor["ruta2_imagen_alerta"]) {
+                    array_push($valor["imagenes"], $valor["ruta2_imagen_alerta"]);
+                    if ($valor["ruta3_imagen_alerta"]) {
+                        array_push($valor["imagenes"], $valor["ruta3_imagen_alerta"]);
+                    }
+                }
+            }
+            unset($valor["ruta1_imagen_alerta"]);
+            unset($valor["ruta2_imagen_alerta"]);
+            unset($valor["ruta3_imagen_alerta"]);
+            $filasAlertasCostumer[] = $valor;
+        }
+
+        $response = $filasAlertasCostumer;
 
         $return = new GetController();
         $return->fncResponse($response);

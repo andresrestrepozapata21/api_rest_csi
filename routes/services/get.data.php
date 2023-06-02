@@ -8,7 +8,10 @@ if (isset($_GET)) {
     if ($table == "alertas") {
         $response = new GetController();
         $response->getDataAlerts($table, $select);
-    }else{
+    } else if($table == "planes") {
+        $response = new GetController();
+        $response->getDataPlans($table, $select);
+    } else{
         $response = new GetController();
         $response->getData($table, $select);
     }

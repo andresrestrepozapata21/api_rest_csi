@@ -1,0 +1,210 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;1,100;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.main {
+  width: 100%;
+}
+
+.content {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.header {
+  width: 100%;
+  padding: 15px 10px;
+  text-align: center;
+  background-color: #f6f7f7;
+}
+
+.header h4 {
+  font-weight: 600;
+}
+
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.logo img {
+  width: 50%;
+}
+
+.logo_1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.logo_1 img {
+  width: 50%;
+}
+
+.img_premium {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.enlace {
+  width: 95%;
+  padding: 20px;
+  background-color: #ecedf4;
+  border-radius: 25px;
+}
+
+.enlace .info {
+  padding: 10px;
+  font-weight: 300;
+}
+
+.content_precio {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.precio {
+  margin: 0 auto;
+  width: 70%;
+  position: relative;
+  color: red;
+  font-size: 30px;
+  font-weight: 900;
+  overflow: hidden; /* Evita que la línea se desborde */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  display: inline-block;
+  position: relative;
+}
+
+.line {
+  position: absolute;
+  transform: translateY(-100%) rotate(-10deg); /* Rota la línea -10 grados */
+  width: 100%;
+  height: 2px;
+  background-color: red;
+}
+
+.content_btn {
+  width: 100%;
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  width: 90%;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  background-color: #2fdf75;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.firma {
+  margin-top: 20px;
+}
+
+.content_info_payu {
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.linea_atencion {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.number_wpp {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  text-align: center;
+}
+
+footer {
+  width: 100%;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.footer h3 {
+  text-align: center;
+  font-weight: 200;
+}
+
+.footer_1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.footer_1 a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.footer_1 a h3 {
+  text-align: center;
+  font-weight: 200;
+  text-decoration: underline rgb(191, 191, 191); /* Subrayado rojo */
+  text-decoration-style: solid; /* Subrayado punteado */
+  text-decoration-thickness: 1px; /* Grosor de 2 píxeles */
+}
+
+@media screen and (min-width: 1025px) {
+  .logo img {
+    width: 10%;
+  }
+
+  .logo_1 img {
+    width: 10%;
+  }
+
+  .img_premium img{
+    width: 40%;
+  }
+}

@@ -1,5 +1,7 @@
 <?php
 
+use PostController as GlobalPostController;
+
 require_once "models/connection.php";
 require_once "models/post.model.php";
 require_once "models/get.filter.model.php";
@@ -136,6 +138,11 @@ class PostController
         $longitud = $data->longitud_alerta;
         $id_usuario_cliente = $data->fk_id_usuario_cliente_alerta;
         $id_servicio_por_zona =  $data->fk_id_servicio_por_zona_alerta;
+
+        //guardo en una variable la bandera para saber si enviar o no notificaciones a los contactos de emergencia del usuario
+        $notificar_contactos = $data->notificar_contactos;
+        unset($data->notificar_contactos);
+
         /*=============================================
         Cargamos la imagen del servicio
         =============================================*/
@@ -180,9 +187,11 @@ class PostController
             $response = PostModel::postWithoutPhoto("puntos_ganados", "punto_ganado", $datos_puntos_ganados);
 
             //Mandamos a registrar y enviar toda la mensajeria
-            PostController::enviar_SMS_llamada_push_email($response_alert, $latitud, $longitud, $id_usuario_cliente, $id_servicio_por_zona);
+            PostController::enviar_SMS_llamada_push_email($response_alert, $latitud, $longitud, $id_usuario_cliente, $id_servicio_por_zona, $notificar_contactos);
         } else {
             $files = array();
+            //Registramos en la base de datos la alerta
+            $comprimir_imagenes = new GlobalPostController();
 
             foreach ($file as $key => $value) {
                 $nombreArchivo = $value['name'];
@@ -214,8 +223,13 @@ class PostController
                     } else {
                         //Pusheamos al arreglo los nombres de los archivos
                         array_push($files, $target_path_nuevo);
+                        // Localizacion
+                        $location = $target_path_nuevo;
+                        // comprimimos la imagen
+                        $comprimir_imagenes->compressImage($value['tmp_name'], $location, 60);
+
                         //Mover el archivo a la carpeta
-                        move_uploaded_file($value['tmp_name'], "./" . $target_path_nuevo);
+                        //move_uploaded_file($value['tmp_name'], "./" . $target_path_nuevo);
                     }
                 }
             }
@@ -252,7 +266,7 @@ class PostController
             $response = PostModel::postWithoutPhoto("puntos_ganados", "punto_ganado", $datos_puntos_ganados);
 
             //Registramos y enviamos toda la mensajeria
-            PostController::enviar_SMS_llamada_push_email($response_alert, $latitud, $longitud, $id_usuario_cliente, $id_servicio_por_zona);
+            PostController::enviar_SMS_llamada_push_email($response_alert, $latitud, $longitud, $id_usuario_cliente, $id_servicio_por_zona, $notificar_contactos);
         }
     }
 
@@ -399,6 +413,12 @@ class PostController
     =============================================*/
     static public function postTrip($table, $suffix, $data)
     {
+        // Ejemplo de uso:
+        $fechaOriginal = $data->fecha_estimada_recorrido_viaje;
+        $fechaConvertida = PostController::convertirFormatoFecha($fechaOriginal);
+
+        $data->fecha_estimada_recorrido_viaje = $fechaConvertida;
+
         $response = PostModel::postTrip($table, $suffix, $data);
 
         $return = new PostController();
@@ -423,7 +443,6 @@ class PostController
 
             $return = new PostController();
             $return->fncResponse($response, null);
-
         } else {
             $nombreArchivo = $file['name'];
 
@@ -439,7 +458,6 @@ class PostController
                 $return = new PostController();
                 $return->fncResponse($response);
             } else {
-
                 $response = PostModel::postStop($data, $target_path_nuevo);
                 move_uploaded_file($file['tmp_name'], "./" . $target_path_nuevo);
 
@@ -452,7 +470,7 @@ class PostController
     /*=============================================
     METODOS AUXILIARES
     =============================================*/
-    function enviar_SMS_llamada_push_email($response, $latitud, $longitud, $id_usuario_cliente, $id_servicio_por_zona)
+    function enviar_SMS_llamada_push_email($response, $latitud, $longitud, $id_usuario_cliente, $id_servicio_por_zona, $notificar_contactos)
     {
         $conexion = Connection::conexionAlternativa();
 
@@ -492,9 +510,9 @@ class PostController
         );
         $json = json_encode($data);
         $header = array('Content-Type: application/json');
-        $resultado_sms = new  PostController();
-        $result_SMS_cliente = $resultado_sms->CallAPI($url, $json, $header);
-        file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> $result_SMS_cliente\n\r", FILE_APPEND);
+        //$resultado_sms = new  PostController();
+        //$result_SMS_cliente = $resultado_sms->CallAPI($url, $json, $header);
+        //file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> $result_SMS_cliente\n\r", FILE_APPEND);
 
 
         /*========================================================================================================================================
@@ -505,85 +523,91 @@ class PostController
         //$result_email = enviar_correo($email, $nombre, $nombre_evento);
         //file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "CORREO API enviado a -> $email RESULTADO: $result_email\n\r", FILE_APPEND);
 
-        //envia a todos los contactos registrados
-        $sentencia_contactos = "SELECT * FROM contactos where fk_id_usuario_cliente_contacto=$id_usuario_cliente";
-        $resultado_contactos = mysqli_query($conexion, $sentencia_contactos);
+        /*=============================================
+        Validamos que se envie mensajes a los numeros de contacto si y solo si el flag enviado por el front es igual a 1
+        =============================================*/
+        if ($notificar_contactos == 1) {
+            //envia a todos los contactos registrados
+            $sentencia_contactos = "SELECT * FROM contactos where fk_id_usuario_cliente_contacto=$id_usuario_cliente";
+            $resultado_contactos = mysqli_query($conexion, $sentencia_contactos);
 
-        if (!$resultado_contactos) {
-            $error2 = "error en SQL 2" . mysqli_error($conexion) . " SQL->" . $sentencia_contactos;
-            file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "ERROR -> " . $error2 . "\n\r", FILE_APPEND);
-            return;
+            if (!$resultado_contactos) {
+                $error2 = "error en SQL 2" . mysqli_error($conexion) . " SQL->" . $sentencia_contactos;
+                file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "ERROR -> " . $error2 . "\n\r", FILE_APPEND);
+                return;
+            }
+
+            file_put_contents('./log_' . date("j.n.Y") . '.txt', $url . "\n\r", FILE_APPEND);
+
+            /*=============================================
+            Consultamos el mensaje para el contacto de emergencia
+            =============================================*/
+            $sentencia = "SELECT * FROM `plantillas_mensajes` WHERE tipo_plantilla_mensaje = 2";
+            $resultado = mysqli_query($conexion, $sentencia);
+            $fila = mysqli_fetch_assoc($resultado);
+            $mensaje1 = $fila["descripcion_plantilla_mensaje"];
+            $mensaje1 = str_replace("%nombre%", $nombre, $mensaje1);
+            $mensaje1 = str_replace("%apellido%", $apellido, $mensaje1);
+            $mensaje1 = str_replace("%servicio%", $nombre_evento, $mensaje1);
+
+            /*=============================================
+            Consultamos el mensaje 2 para el contato de emergencia
+            =============================================*/
+            $sentencia = "SELECT * FROM `plantillas_mensajes` WHERE tipo_plantilla_mensaje = 3";
+            $resultado = mysqli_query($conexion, $sentencia);
+            $fila = mysqli_fetch_assoc($resultado);
+            $mensaje2 = $fila["descripcion_plantilla_mensaje"];
+            $mensaje2 = str_replace("%nombre%", $nombre, $mensaje2);
+            $mensaje2 = str_replace("%apellido%", $apellido, $mensaje2);
+
+            while ($fila_contactos = mysqli_fetch_assoc($resultado_contactos)) {
+                file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "entrando al ciclo...\n\r", FILE_APPEND);
+                file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SQL -> $sentencia_contactos\n\r", FILE_APPEND);
+
+                $url = 'http://api.mipgenlinea.com/serviceSMS.php';
+                $telefonoContacto = $fila_contactos["telefono_contacto"];
+
+                //Primer Mensaje
+                $data = array(
+                    "usuario" => "smsFoxUser",
+                    "password" => "rhjIMEI3*",
+                    "telefono" => $telefonoContacto,
+                    "mensaje" => $mensaje1,
+                    "aplicacion" => "SMS Test Unitario",
+
+                );
+                $json = json_encode($data);
+                $header = array('Content-Type: application/json');
+                //$resultado_sms = new  PostController();
+                //$result_sms = $resultado_sms->CallAPI($url, $json, $header);
+                //file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms . ",\n\r", FILE_APPEND);
+
+                //Segundo Mensaje
+                $data = array(
+                    "usuario" => "smsFoxUser",
+                    "password" => "rhjIMEI3*",
+                    "telefono" => $telefonoContacto,
+                    "mensaje" => $mensaje2,
+                    "aplicacion" => "SMS Test Unitario",
+
+                );
+                $json = json_encode($data);
+                $header = array('Content-Type: application/json');
+                //$resultado_sms = new  PostController();
+                //$result_sms2 = $resultado_sms->CallAPI($url, $json, $header);
+                //file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms2 . ",\n\r", FILE_APPEND);
+
+
+                //Llamada a los contactos de emergencia
+                $url = 'http://api.mipgenlinea.com/serviceIVR.php';
+                $urlAudio = "https://csi.mipgenlinea.com/audiosAlerta/xml-message-csi.xml";
+                $datos = ['usuario' => 'smsFoxUser', 'password' => 'rhjIMEI3*', 'telefono' => $telefonoContacto, 'mensaje' => $urlAudio, 'fecha' => 'NA', 'aplicacion' => 'CSI LLAMADA'];
+                //$resultado_sms2 = new  PostController();
+                //$result_sms3 = $resultado_sms2->CallAPIIVR("POST", $url, json_encode($datos));
+                //file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "IVR API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms3 . ",\n\r", FILE_APPEND);
+            }
         }
 
-        file_put_contents('./log_' . date("j.n.Y") . '.txt', $url . "\n\r", FILE_APPEND);
-
-        /*=============================================
-        Consultamos el mensaje para el contacto de emergencia
-        =============================================*/
-        $sentencia = "SELECT * FROM `plantillas_mensajes` WHERE tipo_plantilla_mensaje = 2";
-        $resultado = mysqli_query($conexion, $sentencia);
-        $fila = mysqli_fetch_assoc($resultado);
-        $mensaje1 = $fila["descripcion_plantilla_mensaje"];
-        $mensaje1 = str_replace("%nombre%", $nombre, $mensaje1);
-        $mensaje1 = str_replace("%apellido%", $apellido, $mensaje1);
-        $mensaje1 = str_replace("%servicio%", $nombre_evento, $mensaje1);
-
-        /*=============================================
-        Consultamos el mensaje 2 para el contato de emergencia
-        =============================================*/
-        $sentencia = "SELECT * FROM `plantillas_mensajes` WHERE tipo_plantilla_mensaje = 3";
-        $resultado = mysqli_query($conexion, $sentencia);
-        $fila = mysqli_fetch_assoc($resultado);
-        $mensaje2 = $fila["descripcion_plantilla_mensaje"];
-        $mensaje2 = str_replace("%nombre%", $nombre, $mensaje2);
-        $mensaje2 = str_replace("%apellido%", $apellido, $mensaje2);
-
-        while ($fila_contactos = mysqli_fetch_assoc($resultado_contactos)) {
-            file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "entrando al ciclo...\n\r", FILE_APPEND);
-            file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SQL -> $sentencia_contactos\n\r", FILE_APPEND);
-
-            $url = 'http://api.mipgenlinea.com/serviceSMS.php';
-            $telefonoContacto = $fila_contactos["telefono_contacto"];
-
-            //Primer Mensaje
-            $data = array(
-                "usuario" => "smsFoxUser",
-                "password" => "rhjIMEI3*",
-                "telefono" => $telefonoContacto,
-                "mensaje" => $mensaje1,
-                "aplicacion" => "SMS Test Unitario",
-
-            );
-            $json = json_encode($data);
-            $header = array('Content-Type: application/json');
-            $resultado_sms = new  PostController();
-            $result_sms = $resultado_sms->CallAPI($url, $json, $header);
-            file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms . ",\n\r", FILE_APPEND);
-
-            //Segundo Mensaje
-            $data = array(
-                "usuario" => "smsFoxUser",
-                "password" => "rhjIMEI3*",
-                "telefono" => $telefonoContacto,
-                "mensaje" => $mensaje2,
-                "aplicacion" => "SMS Test Unitario",
-
-            );
-            $json = json_encode($data);
-            $header = array('Content-Type: application/json');
-            $resultado_sms = new  PostController();
-            $result_sms2 = $resultado_sms->CallAPI($url, $json, $header);
-            file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms2 . ",\n\r", FILE_APPEND);
-
-
-            //Llamada a los contactos de emergencia
-            $url = 'http://api.mipgenlinea.com/serviceIVR.php';
-            $urlAudio = "https://csi.mipgenlinea.com/audiosAlerta/xml-message-csi.xml";
-            $datos = ['usuario' => 'smsFoxUser', 'password' => 'rhjIMEI3*', 'telefono' => $telefonoContacto, 'mensaje' => $urlAudio, 'fecha' => 'NA', 'aplicacion' => 'CSI LLAMADA'];
-            $resultado_sms2 = new  PostController();
-            $result_sms3 = $resultado_sms2->CallAPIIVR("POST", $url, json_encode($datos));
-            file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "IVR API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms3 . ",\n\r", FILE_APPEND);
-        }
         /*=============================================
         Consultamos los lideres de zona para enviarles mensaje
         =============================================*/
@@ -620,15 +644,16 @@ class PostController
                 );
                 $json = json_encode($data);
                 $header = array('Content-Type: application/json');
-                $resultado_sms = new  PostController();
-                $result_sms3 = $resultado_sms->CallAPI($url, $json, $header);
-                file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> TELEFONO:" . $telefonoLider . " - " . $result_sms3 . ",\n\r", FILE_APPEND);
+                //$resultado_sms = new  PostController();
+                //$result_sms3 = $resultado_sms->CallAPI($url, $json, $header);
+                //file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> TELEFONO:" . $telefonoLider . " - " . $result_sms3 . ",\n\r", FILE_APPEND);
             }
 
             if (!empty($arrayTokenDevices)) {
                 //PostController::sendGCM($arrayTokenDevices, "CSI Reaccion - Una alerta fue enviada cerca de donde te encuentas"); ------------------------------------ notificacines push por configurar --------------------------------------------
             }
         }
+
         /*=============================================
         Consultamos los responsables del servicio
         =============================================*/
@@ -661,9 +686,9 @@ class PostController
                 );
                 $json = json_encode($data);
                 $header = array('Content-Type: application/json');
-                $resultado_sms = new  PostController();
-                $result = $resultado_sms->CallAPI($url, $json, $header);
-                file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " -> TELEFONO:" . $telefonoLider . "SMS API -> $result\n\r", FILE_APPEND);
+                //$resultado_sms = new  PostController();
+                //$result = $resultado_sms->CallAPI($url, $json, $header);
+                //file_put_contents('./log_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " -> TELEFONO:" . $telefonoLider . "SMS API -> $result\n\r", FILE_APPEND);
             }
         }
         /*=============================================
@@ -699,7 +724,7 @@ class PostController
         }
 
         $return = new PostController();
-        $return->fncResponse($response, $result_SMS_cliente);
+        $return->fncResponse($response, "NADA POR AHORA");
     }
 
     function CallAPI($url, $json, $header)
@@ -820,6 +845,28 @@ class PostController
         curl_close($ch);
 
         echo $result;
+    }
+
+    function convertirFormatoFecha($fecha)
+    {
+        $fechaObj = new DateTime($fecha);
+        return $fechaObj->format('Y-m-d H:i:s');
+    }
+
+    function compressImage($source, $destination, $quality)
+    {
+        $info = getimagesize($source);
+
+        if ($info['mime'] == 'image/jpeg')
+            $image = imagecreatefromjpeg($source);
+
+        elseif ($info['mime'] == 'image/gif')
+            $image = imagecreatefromgif($source);
+
+        elseif ($info['mime'] == 'image/png')
+            $image = imagecreatefrompng($source);
+
+        imagejpeg($image, $destination, $quality);
     }
 
     /*=============================================

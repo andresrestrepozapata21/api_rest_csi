@@ -15,7 +15,7 @@ class PostController
     /*=============================================
     Peticion post para crear cliente
     =============================================*/
-    static public function postLogin($table, $suffix,$data)
+    static public function postLogin($table, $suffix, $data)
     {
 
         /*=============================================
@@ -52,11 +52,11 @@ class PostController
 
                         $responsePlan = GetHomePageModel::getPlanUsuario($id);
 
-                        
+
                         if (isset($responsePlan[0]->id_plan)) {
                             $id_plan = $responsePlan[0]->id_plan;
                             $response[0]->{"id_plan"} = (int) $id_plan;
-                        }else{
+                        } else {
                             $response[0]->{"id_plan"} = 0;
                         }
 
@@ -65,6 +65,7 @@ class PostController
                     }
                 } else {
                     $response = array(
+                        "id_usuario" => $response[0]->{"id_$suffix"},
                         "activo" => $response[0]->{"activo_$suffix"},
                         "code" => 0
                     );
@@ -73,6 +74,7 @@ class PostController
                 }
             } else {
                 $response = array(
+                    "id_usuario" => $response[0]->{"id_$suffix"},
                     "activo" => $response[0]->{"activo_$suffix"},
                     "code" => 8
                 );
@@ -81,6 +83,7 @@ class PostController
             }
         } else {
             $response = array(
+                "id_usuario" => $response[0]->{"id_$suffix"},
                 "activo" => "no existe",
                 "code" => 1
             );
@@ -102,14 +105,15 @@ class PostController
                 $json  = array(
                     'status' => 200,
                     'result' => $response['code'],
-                    'activo_'.$suffix => $response['activo']
+                    'id_usuario' => (int) $response["id_usuario"],
+                    'activo_' . $suffix => (int) $response['activo']
                 );
             } else {
                 $select = "activo_" . $suffix;
                 $json  = array(
                     'status' => 200,
                     'result' => 3,
-                    'activo_'.$suffix => (int) $response[0]->$select,
+                    'activo_' . $suffix => (int) $response[0]->$select,
                     'id_plan' => $response[0]->id_plan,
                     'detail' => $response
                 );

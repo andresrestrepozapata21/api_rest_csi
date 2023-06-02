@@ -27,7 +27,7 @@ if (isset($_POST)) {
             } else if ($table == "reacciones_cliente_cliente") {
                 $response = new PostController();
                 $response->postReactionCustomerAlert($table, $suffix, $data);
-            } else if ($table == "posiciones_clientes" || $table == "posiciones_agentes") {
+            } else if ($table == "posiciones_clientes" || $table == "posiciones_agentes" || $table == "posiciones_sin_cobertura") {
                 $response = new PostController();
                 $response->postPosition($table, $suffix, $data);
             } else if ($table == "tipos_usuarios") {
