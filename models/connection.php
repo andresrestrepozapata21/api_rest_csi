@@ -53,7 +53,8 @@ class Connection
 
         $token = array(
             "iat" => $time, //Tiempo en que inicia el token
-            "exp" => $time + (60 * 60 * 24 * 168), //Tiempo en que expirará el token (1 Semana)
+            "exp" => $time + (60 * 60 * 24 * 168), //Tiempo en que expirará el token (1 semana)
+            //"exp" => $time + (60), //Tiempo en que expirará el token (1 minuto)
             "data" => [
                 "id" => $id,
                 "email" => $email

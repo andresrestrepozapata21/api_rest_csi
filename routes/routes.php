@@ -3,6 +3,9 @@
 $routesArray = explode("/", $_SERVER['REQUEST_URI']);
 $routesArray = array_filter($routesArray);
 
+/*=============================================
+Dejo estas lineas comentadas, son las que se usaron para hacer pruebas unitarias en caso de errores
+=============================================*/
 //echo '<pre>'; print_r($routesArray); echo '</pre>';
 //return;
 
@@ -28,14 +31,17 @@ Cuando si se hace una peticion a la API
 
 if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
+    //capturo la palabra que se ingreso en la URL despues del /
     $table = explode("?", $routesArray[1])[0];
+    //Capturo los datos que vienen en el JSON Request en caso de tenerlo
     $data = json_decode(file_get_contents("php://input"));
 
     /*=============================================
-    Peticiones GET
+    Peticiones GET, dependendo de la palabra que se ingrese despues del / en la URL llama el servicio correspondiente en el folder services
+    algunos utilizan variables $table, $suffix necesarias para validar y/o armar la SQL posteriormente en el model
     =============================================*/
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
-
+        //Estructra condicional para validar la palabra ingresada en la URL
         if ($table == "getArl") {
 
             $table = "arl_vigentes";
@@ -71,7 +77,13 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "alertas";
             $select = "*";
             include "services/get.data.php";
+        } else if ($table == "getPopup") {
+
+            $table = "anuncios_popup";
+            $select = "*";
+            include "services/get.data.php";
         } else {
+            //Retorno el caso de error
             $json  = array(
 
                 'status' => 400,
@@ -84,10 +96,12 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
     }
 
     /*=============================================
-    Peticiones POST
+    Peticiones POST, dependendo de la palabra que se ingrese despues del / en la URL llama el servicio correspondiente en el folder services
+    algunos utilizan variables $table, $suffix necesarias para validar y/o armar la SQL posteriormente en el model
     =============================================*/
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
-
+        //Estructra condicional para validar la palabra ingresada en la URL
+        //Valido los endpoint que no necesitan recepcion como FormData por medio del metodo $_POST
         if ($table == "customerRecord") {
 
             $table = "usuarios_clientes";
@@ -122,14 +136,6 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $userToken = "usuarios_clientes";
             $table = "viajes";
             $suffix  = "viaje";
-            include "services/post.php";
-        } else if ($table == "stopRecord") {
-
-            $userToken = "usuarios_clientes";
-            $table = "paradas";
-            $file = $_FILES['file'];
-            $data = '{"token":"' . $_POST["token"] . '","descripcion_parada":"' . $_POST["descripcion_parada"] . '","latitud_parada":"' . $_POST["latitud_parada"] . '","longitud_parada":"' . $_POST["longitud_parada"] . '","fk_id_viaje_parada":"' . $_POST["fk_id_viaje_parada"] . '"}';
-            $data = json_decode($data);
             include "services/post.php";
         } else if ($table == "createTypeUser") {
 
@@ -178,56 +184,13 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
 
             $userToken = "usuarios_clientes";
             include "services/get.homePage.php";
-        } else if ($table == "serviceRecord") {
-
-            $userToken = "administradores";
-            $table = "servicios";
-            $file = $_FILES['file'];
-            $data = '{"token":"' . $_POST["token"] . '","descripcion_servicio":"' . $_POST["descripcion_servicio"] . '","puntos_servicio":' . $_POST["puntos_servicio"] . ',"color_sombra_servicio":"' . $_POST["color_sombra_servicio"] . '"}';
-            $data = json_decode($data);
-            include "services/post.php";
-        } else if ($table == "planRecord") {
-
-            $userToken = "administradores";
-            $table = "planes";
-            $file = $_FILES['file'];
-            $data = '{"token":"' . $_POST["token"] . '","tipo_plan":"' . $_POST["tipo_plan"] . '","precio_plan":' . $_POST["precio_plan"] . ',"descripcion_plan":"' . $_POST["descripcion_plan"] . '"}';
-            $data = json_decode($data);
-            include "services/post.php";
-        } else if ($table == "tripPictureRecord") {
+        } else if ($table == "masterChatico") {
 
             $userToken = "usuarios_clientes";
-            $table = "registros_fotograficos_viajes";
-            $file = $_FILES['file'];
-            $data = '{"token":"' . $_POST["token"] . '","fk_id_viaje_registro_fotografico_viaje":' . $_POST["fk_id_viaje_registro_fotografico_viaje"] . '}';
-            $data = json_decode($data);
-            include "services/post.php";
-        } else if ($table == "putCustomer") {
-
-            $userToken = "usuarios_clientes";
-            $table = "usuarios_clientes";
-            $suffix = "usuario_cliente";
-            $select = "id_usuario_cliente";
-            $id = $_POST["id_usuario_cliente"];
-            $file = $_FILES['file'];
-            $data = '{"token":"' . $_POST["token"] . '","id_usuario_cliente":"' . $_POST["id_usuario_cliente"] . '","Enfermedades_base":"' . $_POST["Enfermedades_base"] . '","nombre_usuario_cliente":"' . $_POST["nombre_usuario_cliente"] . '","apellido_usuario_cliente":"' . $_POST["apellido_usuario_cliente"] . '","telefono_usuario_cliente":' . $_POST["telefono_usuario_cliente"] . ',"cedula_usuario_cliente":"' . $_POST["cedula_usuario_cliente"] . '","tipo_de_sangre":"' . $_POST["tipo_de_sangre"] . '","direccion_usuario_cliente":"' . $_POST["direccion_usuario_cliente"] . '","email":"' . $_POST["email"] . '","arl":"' . $_POST["arl"] . '","password":' . $_POST["password"] . ',"alergias":"' . $_POST["alergias"] . '","eps":"' . $_POST["eps"] . '"}';
-            $data = json_decode($data);
-            $ruta = "src/perfile_pictures/clients/" . $id . "/";
-
-            include "services/put.toUpdate.php";
-        } else if ($table == "putAgent") {
-
-            $userToken = "usuarios_agentes";
-            $table = "usuarios_agentes";
-            $suffix = "usuario_agente";
-            $select = "id_usuario_agente";
-            $id = $_POST["id_usuario_agente"];
-            $file = $_FILES['file'];
-            $data = '{"token":"' . $_POST["token"] . '","id_usuario_agente":"' . $_POST["id_usuario_agente"] . '","Enfermedades_base":"' . $_POST["Enfermedades_base"] . '","nombre_usuario_agente":"' . $_POST["nombre_usuario_agente"] . '","apellido_usuario_agente":"' . $_POST["apellido_usuario_agente"] . '","telefono_usuario_agente":' . $_POST["telefono_usuario_agente"] . ',"cedula_usuario_agente":"' . $_POST["cedula_usuario_agente"] . '","tipo_de_sangre":"' . $_POST["tipo_de_sangre"] . '","direccion_usuario_agente":"' . $_POST["direccion_usuario_agente"] . '","email":"' . $_POST["email"] . '","arl":"' . $_POST["arl"] . '","password":' . $_POST["password"] . ',"alergias":"' . $_POST["alergias"] . '","eps":"' . $_POST["eps"] . '","fk_id_tipo_usuario_usuario_agente":"' . $_POST["fk_id_tipo_usuario_usuario_agente"] . '"}';
-            $data = json_decode($data);
-            $ruta = "src/perfile_pictures/agents/" . $id . "/";
-
-            include "services/put.toUpdate.php";
+            $table = "masterChatico";
+            $user = $data->user;
+            $password = $data->password;
+            include "services/post_chatico.php";
         } else if ($table == "getPlan") {
 
             $userToken = "usuarios_clientes";
@@ -314,54 +277,6 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $select = "*";
             $id = "fk_id_usuario_cliente_contacto";
             include "services/post.php";
-        } else if ($table == "alertRecord") {
-
-            $userToken = "usuarios_clientes";
-            $table = "alertas";
-            $file1 = $_FILES['file1'];
-            $file2 = $_FILES['file2'];
-            $file3 = $_FILES['file3'];
-            $file = array();
-            array_push($file, $file1, $file2, $file3);
-            $data = '{"token":"' . $_POST["token"] . '","latitud_alerta":' . $_POST["latitud_alerta"] . ',"longitud_alerta":' . $_POST["longitud_alerta"] . ',"comentario_alerta":"' . $_POST["comentario_alerta"] . '","notificar_contactos":' . $_POST["notificar_contactos"] . ',"fk_id_usuario_cliente_alerta":' . $_POST["fk_id_usuario_cliente_alerta"] . ',"fk_id_servicio_por_zona_alerta":' . $_POST["fk_id_servicio_por_zona_alerta"] . '}';
-            $data = json_decode($data);
-            include "services/post.php";
-        } else if ($table == "planUpdate") {
-
-            $userToken = "administradores";
-            $table = "planes";
-            $suffix = "plan";
-            $select = "id_plan";
-            $id = $_POST["id_plan"];
-            $file = $_FILES['file'];
-            $data = '{"token":"' . $_POST["token"] . '","id_plan":"' . $_POST["id_plan"] . '","tipo_plan":"' . $_POST["tipo_plan"] . '","precio_plan":"' . $_POST["precio_plan"] . '","descripcion_plan":"' . $_POST["descripcion_plan"] . '"}';
-            $data = json_decode($data);
-            $ruta = "src/images_plans/";
-            include "services/put.toUpdate.php";
-        } else if ($table == "serviceUpdate") {
-
-            $userToken = "administradores";
-            $table = "servicios";
-            $suffix = "servicio";
-            $select = "id_servicio";
-            $id = $_POST["id_servicio"];
-            $file = $_FILES['file'];
-            $data = '{"token":"' . $_POST["token"] . '","id_servicio":"' . $_POST["id_servicio"] . '","descripcion_servicio":"' . $_POST["descripcion_servicio"] . '","puntos_servicio":"' . $_POST["puntos_servicio"] . '","color_sombra_servicio":"' . $_POST["color_sombra_servicio"] . '"}';
-            $data = json_decode($data);
-            $ruta = "src/images_services/";
-            include "services/put.toUpdate.php";
-        } else if ($table == "stopUpdate") {
-
-            $userToken = "usuarios_clientes";
-            $table = "paradas";
-            $suffix = "parada";
-            $select = "id_parada";
-            $id = $_POST["id_parada"];
-            $file = $_FILES['file'];
-            $data = '{"token":"' . $_POST["token"] . '","id_parada":"' . $_POST["id_parada"] . '","descripcion_parada":"' . $_POST["descripcion_parada"] . '","place_id_parada":"' . $_POST["place_id_parada"] . '","fk_id_viaje_parada":"' . $_POST["fk_id_viaje_parada"] . '"}';
-            $data = json_decode($data);
-            $ruta = "src/images_stops/";
-            include "services/put.toUpdate.php";
         } else if ($table == "reactionAgentAlert") {
 
             $userToken = "usuarios_agentes";
@@ -448,7 +363,147 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "alertas";
 
             include "services/get.dataFilter.php";
+        } else if ($table == "getAlertsZone") {
+
+            $userToken = "usuarios_clientes";
+            $table = "alertasZona";
+
+            include "services/get.dataFilter.php";
+        } else if ($table == "resendMessageCustomer") {
+
+            $table = "usuarios_clientes";
+            $suffix = "usuario_cliente";
+            $select = "id_usuario_cliente";
+            include "services/put.resendMessage.php";
+        } else if ($table == "resendMessageAgent") {
+
+            $table = "usuarios_agentes";
+            $suffix = "usuario_agente";
+            $select = "id_usuario_agente";
+            include "services/put.resendMessage.php";
+        } else if ($table == "valideCostumerChatico") {
+
+            $table = "usuarios_clientes";
+            $user = $data->user;
+            $password = $data->password;
+
+            include "services/post_chatico.php";
+        } else if ($table == "getPointsUser") {
+
+            $userToken = "usuarios_clientes";
+            $table = "puntos_ganados";
+            include "services/get.dataFilter.php";
+        }
+
+        //Hay algunos casos donde utilizo la recepcion de un FormData() por tanto se capturan los datos por medio del metodo POST, luego armo el JSON normal para enviarlo al Servicio
+        else if ($table == "stopRecord") {
+
+            $userToken = "usuarios_clientes";
+            $table = "paradas";
+            $file = $_FILES['file'];
+            $data = '{"token":"' . $_POST["token"] . '","descripcion_parada":"' . $_POST["descripcion_parada"] . '","latitud_parada":"' . $_POST["latitud_parada"] . '","longitud_parada":"' . $_POST["longitud_parada"] . '","fk_id_viaje_parada":"' . $_POST["fk_id_viaje_parada"] . '"}';
+            $data = json_decode($data);
+            include "services/post.php";
+        } else if ($table == "alertRecord") {
+
+            $userToken = "usuarios_clientes";
+            $table = "alertas";
+            $file1 = $_FILES['file1'];
+            $file2 = $_FILES['file2'];
+            $file3 = $_FILES['file3'];
+            $file = array();
+            array_push($file, $file1, $file2, $file3);
+            $data = '{"token":"' . $_POST["token"] . '","latitud_alerta":' . $_POST["latitud_alerta"] . ',"longitud_alerta":' . $_POST["longitud_alerta"] . ',"comentario_alerta":"' . $_POST["comentario_alerta"] . '","notificar_contactos":' . $_POST["notificar_contactos"] . ',"fk_id_usuario_cliente_alerta":' . $_POST["fk_id_usuario_cliente_alerta"] . ',"fk_id_servicio_por_zona_alerta":' . $_POST["fk_id_servicio_por_zona_alerta"] . '}';
+            $data = json_decode($data);
+            include "services/post.php";
+        } else if ($table == "planUpdate") {
+
+            $userToken = "administradores";
+            $table = "planes";
+            $suffix = "plan";
+            $select = "id_plan";
+            $id = $_POST["id_plan"];
+            $file = $_FILES['file'];
+            $data = '{"token":"' . $_POST["token"] . '","id_plan":"' . $_POST["id_plan"] . '","tipo_plan":"' . $_POST["tipo_plan"] . '","precio_plan":"' . $_POST["precio_plan"] . '","descripcion_plan":"' . $_POST["descripcion_plan"] . '"}';
+            $data = json_decode($data);
+            $ruta = "src/images_plans/";
+            include "services/put.toUpdate.php";
+        } else if ($table == "serviceUpdate") {
+
+            $userToken = "administradores";
+            $table = "servicios";
+            $suffix = "servicio";
+            $select = "id_servicio";
+            $id = $_POST["id_servicio"];
+            $file = $_FILES['file'];
+            $data = '{"token":"' . $_POST["token"] . '","id_servicio":"' . $_POST["id_servicio"] . '","descripcion_servicio":"' . $_POST["descripcion_servicio"] . '","puntos_servicio":"' . $_POST["puntos_servicio"] . '","color_sombra_servicio":"' . $_POST["color_sombra_servicio"] . '"}';
+            $data = json_decode($data);
+            $ruta = "src/images_services/";
+            include "services/put.toUpdate.php";
+        } else if ($table == "stopUpdate") {
+
+            $userToken = "usuarios_clientes";
+            $table = "paradas";
+            $suffix = "parada";
+            $select = "id_parada";
+            $id = $_POST["id_parada"];
+            $file = $_FILES['file'];
+            $data = '{"token":"' . $_POST["token"] . '","id_parada":"' . $_POST["id_parada"] . '","descripcion_parada":"' . $_POST["descripcion_parada"] . '","place_id_parada":"' . $_POST["place_id_parada"] . '","fk_id_viaje_parada":"' . $_POST["fk_id_viaje_parada"] . '"}';
+            $data = json_decode($data);
+            $ruta = "src/images_stops/";
+            include "services/put.toUpdate.php";
+        } else if ($table == "serviceRecord") {
+
+            $userToken = "administradores";
+            $table = "servicios";
+            $file = $_FILES['file'];
+            $data = '{"token":"' . $_POST["token"] . '","descripcion_servicio":"' . $_POST["descripcion_servicio"] . '","puntos_servicio":' . $_POST["puntos_servicio"] . ',"color_sombra_servicio":"' . $_POST["color_sombra_servicio"] . '"}';
+            $data = json_decode($data);
+            include "services/post.php";
+        } else if ($table == "planRecord") {
+
+            $userToken = "administradores";
+            $table = "planes";
+            $file = $_FILES['file'];
+            $data = '{"token":"' . $_POST["token"] . '","tipo_plan":"' . $_POST["tipo_plan"] . '","precio_plan":' . $_POST["precio_plan"] . ',"descripcion_plan":"' . $_POST["descripcion_plan"] . '"}';
+            $data = json_decode($data);
+            include "services/post.php";
+        } else if ($table == "tripPictureRecord") {
+
+            $userToken = "usuarios_clientes";
+            $table = "registros_fotograficos_viajes";
+            $file = $_FILES['file'];
+            $data = '{"token":"' . $_POST["token"] . '","fk_id_viaje_registro_fotografico_viaje":' . $_POST["fk_id_viaje_registro_fotografico_viaje"] . '}';
+            $data = json_decode($data);
+            include "services/post.php";
+        } else if ($table == "putCustomer") {
+
+            $userToken = "usuarios_clientes";
+            $table = "usuarios_clientes";
+            $suffix = "usuario_cliente";
+            $select = "id_usuario_cliente";
+            $id = $_POST["id_usuario_cliente"];
+            $file = $_FILES['file'];
+            $data = '{"token":"' . $_POST["token"] . '","id_usuario_cliente":"' . $_POST["id_usuario_cliente"] . '","Enfermedades_base":"' . $_POST["Enfermedades_base"] . '","nombre_usuario_cliente":"' . $_POST["nombre_usuario_cliente"] . '","apellido_usuario_cliente":"' . $_POST["apellido_usuario_cliente"] . '","telefono_usuario_cliente":' . $_POST["telefono_usuario_cliente"] . ',"cedula_usuario_cliente":"' . $_POST["cedula_usuario_cliente"] . '","tipo_de_sangre":"' . $_POST["tipo_de_sangre"] . '","direccion_usuario_cliente":"' . $_POST["direccion_usuario_cliente"] . '","email":"' . $_POST["email"] . '","arl":"' . $_POST["arl"] . '","password":' . $_POST["password"] . ',"alergias":"' . $_POST["alergias"] . '","eps":"' . $_POST["eps"] . '"}';
+            $data = json_decode($data);
+            $ruta = "src/perfile_pictures/clients/" . $id . "/";
+
+            include "services/put.toUpdate.php";
+        } else if ($table == "putAgent") {
+
+            $userToken = "usuarios_agentes";
+            $table = "usuarios_agentes";
+            $suffix = "usuario_agente";
+            $select = "id_usuario_agente";
+            $id = $_POST["id_usuario_agente"];
+            $file = $_FILES['file'];
+            $data = '{"token":"' . $_POST["token"] . '","id_usuario_agente":"' . $_POST["id_usuario_agente"] . '","Enfermedades_base":"' . $_POST["Enfermedades_base"] . '","nombre_usuario_agente":"' . $_POST["nombre_usuario_agente"] . '","apellido_usuario_agente":"' . $_POST["apellido_usuario_agente"] . '","telefono_usuario_agente":' . $_POST["telefono_usuario_agente"] . ',"cedula_usuario_agente":"' . $_POST["cedula_usuario_agente"] . '","tipo_de_sangre":"' . $_POST["tipo_de_sangre"] . '","direccion_usuario_agente":"' . $_POST["direccion_usuario_agente"] . '","email":"' . $_POST["email"] . '","arl":"' . $_POST["arl"] . '","password":' . $_POST["password"] . ',"alergias":"' . $_POST["alergias"] . '","eps":"' . $_POST["eps"] . '","fk_id_tipo_usuario_usuario_agente":"' . $_POST["fk_id_tipo_usuario_usuario_agente"] . '"}';
+            $data = json_decode($data);
+            $ruta = "src/perfile_pictures/agents/" . $id . "/";
+
+            include "services/put.toUpdate.php";
         } else {
+            //Retorno el caso de error
             $json  = array(
 
                 'status' => 400,
@@ -461,23 +516,12 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
     }
 
     /*=============================================
-    Peticiones PUT
+    Peticiones PUT, dependendo de la palabra que se ingrese despues del / en la URL llama el servicio correspondiente en el folder services
+    algunos utilizan variables $table, $suffix necesarias para validar y/o armar la SQL posteriormente en el model
     =============================================*/
     if ($_SERVER['REQUEST_METHOD'] == "PUT") {
-
-        if ($table == "resendMessageCustomer") {
-
-            $table = "usuarios_clientes";
-            $suffix = "usuario_cliente";
-            $select = "id_usuario_cliente";
-            include "services/put.resendMessage.php";
-        } else if ($table == "resendMessageAgent") {
-
-            $table = "usuarios_agentes";
-            $suffix = "usuario_agente";
-            $select = "id_usuario_agente";
-            include "services/put.resendMessage.php";
-        } else if ($table == "checkAccountCustomer") {
+        //Estructra condicional para validar la palabra ingresada en la URL
+        if ($table == "checkAccountCustomer") {
 
             $table = "usuarios_clientes";
             $suffix = "usuario_cliente";
@@ -530,6 +574,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $select = "id_usuario_agente";
             include "services/put.toActivete.php";
         } else {
+            //Retorno el caso de error
             $json  = array(
 
                 'status' => 400,
@@ -542,10 +587,11 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
     }
 
     /*=============================================
-    Peticiones DELETE
+    Peticiones DELETE, dependendo de la palabra que se ingrese despues del / en la URL llama el servicio correspondiente en el folder services
+    algunos utilizan variables $table, $suffix necesarias para validar y/o armar la SQL posteriormente en el model
     =============================================*/
     if ($_SERVER['REQUEST_METHOD'] == "DELETE") {
-
+        //Estructra condicional para validar la palabra ingresada en la URL
         if ($table == "deleteTypeUser") {
 
             $userToken = "administradores";
@@ -601,6 +647,7 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $suffix = "registro_fotografico_viaje";
             include "services/delete.php";
         } else {
+            //Retorno el caso de error
             $json  = array(
 
                 'status' => 400,

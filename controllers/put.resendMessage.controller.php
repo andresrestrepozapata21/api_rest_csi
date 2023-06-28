@@ -33,13 +33,13 @@ class PutController
             =============================================*/
             $mensaje = "Hola $nombre, tu codigo de verificacion CSI es: $verificationCode, ingresa este codigo en tu APP CSI para completar tu registro.";
 
-            $url = 'http://api.mipgenlinea.com/serviceSMS2.php';
+            $url = 'http://api.mipgenlinea.com/serviceSMS.php';
             //$datos = ['usuario' => '00486966949', 'password' => 'Juryzu57', 'telefono' => $telefono, 'mensaje' => $mensaje, 'fecha' => 'NA', 'aplicacion' => 'CSI ALERTA'];
 
             $data = array(
                 "usuario" => "smsFoxUser",
                 "password" => "rhjIMEI3*",
-                "telefono" => $telefono,
+                "telefono" => "+57" . $telefono,
                 "mensaje" => $mensaje,
                 "aplicacion" => "SMS Test Unitario"
             );

@@ -24,3 +24,5 @@
 22-> El token a expirado
 23-> El usuario no esta autorizado
 24-> Autorización Requerida
+25-> Credeciales Incorrectas
+26-> No hay Alertas en la zona

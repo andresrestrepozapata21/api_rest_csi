@@ -38,6 +38,17 @@ class GetController{
     }
 
     /*=============================================
+    Peticiones GET sin filtro
+    =============================================*/
+    public function getDataPopup($table, $select){
+
+        $response = GetAllModel::getDataPopup($table, $select);
+        
+        $return = new GetController();
+        $return -> fncResponse($response);
+    }
+
+    /*=============================================
     Respuestas del controlador
     =============================================*/
     public function fncResponse($response){

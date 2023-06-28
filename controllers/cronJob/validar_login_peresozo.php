@@ -1,6 +1,6 @@
 <?php
 date_default_timezone_set('America/Bogota');
-require_once "./models/connection.php";
+require_once "models/connection.php";
 
 $fecha = date('Y-m-d H:i:s');
 

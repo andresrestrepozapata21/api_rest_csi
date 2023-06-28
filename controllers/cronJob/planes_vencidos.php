@@ -18,7 +18,7 @@ while ($row = mysqli_fetch_assoc($consulta)) {
 
     // Crear un objeto DateTime a partir de la fecha actual
     $fecha_actual = new DateTime($fecha_creacion);
-    // Sumar 10 minutos al objeto DateTime
+    // Sumar los minutos de vigencia del plan en minutos al objeto DateTime
     $fecha_actual->add(new DateInterval('PT'.$vigencia_minutos.'M'));
     // Obtener la nueva fecha y hora con los minutos añadidos
     $fecha_vencimiento = $fecha_actual->format('Y-m-d H:i:s');
@@ -28,3 +28,5 @@ while ($row = mysqli_fetch_assoc($consulta)) {
         $update_query = mysqli_query($conexion, $update);
     }
 }
+
+$conexion->close();

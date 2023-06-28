@@ -5,7 +5,7 @@ require_once "models/get.homePage.model.php";
 require_once "models/connection.php";
 
 
-class GetController
+class GetControllerMaster
 {
 
     /*=============================================
@@ -20,7 +20,7 @@ class GetController
         $responseUser = GetHomePageModel::getUsuario($data->id_usuario_cliente);
 
         if (empty($responseUser)) {
-            return GetController::fncResponse(null);
+            return GetControllerMaster::fncResponse(null);
         }
 
         $id = $responseUser[0]->id_usuario_cliente;
@@ -49,8 +49,10 @@ class GetController
         /*=============================================
         Continuo con la ejecucion del Master
         =============================================*/
+        $id_usuario_cliente = $responseUser[0]->id_usuario_cliente;
         $nombre = $responseUser[0]->nombre_usuario_cliente;
         $cedula = $responseUser[0]->cedula_usuario_cliente;
+        $genero = $responseUser[0]->genero_usuario_cliente;
         $popup_inicio = $responseUser[0]->presentacion_inicial_popup_usuario_cliente;
         $popup_anuncio = $responseUser[0]->anuncio_popup_usuario_cliente;
         $url_cargar_info = $responseUser[0]->url_cargar_info_usuario_cliente;
@@ -65,19 +67,26 @@ class GetController
             $codigo_plan = $responsePlan[0]->codigo_plan;
             $contactos_emergencia_plan = $responsePlan[0]->contactos_emergencia_plan;
             $fecha_compra_plan = $responsePlan[0]->date_created_plan_comprado;
-            $fecha_vencimiento = date("d-m-Y", strtotime($responsePlan[0]->date_created_plan_comprado . "+ 30 days"));
+            $vigencia_minutos = $responsePlan[0]->vigencia_plan;
+
+            // Crear un objeto DateTime a partir de la fecha actual
+            $fecha_creacion = new DateTime($fecha_compra_plan);
+            // Sumar los minutos de vigencia del plan en minutos al objeto DateTime
+            $fecha_creacion->add(new DateInterval('PT' . $vigencia_minutos . 'M'));
+            // Obtener la nueva fecha y hora con los minutos añadidos
+            $fecha_vencimiento = $fecha_creacion->format('Y-m-d H:i:s');
         } else {
             $tipo_plan = 0;
             $id_plan = 0;
             $codigo_plan = 0;
             $contactos_emergencia_plan = 0;
-            $fecha_vencimiento = 0;
+            $fecha_vencimiento = "";
         }
 
 
         error_log("Parametros recibidos " . $latitud . " - " . $longitud);
 
-        $filasZonas = GetController::validarZonaCercana($latitud, $longitud);
+        $filasZonas = GetControllerMaster::validarZonaCercana($latitud, $longitud);
 
         /*=============================================
         Consultamos cuales son las alertas cercanas
@@ -89,30 +98,32 @@ class GetController
 
         while ($valor = mysqli_fetch_assoc($resultado_listado)) {
 
-            $distancia = GetController::distance($valor["latitud_alerta"], $valor["longitud_alerta"], $latitud, $longitud, "K");
+            $distancia = GetControllerMaster::distance($valor["latitud_alerta"], $valor["longitud_alerta"], $latitud, $longitud, "K");
 
             if ($distancia <= 100) {
-                if (round($distancia * 1000) <= 200) {
+                if (round($distancia * 1000) <= 500) {
 
                     $valor["distancia"] = '' . round(($distancia * 1000)) . '';
-                    $valor["dias"] = '' . GetController::contarDias(date('Y-m-d'), $valor["date_created_alerta"]) . '';
+                    $valor["dias"] = '' . GetControllerMaster::contarDias(date('Y-m-d'), $valor["date_created_alerta"]) . '';
 
-                    $valor["imagenes"] = array();
+                    if ($valor["dias"] == 0) {
+                        $valor["imagenes"] = array();
 
-                    if ($valor["ruta1_imagen_alerta"]) {
-                        array_push($valor["imagenes"], $valor["ruta1_imagen_alerta"]);
-                        if ($valor["ruta2_imagen_alerta"]) {
-                            array_push($valor["imagenes"], $valor["ruta2_imagen_alerta"]);
-                            if ($valor["ruta3_imagen_alerta"]) {
-                                array_push($valor["imagenes"], $valor["ruta3_imagen_alerta"]);
+                        if ($valor["ruta1_imagen_alerta"]) {
+                            array_push($valor["imagenes"], $valor["ruta1_imagen_alerta"]);
+                            if ($valor["ruta2_imagen_alerta"]) {
+                                array_push($valor["imagenes"], $valor["ruta2_imagen_alerta"]);
+                                if ($valor["ruta3_imagen_alerta"]) {
+                                    array_push($valor["imagenes"], $valor["ruta3_imagen_alerta"]);
+                                }
                             }
                         }
-                    }
 
-                    unset($valor["ruta1_imagen_alerta"]);
-                    unset($valor["ruta2_imagen_alerta"]);
-                    unset($valor["ruta3_imagen_alerta"]);
-                    $filasAlertas[] = $valor;
+                        unset($valor["ruta1_imagen_alerta"]);
+                        unset($valor["ruta2_imagen_alerta"]);
+                        unset($valor["ruta3_imagen_alerta"]);
+                        $filasAlertas[] = $valor;
+                    }
                 }
             }
         }
@@ -131,7 +142,15 @@ class GetController
 
             if ($resultado_listado) {
                 while ($valor = mysqli_fetch_assoc($resultado_listado)) {
-                    $filasServicios[] = $valor;
+                    if ($genero == "M") {
+                        if ($valor["id_servicio"] == "31" || $valor["id_servicio"] == "33" || $valor["id_servicio"] == "34" || $valor["id_servicio"] == "35" || $valor["id_servicio"] == "36" || $valor["id_servicio"] == "37" || $valor["id_servicio"] == "38" || $valor["id_servicio"] == "39") {
+                            $filasServicios[] = $valor;
+                        }
+                    } else if ($genero == "F") {
+                        if ($valor["id_servicio"] == "31" || $valor["id_servicio"] == "33" || $valor["id_servicio"] == "34" || $valor["id_servicio"] == "35" || $valor["id_servicio"] == "36" || $valor["id_servicio"] == "37" || $valor["id_servicio"] == "38" || $valor["id_servicio"] == "32") {
+                            $filasServicios[] = $valor;
+                        }
+                    }
                 }
             } else {
                 $filasServicios["comentario"] = 0;
@@ -257,7 +276,7 @@ class GetController
                 $saludo = 'Saludo no encontrado';
             }
             $saludo = $saludoBD;
-        } elseif ($horaActual > '10:30' && $horaActual <= '12:00') {
+        } else if ($horaActual > '10:30' && $horaActual <= '12:00') {
             //consultamos en la base de datos con el flag
             $sql_saludos = "SELECT descripcion_saludo FROM saludos WHERE horario_saludo = 4 ORDER BY RAND() LIMIT 1";
             $resultado_saludos = $conexion->query($sql_saludos);
@@ -268,7 +287,7 @@ class GetController
                 $saludo = 'Saludo no encontrado';
             }
             $saludo = $saludoBD;
-        } elseif ($horaActual > '12:00' && $horaActual <= '18:00') {
+        } else if ($horaActual > '12:00' && $horaActual <= '18:00') {
             //consultamos en la base de datos con el flag
             $sql_saludos = "SELECT descripcion_saludo FROM saludos WHERE horario_saludo = 2 ORDER BY RAND() LIMIT 1";
             $resultado_saludos = $conexion->query($sql_saludos);
@@ -279,7 +298,7 @@ class GetController
                 $saludo = 'Saludo no encontrado';
             }
             $saludo = $saludoBD;
-        } elseif ($horaActual > '18:00' && $horaActual <= '00:00') {
+        } else if ($horaActual > '18:00' && $horaActual <= '23:59') {
             //consultamos en la base de datos con el flag
             $sql_saludos = "SELECT descripcion_saludo FROM saludos WHERE horario_saludo = 3 ORDER BY RAND() LIMIT 1";
             $resultado_saludos = $conexion->query($sql_saludos);
@@ -290,7 +309,7 @@ class GetController
                 $saludo = 'Saludo no encontrado';
             }
             $saludo = $saludoBD;
-        } else if ($horaActual > '00:00' && $horaActual < '06:00') {
+        } else if ($horaActual >= '00:00' && $horaActual < '06:00') {
             //consultamos en la base de datos con el flag
             $sql_saludos = "SELECT descripcion_saludo FROM saludos WHERE horario_saludo = 0 ORDER BY RAND() LIMIT 1";
             $resultado_saludos = $conexion->query($sql_saludos);
@@ -317,7 +336,7 @@ class GetController
             'url_cargar_info' => $url_cargar_info,
             'modal_inicio' => $popup_inicio,
             'modal_anuncio' => $popup_anuncio,
-            "codigo_QR" => "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http%3A%2F%2Fpruebas.mipgenlinea.com%2Fvalidador_qr.php?cedula=$cedula",
+            "codigo_QR" => "https://chart.googleapis.com/chart?chs=180x180&cht=qr&chl=http%3A%2F%2Fapicsi.mipgenlinea.com%2Fvalidador_plan%2F?id_usuario=$id_usuario_cliente",
             'puntos_ganados' => $puntos_usuario,
             'id_plan' => (int) $id_plan,
             'tipo_plan' => $tipo_plan,
@@ -339,7 +358,7 @@ class GetController
             "contactos_seguridad_zona" => $filasContactosSeguridad
         );
 
-        $return = new GetController();
+        $return = new GetControllerMaster();
         $return->fncResponse($response);
     }
     /*=============================================
@@ -348,22 +367,20 @@ class GetController
     function validarZonaCercana($latitud, $longitud)
     {
         $conexion = Connection::conexionAlternativa();
-        $sentencia_listar = "select * from zonas";
+        $sentencia_listar = "SELECT * FROM zonas";
         $resultado_listado = mysqli_query($conexion, $sentencia_listar);
 
         $filasZonas = array();
 
         while ($valor = mysqli_fetch_assoc($resultado_listado)) {
 
-            $distancia = GetController::distance($valor["latitud_zona"], $valor["longitud_zona"], $latitud, $longitud, "K");
+            $distancia = GetControllerMaster::distance($valor["latitud_zona"], $valor["longitud_zona"], $latitud, $longitud, "K");
 
-            if ($distancia <= 100) {
-                if (round($distancia * 1000) <= $valor["radio_zona"]) {
+            if (round($distancia * 1000) <= $valor["radio_zona"]) {
 
-                    $valor["distancia"] = '' . round(($distancia * 1000)) . '';
+                $valor["distancia"] = '' . round(($distancia * 1000)) . '';
 
-                    $filasZonas[] = $valor;
-                }
+                $filasZonas[] = $valor;
             }
         }
 

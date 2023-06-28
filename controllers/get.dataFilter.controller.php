@@ -159,7 +159,7 @@ class GetController
                 if (round($distancia * 1000) <= 1000) {
 
                     $valor["distancia"] = '' . round(($distancia * 1000)) . '';
-                    $valor["minutos"] = '' . GetController::contarDias(date('Y-m-d H:i:s'), $valor["date_created_$suffix"]) . '';
+                    $valor["minutos"] = '' . GetController::contarMinutos(date('Y-m-d H:i:s'), $valor["date_created_$suffix"]) . '';
 
                     if ($valor["minutos"] <= 60) {
                         $filasPosiciones[] = $valor;
@@ -259,6 +259,89 @@ class GetController
     }
 
     /*=============================================
+    Peticiones GET obtener alertas por usuario cliente
+    =============================================*/
+    public function getAlertsZone($data)
+    {
+        //Guardamos el id de la zona
+        $id_zona = $data->id_zona;
+
+        /*=============================================
+        Consultamos las alertas que tienes la foranea del usuario
+        =============================================*/
+        $conexion = Connection::conexionAlternativa();
+        $sentencia_listar = "SELECT id_alerta, latitud_alerta, longitud_alerta, tipo_evento_alerta, estado_alerta, comentario_alerta, fk_id_usuario_cliente_alerta, fk_id_servicio_por_zona_alerta, date_created_alerta, date_update_alerta, ruta1_imagen_alerta, ruta2_imagen_alerta, ruta3_imagen_alerta FROM alertas a INNER JOIN servicios_por_zona sz ON a.fk_id_servicio_por_zona_alerta=sz.id_servicos_por_zona INNER JOIN zonas z ON sz.fk_id_zona_servicos_por_zona=z.id_zona WHERE z.id_zona=$id_zona ORDER BY a.date_created_alerta DESC";
+        $resultado_listado = mysqli_query($conexion, $sentencia_listar);
+
+        $filasAlertasCostumer = array();
+        while ($valor = mysqli_fetch_assoc($resultado_listado)) {
+            //Calculamos cuantos dias lleva activa la alerta
+            $valor["dias"] = '' . GetController::contarDias(date('Y-m-d'), $valor["date_created_alerta"]) . '';
+
+            if ($valor["dias"] == 0) {
+                $valor["imagenes"] = array();
+
+                if ($valor["ruta1_imagen_alerta"]) {
+                    array_push($valor["imagenes"], $valor["ruta1_imagen_alerta"]);
+                    if ($valor["ruta2_imagen_alerta"]) {
+                        array_push($valor["imagenes"], $valor["ruta2_imagen_alerta"]);
+                        if ($valor["ruta3_imagen_alerta"]) {
+                            array_push($valor["imagenes"], $valor["ruta3_imagen_alerta"]);
+                        }
+                    }
+                }
+                unset($valor["ruta1_imagen_alerta"]);
+                unset($valor["ruta2_imagen_alerta"]);
+                unset($valor["ruta3_imagen_alerta"]);
+                $filasAlertasCostumer[] = $valor;
+            }
+        }
+
+        if (empty($filasAlertasCostumer)) {
+            $response = array(
+                'code' => 26
+            );
+        }else{
+            $response = $filasAlertasCostumer;
+        }
+
+        $return = new GetController();
+        $return->fncResponse($response);
+    }
+
+    /*=============================================
+    Consultamos si es usuario activo o no
+    =============================================*/
+    public function getValideCostumer($table, $data)
+    {
+        //conexion a la base de datos
+        $conexion = Connection::conexionAlternativa();
+
+        $sql = "SELECT * FROM $table WHERE telefono_usuario_cliente='$data->phone_number' AND activo_usuario_cliente = 1";
+        $query = mysqli_query($conexion, $sql);
+
+        if (mysqli_num_rows($query) > 0) {
+            $datos = mysqli_fetch_assoc($query);
+            $id_usuario_cliente = $datos["id_usuario_cliente"];
+            $token_vigente = $datos["token"];
+            /*=============================================
+            Armo el arreglo que se convertira en JSON en el detail de la respuesta
+            =============================================*/
+            $response = array(
+                "flag_be" => 1,
+                'id_usuario_cliente' => (int) $id_usuario_cliente,
+                'token' => $token_vigente
+            );
+        } else {
+            $response = array(
+                "flag_be" => 0
+            );
+        }
+        $return = new GetController();
+        $return->fncResponse($response);
+    }
+
+    /*=============================================
     Peticiones GET obtener servicios por zona
     =============================================*/
     public function getZone($data)
@@ -302,7 +385,36 @@ class GetController
     }
 
     /*=============================================
-    METODOS AUXILIARES
+    Peticiones GET
+    =============================================*/
+    public function getPointsUser($table, $data)
+    {
+        $conexion = Connection::conexionAlternativa();
+        /*=============================================
+        Consultamos los puntos acumulados del usuario
+        =============================================*/
+        $sentencia_puntos = "SELECT pg.acumulado_puntos_punto_ganado FROM $table pg WHERE fk_id_usuario_cliente_punto_ganado = $data->fk_id_usuario_cliente_punto_ganado ORDER BY acumulado_puntos_punto_ganado DESC LIMIT 1";
+        $consulta_puntos = mysqli_query($conexion, $sentencia_puntos);
+        $fila_puntos = mysqli_fetch_assoc($consulta_puntos);
+        $puntos_usuario = 0;
+
+        if (isset($fila_puntos["acumulado_puntos_punto_ganado"])) {
+            $puntos_usuario = (int) $fila_puntos["acumulado_puntos_punto_ganado"];
+        }
+
+        /*=============================================
+        Armo el arreglo que se convertira en JSON en el detail de la respuesta
+        =============================================*/
+        $response = array(
+            'puntos_ganados' => $puntos_usuario
+        );
+
+        $return = new GetController();
+        $return->fncResponse($response);
+    }
+
+    /*=============================================
+                METODOS AUXILIARES
     =============================================*/
     public function distance($lat1, $lon1, $lat2, $lon2, $unit)
     {
@@ -323,7 +435,7 @@ class GetController
         }
     }
 
-    function contarDias($fecha1, $fecha2)
+    function contarMinutos($fecha1, $fecha2)
     {
         $startTimeStamp = strtotime($fecha1);
         $endTimeStamp = strtotime($fecha2);
@@ -333,6 +445,18 @@ class GetController
         $numberDays = intval($numberDays);
         return $numberDays;
     }
+
+    function contarDias($fecha1, $fecha2)
+    {
+        $startTimeStamp = strtotime($fecha1);
+        $endTimeStamp = strtotime($fecha2);
+        $timeDiff = abs($endTimeStamp - $startTimeStamp);
+        $numberDays = $timeDiff / 86400;  // 86400 seconds in one day
+        // and you might want to convert to integer
+        $numberDays = intval($numberDays);
+        return $numberDays;
+    }
+
 
     /*=============================================
     Consultamos en que zona estamos
