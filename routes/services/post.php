@@ -1,5 +1,4 @@
 <?php
-
 //Requiero los scripts que necesito para utilizar sus metodos
 require_once "models/connection.php";
 require_once "controllers/post.controller.php";
@@ -26,7 +25,7 @@ if (isset($_POST)) {
                 $response->postServicePerZone($data);
             } else if ($table == "alertas") {
                 $response = new PostController();
-                $response->postAlert($data, $file);
+                $response->postAlert($data, $file, $video);
             } else if ($table == "reacciones_agentes") {
                 $response = new PostController();
                 $response->postReactionAgentAlert($table, $suffix, $data);

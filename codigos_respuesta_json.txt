@@ -26,3 +26,5 @@
 24-> Autorización Requerida
 25-> Credeciales Incorrectas
 26-> No hay Alertas en la zona
+27-> El cliente esta tratando de reaccionar a su propia alerta
+28-> la alerta ya fue atendida por otro cliente

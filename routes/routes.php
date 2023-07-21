@@ -363,6 +363,14 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "alertas";
 
             include "services/get.dataFilter.php";
+        } else if ($table == "getCostumerData") {
+
+            $userToken = "usuarios_clientes";
+            $table = "usuarios_clientes";
+            $select = "cedula_usuario_cliente,nombre_usuario_cliente,apellido_usuario_cliente,telefono_usuario_cliente,direccion_usuario_cliente,genero_usuario_cliente,email,password,foto_perfil_usuario_cliente,tipo_de_sangre,enfermedades_base,alergias,eps,arl,date_created_usuario_cliente";
+            $id = "id_usuario_cliente";
+
+            include "services/get.dataFilter.php";
         } else if ($table == "getAlertsZone") {
 
             $userToken = "usuarios_clientes";
@@ -413,8 +421,10 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $file3 = $_FILES['file3'];
             $file = array();
             array_push($file, $file1, $file2, $file3);
+            $video = $_FILES['videoFile'];
             $data = '{"token":"' . $_POST["token"] . '","latitud_alerta":' . $_POST["latitud_alerta"] . ',"longitud_alerta":' . $_POST["longitud_alerta"] . ',"comentario_alerta":"' . $_POST["comentario_alerta"] . '","notificar_contactos":' . $_POST["notificar_contactos"] . ',"fk_id_usuario_cliente_alerta":' . $_POST["fk_id_usuario_cliente_alerta"] . ',"fk_id_servicio_por_zona_alerta":' . $_POST["fk_id_servicio_por_zona_alerta"] . '}';
             $data = json_decode($data);
+
             include "services/post.php";
         } else if ($table == "planUpdate") {
 

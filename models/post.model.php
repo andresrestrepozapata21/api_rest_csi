@@ -247,13 +247,15 @@ class PostModel
 
         $sql = "INSERT INTO $table ($columns) VALUES ($params)";
 
+       
+
         $link = Connection::connect();
         $stmt = $link->prepare($sql);
         
         foreach ($data as $key => $value) {
             $stmt->bindParam(":" . $key, $data->$key, PDO::PARAM_STR);
         }
-        
+
         if ($stmt->execute()) {
             $response = array(
                 'lastId' => $link->lastInsertId(),
@@ -415,6 +417,20 @@ class PostModel
     =============================================*/
     static public function postReactionCustomerAlert($table, $suffix, $data)
     {
+        //instancio mi conexion alternativa
+        $conexion = Connection::conexionAlternativa();
+        //consulto si hay una reaccion a esta alerta
+        $sql = "SELECT * FROM `reacciones_cliente_cliente` WHERE fk_id_alerta_reaccion_cliente_cliente = $data->fk_id_alerta";
+        $query = mysqli_query($conexion, $sql);
+        //Si efectivamente hay una reaccion registrada retorno un codigo 1 para que el controlador pueda validar que no se puede registrar la reaccion
+        if(mysqli_num_rows($query) > 0){
+            $response = array(
+                'code' => 28
+            );
+            return $response;
+        }
+
+        //una vez pasado el filtro, significa que todo esta ok, entonces continuo con el registro de eta reaccion
         $columns = "";
         $params = "";
 

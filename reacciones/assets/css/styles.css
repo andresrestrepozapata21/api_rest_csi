@@ -1,0 +1,293 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,600;1,100;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.main {
+  width: 100%;
+}
+
+.content {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.header {
+  width: 100%;
+  padding: 15px 10px;
+  text-align: center;
+  background-color: #f6f7f7;
+}
+
+.header h4 {
+  font-weight: 600;
+}
+
+.logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.logo img {
+  width: 50%;
+}
+
+.logo_1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.logo_1 img {
+  width: 50%;
+}
+
+.img_premium {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.enlace {
+  width: 95%;
+  padding: 20px;
+  background-color: #ecedf4;
+  border-radius: 25px;
+}
+
+.enlace .titulo_servicio {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.enlace .info {
+  padding: 10px;
+  font-weight: 300;
+}
+
+.enlace .info_alerta {
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.comentario {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.comentario i {
+  text-align: center;
+  width: 20%;
+}
+
+.comentario p {
+  width: 80%;
+  font-size: 14px;
+  text-align: justify;
+}
+
+.ubicacion {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.ubicacion i {
+  text-align: center;
+  width: 20%;
+}
+
+.ubicacion p {
+  width: 80%;
+  font-size: 14px;
+  text-align: justify;
+}
+
+.momento {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.momento i {
+  text-align: center;
+  width: 20%;
+}
+
+.momento p {
+  width: 80%;
+  font-size: 14px;
+  text-align: justify;
+}
+
+.perfil {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+}
+
+.perfil img {
+  width: 100%;
+  border-radius: 150px;
+}
+
+.info_usuario {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.info_usuario i {
+  text-align: center;
+  width: 20%;
+}
+
+.info_usuario table {
+  width: 80%;
+  border-collapse: collapse;
+  width: 300px;
+  margin: 0 auto;
+  border: 1px solid #000;
+  font-size: 14px;
+}
+
+.info_usuario table th,
+td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #000;
+}
+
+.info_usuario table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.info_usuario table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.info_usuario table tr:hover {
+  background-color: #e5e5e5;
+}
+
+.content_btn{
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content_btn .btn{
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: #ffffff;
+}
+
+.imagenes {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.imagenes img {
+  width: 100%;
+  border-radius: 15px;
+  margin: 10px 0;
+}
+
+footer {
+  width: 100%;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.footer h3 {
+  text-align: center;
+  font-weight: 200;
+}
+
+.footer_1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.footer_1 a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.footer_1 a h3 {
+  text-align: center;
+  font-weight: 200;
+  text-decoration: underline rgb(191, 191, 191); /* Subrayado rojo */
+  text-decoration-style: solid; /* Subrayado punteado */
+  text-decoration-thickness: 1px; /* Grosor de 2 píxeles */
+}
+
+@media screen and (min-width: 1025px) {
+  .logo img {
+    width: 10%;
+  }
+
+  .logo_1 img {
+    width: 10%;
+  }
+
+  .img_premium img {
+    width: 40%;
+  }
+}
+
+.si {
+  color: #28a745;
+}
+
+.no {
+  color: #dc3545;
+}

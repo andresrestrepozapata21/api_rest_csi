@@ -1,14 +1,16 @@
 <?php
+//seteo la zona horaria
 date_default_timezone_set('America/Bogota');
+//requiro los scripts que necesito
 require_once "models/get.filter.model.php";
 require_once "models/connection.php";
 
-
+//nombro la clase
 class GetController
 {
 
     /*=============================================
-    Peticiones GET
+    este metodo es reutilizable para obtener informacion, es solo validar que datos me esta entregando el Servicio y como quedaria armado el modelo
     =============================================*/
     public function getData($table, $select, $data, $id)
     {
@@ -20,7 +22,7 @@ class GetController
     }
 
     /*=============================================
-    Peticiones GET
+    metodo para obtener los datos de los viajes solo viajes
     =============================================*/
     public function getDataTrip($table, $select, $data, $id)
     {
@@ -32,7 +34,7 @@ class GetController
     }
 
     /*=============================================
-    Peticiones GET pra traer todos los datos del viaje
+    metodo para traer todos los datos del viaje con paradas y fotos
     =============================================*/
     public function getTrip($table, $select, $data, $id)
     {
@@ -79,7 +81,7 @@ class GetController
     }
 
     /*=============================================
-    Peticiones GET para los planes existentes
+    metodo para los planes existentes en base de datos
     =============================================*/
     public function getDataPlanExistente($table, $data)
     {
@@ -91,7 +93,7 @@ class GetController
     }
 
     /*=============================================
-    Peticiones GET para traer los establecimientos de la zona
+    metodo para traer los establecimientos de la zona
     =============================================*/
     public function getCodeZone($data)
     {
@@ -135,7 +137,7 @@ class GetController
     }
 
     /*=============================================
-    Peticiones GET para los planes existentes
+    metodo para las pocisiones de los clientes o agentes cercanos a la zona en la que se esta, agentes o clientes depende de que nombre de tabla se este ingresando, este metodo es reutilizado
     =============================================*/
     public function getClosePosition($table, $suffix, $table2, $suffix2, $data)
     {
@@ -177,7 +179,7 @@ class GetController
     }
 
     /*=============================================
-    Peticiones GET obtener establecimiento
+    metodo para obtener establecimiento
     =============================================*/
     public function getLocal($data)
     {
@@ -197,14 +199,11 @@ class GetController
     }
 
     /*=============================================
-    Peticiones GET obtener servicios por zona
+    metodo para obtener servicios por zona
     =============================================*/
     public function getServicesPerZone($data)
     {
-
-        /*=============================================
-        Consultamos en que zona estamos
-        =============================================*/
+        //Consultamos en que zona estamos
         $conexion = Connection::conexionAlternativa();
         $sentencia_listar = "SELECT id_servicos_por_zona, id_servicio, descripcion_servicio, ruta_imagen_servicio, puntos_servicio, color_sombra_servicio FROM servicios_por_zona sz INNER JOIN servicios s ON sz.fk_id_servicio_servicos_por_zona = s.id_servicio  WHERE fk_id_zona_servicos_por_zona = $data->id_zona";
         $resultado_listado = mysqli_query($conexion, $sentencia_listar);
@@ -222,7 +221,7 @@ class GetController
     }
 
     /*=============================================
-    Peticiones GET obtener alertas por usuario cliente
+    metodo para obtener alertas por usuario cliente
     =============================================*/
     public function getAlertsCostumer($data)
     {
@@ -230,7 +229,7 @@ class GetController
         Consultamos las alertas que tienes la foranea del usuario
         =============================================*/
         $conexion = Connection::conexionAlternativa();
-        $sentencia_listar = "SELECT * FROM alertas WHERE fk_id_usuario_cliente_alerta = $data->fk_id_usuario_cliente_alerta ORDER BY date_created_alerta DESC";
+        $sentencia_listar = "SELECT a.id_alerta, a.latitud_alerta, a.longitud_alerta, a.estado_alerta, a.comentario_alerta, a.ruta1_imagen_alerta, a.ruta2_imagen_alerta, a.ruta3_imagen_alerta, a.ruta_video_alerta, a.date_created_alerta, sz.id_servicos_por_zona, s.id_servicio, s.descripcion_servicio FROM alertas a INNER JOIN servicios_por_zona sz ON a.fk_id_servicio_por_zona_alerta=sz.id_servicos_por_zona INNER JOIN servicios s ON sz.fk_id_servicio_servicos_por_zona=s.id_servicio WHERE a.fk_id_usuario_cliente_alerta = $data->fk_id_usuario_cliente_alerta ORDER BY a.date_created_alerta DESC";
         $resultado_listado = mysqli_query($conexion, $sentencia_listar);
 
         $filasAlertasCostumer = array();
@@ -259,50 +258,139 @@ class GetController
     }
 
     /*=============================================
-    Peticiones GET obtener alertas por usuario cliente
+    metodo para obtener alertas por zona agregando la distancia y los dias transcurridos, si esta alerta lleva mas de un dia no se retorna
     =============================================*/
     public function getAlertsZone($data)
     {
         //Guardamos el id de la zona
-        $id_zona = $data->id_zona;
+        $latitud = $data->latitud;
+        $longitud = $data->longitud;
 
         /*=============================================
-        Consultamos las alertas que tienes la foranea del usuario
+        Consultamos cuales son las alertas cercanas
         =============================================*/
         $conexion = Connection::conexionAlternativa();
-        $sentencia_listar = "SELECT id_alerta, latitud_alerta, longitud_alerta, tipo_evento_alerta, estado_alerta, comentario_alerta, fk_id_usuario_cliente_alerta, fk_id_servicio_por_zona_alerta, date_created_alerta, date_update_alerta, ruta1_imagen_alerta, ruta2_imagen_alerta, ruta3_imagen_alerta FROM alertas a INNER JOIN servicios_por_zona sz ON a.fk_id_servicio_por_zona_alerta=sz.id_servicos_por_zona INNER JOIN zonas z ON sz.fk_id_zona_servicos_por_zona=z.id_zona WHERE z.id_zona=$id_zona ORDER BY a.date_created_alerta DESC";
+        $sentencia_listar = "SELECT * FROM alertas a INNER JOIN usuarios_clientes uc ON a.fk_id_usuario_cliente_alerta=uc.id_usuario_cliente INNER JOIN servicios_por_zona sz ON a.fk_id_servicio_por_zona_alerta=sz.id_servicos_por_zona INNER JOIN servicios s ON sz.fk_id_servicio_servicos_por_zona=s.id_servicio ORDER BY date_created_alerta DESC";
         $resultado_listado = mysqli_query($conexion, $sentencia_listar);
 
-        $filasAlertasCostumer = array();
+        $filasAlertas = array();
+
         while ($valor = mysqli_fetch_assoc($resultado_listado)) {
-            //Calculamos cuantos dias lleva activa la alerta
-            $valor["dias"] = '' . GetController::contarDias(date('Y-m-d'), $valor["date_created_alerta"]) . '';
 
-            if ($valor["dias"] == 0) {
-                $valor["imagenes"] = array();
+            $distancia = GetController::distance($valor["latitud_alerta"], $valor["longitud_alerta"], $latitud, $longitud, "K");
 
-                if ($valor["ruta1_imagen_alerta"]) {
-                    array_push($valor["imagenes"], $valor["ruta1_imagen_alerta"]);
-                    if ($valor["ruta2_imagen_alerta"]) {
-                        array_push($valor["imagenes"], $valor["ruta2_imagen_alerta"]);
-                        if ($valor["ruta3_imagen_alerta"]) {
-                            array_push($valor["imagenes"], $valor["ruta3_imagen_alerta"]);
+            if (round($distancia * 1000) <= 1000) {
+
+                $valor["distancia"] = '' . round(($distancia * 1000)) . '';
+                $valor["dias"] = '' . GetController::contarDias(date('Y-m-d'), $valor["date_created_alerta"]) . '';
+
+                if ($valor["dias"] == 0) {
+                    $valor["imagenes"] = array();
+
+                    if ($valor["ruta1_imagen_alerta"]) {
+                        array_push($valor["imagenes"], $valor["ruta1_imagen_alerta"]);
+                        if ($valor["ruta2_imagen_alerta"]) {
+                            array_push($valor["imagenes"], $valor["ruta2_imagen_alerta"]);
+                            if ($valor["ruta3_imagen_alerta"]) {
+                                array_push($valor["imagenes"], $valor["ruta3_imagen_alerta"]);
+                            }
                         }
                     }
+                    //buscamos si esta alerta tiene una reaccion y hago inner con el usuario que reacciono a esta alerta si es el caso
+                    $sql_reacciones = "SELECT * FROM reacciones_cliente_cliente r INNER JOIN usuarios_clientes uc ON r.fk_id_usuario_cliente_reaccion_cliente_cliente=uc.id_usuario_cliente WHERE fk_id_alerta_reaccion_cliente_cliente =" . $valor['id_alerta'];
+                    $query_reacciones = mysqli_query($conexion, $sql_reacciones);
+                    //valido si me trajo algo la consulta si no hago la logica respectiva
+                    if(mysqli_num_rows($query_reacciones) > 0){
+                        $datos_reaccion = mysqli_fetch_assoc($query_reacciones);
+                        $valor['reaccion'] = 1;
+                        //Elimino del arreglo original todos los atributos que no son relevantes para el lado del cliente en este endpoint
+                        unset($datos_reaccion["ruta_imagen_reaccion_cliente_cliente"]);
+                        unset($datos_reaccion["fk_id_alerta_reaccion_cliente_cliente"]);
+                        unset($datos_reaccion["fk_id_usuario_cliente_reaccion_cliente_cliente"]);
+                        unset($datos_reaccion["date_update_reaccion_cliente_cliente"]);
+                        unset($datos_reaccion["password"]);
+                        unset($datos_reaccion["token"]);
+                        unset($datos_reaccion["token_exp"]);
+                        unset($datos_reaccion["foto_perfil_usuario_cliente"]);
+                        unset($datos_reaccion["tipo_de_sangre"]);
+                        unset($datos_reaccion["enfermedades_base"]);
+                        unset($datos_reaccion["alergias"]);
+                        unset($datos_reaccion["eps"]);
+                        unset($datos_reaccion["arl"]);
+                        unset($datos_reaccion["activo_usuario_cliente"]);
+                        unset($datos_reaccion["estado_usuario_cliente"]);
+                        unset($datos_reaccion["eliminado_usuario_cliente"]);
+                        unset($datos_reaccion['eliminado_usuario_cliente']);
+                        unset($datos_reaccion['presentacion_inicial_popup_usuario_cliente']);
+                        unset($datos_reaccion['anuncio_popup_usuario_cliente']);
+                        unset($datos_reaccion['lastlogin_usuario_cliente']);
+                        unset($datos_reaccion['fk_id_tipo_usuario_usuario_cliente']);
+                        unset($datos_reaccion['token_dispositivo']);
+                        unset($datos_reaccion['codigo_verificacion']);
+                        unset($datos_reaccion['fecha_verificacion_pin']);
+                        unset($datos_reaccion['url_cargar_info_usuario_cliente']);
+                        unset($datos_reaccion['date_created_usuario_cliente']);
+                        unset($datos_reaccion['date_update_usuario_cliente']);
+
+                        $valor['detalles_reaccion'] = $datos_reaccion;  
+                    }else{
+                        $valor['reaccion'] = 0;
+                        $valor['detalles_reaccion'] = array();  
+                    }
+                    //Elimino del arreglo original todos los atributos que no son relevantes para el lado del cliente en este endpoint
+                    unset($valor["ruta1_imagen_alerta"]);
+                    unset($valor["ruta2_imagen_alerta"]);
+                    unset($valor["ruta3_imagen_alerta"]);
+                    unset($valor['tipo_evento_alerta']);
+                    unset($valor['date_update_alerta']);
+                    unset($valor['password']);
+                    unset($valor['token']);
+                    unset($valor['token_exp']);
+                    unset($valor['tipo_de_sangre']);
+                    unset($valor['enfermedades_base']);
+                    unset($valor['alergias']);
+                    unset($valor['eps']);
+                    unset($valor['arl']);
+                    unset($valor['activo_usuario_cliente']);
+                    unset($valor['estado_usuario_cliente']);
+                    unset($valor['eliminado_usuario_cliente']);
+                    unset($valor['presentacion_inicial_popup_usuario_cliente']);
+                    unset($valor['anuncio_popup_usuario_cliente']);
+                    unset($valor['lastlogin_usuario_cliente']);
+                    unset($valor['fk_id_tipo_usuario_usuario_cliente']);
+                    unset($valor['token_dispositivo']);
+                    unset($valor['codigo_verificacion']);
+                    unset($valor['fecha_verificacion_pin']);
+                    unset($valor['url_cargar_info_usuario_cliente']);
+                    unset($valor['date_created_usuario_cliente']);
+                    unset($valor['date_update_usuario_cliente']);
+                    unset($valor['foto_perfil_usuario_cliente']);
+                    unset($valor['id_servicos_por_zona']);
+                    unset($valor['fk_id_servicio_servicos_por_zona']);
+                    unset($valor['fk_id_zona_servicos_por_zona']);
+                    unset($valor['date_created_servicos_por_zona']);
+                    unset($valor['date_update__servicos_por_zona']);
+                    unset($valor['ruta_imagen_servicio']);
+                    unset($valor['puntos_servicio']);
+                    unset($valor['color_sombra_servicio']);
+                    unset($valor['date_created_servicio']);
+                    unset($valor['date_update_servicio']);
+                    unset($valor['fk_id_servicio_por_zona_alerta']);
+                    unset($valor['fk_id_usuario_cliente_alerta']);
+                    unset($valor['date_created_servicos_por_zona']);
+                    unset($valor['date_update__servicos_por_zona']);
+                    //voy guarndando mi arreglo final
+                    $filasAlertas[] = $valor;
                 }
-                unset($valor["ruta1_imagen_alerta"]);
-                unset($valor["ruta2_imagen_alerta"]);
-                unset($valor["ruta3_imagen_alerta"]);
-                $filasAlertasCostumer[] = $valor;
             }
         }
 
-        if (empty($filasAlertasCostumer)) {
+        if (empty($filasAlertas)) {
             $response = array(
                 'code' => 26
             );
-        }else{
-            $response = $filasAlertasCostumer;
+        } else {
+            $response = $filasAlertas;
         }
 
         $return = new GetController();
@@ -310,7 +398,7 @@ class GetController
     }
 
     /*=============================================
-    Consultamos si es usuario activo o no
+    Consultamos si es usuario activo o no con base al nuemo de telefono
     =============================================*/
     public function getValideCostumer($table, $data)
     {
@@ -342,7 +430,7 @@ class GetController
     }
 
     /*=============================================
-    Peticiones GET obtener servicios por zona
+    metodo para obtener la zona en la que se esta co base a sus coordenadas y que servicios se tiene para esta zona
     =============================================*/
     public function getZone($data)
     {
@@ -351,9 +439,6 @@ class GetController
 
         $filasZonas = GetController::validarZonaCercana($latitud, $longitud);
 
-        /*=============================================
-        Consultamos los servicios por zona
-        =============================================*/
         if (!isset($filasZonas["comentario"])) {
 
             $id_zona = $filasZonas[0]["id_zona"];
@@ -385,7 +470,7 @@ class GetController
     }
 
     /*=============================================
-    Peticiones GET
+    metodo para obtener los puntos acumulados del usuario por usar las alertas
     =============================================*/
     public function getPointsUser($table, $data)
     {
@@ -393,7 +478,7 @@ class GetController
         /*=============================================
         Consultamos los puntos acumulados del usuario
         =============================================*/
-        $sentencia_puntos = "SELECT pg.acumulado_puntos_punto_ganado FROM $table pg WHERE fk_id_usuario_cliente_punto_ganado = $data->fk_id_usuario_cliente_punto_ganado ORDER BY acumulado_puntos_punto_ganado DESC LIMIT 1";
+        $sentencia_puntos = "SELECT pg.acumulado_puntos_punto_ganado FROM $table pg WHERE fk_id_usuario_cliente_punto_ganado = $data->id_usuario ORDER BY acumulado_puntos_punto_ganado DESC LIMIT 1";
         $consulta_puntos = mysqli_query($conexion, $sentencia_puntos);
         $fila_puntos = mysqli_fetch_assoc($consulta_puntos);
         $puntos_usuario = 0;
@@ -413,12 +498,12 @@ class GetController
         $return->fncResponse($response);
     }
 
-    /*=============================================
-                METODOS AUXILIARES
-    =============================================*/
+    /*===========================================================================================================================================================
+                                                                     METODOS AUXILIARES
+    ===========================================================================================================================================================*/
+    //calcular la distancia
     public function distance($lat1, $lon1, $lat2, $lon2, $unit)
     {
-
         $theta = $lon1 - $lon2;
         $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
         $dist = acos($dist);
@@ -434,7 +519,7 @@ class GetController
             return $miles;
         }
     }
-
+    //contar los munitos transcurridos de una alerta
     function contarMinutos($fecha1, $fecha2)
     {
         $startTimeStamp = strtotime($fecha1);
@@ -445,7 +530,7 @@ class GetController
         $numberDays = intval($numberDays);
         return $numberDays;
     }
-
+    //calcula el numeero de dias transcurridos de una alerta
     function contarDias($fecha1, $fecha2)
     {
         $startTimeStamp = strtotime($fecha1);
@@ -456,11 +541,7 @@ class GetController
         $numberDays = intval($numberDays);
         return $numberDays;
     }
-
-
-    /*=============================================
-    Consultamos en que zona estamos
-    =============================================*/
+    //calcular y devolver en que zona se esta
     function validarZonaCercana($latitud, $longitud)
     {
         $conexion = Connection::conexionAlternativa();

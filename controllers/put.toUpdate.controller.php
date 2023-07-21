@@ -40,62 +40,49 @@ class PutController
         $response = GetModel::getDataFilter($table, "email, foto_perfil_$suffix", "id_$suffix", $id);
 
         if (!empty($response)) {
-            /*=============================================
-            Validamos que el correo No exista en base de datos
-            =============================================*/
-            $response_email = GetModel::getDataFilter($table, "id_$suffix, email", "email", $data->email);
+            $direccion = "foto_perfil_$suffix";
+            if ($response[0]->$direccion != null) {
+                unlink("./" . $response[0]->$direccion);
+            }
 
-            if (empty($response_email)) {
-                $direccion = "foto_perfil_$suffix";
-                if ($response[0]->$direccion != null) {
-                    unlink($response[0]->$direccion);
-                }
+            $target_path = "uploads/";
+            $target_path = $target_path . basename($file['name']);
 
-                $target_path = "uploads/";
-                $target_path = $target_path . basename($file['name']);
+            error_log("Path: " . $target_path);
 
-                error_log("Path: " . $target_path);
+            $nombreArchivo = $file['name'];
+            $id_plan = $id;
 
-                $nombreArchivo = $file['name'];
-                $id_plan = $id;
+            $target_path_nuevo = $ruta;
+            error_log("Nuevo Path: " . $target_path_nuevo);
 
-                $target_path_nuevo = $ruta;
-                error_log("Nuevo Path: " . $target_path_nuevo);
-
-                if (!file_exists("./" . $target_path_nuevo)) {
-                    if (mkdir("./" . $target_path_nuevo, 0777, true)) {
-                        error_log("Exito! Carpeta creada:" . $target_path_nuevo);
-                    } else {
-                        error_log(" :( No pudo crear:" . $target_path_nuevo);
-                    }
+            if (!file_exists("./" . $target_path_nuevo)) {
+                if (mkdir("./" . $target_path_nuevo, 0777, true)) {
+                    error_log("Exito! Carpeta creada:" . $target_path_nuevo);
                 } else {
-                    error_log("Carpeta existente:" . $target_path_nuevo);
-                }
-
-                $target_path_nuevo = $target_path_nuevo . $nombreArchivo;
-
-                if (file_exists("./" . $target_path_nuevo)) {
-                    $response = array(
-                        "code" => 13
-                    );
-                    $return = new PutController();
-                    $return->fncResponse($response);
-                } else {
-
-                    $response = PutModel::putData($table, $data, $select, $data->$select, $suffix);
-                    $responseImagen = PutModel::putImage($table, $target_path_nuevo, "id_" . $suffix, $id_plan, $suffix, "foto_perfil_$suffix");
-
-                    move_uploaded_file($file['tmp_name'], "./" . $target_path_nuevo);
-
-                    $return = new PutController();
-                    $return->fncResponse($responseImagen);
+                    error_log(" :( No pudo crear:" . $target_path_nuevo);
                 }
             } else {
+                error_log("Carpeta existente:" . $target_path_nuevo);
+            }
+
+            $target_path_nuevo = $target_path_nuevo . $nombreArchivo;
+
+            if (file_exists("./" . $target_path_nuevo)) {
                 $response = array(
-                    "code" => 2
+                    "code" => 13
                 );
                 $return = new PutController();
-                $return->fncResponse($response, "No se envio mensaje");
+                $return->fncResponse($response);
+            } else {
+
+                $response = PutModel::putData($table, $data, $select, $data->$select, $suffix);
+                $responseImagen = PutModel::putImage($table, $target_path_nuevo, "id_" . $suffix, $id_plan, $suffix, "foto_perfil_$suffix");
+
+                move_uploaded_file($file['tmp_name'], "./" . $target_path_nuevo);
+
+                $return = new PutController();
+                $return->fncResponse($responseImagen);
             }
         } else {
             $response = null;

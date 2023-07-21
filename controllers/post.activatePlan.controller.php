@@ -1,18 +1,19 @@
 <?php
-
+//este controlador creo no lo estamos usando
+//requiro los scripts que necesito
 require_once "models/connection.php";
 require_once "models/post.activatePlan.model.php";
 require_once "models/get.consultarCodigoActivacion.model.php";
 require_once "models/put.deactivateCode.model.php";
 
+//nombro la clase
 class PostController
 {
     /*=============================================
-    Peticion post para crear cliente
+    Peticion post para crear un plan vinculado al cliente
     =============================================*/
     static public function postRegister($table, $data)
     {
-
         /*=============================================
         Llamamos al modelo para consultar si el codigo es valido
         =============================================*/

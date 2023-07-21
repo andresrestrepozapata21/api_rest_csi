@@ -15,7 +15,12 @@ if (isset($data->token)) {
         //Armo un estructura condicional para validar que operacion necesito hacer y con base a esto llamo el metodo necesario segun la necesidad este endpoint es para actualziar los usuarios con foto, pero tambien hay metodos para actualiar otras cosas, poner cuidado de donde vienen y cual mentodo se esta llamando
         if ($table == "usuarios_clientes") {
             $response = new PutController();
-            $response->putWithImage($table, $suffix, $id, $file, $ruta, $data, $select);
+            //Validamos si viene o no un archivo file en el FormData() Request, esto con la finalidad de definir a que metodo llamar, y asi asegurar si modificar el cliente con una foto o son foto de perfil
+            if (empty($file['name'])) {
+                $response->putData($table, $suffix, $select, $data);
+            } else {
+                $response->putWithImage($table, $suffix, $id, $file, $ruta, $data, $select);
+            }
         } else if ($table == "usuarios_agentes") {
             $response = new PutController();
             $response->putWithImage($table, $suffix, $id, $file, $ruta, $data, $select);

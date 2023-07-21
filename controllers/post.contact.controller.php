@@ -1,13 +1,14 @@
 <?php
-
+//requiro los scripts que necesito
 require_once "models/connection.php";
 require_once "models/post.contact.model.php";
 require_once "models/get.filter.model.php";
 
+//nombro la clase
 class PostController
 {
     /*=============================================
-    Peticion post para crear cliente
+    Peticion post para crear un contacto de emergencia al cliente
     =============================================*/
     static public function postRegister($data)
     {
@@ -21,17 +22,19 @@ class PostController
         $data->telefono_contacto = $contacto_contacto;
 
         /*=============================================
-        Validamos que el correo No exista en base de datos
+        Validamos que el telefono No exista en base de datos
         =============================================*/
         $response = GetModel::getDataFilter("contactos", "id_contacto, email_contacto, telefono_contacto", "telefono_contacto", $data->telefono_contacto);
 
+        //si el telefono efectivamente no esta en base de datos podemos registrarlo
         if (empty($response)) {
-
+            //llamo el modelo para registrar
             $response = PostModel::postData($data);
-
+            //retorno el JSON response
             $return = new PostController();
             $return->fncResponse($response);
         } else {
+            //en caso contrario devuelvo el codigo 10 que significa que el telefono ya existe
             $response = array(
                 "code" => 10
             );

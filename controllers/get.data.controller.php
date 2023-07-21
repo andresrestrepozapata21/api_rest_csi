@@ -1,11 +1,11 @@
 <?php
-
+//requiro los scripts que necesito
 require_once "models/get.data.model.php";
 
 class GetController{
 
     /*=============================================
-    Peticiones GET sin filtro
+    Peticiones GET, este metodo es reutilizable para obtener informacion, es solo validar que datos me esta entregando el Servicio y como quedaria armado el modelo
     =============================================*/
     public function getData($table, $select){
 
@@ -16,7 +16,7 @@ class GetController{
     }
 
      /*=============================================
-    Peticiones GET sin filtro
+    Peticiones GET para obtener los datos de los panes, validar que datos me esta entregando el Servicio y como quedaria armado el modelo
     =============================================*/
     public function getDataPlans($table, $select){
 
@@ -27,7 +27,7 @@ class GetController{
     }
 
     /*=============================================
-    Peticiones GET sin filtro
+    Peticiones GET para obtener los datos de las alertas, validar que datos me esta entregando el Servicio y como quedaria armado el modelo
     =============================================*/
     public function getDataAlerts($table, $select){
 
@@ -38,7 +38,7 @@ class GetController{
     }
 
     /*=============================================
-    Peticiones GET sin filtro
+    Peticiones GET para obtener los datos del popup que este activo en base de datos en su tabla, validar que datos me esta entregando el Servicio y como quedaria armado el modelo
     =============================================*/
     public function getDataPopup($table, $select){
 

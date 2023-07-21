@@ -1,25 +1,23 @@
 <?php
-
+//Requiero los scripts que necesito para utilizar sus metodos
 require_once "models/delete.model.php";
 require_once "models/get.filter.model.php";
-
+//deficno la clase que voy a utlizar
 class DeleteController
 {
-
     /*=============================================
-    Peticion Delete para eliminar datos
+    Peticion Delete para eliminar datos este metodo es reutilizable, tener cuidado de donde vienen los datos
     =============================================*/
     static public function deleteData($table, $id, $nameId)
     {
-
         $response = DeleteModel::deleteData($table, $id, $nameId);
-
+        
         $return = new DeleteController();
         $return->fncResponse($response);
     }
 
     /*=============================================
-    Peticion Delete para eliminar usuario
+    Peticion Delete para eliminar usuario busco el usuario y luego valido si tiene foto de perfil, si es el caso lo elimino, y por ultimo elimino el registro del usuario.
     =============================================*/
     static public function deleteUser($table, $id, $nameId, $suffix)
     {
