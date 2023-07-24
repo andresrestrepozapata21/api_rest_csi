@@ -351,14 +351,30 @@ class GetControllerMaster
             $saludo = $saludoBD;
         }
 
-        $conexion->close();
         //reemplazmos el nombre en el mensaje
         $saludo = str_replace("[NOMBRE]", $nombre, $saludo);
+
+        /*=============================================
+        Consultamos si el usuario tiene documentos cargados y validamos para devolver el flag correspondiente
+        =============================================*/
+        $sentencia_documentos = "SELECT * FROM `documentos` WHERE fk_id_usuario_cliente_documento = $id";
+        $consulta_documentos = mysqli_query($conexion, $sentencia_documentos);
+        //declaro el flag a retornar
+        $flag_documentos = 0;
+        //valido si bien o no la resultados
+        if (mysqli_num_rows($consulta_documentos) > 0) {
+            //modifico el flag de ser necesario
+            $flag_documentos = 1;
+        }
+
+        //cerramos la conexion
+        $conexion->close();
 
         /*=============================================
         Armo el arreglo que se convertira en JSON en el detail de la respuesta con todos los datos que necesite
         =============================================*/
         $response = array(
+            'tiene_documentos_cargados' => $flag_documentos,
             'id_usuario_cliente' => $id,
             'nombre_usuario_cliente' => $nombre,
             'genero_usuario_cliente' => $genero,

@@ -401,6 +401,24 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $userToken = "usuarios_clientes";
             $table = "puntos_ganados";
             include "services/get.dataFilter.php";
+        } else if ($table == "deleteCustomer") {
+
+            $userToken = "usuarios_clientes";
+            $table = "usuarios_clientes";
+            $nameId = "id_usuario_cliente";
+            $id = $data->id_usuario_cliente;
+            $suffix = "usuario_cliente";
+            include "services/delete.php";
+        }  else if ($table == "expirationPlanUser") {
+
+            $userToken = "usuarios_clientes";
+            $table = "planes_comprados_por_usuario";
+            include "services/get.dataFilter.php";
+        } else if ($table == "customerGotDocuments") {
+
+            $userToken = "usuarios_clientes";
+            $table = "documentos";
+            include "services/get.dataFilter.php";
         }
 
         //Hay algunos casos donde utilizo la recepcion de un FormData() por tanto se capturan los datos por medio del metodo POST, luego armo el JSON normal para enviarlo al Servicio
@@ -615,14 +633,6 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "paradas";
             $nameId = "id_parada";
             $id = $data->id_parada;
-            include "services/delete.php";
-        } else if ($table == "deleteCustomer") {
-
-            $userToken = "administradores";
-            $table = "usuarios_clientes";
-            $nameId = "id_usuario_cliente";
-            $id = $data->id_usuario_cliente;
-            $suffix = "usuario_cliente";
             include "services/delete.php";
         } else if ($table == "deleteAgent") {
 

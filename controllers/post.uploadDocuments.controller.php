@@ -8,22 +8,38 @@ header('Access-Control-Allow-Origin: *');
 require_once "models/connection.php";
 require_once "models/post.uploadDocuments.model.php";
 require_once "models/put.updatePending.model.php";
+require_once "controllers/correos/enviar_correo_cargue_documentos.php";
 
 //include_once '../cors.php';
 
 class PostController
 {
-    
     /*=============================================
     Peticion post para crear documento del cliente
     =============================================*/
     static public function postRegister($table, $suffix, $id, $file1, $file2, $file3)
     {
+        //instacion la conexion a la BD con conexion alternativa
+        $conexion = Connection::conexionAlternativa();
+        //llamo los metodo para cargar los documetos y capturo en variables
         $response1 = PostController::cargarDocumentoCliente($table, $suffix, $id, $file1);
         $response2 = PostController::cargarDocumentoCliente($table, $suffix, $id, $file2);
         $response3 = PostController::cargarDocumentoCliente($table, $suffix, $id, $file3);
-
+        //valido que todo haya salido bine
         if($response1["code"] == 3 && $response2["code"] == 3 && $response3["code"] == 3){
+            //sentencia para obtener los datos del usuario
+            $sql = "SELECT * FROM usuarios_clientes WHERE id_usuario_cliente = $id";
+            $query = mysqli_query($conexion, $sql);
+            $datos = mysqli_fetch_assoc($query);
+            //capturo las variables que necesito para enviar el correo
+            $nombre = $datos["nombre_usuario_cliente"];
+            $apellido = $datos["apellido_usuario_cliente"];
+            $cedula = $datos["cedula_usuario_cliente"];
+            $destinatario1 = 'arz.950203@gmail.com';
+
+            $result_email = enviar_correo($destinatario1, $nombre, $apellido, $cedula);
+            file_put_contents('././log_emails_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " EMAIL CONFIRMACION CARGUE DOCUMENTOS -> $result_email" . " USUARIO: " . $nombre . " " . $apellido  . "\n\r", FILE_APPEND);
+            //Armo y devuelvo la respuesta
             $response = array(
                 "code" => 3
             );

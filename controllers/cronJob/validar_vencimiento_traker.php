@@ -66,13 +66,12 @@ while ($fila = mysqli_fetch_assoc($consulta)) {
                     //echo "se envia una alerta a la central";
                     // Llamas a la función reverseGeocode con el PlaceID como argumento
                     $coordenadas = reverseGeocode($placeID_inicio);
-
+                    //capturamos las coordenadas
                     $latitud_inicio = $coordenadas["latitud"];
                     $longitud_inicio = $coordenadas["longitud"];
-
-                    $sentencia_3 = "INSERT INTO `alertas`(`latitud_alerta`, `longitud_alerta`, `estado_alerta`, `comentario_alerta`, `fk_id_usuario_cliente_alerta`, `fk_id_servicio_por_zona_alerta`, `date_created_alerta`) VALUES ($latitud_inicio,$longitud_inicio,1,'No recibimos ninguna confirmación de que llegaste bien a tu destino usando la funcion ACOMPAÑAME. Hemos iniciado un protocolo de asistencia para comprobar que estás bien y llegaste a tu destino.    ',$fk_id_usuario,30,'$fecha')";
+                    //insertamos la alerta
+                    $sentencia_3 = "INSERT INTO `alertas`(`latitud_alerta`, `longitud_alerta`, `estado_alerta`, `comentario_alerta`, `ruta1_imagen_alerta`,`fk_id_usuario_cliente_alerta`, `fk_id_servicio_por_zona_alerta`, `date_created_alerta`) VALUES ($latitud_inicio,$longitud_inicio,1,'No recibimos ninguna confirmación de que llegaste bien a tu destino usando la funcion ACOMPAÑAME. Hemos iniciado un protocolo de asistencia para comprobar que estás bien y llegaste a tu destino.', 'src/evidence_alerts/imagen_protocolo_acompaname.png',$fk_id_usuario,30,'$fecha')";
                     $consulta_3 = mysqli_query($conexion, $sentencia_3);
-                    //echo $latitud_inicio . " " . $longitud_inicio . "<br>";
                     //Insertamos en la base de datos
                     $sentencia_4 = "UPDATE viajes SET notificaciones_viaje = 4, fecha_ult_notificacion_viaje = '$fecha' WHERE id_viaje = $id_viaje";
                     $consulta_4 = mysqli_query($conexion, $sentencia_4);

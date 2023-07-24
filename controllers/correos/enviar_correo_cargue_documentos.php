@@ -9,9 +9,8 @@ include("utilidad_enviar_correo.php");
 //$result = enviar_correo_confirmacion($email, $nombre, $servicio);
 //echo $result;
 
-
-function enviar_correo($email, $nombre, $servicio){
-    $result = enviar_correo_confirmacion($email, $nombre, $servicio);
+function enviar_correo($destinatario1, $nombre, $apellido, $cedula){
+    $result = enviar_correo_confirmacion($destinatario1, $nombre, $apellido, $cedula);
     return $result;
 }
 

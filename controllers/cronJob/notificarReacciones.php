@@ -68,7 +68,7 @@ if (mysqli_num_rows($query_vistima) > 0) {
             $mensaje = str_replace("%apellido%", $apellido_cliente_victima, $mensaje);
             $mensaje = str_replace("%nombre2%", $nombre_usuario_cliente_reaccion, $mensaje);
             $mensaje = str_replace("%apellido2%", $apellido_usuario_cliente_reaccion, $mensaje);
-            $body = "CSI Reaccion - Hola %nombre% %apellido%, por favor confirmanos que el usuario %nombre2% %apellido2% atendio tu emergencia|apicsi.mipgenlinea.com/reacciones/confirmarVictima.php?id_reaccion=$id_reaccion_cliente_cliente";
+            $body = "CSI Reaccion - Hola %nombre% %apellido%, por favor confirmanos que el usuario %nombre2% %apellido2% atendio tu emergencia.|https://apicsi.mipgenlinea.com/reacciones/confirmarVictima.php?id_reaccion=$id_reaccion_cliente_cliente";
             $body = str_replace("%nombre%", $nombre_cliente_victima, $body);
             $body = str_replace("%apellido%", $apellido_cliente_victima, $body);
             $body = str_replace("%nombre2%", $nombre_usuario_cliente_reaccion, $body);
@@ -161,7 +161,7 @@ if (mysqli_num_rows($query_reaccion) > 0) {
             $mensaje = str_replace("%apellido%", $apellido_cliente_victima, $mensaje);
             $mensaje = str_replace("%nombre2%", $nombre_usuario_cliente_reaccion, $mensaje);
             $mensaje = str_replace("%apellido2%", $apellido_usuario_cliente_reaccion, $mensaje);
-            $body = "CSI Reaccion - Hola %nombre2% %apellido2%, por favor confirmanos que has atendido la emergencia de %nombre% %apellido%, INGRESA AQUI -> apicsi.mipgenlinea.com/reacciones/confirmarReaccion.php?id_reaccion=$id_reaccion_cliente_cliente";
+            $body = "CSI Reaccion - Hola %nombre2% %apellido2%, por favor confirmanos que has atendido la emergencia de %nombre% %apellido%.|https://apicsi.mipgenlinea.com/reacciones/confirmarReaccion.php?id_reaccion=$id_reaccion_cliente_cliente";
             $body = str_replace("%nombre%", $nombre_cliente_victima, $body);
             $body = str_replace("%apellido%", $apellido_cliente_victima, $body);
             $body = str_replace("%nombre2%", $nombre_usuario_cliente_reaccion, $body);

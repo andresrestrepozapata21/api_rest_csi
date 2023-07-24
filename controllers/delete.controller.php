@@ -29,7 +29,7 @@ class DeleteController
             if ($response[0]->$direccion != null) {
                 unlink($response[0]->$direccion);
             }
-            $response = DeleteModel::deleteData($table, $id, $nameId);
+            $response = DeleteModel::desactiveUser($table, $id, $nameId, $suffix);
 
             $return = new DeleteController();
             $return->fncResponse($response);

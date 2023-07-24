@@ -300,7 +300,7 @@ class GetController
                     $sql_reacciones = "SELECT * FROM reacciones_cliente_cliente r INNER JOIN usuarios_clientes uc ON r.fk_id_usuario_cliente_reaccion_cliente_cliente=uc.id_usuario_cliente WHERE fk_id_alerta_reaccion_cliente_cliente =" . $valor['id_alerta'];
                     $query_reacciones = mysqli_query($conexion, $sql_reacciones);
                     //valido si me trajo algo la consulta si no hago la logica respectiva
-                    if(mysqli_num_rows($query_reacciones) > 0){
+                    if (mysqli_num_rows($query_reacciones) > 0) {
                         $datos_reaccion = mysqli_fetch_assoc($query_reacciones);
                         $valor['reaccion'] = 1;
                         //Elimino del arreglo original todos los atributos que no son relevantes para el lado del cliente en este endpoint
@@ -332,10 +332,10 @@ class GetController
                         unset($datos_reaccion['date_created_usuario_cliente']);
                         unset($datos_reaccion['date_update_usuario_cliente']);
 
-                        $valor['detalles_reaccion'] = $datos_reaccion;  
-                    }else{
+                        $valor['detalles_reaccion'] = $datos_reaccion;
+                    } else {
                         $valor['reaccion'] = 0;
-                        $valor['detalles_reaccion'] = array();  
+                        $valor['detalles_reaccion'] = array();
                     }
                     //Elimino del arreglo original todos los atributos que no son relevantes para el lado del cliente en este endpoint
                     unset($valor["ruta1_imagen_alerta"]);
@@ -494,6 +494,80 @@ class GetController
             'puntos_ganados' => $puntos_usuario
         );
 
+        $return = new GetController();
+        $return->fncResponse($response);
+    }
+
+    /*=============================================
+    metodo para obtener el vencimiento del plan del usuario
+    =============================================*/
+    public function expirationPlanUser($data)
+    {
+        $conexion = Connection::conexionAlternativa();
+        /*=============================================
+        Consultamos los puntos acumulados del usuario
+        =============================================*/
+        $sentencia = "SELECT * FROM planes_comprados pc INNER JOIN planes p ON p.id_plan=pc.fk_id_plan_plan_comprado WHERE fk_id_usuario_cliente_plan_comprado = $data->id_usuario_cliente AND activo_plan_comprado = 1";
+        $consulta = mysqli_query($conexion, $sentencia);
+        $puntos_usuario = 0;
+
+        if (mysqli_num_rows($consulta) > 0) {
+            $fila = mysqli_fetch_assoc($consulta);
+            //capturo las variables que necesito
+            $fecha_compra_plan = $fila["date_created_plan_comprado"];
+            $vigencia_minutos = $fila["vigencia_plan"];
+            // Crear un objeto DateTime a partir de la fecha actual
+            $fecha_creacion = new DateTime($fecha_compra_plan);
+            // Sumar los minutos de vigencia del plan en minutos al objeto DateTime
+            $fecha_creacion->add(new DateInterval('PT' . $vigencia_minutos . 'M'));
+            // Obtener la nueva fecha y hora con los minutos añadidos
+            $fecha_vencimiento = $fecha_creacion->format('Y-m-d H:i:s');
+
+            /*=============================================
+            Armo el arreglo que se convertira en JSON en el detail de la respuesta
+            =============================================*/
+            $response = array(
+                'fecha_vencimiento' => $fecha_vencimiento
+            );
+
+            $return = new GetController();
+            $return->fncResponse($response);
+        } else {
+            $response = array(
+                'code' => 16
+            );
+
+            $return = new GetController();
+            $return->fncResponse($response);
+        }
+    }
+
+    /*=============================================
+    metodo para obtener el vencimiento del plan del usuario
+    =============================================*/
+    public function validateDocumentsCustomer($data)
+    {
+        //Instancio la conexcion a la base de datos
+        $conexion = Connection::conexionAlternativa();
+        //capturo el ID del usuario que viene en la peticion
+        $id = $data->fk_id_usuario_cliente_alerta;
+        /*=============================================
+        Consultamos los documentos de ese usuario
+        =============================================*/
+        $sentencia_documentos = "SELECT * FROM `documentos` WHERE fk_id_usuario_cliente_documento = $id";
+        $consulta_documentos = mysqli_query($conexion, $sentencia_documentos);
+        //declaro el flag a retornar
+        $flag_documentos = 0;
+        //valido si bien o no la resultados y modifico el flag de ser necesario (valido si el usurio tiene documentos cargados)
+        if (mysqli_num_rows($consulta_documentos) > 0) {
+            //modifico el flag de ser necesario
+            $flag_documentos = 1;
+        }
+        //Defino la respuesta
+        $response = array(
+            'tiene_documentos_cargados' => $flag_documentos
+        );
+        //Llamo el metodo que va a retornar el JSON RESPONSE
         $return = new GetController();
         $return->fncResponse($response);
     }

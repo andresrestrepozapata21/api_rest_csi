@@ -15,6 +15,9 @@ if (isset($data->token)) {
         if ($table == "planes_comprados") {
             $response = new GetController();
             $response->getDataPlanExistente($table, $data);
+        } else if ($table == "planes_comprados_por_usuario") {
+            $response = new GetController();
+            $response->expirationPlanUser($data);
         } else if ($table == "zonas") {
             $response = new GetController();
             $response->getCodeZone($data);
@@ -43,6 +46,9 @@ if (isset($data->token)) {
         } else if ($table == "puntos_ganados") {
             $response = new GetController();
             $response->getPointsUser($table, $data);
+        }  else if ($table == "documentos") {
+            $response = new GetController();
+            $response->validateDocumentsCustomer($data);
         }
         //este caso es la excepcion cuando hay varios endpoints que son genericos y tienen la misma estructura, se reutiliza el metodo en cuestion
         else {

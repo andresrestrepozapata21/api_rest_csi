@@ -84,7 +84,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btn'])) {
                     </div>
                     <!-- HTML para probar toda la info del usuario-->
                     <div class="perfil">
-                        <img src="../<?php echo $foto_perfil ?>" alt="">
+                        <?php
+                        if ($foto_perfil != "") {
+                        ?>
+                            <img src="../<?php echo $foto_perfil ?>" alt="">
+                        <?php } ?>
                     </div>
                     <div class="info_usuario">
                         <table>
