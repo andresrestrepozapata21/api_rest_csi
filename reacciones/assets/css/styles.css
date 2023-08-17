@@ -159,6 +159,19 @@
   border-radius: 150px;
 }
 
+.imagen_alera {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+}
+
+.imagen_alera img {
+  width: 100%;
+  border-radius: 15px;
+}
+
 .info_usuario {
   width: 100%;
   display: flex;

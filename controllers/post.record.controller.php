@@ -35,9 +35,19 @@ class PostController
                 $telefono = $data->$telefono;
                 $nombre = "nombre_$suffix";
                 $nombre = $data->$nombre;
+                $apellido = "apellido_$suffix";
+                $apellido = $data->$apellido;
+                $email = $data->email;
+                $genero = "genero_$suffix";
+                $genero = $data->$genero;
+                if($genero == "M"){
+                    $genero_chatico = "male";
+                }else{
+                    $genero_chatico = "female";
+                }
 
                 /*=============================================
-                Enviamos mensaje de texto con el nuevo codigo
+                Enviamos mensaje de texto con el codigo de verificacion
                 =============================================*/
                 $mensaje = "Hola %nombre%, tu codigo de verificacion CSI es: %codigo%, por favor ingresalo para continuar.";
                 $mensaje = str_replace("%nombre%", $nombre, $mensaje);
@@ -58,8 +68,29 @@ class PostController
                 $result = $resultado_sms->CallAPI($url, $json, $header);
                 file_put_contents('./log_fecha: ' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " SMS API -> $result \r\n", FILE_APPEND);
 
+                /*=============================================
+                Enviamos mensaje de WPP con el codigo verificacion
+                =============================================*/
+                $url = 'http://api.mipgenlinea.com/sendWppChatico.php';
+                $data = array(
+                    "user" => "smsFoxUser",
+                    "password" => "rhjIMEI3*",
+                    "first_name" => $nombre,
+                    "last_name" => $apellido,
+                    "name" => $nombre . " " . $apellido,
+                    "phone" => "+57" . $telefono,
+                    "email" => $email,
+                    "gender" => $genero_chatico,
+                    "code" => $codigo
+                );
+                $json = json_encode($data);
+                $header = array('Content-Type: application/json');
+                $resultado_chatico = new  PostController();
+                $result_chatico = $resultado_chatico->CallAPI($url, $json, $header);
+                file_put_contents('./log_fecha: ' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " CHATICO API -> $result_chatico \r\n", FILE_APPEND);
+
                 $return = new PostController();
-                $return->fncResponse($response, $result);
+                $return->fncResponse($response, $result_chatico);
             } else {
                 $response = array(
                     "code" => 29

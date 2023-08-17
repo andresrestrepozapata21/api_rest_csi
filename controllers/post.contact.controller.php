@@ -19,6 +19,9 @@ class PostController
         $contacto_contacto = str_replace(")", "", $contacto_contacto);
         $contacto_contacto = str_replace("-", "", $contacto_contacto);
         $contacto_contacto = str_replace(" ", "", $contacto_contacto);
+
+        $contacto_contacto = PostController::validarYCorregirNumero($contacto_contacto);
+
         $data->telefono_contacto = $contacto_contacto;
 
         /*=============================================
@@ -44,19 +47,35 @@ class PostController
     }
 
     /*=============================================
+                METODOS AUXILIARES
+    =============================================*/
+    function validarYCorregirNumero($numero)
+    {
+        // Expresión regular para validar si el número empieza con un indicativo
+        $pattern = "/^\+\d{1,4}/";
+
+        if (!preg_match($pattern, $numero)) {
+            // Si no tiene indicativo, agregamos el de Colombia
+            $numero = '+57' . $numero;
+        }
+
+        return $numero;
+    }
+
+    /*=============================================
     Respuestas del controlador
     =============================================*/
     public function fncResponse($response)
     {
         if (!empty($response)) {
-            if($response['code'] == 3){
+            if ($response['code'] == 3) {
                 $json  = array(
-                    
+
                     'status' => 200,
                     'result' => $response["code"],
                     'method' => $_SERVER['REQUEST_METHOD']
                 );
-            }else{
+            } else {
                 $json = array(
                     'status' => 200,
                     'result' => $response['code'],

@@ -4,8 +4,6 @@ require_once "models/connection.php";
 require_once "models/post.Login.model.php";
 require_once "models/get.filter.model.php";
 require_once "models/get.homePage.model.php";
-
-
 require_once "vendor/autoload.php";
 
 use Firebase\JWT\JWT;
@@ -76,7 +74,7 @@ class PostController
                 $response = array(
                     "id_usuario" => $response[0]->{"id_$suffix"},
                     "activo" => $response[0]->{"activo_$suffix"},
-                    "code" => 8
+                    "code" => 3
                 );
                 $return = new PostController();
                 $return->fncResponse($response, $suffix);

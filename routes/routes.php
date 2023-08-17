@@ -331,6 +331,14 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table2 = "usuarios_agentes";
             $suffix2 = "usuario_agente";
             include "services/post.closePosition.php";
+        }  else if ($table == "getCloseAgentsChief") {
+
+            $userToken = "usuarios_clientes";
+            $table = "posiciones_agentes";
+            $suffix = "posicion_agente";
+            $table2 = "usuarios_agentes";
+            $suffix2 = "usuario_agente";
+            include "services/post.closePositionChief.php";
         } else if ($table == "contactDelete") {
 
             $userToken = "usuarios_clientes";
@@ -419,6 +427,12 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $userToken = "usuarios_clientes";
             $table = "documentos";
             include "services/get.dataFilter.php";
+        } else if ($table == "ignoreAlert") {
+
+            $userToken = "usuarios_clientes";
+            $table = "ignoraciones";
+            $suffix  = "usuario_cliente";
+            include "services/post.php";
         }
 
         //Hay algunos casos donde utilizo la recepcion de un FormData() por tanto se capturan los datos por medio del metodo POST, luego armo el JSON normal para enviarlo al Servicio

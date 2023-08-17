@@ -179,6 +179,70 @@ class GetController
     }
 
     /*=============================================
+    metodo para las pocisiones de los clientes o agentes cercanos a la zona en la que se esta, agentes o clientes depende de que nombre de tabla se este ingresando, este metodo es reutilizado
+    =============================================*/
+    public function getClosePositionChief($table, $suffix, $table2, $suffix2, $data)
+    {
+        //intancia de la conexion
+        $conexion = Connection::conexionAlternativa();
+
+        $latitud = $data->latitud;
+        $longitud = $data->longitud;
+        $count = 50;
+
+        $result = array();
+
+        for ($i = 0; $i < $count; $i++) {
+            // Consultar un nombre aleatorio de la tabla nombres_agentes_fake
+            $consultaNombre = "SELECT nombre FROM nombres_agentes_fake ORDER BY RAND() LIMIT 1";
+            $resultadoNombre = mysqli_query($conexion, $consultaNombre);
+
+            // Verificar si se encontró un resultado para el nombre
+            if (mysqli_num_rows($resultadoNombre) > 0) {
+                $filaNombre = mysqli_fetch_assoc($resultadoNombre);
+                $nombreAleatorio = $filaNombre['nombre'];
+            }
+            // Consultar un apellido aleatorio de la tabla nombres_agentes_fake
+            $consultaApellido = "SELECT apellido FROM nombres_agentes_fake ORDER BY RAND() LIMIT 1";
+            $resultadoApellido = mysqli_query($conexion,$consultaApellido);
+            // Verificar si se encontró un resultado para el apellido
+            if (mysqli_num_rows($resultadoApellido) > 0) {
+                $filaApellido = mysqli_fetch_assoc($resultadoApellido);
+                $apellidoAleatorio = $filaApellido['apellido'];
+            }
+            //defino mis coordenadas aleatorias con un rango de 5 KM
+            $randomLat = $latitud + (mt_rand(-900, 900) / 100000);
+            $randomLng = $longitud + (mt_rand(-900, 900) / 100000);
+            //defino las coordenadas en un array coordinate
+            $coordinate = array(
+                'lat' => $randomLat,
+                'lng' => $randomLng,
+            );
+            //defino las variables adicionales que necestio
+            $title = 'Agente CSI '. $nombreAleatorio . ' ' . $apellidoAleatorio;
+            $snippet = 'Vigilando Zona';
+            $iconUrl = '/assets/pointer.png';
+            $iconSize = array(
+                'width' => 48,
+                'height' => 55,
+            );
+            //armo mi objeto en la respectiva iteracion
+            $object = array(
+                'coordinate' => $coordinate,
+                'title' => $title,
+                'snippet' => $snippet,
+                'iconUrl' => $iconUrl,
+                'iconSize' => $iconSize,
+            );
+            //en cada iteracin voy guardando cada objeto en un array principal y este es el que se retorna
+            $result[] = $object;
+        }
+        //instacion mi class get controller y llamo mi petodo para retornar la respueta en el JSON
+        $return = new GetController();
+        $return->fncResponse($result);
+    }
+
+    /*=============================================
     metodo para obtener establecimiento
     =============================================*/
     public function getLocal($data)
@@ -279,7 +343,7 @@ class GetController
 
             $distancia = GetController::distance($valor["latitud_alerta"], $valor["longitud_alerta"], $latitud, $longitud, "K");
 
-            if (round($distancia * 1000) <= 1000) {
+            if (round($distancia * 1000) <= 2000) {
 
                 $valor["distancia"] = '' . round(($distancia * 1000)) . '';
                 $valor["dias"] = '' . GetController::contarDias(date('Y-m-d'), $valor["date_created_alerta"]) . '';

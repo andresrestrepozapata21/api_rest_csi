@@ -13,7 +13,12 @@ if ($datos["foto_perfil_usuario_cliente"]) {
 } else {
     $foto_perfil = "";
 }
-
+//capturo la foto
+if ($datos["ruta1_imagen_alerta"]) {
+    $imagen_alerta = $datos["ruta1_imagen_alerta"];
+} else {
+    $imagen_alerta = "";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,6 +52,14 @@ if ($datos["foto_perfil_usuario_cliente"]) {
                         <i class="fa-regular fa-comment-dots"></i>
                         <p>Esta es la informacion de la alerta que quieres atender, incluyendo su ubicación e información del usuario.</p>
                     </div>
+                    <!-- HTML para probar toda la info del usuario-->
+                    <div class="imagen_alera">
+                        <?php
+                        if ($imagen_alerta != "") {
+                        ?>
+                            <img src="../<?php echo $imagen_alerta ?>" alt="">
+                        <?php } ?>
+                    </div>
                     <div class="info_usuario">
                         <table>
                             <tr>
@@ -65,7 +78,7 @@ if ($datos["foto_perfil_usuario_cliente"]) {
                     </div>
                     <div class="ubicacion">
                         <i class="fa-solid fa-location-dot"></i>
-                        <p><a href="https://maps.google.com/?q=<?php echo $datos["latitud_alerta"] . ',' . $datos["longitud_alerta"] ?>">Ver en Google Maps </a></p>
+                        <p><a href="https://maps.google.com/?q=<?php echo $datos["latitud_alerta"] . ',' . $datos["longitud_alerta"] ?>">Ver como llegar</a></p>
                     </div>
                     <div class="momento">
                         <i class="fa-regular fa-clock"></i>

@@ -47,6 +47,9 @@ if (isset($_POST)) {
             } else if ($table == "registros_fotograficos_viajes") {
                 $response = new PostController();
                 $response->postTripPicture($data, $file);
+            } else if ($table == "ignoraciones") {
+                $response = new PostController();
+                $response->postIgnore($table, $suffix, $data);
             }
         }
         //En caso del que el token este vencido, envio un codigo 22

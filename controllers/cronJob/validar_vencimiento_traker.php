@@ -18,13 +18,22 @@ while ($fila = mysqli_fetch_assoc($consulta)) {
     $activo = $fila["activo_viaje"];
     $cancelado = $fila["cancelado_viaje"];
     $confirmacion_llegada_destino_viaje = $fila["confirmacion_llegada_destino_viaje"];
-    $telefono = "+57".$fila["telefono_usuario_cliente"];
+    $telefono = "+57" . $fila["telefono_usuario_cliente"];
     $notificacion = $fila["notificaciones_viaje"];
     $id_viaje = $fila["id_viaje"];
     $fk_id_usuario = $fila["fk_id_usuario_cliente_viaje"];
     $placeID_inicio = $fila["placeID_origen_viaje"];
     $fecha_ultimo_envio = $fila["fecha_ult_notificacion_viaje"];
     $token_dispositivo = $fila["token_dispositivo"];
+    $nombre = $fila["nombre_usuario_cliente"];
+    $apellido = $fila["apellido_usuario_cliente"];
+    $email = $fila["apellido_usuario_cliente"];
+    $genero = $fila["genero_usuario_cliente"];
+    if($genero == "M"){
+        $genero_chatico = "male";
+    }else{
+        $genero_chatico = "female";
+    }
     // Crear un objeto DateTime a partir de la fecha dada
     $datetime = new DateTime($fecha_ultimo_envio);
     // Sumar 5 minutos
@@ -38,12 +47,36 @@ while ($fila = mysqli_fetch_assoc($consulta)) {
         if ($fecha > $fecha_estimada_viaje) {
             if ($notificacion == 0) {
                 # ------------- push notification -----------------
-                $resut_push_notification = sendGCM($token_dispositivo, "CSI Reaccion - por favor, finaliza tu recorrido");
+                $body = "Debes finalizar tu recorrido, de lo contratio este reportara como alerta CSI.";
+                $url_push = "#";
+                $title = $nombre . " " . $apellido . " te recordamos que:";
+                $resut_push_notification = sendGCM($token_dispositivo,  $body, $title, $url_push);
+                file_put_contents('./log_push_expired_tracker' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " PUSH -> $resut_push_notification\n\r", FILE_APPEND);
                 $sentencia_0 = "UPDATE viajes SET notificaciones_viaje = 1, fecha_ult_notificacion_viaje = '$fecha' WHERE id_viaje = $id_viaje";
                 $consulta_0 = mysqli_query($conexion, $sentencia_0);
             } else if ($notificacion  == 1) {
                 if ($fecha > $fecha_5min) {
-                    # wpp wpp
+                    /*=============================================
+                    Enviamos mensaje de WPP
+                    =============================================*/
+                    /*
+                    $url = 'http://api.mipgenlinea.com/sendWppChatico.php';
+                    $data = array(
+                        "user" => "smsFoxUser",
+                        "password" => "rhjIMEI3*",
+                        "first_name" => $nombre,
+                        "last_name" => $apellido,
+                        "name" => $nombre . " " . $apellido,
+                        "phone" => $telefono,
+                        "email" => $email,
+                        "gender" => $genero_chatico,
+                    );
+                    $json = json_encode($data);
+                    $header = array('Content-Type: application/json');
+                    $resultado_chatico = new  PostController();
+                    $result_chatico = $resultado_chatico->CallAPI($url, $json, $header);
+                    file_put_contents('./log_push_expired_tracker: ' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " CHATICO API -> $result_chatico \r\n", FILE_APPEND);
+                    */
                     $sentencia_1 = "UPDATE viajes SET notificaciones_viaje = 2, fecha_ult_notificacion_viaje = '$fecha' WHERE id_viaje = $id_viaje";
                     $consulta_1 = mysqli_query($conexion, $sentencia_1);
                 }
@@ -86,6 +119,28 @@ $conexion->close();
 /*=============================================
 METODOS AUXILIARES
 =============================================*/
+/*=============================================
+METODO PARA LLAMAR EL API
+=============================================*/
+function CallAPI($url, $json, $header)
+{
+    $curl = curl_init();
+
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_setopt($curl, CURLOPT_POST, 1);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+
+    $response = curl_exec($curl);
+    $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+    curl_close($curl);
+
+    return $response;
+}
+
 //hacer la llamadas
 function CallAPIIVR($method, $url, $data = false)
 {
@@ -149,8 +204,8 @@ function reverseGeocode($placeId)
     }
 }
 
-//push notifications
-function sendGCM($deviceToken, $body)
+//enviar los push notification
+function sendGCM($deviceToken, $body, $title, $url_push)
 {
     define('API_ACCESS_KEY', 'key=AAAAPBpq6KE:APA91bH4B4CF3XR6gXosqn317XPu02riJ6u7aBNOIYgYak363HaD23k5oii4FvZ90sC1NV19-Mi8xW1aqhRTPnymGXeNhzjXihZJljEywO5h9YDBL5q64l-ty-eWbxNDe5LuF9f0tlrh');
     $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
@@ -163,10 +218,10 @@ function sendGCM($deviceToken, $body)
     );
 
     $notification = [
-        'title'  => '' . "Atención Emergencia Reportada por CSI" . '',
+        'title'  => '' . $title . '',
         'body'   => '' . $body . ''
     ];
-    $extraNotificationData = ["message" => $notification, "moredata" => 'dd'];
+    $extraNotificationData = ["body" => $body, "title" => $title, "url" => $url_push];
 
     $fcmNotification = [
         'notification'  => $notification,

@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btn'])) {
                 <div class="info_alerta">
                     <div class="comentario">
                         <i class="fa-regular fa-comment-dots"></i>
-                        <p>El usuario CSI que reacciono a una de tus alertas es:</p>
+                        <p>El usuario CSI al que reaccionaste es:</p>
                     </div>
                     <!-- HTML para probar toda la info del usuario-->
                     <div class="perfil">

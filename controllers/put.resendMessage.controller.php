@@ -16,7 +16,7 @@ class PutController
         /*=============================================
         Validamos que el ID exista en base de datos
         =============================================*/
-        $response = GetModel::getDataFilter($table, "$select, telefono_$suffix, nombre_$suffix", "id_$suffix", $data->$select);
+        $response = GetModel::getDataFilter($table, "$select, telefono_$suffix, nombre_$suffix, apellido_$suffix, genero_$suffix, email", "id_$suffix", $data->$select);
 
         if (!empty($response)) {
 
@@ -25,11 +25,21 @@ class PutController
             $telefono = $response[0]->$telefono;
             $nombre = "nombre_$suffix";
             $nombre = $response[0]->$nombre;
-
+            $apellido = "apellido_$suffix";
+            $apellido = $response[0]->$apellido;
+            $email = $response[0]->email;
+            $genero = "genero_$suffix";
+            $genero = $response[0]->$genero;
+            if ($genero == "M") {
+                $genero_chatico = "male";
+            } else {
+                $genero_chatico = "female";
+            }
+            //Actualizamos en base de datos el codigo de verificaion
             $response = PutModel::putData($table, $verificationCode, $select, $response[0]->$select);
 
             /*=============================================
-            Enviamos mensaje de texto con el nuevo codigo
+            Enviamos mensaje de texto con el nuevo codigo de verificacion
             =============================================*/
             $mensaje = "Hola %nombre%, tu codigo de verificacion CSI es: %codigo%, por favor ingresalo para continuar.";
             $mensaje = str_replace("%nombre%", $nombre, $mensaje);
@@ -48,6 +58,27 @@ class PutController
             $resultado_sms = new  PutController();
             $result = $resultado_sms->CallAPI($url, $json, $header);
             file_put_contents('./log_fecha: ' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " SMS API -> $result \r\n", FILE_APPEND);
+
+            /*=============================================
+            Enviamos mensaje de WPP con el nuevo codigo de verificacion
+            =============================================*/
+            $url = 'http://api.mipgenlinea.com/sendWppChatico.php';
+            $data = array(
+                "user" => "smsFoxUser",
+                "password" => "rhjIMEI3*",
+                "first_name" => $nombre,
+                "last_name" => $apellido,
+                "name" => $nombre . " " . $apellido,
+                "phone" => "+57" . $telefono,
+                "email" => $email,
+                "gender" => $genero_chatico,
+                "code" => $verificationCode
+            );
+            $json = json_encode($data);
+            $header = array('Content-Type: application/json');
+            $resultado_chatico = new  PutController();
+            $result_chatico = $resultado_chatico->CallAPI($url, $json, $header);
+            file_put_contents('./log_fecha: ' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " CHATICO API -> $result_chatico \r\n", FILE_APPEND);
 
             $return = new PutController();
             $return->fncResponse($response, $result);

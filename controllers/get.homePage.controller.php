@@ -100,7 +100,7 @@ class GetControllerMaster
         /*=============================================
         Consultamos cuales son las alertas cercanas
         =============================================*/
-        $sentencia_listar = "SELECT * FROM alertas ORDER BY date_created_alerta DESC";
+        $sentencia_listar = "SELECT * FROM alertas a INNER JOIN usuarios_clientes uc ON a.fk_id_usuario_cliente_alerta=uc.id_usuario_cliente INNER JOIN servicios_por_zona sz ON a.fk_id_servicio_por_zona_alerta=sz.id_servicos_por_zona INNER JOIN servicios s ON sz.fk_id_servicio_servicos_por_zona=s.id_servicio ORDER BY date_created_alerta DESC";
         $resultado_listado = mysqli_query($conexion, $sentencia_listar);
 
         $filasAlertas = array();
@@ -109,7 +109,7 @@ class GetControllerMaster
 
             $distancia = GetControllerMaster::distance($valor["latitud_alerta"], $valor["longitud_alerta"], $latitud, $longitud, "K");
 
-            if (round($distancia * 1000) <= 1000) {
+            if (round($distancia * 1000) <= 2000) {
 
                 $valor["distancia"] = '' . round(($distancia * 1000)) . '';
                 $valor["dias"] = '' . GetControllerMaster::contarDias(date('Y-m-d'), $valor["date_created_alerta"]) . '';
@@ -126,13 +126,99 @@ class GetControllerMaster
                             }
                         }
                     }
+                    //buscamos si esta alerta tiene una reaccion y hago inner con el usuario que reacciono a esta alerta si es el caso
+                    $sql_reacciones = "SELECT * FROM reacciones_cliente_cliente r INNER JOIN usuarios_clientes uc ON r.fk_id_usuario_cliente_reaccion_cliente_cliente=uc.id_usuario_cliente WHERE fk_id_alerta_reaccion_cliente_cliente =" . $valor['id_alerta'];
+                    $query_reacciones = mysqli_query($conexion, $sql_reacciones);
+                    //valido si me trajo algo la consulta si no hago la logica respectiva
+                    if (mysqli_num_rows($query_reacciones) > 0) {
+                        $datos_reaccion = mysqli_fetch_assoc($query_reacciones);
+                        $valor['reaccion'] = 1;
+                        //Elimino del arreglo original todos los atributos que no son relevantes para el lado del cliente en este endpoint
+                        unset($datos_reaccion["ruta_imagen_reaccion_cliente_cliente"]);
+                        unset($datos_reaccion["fk_id_alerta_reaccion_cliente_cliente"]);
+                        unset($datos_reaccion["fk_id_usuario_cliente_reaccion_cliente_cliente"]);
+                        unset($datos_reaccion["date_update_reaccion_cliente_cliente"]);
+                        unset($datos_reaccion["password"]);
+                        unset($datos_reaccion["token"]);
+                        unset($datos_reaccion["token_exp"]);
+                        unset($datos_reaccion["foto_perfil_usuario_cliente"]);
+                        unset($datos_reaccion["tipo_de_sangre"]);
+                        unset($datos_reaccion["enfermedades_base"]);
+                        unset($datos_reaccion["alergias"]);
+                        unset($datos_reaccion["eps"]);
+                        unset($datos_reaccion["arl"]);
+                        unset($datos_reaccion["activo_usuario_cliente"]);
+                        unset($datos_reaccion["estado_usuario_cliente"]);
+                        unset($datos_reaccion["eliminado_usuario_cliente"]);
+                        unset($datos_reaccion['eliminado_usuario_cliente']);
+                        unset($datos_reaccion['presentacion_inicial_popup_usuario_cliente']);
+                        unset($datos_reaccion['anuncio_popup_usuario_cliente']);
+                        unset($datos_reaccion['lastlogin_usuario_cliente']);
+                        unset($datos_reaccion['fk_id_tipo_usuario_usuario_cliente']);
+                        unset($datos_reaccion['token_dispositivo']);
+                        unset($datos_reaccion['codigo_verificacion']);
+                        unset($datos_reaccion['fecha_verificacion_pin']);
+                        unset($datos_reaccion['url_cargar_info_usuario_cliente']);
+                        unset($datos_reaccion['date_created_usuario_cliente']);
+                        unset($datos_reaccion['date_update_usuario_cliente']);
 
+                        $valor['detalles_reaccion'] = $datos_reaccion;
+                    } else {
+                        $valor['reaccion'] = 0;
+                        $valor['detalles_reaccion'] = array();
+                    }
+                    //Elimino del arreglo original todos los atributos que no son relevantes para el lado del cliente en este endpoint
                     unset($valor["ruta1_imagen_alerta"]);
                     unset($valor["ruta2_imagen_alerta"]);
                     unset($valor["ruta3_imagen_alerta"]);
+                    unset($valor['tipo_evento_alerta']);
+                    unset($valor['date_update_alerta']);
+                    unset($valor['password']);
+                    unset($valor['token']);
+                    unset($valor['token_exp']);
+                    unset($valor['tipo_de_sangre']);
+                    unset($valor['enfermedades_base']);
+                    unset($valor['alergias']);
+                    unset($valor['eps']);
+                    unset($valor['arl']);
+                    unset($valor['activo_usuario_cliente']);
+                    unset($valor['estado_usuario_cliente']);
+                    unset($valor['eliminado_usuario_cliente']);
+                    unset($valor['presentacion_inicial_popup_usuario_cliente']);
+                    unset($valor['anuncio_popup_usuario_cliente']);
+                    unset($valor['lastlogin_usuario_cliente']);
+                    unset($valor['fk_id_tipo_usuario_usuario_cliente']);
+                    unset($valor['token_dispositivo']);
+                    unset($valor['codigo_verificacion']);
+                    unset($valor['fecha_verificacion_pin']);
+                    unset($valor['url_cargar_info_usuario_cliente']);
+                    unset($valor['date_created_usuario_cliente']);
+                    unset($valor['date_update_usuario_cliente']);
+                    unset($valor['foto_perfil_usuario_cliente']);
+                    unset($valor['id_servicos_por_zona']);
+                    unset($valor['fk_id_servicio_servicos_por_zona']);
+                    unset($valor['fk_id_zona_servicos_por_zona']);
+                    unset($valor['date_created_servicos_por_zona']);
+                    unset($valor['date_update__servicos_por_zona']);
+                    unset($valor['ruta_imagen_servicio']);
+                    unset($valor['puntos_servicio']);
+                    unset($valor['color_sombra_servicio']);
+                    unset($valor['date_created_servicio']);
+                    unset($valor['date_update_servicio']);
+                    unset($valor['fk_id_servicio_por_zona_alerta']);
+                    unset($valor['fk_id_usuario_cliente_alerta']);
+                    unset($valor['date_created_servicos_por_zona']);
+                    unset($valor['date_update__servicos_por_zona']);
+                    //voy guarndando mi arreglo final
                     $filasAlertas[] = $valor;
                 }
             }
+        }
+
+        //si no hay alertas por medio del comentario, el array se iguala a 0
+        if (isset($filasAlertas["comentario"])) {
+            unset($filasAlertas["comentario"]);
+            $filasAlertas = [];
         }
 
         //obtengo por medio del metodo aux, la zona en la que este
@@ -178,12 +264,6 @@ class GetControllerMaster
         //estructura para caso contrado que no hayan servicios
         else {
             $filasServicios["comentario"] = 0;
-        }
-
-        //si no hay alertas por medio del comentario, el array se iguala a 0
-        if (isset($filasAlertas["comentario"])) {
-            unset($filasAlertas["comentario"]);
-            $filasAlertas = [];
         }
 
         //si no hay servicios por medio del comentario, el array se iguala a 0
@@ -395,6 +475,7 @@ class GetControllerMaster
             //'cantidad_clientes_activos' => $dato_clientes_activos["cantidad_clientes_activos"],
             'cantidad_agentes_activos' => $dato_agentes_activos,
             'cantidad_clientes_activos' => $dato_clientes_activos,
+            'link_puntos' => 'https://falabella.com.co/',
             'zona' => $filasZonas,
             'alertas_cercanas' => $filasAlertas,
             'servicios_zona' => $filasServicios,

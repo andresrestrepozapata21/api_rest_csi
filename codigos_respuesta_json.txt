@@ -26,6 +26,6 @@
 24-> Autorización Requerida
 25-> Credeciales Incorrectas
 26-> No hay Alertas en la zona
-27-> El cliente esta tratando de reaccionar a su propia alerta
+27-> El cliente esta tratando de reaccionar a su propia alerta / el usuario esta tratando de ignorar una alerta propia
 28-> la alerta ya fue atendida por otro cliente
 29-> El telefono ya existe en base de datos, otro usuario lo esta usando

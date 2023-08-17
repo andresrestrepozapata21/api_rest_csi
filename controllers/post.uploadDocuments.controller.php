@@ -35,7 +35,7 @@ class PostController
             $nombre = $datos["nombre_usuario_cliente"];
             $apellido = $datos["apellido_usuario_cliente"];
             $cedula = $datos["cedula_usuario_cliente"];
-            $destinatario1 = 'arz.950203@gmail.com';
+            $destinatario1 = 'activaciones@csisecurity.co';
 
             $result_email = enviar_correo($destinatario1, $nombre, $apellido, $cedula);
             file_put_contents('././log_emails_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " EMAIL CONFIRMACION CARGUE DOCUMENTOS -> $result_email" . " USUARIO: " . $nombre . " " . $apellido  . "\n\r", FILE_APPEND);

@@ -247,8 +247,6 @@ class PostModel
 
         $sql = "INSERT INTO $table ($columns) VALUES ($params)";
 
-       
-
         $link = Connection::connect();
         $stmt = $link->prepare($sql);
         

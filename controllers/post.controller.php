@@ -527,11 +527,12 @@ class PostController
             if ($response["code"] && $response["code"] == 3) {
                 # ------------- push notification para el usuario que genero la alerta - vistima ----------------- #
                 $body = "CSI Reaccion - El usuario $nombre_usuario_cliente_reaccion $apellido_usuario_cliente_reaccion va a ayudar con tu emergencia.";
-                $resut_push_notification_victima = PostController::sendGCM_2($token_dispositivo_cliente_victima, $body);
+                $url_push = "https://apicsi.mipgenlinea.com/reacciones/datosReaccion.php?id=$id_usuario_cliente_reaccion";
+                $title = "Hola $nombre_cliente_victima!";
+                $resut_push_notification_victima = PostController::sendGCM($token_dispositivo_cliente_victima, $body, $title, $url_push);
                 file_put_contents('./log_push_reaction' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " PUSH API VICTIMA -> $resut_push_notification_victima\n\r", FILE_APPEND);
-
                 # ------------- SMS para el usuario vistima ----------------- #
-                $mensaje = "Hola, El usuario %nombre% %apellido% ha visto tu alerta y quiere ayudarte, para ver mas informacion sobre el usuario INGRESA AQUI -> apicsi.mipgenlinea.com/reacciones/datosReaccion.php?id=$id_usuario_cliente_reaccion";
+                $mensaje = "Hola, El usuario %nombre% %apellido% ha visto tu alerta y quiere ayudarte, para ver mas informacion sobre el usuario INGRESA AQUI -> https://apicsi.mipgenlinea.com/reacciones/datosReaccion.php?id=$id_usuario_cliente_reaccion";
                 $mensaje = str_replace("%nombre%", $nombre_usuario_cliente_reaccion, $mensaje);
                 $mensaje = str_replace("%apellido%", $apellido_usuario_cliente_reaccion, $mensaje);
                 $url = 'http://api.mipgenlinea.com/serviceSMS.php';
@@ -550,11 +551,13 @@ class PostController
 
                 # ------------- push notification para el usuario que va a ayudar con la alerta ----------------- #
                 $body = "CSI Reaccion - Vas a ayudar con la emergencia de $nombre_cliente_victima $apellido_cliente_victima, en segundos recibiras un SMS con mas informacion.";
-                $resut_push_notification_reacciona = PostController::sendGCM_2($token_dispositivo_cliente, $body);
+                $url_push = "https://apicsi.mipgenlinea.com/reacciones/datosAlerta.php?id=$id_alerta";
+                $title = "Hola $nombre_usuario_cliente_reaccion!";
+                $resut_push_notification_reacciona = PostController::sendGCM($token_dispositivo_cliente, $body, $title, $url_push);
                 file_put_contents('./log_push_reaction' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " PUSH API REACCIONA -> $resut_push_notification_reacciona\n\r", FILE_APPEND);
 
                 # ------------- SMS para el usuario que esta reaccionando ----------------- #
-                $mensaje = "Hola, al usuario que vas a reaccionar se llama: %nombre% %apellido%, telefono %telefono%, para ver mas informacion INGRESA AQUI -> apicsi.mipgenlinea.com/reacciones/datosAlerta.php?id=$id_alerta";
+                $mensaje = "Hola, al usuario que vas a reaccionar se llama: %nombre% %apellido%, telefono %telefono%, para ver mas informacion INGRESA AQUI -> https://apicsi.mipgenlinea.com/reacciones/datosAlerta.php?id=$id_alerta";
                 $mensaje = str_replace("%nombre%", $nombre_cliente_victima, $mensaje);
                 $mensaje = str_replace("%apellido%", $apellido_cliente_victima, $mensaje);
                 $mensaje = str_replace("%telefono%", $telefono_cliente_victima, $mensaje);
@@ -649,8 +652,58 @@ class PostController
     }
 
     /*=============================================
-    METODOS AUXILIARES
+    Peticion post para registrar las paradas del viaje
     =============================================*/
+    static public function postIgnore($table, $suffix, $data)
+    {
+        //conexion a la base de datos
+        $conexion = Connection::conexionAlternativa();
+        //capturo la fecha
+        $fecha = date('Y-m-d H:i:s');
+        //Busco los datos de la alerta donde encuentro el ID del usuario que creo la alerta
+        $sentencia = "SELECT * FROM alertas a INNER JOIN usuarios_clientes uc ON a.fk_id_usuario_cliente_alerta =uc.id_usuario_cliente WHERE a.id_alerta = $data->fk_id_alerta_ignoracion";
+        $resultado = mysqli_query($conexion, $sentencia);
+        $fila = mysqli_fetch_assoc($resultado);
+        //capturo el id del usuario que creo la alerta
+        $id_usuario_cliente_alerta = $fila["id_usuario_cliente"];
+        //busca los datos del usuario que esta ignorando la alerta
+        $sentencia_usuario = "SELECT * FROM usuarios_clientes WHERE id_usuario_cliente=$data->fk_id_usuario_cliente_ignoracion";
+        $resultado_usuarios = mysqli_query($conexion, $sentencia_usuario);
+        $filas_usuario = mysqli_fetch_assoc($resultado_usuarios);
+        //Capturo los datos del usuario que esta reaccionando
+        $id_usuario_cliente_ignoracion = $filas_usuario["id_usuario_cliente"];
+        //Solo si el usuario esta tratando de ignorar una alerta que el mismo no haya creado
+        if ($id_usuario_cliente_alerta != $id_usuario_cliente_ignoracion) {
+            //rutina para insertar en la base de datos
+            $sql = "INSERT INTO `ignoraciones`(`fk_id_usuario_cliente_ignoracion`, `fk_id_alerta_ignoracion`, `date_created_ignoracion`) VALUES ($data->fk_id_usuario_cliente_ignoracion,$data->fk_id_alerta_ignoracion,'$fecha')";
+            $query = mysqli_query($conexion, $sql);
+            //valido que todo haya salido bien, si no, retorno un codigo 11 que indica que algo salio mal
+            if ($query) {
+                $response = array(
+                    'code' => 3
+                );
+                $return = new PostController();
+                $return->fncResponse($response, null);
+            } else {
+                $response = array(
+                    'code' => 11
+                );
+                $return = new PostController();
+                $return->fncResponse($response, null);
+            }
+        } else {
+            $json = array(
+                'status' => 200,
+                'result' => 27
+            );
+            echo json_encode($json, http_response_code($json["status"]));
+            return;
+        }
+    }
+
+    /*==================================================================================================
+                                            METODOS AUXILIARES
+    ====================================================================================================*/
     //metodo para realizar toda la mensajeria de la alerta con sus respectivas validaciones
     function enviar_SMS_llamada_push_email($response, $latitud, $longitud, $id_usuario_cliente, $id_servicio_por_zona, $notificar_contactos)
     {
@@ -678,7 +731,12 @@ class PostController
         $nombre = $fila_telefono["nombre_usuario_cliente"];
         $apellido = $fila_telefono["apellido_usuario_cliente"];
         $email = $fila_telefono["email"];
-
+        $genero = $fila_telefono["genero_usuario_cliente"];
+        if ($genero == "M") {
+            $genero_chatico = "male";
+        } else {
+            $genero_chatico = "female";
+        }
 
         //Consultamos el mensaje para el cliente agregamos los datos al mensaje, configuramos el consumo a la api y enviamos
         $sentencia = "SELECT * FROM `plantillas_mensajes` WHERE tipo_plantilla_mensaje = 1";
@@ -699,7 +757,36 @@ class PostController
         $header = array('Content-Type: application/json');
         $resultado_sms = new  PostController();
         $result_SMS_cliente = $resultado_sms->CallAPI($url, $json, $header);
-        file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> $result_SMS_cliente\n\r", FILE_APPEND);
+        file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " SMS API -> TELEFONO USUARIO:" . $telefono . " - " . $result_SMS_cliente . ",\n\r", FILE_APPEND);
+
+        //Llamada al cliente para informarle que ha creado la alerta
+        $url = 'http://api.mipgenlinea.com/serviceIVR.php';
+        $urlAudio = "https://csi.mipgenlinea.com/audiosAlerta/xml-message-csi-usuario.xml";
+        $datos = ['usuario' => 'smsFoxUser', 'password' => 'rhjIMEI3*', 'telefono' => '+57' . $telefono, 'mensaje' => $urlAudio, 'fecha' => 'NA', 'aplicacion' => 'CSI LLAMADA'];
+        $instancia = new  PostController();
+        $result_llamada_usuario = $instancia->CallAPIIVR("POST", $url, json_encode($datos));
+        file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " IVR API -> TELEFONO USUARIO:" . $telefono . " - " . $result_llamada_usuario . ",\n\r", FILE_APPEND);
+
+        /*=============================================
+        Enviamos mensaje de WPP al usuario informando de la recepcion de la central
+        =============================================*/
+        $url = 'http://api.mipgenlinea.com/sendWppAlertaCliente.php';
+        $data = array(
+            "user" => "smsFoxUser",
+            "password" => "rhjIMEI3*",
+            "first_name" => $nombre,
+            "last_name" => $apellido,
+            "name" => $nombre . " " . $apellido,
+            "phone" => "+57" . $telefono,
+            "email" => $email,
+            "gender" => $genero_chatico,
+            "service" => $nombre_evento
+        );
+        $json = json_encode($data);
+        $header = array('Content-Type: application/json');
+        $resultado_chatico = new  PostController();
+        $result_chatico = $resultado_chatico->CallAPI($url, $json, $header);
+        file_put_contents('./log_alerta: ' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " CHATICO API USUARIO ALERTA -> $result_chatico \r\n", FILE_APPEND);
 
 
         /*========================================================================================================================================
@@ -722,8 +809,6 @@ class PostController
                 file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "ERROR -> " . $error2 . "\n\r", FILE_APPEND);
                 return;
             }
-
-            file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', $url . "\n\r", FILE_APPEND);
 
             //Consultamos el mensaje 2 para el contacto agregamos los datos al mensaje, configuramos el consumo a la api y enviamos
             $sentencia = "SELECT * FROM `plantillas_mensajes` WHERE tipo_plantilla_mensaje = 2";
@@ -750,8 +835,12 @@ class PostController
 
                 //configuramos y enviamos los mensajes y la llamada
                 //enviamos primer sms
-                $url = 'http://api.mipgenlinea.com/serviceSMS.php';
+                //declaro las variables que necesito del contacto de emergencia
                 $telefonoContacto = $fila_contactos["telefono_contacto"];
+                $nombreContacto = $fila_contactos["nombre_contacto"];
+                $email_contacto = $fila_contactos["email_contacto"];
+                //defino la URL
+                $url = 'http://api.mipgenlinea.com/serviceSMS.php';
                 $data = array(
                     "usuario" => "smsFoxUser",
                     "password" => "rhjIMEI3*",
@@ -764,7 +853,7 @@ class PostController
                 $header = array('Content-Type: application/json');
                 $resultado_sms = new  PostController();
                 $result_sms = $resultado_sms->CallAPI($url, $json, $header);
-                file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms . ",\n\r", FILE_APPEND);
+                file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " SMS API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms . ",\n\r", FILE_APPEND);
 
                 //Segundo Mensaje sms
                 $data = array(
@@ -779,7 +868,51 @@ class PostController
                 $header = array('Content-Type: application/json');
                 $resultado_sms = new  PostController();
                 $result_sms2 = $resultado_sms->CallAPI($url, $json, $header);
-                file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms2 . ",\n\r", FILE_APPEND);
+                file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " SMS API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms2 . ",\n\r", FILE_APPEND);
+
+                /*=============================================
+                Enviamos el mensaje 1 al WPP del contacto de emergencia
+                =============================================*/
+                $url = 'http://api.mipgenlinea.com/sendWppAlertaContacto1.php';
+                $data = array(
+                    "user" => "smsFoxUser",
+                    "password" => "rhjIMEI3*",
+                    "first_name" => $nombreContacto,
+                    "last_name" => $nombreContacto,
+                    "name" => $nombreContacto,
+                    "phone" => $telefonoContacto,
+                    "email" => $email_contacto,
+                    "gender" => $genero_chatico,
+                    "service" => $nombre_evento,
+                    "nameVictim" => $nombre . " " . $apellido
+                );
+                $json = json_encode($data);
+                $header = array('Content-Type: application/json');
+                $resultado_chatico = new  PostController();
+                $result_chatico = $resultado_chatico->CallAPI($url, $json, $header);
+                file_put_contents('./log_alerta: ' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " CHATICO API USUARIO CONTACTO M1 -> $result_chatico \r\n", FILE_APPEND);
+
+                /*=============================================
+                Enviamos el mensaje 2 al WPP del contacto de emergencia
+                =============================================*/
+                $url = 'http://api.mipgenlinea.com/sendWppAlertaContacto2.php';
+                $data = array(
+                    "user" => "smsFoxUser",
+                    "password" => "rhjIMEI3*",
+                    "first_name" => $nombreContacto,
+                    "last_name" => $nombreContacto,
+                    "name" => $nombreContacto,
+                    "phone" => $telefonoContacto,
+                    "email" => $email_contacto,
+                    "gender" => $genero_chatico,
+                    "id_alerta" => $response["lastId"],
+                    "nameVictim" => $nombre . " " . $apellido
+                );
+                $json = json_encode($data);
+                $header = array('Content-Type: application/json');
+                $resultado_chatico = new  PostController();
+                $result_chatico = $resultado_chatico->CallAPI($url, $json, $header);
+                file_put_contents('./log_alerta: ' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " CHATICO API USUARIO CONTACTO M2 -> $result_chatico \r\n", FILE_APPEND);
 
                 //Llamada a los contactos de emergencia
                 $url = 'http://api.mipgenlinea.com/serviceIVR.php';
@@ -787,7 +920,7 @@ class PostController
                 $datos = ['usuario' => 'smsFoxUser', 'password' => 'rhjIMEI3*', 'telefono' => $telefonoContacto, 'mensaje' => $urlAudio, 'fecha' => 'NA', 'aplicacion' => 'CSI LLAMADA'];
                 $resultado_sms2 = new  PostController();
                 $result_sms3 = $resultado_sms2->CallAPIIVR("POST", $url, json_encode($datos));
-                file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "IVR API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms3 . ",\n\r", FILE_APPEND);
+                file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " IVR API -> TELEFONO:" . $telefonoContacto . " - " . $result_sms3 . ",\n\r", FILE_APPEND);
             }
         }
 
@@ -797,7 +930,6 @@ class PostController
         $sentencia_listar = "SELECT * FROM agentes_lideres_por_zona alz INNER JOIN usuarios_agentes ua ON ua.id_usuario_agente=alz.fk_id_agente_agente_lider_zona WHERE fk_id_zona_agente_lider_zona=$id_zona";
         $resultado_listado = mysqli_query($conexion, $sentencia_listar);
 
-        $url = 'http://api.mipgenlinea.com/serviceSMS.php';
 
         if ($resultado_listado) {
             //Consultamos el mensaje para el lider de zona agregamos los datos al mensaje, configuramos el consumo a la api y enviamos
@@ -812,9 +944,24 @@ class PostController
             while ($valor = mysqli_fetch_assoc($resultado_listado)) {
 
                 $telefonoLider = $valor["telefono_usuario_agente"];
+                $nombreLider = $valor["nombre_usuario_agente"];
+                $apellidoLider = $valor["apellido_usuario_agente"];
+                $emailLider = $valor["email"];
+                $generoLider = $valor["genero_usuario_agente"];
+                if ($generoLider == "M") {
+                    $genero_chatico_lider = "male";
+                } else {
+                    $genero_chatico_lider = "female";
+                }
                 $tokenDevice = $valor["token_dispositivo"];
-                $resut_push_notification = PostController::sendGCM($tokenDevice, "CSI Reaccion - Una alerta fue enviada cerca de donde te encuentas");
-
+                # ------------- push notification para el usuario que este en cada iteracion ----------------- #
+                $body = "Fue reportada una alerta cerca de donde estás, es importante que estés alerta";
+                $url_push = "https://maps.google.com/?q=" . $latitud . "," . $longitud;
+                $title = $nombre . " " . $apellido . " reporto " . $nombre_evento;
+                $resut_push_notification = PostController::sendGCM($tokenDevice, $body, $title, $url_push);
+                file_put_contents('./log_push_record_alert' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " PUSH AGENTE LIDER -> $resut_push_notification\n\r", FILE_APPEND);
+                //SMS para los lideres de la zona
+                $url = 'http://api.mipgenlinea.com/serviceSMS.php';
                 $data = array(
                     "usuario" => "smsFoxUser",
                     "password" => "rhjIMEI3*",
@@ -826,7 +973,35 @@ class PostController
                 $header = array('Content-Type: application/json');
                 $resultado_sms = new  PostController();
                 $result_sms3 = $resultado_sms->CallAPI($url, $json, $header);
-                file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "SMS API -> TELEFONO:" . $telefonoLider . " - " . $result_sms3 . ",\n\r", FILE_APPEND);
+                file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " SMS API -> TELEFONO LIDER ZONA:" . $telefonoLider . " - " . $result_sms3 . ",\n\r", FILE_APPEND);
+                //Llamada aa los lideres de zona
+                $url = 'http://api.mipgenlinea.com/serviceIVR.php';
+                $urlAudio = "https://csi.mipgenlinea.com/audiosAlerta/xml-message-csi-liderZona.xml";
+                $datos = ['usuario' => 'smsFoxUser', 'password' => 'rhjIMEI3*', 'telefono' => '+57' . $telefonoLider, 'mensaje' => $urlAudio, 'fecha' => 'NA', 'aplicacion' => 'CSI LLAMADA'];
+                $instancia = new  PostController();
+                $result_llamada_lider_zona = $instancia->CallAPIIVR("POST", $url, json_encode($datos));
+                file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " IVR API -> TELEFONO LIDER ZONA:" . $telefonoLider . " - " . $result_llamada_lider_zona . ",\n\r", FILE_APPEND);
+                /*=============================================
+                Enviamos el mensaje al WPP del agente lider de la zona
+                =============================================*/
+                $url = 'http://api.mipgenlinea.com/sendWppLiderZona.php';
+                $data = array(
+                    "user" => "smsFoxUser",
+                    "password" => "rhjIMEI3*",
+                    "first_name" => $nombreLider,
+                    "last_name" => $apellidoLider,
+                    "name" => $nombreLider . " " . $apellidoLider,
+                    "phone" => "+57" . $telefonoLider,
+                    "email" => $emailLider,
+                    "gender" => $genero_chatico_lider,
+                    "service" => $nombre_evento,
+                    "nameVictim" => $nombre . " " . $apellido,
+                );
+                $json = json_encode($data);
+                $header = array('Content-Type: application/json');
+                $resultado_chatico = new  PostController();
+                $result_chatico = $resultado_chatico->CallAPI($url, $json, $header);
+                file_put_contents('./log_alerta: ' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " CHATICO API USUARIO LIDER ZONA -> $result_chatico \r\n", FILE_APPEND);
             }
         }
 
@@ -848,8 +1023,9 @@ class PostController
             $mensaje = str_replace("%telefono%", $telefono, $mensaje);
             $mensaje = str_replace("%email%", $email, $mensaje);
             while ($valor = mysqli_fetch_assoc($resultado_listado)) {
+                //defino el numero del lider del servicio
                 $telefono_responsable = $valor["telefono_responsable_servicio"];
-
+                //rrutina para enviar el SMS al lider del servicio
                 $url = 'http://api.mipgenlinea.com/serviceSMS.php';
                 $data = array(
                     "usuario" => "smsFoxUser",
@@ -862,38 +1038,93 @@ class PostController
                 $header = array('Content-Type: application/json');
                 $resultado_sms = new  PostController();
                 $result = $resultado_sms->CallAPI($url, $json, $header);
-                file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " -> TELEFONO:" . $telefonoLider . "SMS API -> $result\n\r", FILE_APPEND);
+                file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " SMS API -> TELEFONO LIDER SERVICIO:" . $telefono_responsable . " SMS API -> $result\n\r", FILE_APPEND);
+                //Llamada aa los lideres del serviico
+                $url = 'http://api.mipgenlinea.com/serviceIVR.php';
+                $urlAudio = "https://csi.mipgenlinea.com/audiosAlerta/xml-message-csi-liderServicio.xml";
+                $datos = ['usuario' => 'smsFoxUser', 'password' => 'rhjIMEI3*', 'telefono' => '+57' . $telefono_responsable, 'mensaje' => $urlAudio, 'fecha' => 'NA', 'aplicacion' => 'CSI LLAMADA'];
+                $instancia = new  PostController();
+                $result_llamada_lider_servicio = $instancia->CallAPIIVR("POST", $url, json_encode($datos));
+                file_put_contents('./log_alerta' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " IVR API -> TELEFONO LIDER SERVICIO:" . $telefono_responsable . " - " . $result_llamada_lider_servicio . ",\n\r", FILE_APPEND);
+
+                /*=============================================
+                Enviamos el mensaje al WPP del responsable del servicio
+                =============================================*/
+                $nombreResponsable = $valor["nombre_responsable_servicio"];
+                $telefonoResponsable = $valor["telefono_responsable_servicio"];
+                $emailResponsable = $valor["email_responsable_servicio"];
+                $generoResponsable = $valor["genero_responsable_servicio"];
+                if ($generoResponsable == "M") {
+                    $genero_chatico_Responsable = "male";
+                } else {
+                    $genero_chatico_Responsable = "female";
+                }
+
+                $url = 'http://api.mipgenlinea.com/sendWppResponsableServicio.php';
+                $data = array(
+                    "user" => "smsFoxUser",
+                    "password" => "rhjIMEI3*",
+                    "first_name" => $nombreResponsable,
+                    "last_name" => $nombreResponsable,
+                    "name" => $nombreResponsable,
+                    "phone" => "+57" . $telefonoResponsable,
+                    "email" => $emailResponsable,
+                    "gender" => $genero_chatico_Responsable,
+                    "service" => $nombre_evento,
+                    "nameVictim" => $nombre . " " . $apellido,
+                    "phoneVictim" => $telefono,
+                    "emailVictim" => $email
+                );
+                $json = json_encode($data);
+                $header = array('Content-Type: application/json');
+                $resultado_chatico = new  PostController();
+                $result_chatico = $resultado_chatico->CallAPI($url, $json, $header);
+                file_put_contents('./log_alerta: ' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " CHATICO API USUARIO LIDER ZONA -> $result_chatico \r\n", FILE_APPEND);
             }
         }
         /*=============================================
         Consultamos las posiciones de los clientes cercanos con menos de 1 hora para enviarles mensajes push
         =============================================*/
-        $sentencia_listar = "SELECT * FROM posiciones_clientes pc INNER JOIN usuarios_clientes uc ON uc.id_usuario_cliente=pc.fk_id_usuario_cliente_posicion_cliente";
-        $resultado_listado = mysqli_query($conexion, $sentencia_listar);
-
-        $suffix = "posicion_cliente";
-
-        if ($resultado_listado) {
-            while ($valor = mysqli_fetch_assoc($resultado_listado)) {
-
-                $distancia = PostController::distance($valor["latitud_$suffix"], $valor["longitud_$suffix"], $latitud, $longitud, "K");
-
-                if (round($distancia * 1000) <= 500) {
-
-                    $valor["distancia"] = '' . round(($distancia * 1000)) . '';
-                    $valor["minutos"] = '' . PostController::contarMinutos(date('Y-m-d H:i:s'), $valor["    $suffix"]) . '';
-
-                    if ($valor["minutos"] <= 60) {
-                        $tokenDevice = $valor["token_dispositivo"];
-                        # ------------- push notification para el usuario que este en cada iteracion ----------------- #
-                        $body = "CSI Reaccion - Una alerta fue creada cerca de donde te encuentas|https://maps.google.com/?q=" . $datos["latitud_alerta"] . "," . $datos["longitud_alerta"];
-                        $resut_push_notification = PostController::sendGCM($tokenDevice, $body);
-                        file_put_contents('./log_push_reaction' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " PUSH API VICTIMA -> $resut_push_notification\n\r", FILE_APPEND);
+        //consulto con un DISTINCT los id de los usuario que hay en la tabla excluyendo los repetidos
+        $sentencia_usuarios_posicion = "SELECT DISTINCT fk_id_usuario_cliente_posicion_cliente FROM `posiciones_clientes` WHERE fk_id_usuario_cliente_posicion_cliente != $id_usuario_cliente";
+        $resultado_usuarios_posicion = mysqli_query($conexion, $sentencia_usuarios_posicion);
+        //Si encontro algo ingresa y recorre el resultado
+        if ($resultado_usuarios_posicion) {
+            //entra a un ciclo qu recorre el resultado
+            while ($valor_listado = mysqli_fetch_assoc($resultado_usuarios_posicion)) {
+                //por cada iteracion consulta la ultimma posicion registrada con toda la informacion necestaria
+                $sentencia_listar = "SELECT * FROM posiciones_clientes pc INNER JOIN usuarios_clientes uc ON uc.id_usuario_cliente=pc.fk_id_usuario_cliente_posicion_cliente WHERE pc.fk_id_usuario_cliente_posicion_cliente =" . $valor_listado['fk_id_usuario_cliente_posicion_cliente'] . "ORDER BY date_created_posicion_cliente DESC LIMIT 1";
+                $resultado_listado = mysqli_query($conexion, $sentencia_listar);
+                //defino el suffix
+                $suffix = "posicion_cliente";
+                //si la consulta de la ultima posicion me trae algo
+                if ($resultado_listado) {
+                    //convierto a array para extraer los valores
+                    $valor = mysqli_fetch_assoc($resultado_listado);
+                    //llamo mi metodo para calcular la distancia
+                    $distancia = PostController::distance($valor["latitud_$suffix"], $valor["longitud_$suffix"], $latitud, $longitud, "K");
+                    //si esta a menos de 2 KM de distancia
+                    if (round($distancia * 1000) <= 2000) {
+                        //creo y guardo la variable distancia
+                        $valor["distancia"] = '' . round(($distancia * 1000)) . '';
+                        //creo y guardo la variable minutos y llamo al mentodo que me calcula los minutos que han transcurrido
+                        $valor["minutos"] = '' . PostController::contarMinutos(date('Y-m-d H:i:s'), $valor["date_created_$suffix"]) . '';
+                        //si la pocicon fue registrada en menos de 1 hora
+                        if ($valor["minutos"] <= 60) {
+                            //guardo el token del dispositivo del usuario de la pocision
+                            $tokenDevice = $valor["token_dispositivo"];
+                            # ------------- push notification para el usuario que este en cada iteracion ----------------- #
+                            $body = "Fue reportada una alerta cerca de donde estás, es importante que estés alerta";
+                            $url_push = "https://maps.google.com/?q=" . $latitud . "," . $longitud;
+                            $title = $nombre . " " . $apellido . " reporto " . $nombre_evento;
+                            $resut_push_notification = PostController::sendGCM($tokenDevice, $body, $title, $url_push);
+                            file_put_contents('./log_push_record_alert' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " PUSH CLIENTE CERCANO -> $resut_push_notification\n\r", FILE_APPEND);
+                        }
                     }
                 }
             }
         }
-
+        //retorno la respuesta al cliente
         $return = new PostController();
         $return->fncResponse($response, "NADA POR AHORA");
     }
@@ -916,6 +1147,14 @@ class PostController
         $fila_telefono = mysqli_fetch_assoc($resultado_listado);
         $telefono = $fila_telefono["telefono_usuario_cliente"];
         $nombre = $fila_telefono["nombre_usuario_cliente"];
+        $apellido = $fila_telefono["apellido_usuario_cliente"];
+        $email = $fila_telefono["email"];
+        $genero = $fila_telefono["genero_usuario_cliente"];
+        if ($genero == "M") {
+            $genero_chatico = "male";
+        } else {
+            $genero_chatico = "female";
+        }
 
         /*=============================================
         Consultamos el mensaje para el cliente
@@ -947,6 +1186,27 @@ class PostController
         $resultado_sms2 = new  PostController();
         $result_sms3 = $resultado_sms2->CallAPIIVR("POST", $url, json_encode($datos));
         file_put_contents('./log_serviceTest' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "IVR API -> TELEFONO:" . '+57' . $telefono . " - " . $result_sms3 . ",\n\r", FILE_APPEND);
+
+        /*=============================================
+        Enviamos mensaje de WPP al usuario informando de la recepcion de la central
+        =============================================*/
+        $url = 'http://api.mipgenlinea.com/sendWppAlertaPrueba.php';
+        $data = array(
+            "user" => "smsFoxUser",
+            "password" => "rhjIMEI3*",
+            "first_name" => $nombre,
+            "last_name" => $apellido,
+            "name" => $nombre . " " . $apellido,
+            "phone" => "+57" . $telefono,
+            "email" => $email,
+            "gender" => $genero_chatico,
+            "service" => $nombre_evento
+        );
+        $json = json_encode($data);
+        $header = array('Content-Type: application/json');
+        $resultado_chatico = new  PostController();
+        $result_chatico = $resultado_chatico->CallAPI($url, $json, $header);
+        file_put_contents('./log_alerta: ' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " CHATICO API USUARIO ALERTA -> $result_chatico \r\n", FILE_APPEND);
 
         $return = new PostController();
         $return->fncResponse($response, "NADA POR AHORA");
@@ -1039,7 +1299,7 @@ class PostController
     }
 
     //enviar los push notification
-    function sendGCM($deviceToken, $body)
+    function sendGCM($deviceToken, $body, $title, $url_push)
     {
         define('API_ACCESS_KEY', 'key=AAAAPBpq6KE:APA91bH4B4CF3XR6gXosqn317XPu02riJ6u7aBNOIYgYak363HaD23k5oii4FvZ90sC1NV19-Mi8xW1aqhRTPnymGXeNhzjXihZJljEywO5h9YDBL5q64l-ty-eWbxNDe5LuF9f0tlrh');
         $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
@@ -1052,10 +1312,10 @@ class PostController
         );
 
         $notification = [
-            'title'  => '' . "Atención Emergencia Reportada por CSI" . '',
+            'title'  => '' . $title . '',
             'body'   => '' . $body . ''
         ];
-        $extraNotificationData = ["message" => $notification, "moredata" => 'dd'];
+        $extraNotificationData = ["body" => $body, "title" => $title, "url" => $url_push];
 
         $fcmNotification = [
             'notification'  => $notification,
@@ -1099,45 +1359,6 @@ class PostController
             $image = imagecreatefrompng($source);
 
         imagejpeg($image, $destination, $quality);
-    }
-
-    //push notifications
-    function sendGCM_2($deviceToken, $body)
-    {
-        define('API_ACCESS_KEY_', 'key=AAAAPBpq6KE:APA91bH4B4CF3XR6gXosqn317XPu02riJ6u7aBNOIYgYak363HaD23k5oii4FvZ90sC1NV19-Mi8xW1aqhRTPnymGXeNhzjXihZJljEywO5h9YDBL5q64l-ty-eWbxNDe5LuF9f0tlrh');
-        $fcmUrl = 'https://fcm.googleapis.com/fcm/send';
-
-        $notification_id = $deviceToken;
-
-        $headers = array(
-            'Authorization:' . API_ACCESS_KEY_,
-            'Content-Type: application/json'
-        );
-
-        $notification = [
-            'title'  => '' . "Atención Reaccion Reportada por CSI" . '',
-            'body'   => '' . $body . ''
-        ];
-        $extraNotificationData = ["message" => $notification, "moredata" => 'dd'];
-
-        $fcmNotification = [
-            'notification'  => $notification,
-            'registration_ids' => array($notification_id),
-            'data' => $extraNotificationData,
-            'priority' => 'high'
-        ];
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $fcmUrl);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcmNotification));
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        return $result;
     }
 
     /*=============================================
