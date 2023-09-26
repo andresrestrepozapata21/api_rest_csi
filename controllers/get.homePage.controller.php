@@ -462,7 +462,7 @@ class GetControllerMaster
             'url_cargar_info' => $url_cargar_info,
             'modal_inicio' => $popup_inicio,
             'modal_anuncio' => $popup_anuncio,
-            "codigo_QR" => "https://chart.googleapis.com/chart?chs=180x180&cht=qr&chl=http%3A%2F%2Fapicsi.mipgenlinea.com%2Fvalidador_plan%2F?id_usuario=$id_usuario_cliente",
+            "codigo_QR" => "https://chart.googleapis.com/chart?chs=180x180&cht=qr&chl=http%3A%2F%2Fapicsi.csisecurity.co%2Fvalidador_plan%2F?id_usuario=$id_usuario_cliente",
             'puntos_ganados' => $puntos_usuario,
             'id_plan' => (int) $id_plan,
             'tipo_plan' => $tipo_plan,

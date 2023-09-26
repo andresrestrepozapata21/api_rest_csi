@@ -19,7 +19,7 @@ $fecha = date("Y-m-d H:i:s");
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 
     <!-- Meta Pixel Code -->
-    <script>
+   <!--  <script>
         ! function(f, b, e, v, n, t, s) {
             if (f.fbq) return;
             n = f.fbq = function() {
@@ -40,7 +40,7 @@ $fecha = date("Y-m-d H:i:s");
             'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '803163544037517');
         fbq('track', 'PageView');
-    </script>
+    </script> -->
     <!-- End Meta Pixel Code -->
 
 </head>
@@ -48,7 +48,7 @@ $fecha = date("Y-m-d H:i:s");
 <body>
     <main class="main">
         <header class="header">
-            <h4>Gracias por adquirir la membresía</h4>
+            <h4>Gracias por protección con CSI SECURITY</h4>
         </header>
         <section class="content">
             <article class="logo">
@@ -58,7 +58,7 @@ $fecha = date("Y-m-d H:i:s");
 
                 <!-- Validamos que la transaccion se realice -->
                 <?php
-                $ApiKey = "SCQlXfGYbg1JCgKw50E7VbsV6K";
+                $ApiKey = "N4AFPXABK2cG3mzlJ0nofwq7m4";
                 $merchant_id = $_REQUEST['merchantId'];
                 $referenceCode = $_REQUEST['referenceCode'];
                 $TX_VALUE = $_REQUEST['TX_VALUE'];
@@ -104,16 +104,18 @@ $fecha = date("Y-m-d H:i:s");
                 ?>
                         <div class="contenedor_gracias">
                             <h2>Transaccion Rechazada!</h2>
+                            <br>
                             <p>Parece que hubo un error en tu transacción</p>
                             <p>Por favor valida con tu entidad bancaria</p>
                             <p>Aquí te esperamos para que continúes el proceso</p>
                             <article class="content_info_payu">
-                                <img src="assets/images/payu.png" alt="">
+                                <!-- <img src="assets/images/payu.png" alt=""> -->
                                 <div class="linea_atencion">
                                     <h3>Línea de Atención</h3>
                                     <div class="number_wpp">
                                         <img src="assets/images/wpp_icon.png" alt="">
-                                        <h3>3003651804</h3>
+                                        <br>
+                                        <h3>3188262611</h3>
                                     </div>
                                 </div>
                             </article>
@@ -125,16 +127,17 @@ $fecha = date("Y-m-d H:i:s");
                     ?>
                         <div class="contenedor_gracias">
                             <h2>Error!</h2>
+                            <br>
                             <p>Parece que hubo un error en tu transacción</p>
                             <p>Por favor valida con tu entidad bancaria</p>
                             <p>Aquí te esperamos para que continúes el proceso</p>
                             <article class="content_info_payu">
-                                <img src="assets/images/payu.png" alt="">
+                               <!--  <img src="assets/images/payu.png" alt=""> -->
                                 <div class="linea_atencion">
                                     <h3>Línea de Atención</h3>
                                     <div class="number_wpp">
                                         <img src="assets/images/wpp_icon.png" alt="">
-                                        <h3>3003651804</h3>
+                                        <h3>3188262611</h3>
                                     </div>
                                 </div>
                             </article>
@@ -145,6 +148,7 @@ $fecha = date("Y-m-d H:i:s");
                     ?>
                         <div class="contenedor_gracias">
                             <h2>¡Gracias por tu compra!</h2>
+                            <br>
                             <p>
                                 Tu pago ha sido confirmado con la entidad bancaria y ya puedes hacer uso de la aplicación.
                             </p>
@@ -152,18 +156,18 @@ $fecha = date("Y-m-d H:i:s");
                                 Nuestro equipo de servicio al cliente se comunicará contigo para coordinar detalles posteriores.
                             </p>
                             <article class="content_info_payu">
-                                <img src="assets/images/payu.png" alt="">
+                                <!-- <img src="assets/images/payu.png" alt=""> -->
                                 <div class="linea_atencion">
                                     <h3>Línea de Atención</h3>
                                     <div class="number_wpp">
                                         <img src="assets/images/wpp_icon.png" alt="">
-                                        <h3>3003651804</h3>
+                                        <h3>3188262611</h3>
                                     </div>
                                 </div>
                             </article>
                         </div>
                         <!-- Meta Pixel Code -->
-                        <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=803163544037517&ev=PageView&noscript=1" /></noscript>
+                        <!-- <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=803163544037517&ev=PageView&noscript=1" /></noscript> -->
                         <!-- End Meta Pixel Code -->
                     <?php
                         break;
@@ -172,6 +176,7 @@ $fecha = date("Y-m-d H:i:s");
                     ?>
                         <div class="contenedor_gracias">
                             <h2>¡Gracias por tu compra!</h2>
+                            <br>
                             <p>
                                 Tu pago está siendo confirmado con la entidad bancaria, este proceso puede tomar un par de minutos. Te llegará una notificación al correo registrado una vez el proceso termine.
                             </p>
@@ -179,12 +184,12 @@ $fecha = date("Y-m-d H:i:s");
                                 Recuerda nuestra línea de Atención es:
                             </p>
                             <article class="content_info_payu">
-                                <img src="assets/images/payu.png" alt="">
+                                <!-- <img src="assets/images/payu.png" alt=""> -->
                                 <div class="linea_atencion">
                                     <h3>Línea de Atención</h3>
                                     <div class="number_wpp">
                                         <img src="assets/images/wpp_icon.png" alt="">
-                                        <h3>3003651804</h3>
+                                        <h3>3188262611</h3>
                                     </div>
                                 </div>
                             </article>
@@ -272,7 +277,7 @@ $fecha = date("Y-m-d H:i:s");
                     <h3>Línea de Atención</h3>
                     <div class="number_wpp">
                         <img src="assets/images/wpp_icon.png" alt="">
-                        <h3>3003651804</h3>
+                        <h3>3188262611</h3>
                     </div>
                 </div>
             </article>
@@ -281,7 +286,7 @@ $fecha = date("Y-m-d H:i:s");
                     <h3>CSI Seguridad es una Marca de BE SOLUTIONS SAS</h3>
                 </div>
                 <div class="footer_1">
-                    <a href="">
+                    <a href="https://csisecurity.co/tc/index.html">
                         <h3>Términos y Condiciones Política de Privacidad de Datos</h3>
                     </a>
                 </div>

@@ -107,20 +107,10 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "usuarios_clientes";
             $suffix  = "usuario_cliente";
             include "services/post.record.php";
-        } else if ($table == "agentRecord") {
-
-            $table = "usuarios_agentes";
-            $suffix  = "usuario_agente";
-            include "services/post.record.php";
         } else if ($table == "customerLogin") {
 
             $table = "usuarios_clientes";
             $suffix  = "usuario_cliente";
-            include "services/post.Login.php";
-        } else if ($table == "agentLogin") {
-
-            $table = "usuarios_agentes";
-            $suffix  = "usuario_agente";
             include "services/post.Login.php";
         } else if ($table == "LoginAdmin") {
 
@@ -151,15 +141,6 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $id = $_POST['id'];
             $table = "usuarios_clientes";
             $suffix  = "usuario_cliente";
-            include "services/post.uploadDocuments.php";
-        } else if ($table == "uploadDocumentsAgent") {
-
-            $file1 = $_FILES['file1'];
-            $file2 = $_FILES['file2'];
-            $file3 = $_FILES['file3'];
-            $id = $_POST['id'];
-            $table = "usuarios_agentes";
-            $suffix  = "usuario_agente";
             include "services/post.uploadDocuments.php";
         } else if ($table == "loadPerfilePictureCustomer") {
 
@@ -255,10 +236,6 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $userToken = "usuarios_clientes";
             $table = "planes_comprados";
             include "services/get.dataFilter.php";
-        } else if ($table == "getPasswordAgent") {
-
-            $table = "usuarios_agentes";
-            include "services/get.password.php";
         } else if ($table == "getPasswordCustomer") {
 
             $table = "usuarios_clientes";
@@ -307,13 +284,6 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "posiciones_sin_cobertura";
             $suffix = "posicion_sin_cobertura";
             $id = "id_posicion_sin_cobertura";
-            include "services/post.php";
-        } else if ($table == "positionAgentRecord") {
-
-            $userToken = "usuarios_agentes";
-            $table = "posiciones_agentes";
-            $suffix = "posicion_agente";
-            $id = "id_posicion_agente";
             include "services/post.php";
         } else if ($table == "getCloseCustomers") {
 
@@ -390,12 +360,6 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "usuarios_clientes";
             $suffix = "usuario_cliente";
             $select = "id_usuario_cliente";
-            include "services/put.resendMessage.php";
-        } else if ($table == "resendMessageAgent") {
-
-            $table = "usuarios_agentes";
-            $suffix = "usuario_agente";
-            $select = "id_usuario_agente";
             include "services/put.resendMessage.php";
         } else if ($table == "valideCostumerChatico") {
 
@@ -568,12 +532,6 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "usuarios_clientes";
             $suffix = "usuario_cliente";
             $select = "id_usuario_cliente";
-            include "services/put.checkAccount.php";
-        } else if ($table == "checkAccountAgent") {
-
-            $table = "usuarios_agentes";
-            $suffix = "usuario_agente";
-            $select = "id_usuario_agente";
             include "services/put.checkAccount.php";
         } else if ($table == "typeUserUpdate") {
 

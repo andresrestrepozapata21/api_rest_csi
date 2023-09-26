@@ -10,15 +10,13 @@ require 'src/SMTP.php';
 
 $html = "AQUI EL CONTENIDO DEL MENSAJE";
 
-
-function enviar_correo_confirmacion($destinatario1, $nombre, $apellido, $cedula)
+function enviar_correo_confirmacion($destinatario1, $nombre_completo)
 {
     //HTML del email
-    $mensaje = file_get_contents("https://apicsi.csisecurity.co/controllers/correos/template_correo_recordatorio.html");
-    $mensaje = str_replace("%nombre%", $nombre, $mensaje);
-    $mensaje = str_replace("%apellido%", $apellido, $mensaje);
-    $mensaje = str_replace("%cedula%", $cedula, $mensaje);
-
+    $mensaje = file_get_contents("template_correo.html");
+    $mensaje = str_replace("%nombre%", $nombre_completo, $mensaje);
+    //correo de destino
+    $correo1 = $destinatario1;
     //PHP Mailer
     $mail = new PHPMailer;
     $mail->isSMTP();
@@ -39,17 +37,16 @@ function enviar_correo_confirmacion($destinatario1, $nombre, $apellido, $cedula)
     $mail->CharSet = 'UTF-8';
     $mail->setFrom('alertas@csisecurity.co', 'Administrador CSI');
     $mail->addReplyTo('alertas@csisecurity.co', 'Administrador CSI');
-    $mail->addAddress($destinatario1, 'Envío de Correo');
-    $mail->Subject = $nombre . 'Notificaciones CSI';
+    $mail->addAddress($correo1, 'Envío de Correo');
+    $mail->Subject = 'Gracias por tu compra, ya cuentas con CSI SECURITY';
     $mail->msgHTML($mensaje, __DIR__);
-    $mail->AltBody = $nombre . ' Seguridad CSI';;
-    //$mail->addAttachment('images/empleado.png');
-    //$mail->addAttachment('images/independiente.png');
-    //$mail->addAttachment('images/rentista.png');
-
+    $mail->AltBody = ' Seguridad CSI';
+    //valido y retorno la respuesta
     if (!$mail->send()) {
-        return "Mailer Error: " . $mail->ErrorInfo;
+        //echo "Mailer Error: " . $mail->ErrorInfo;
+        return "error";
     } else {
-        return "Message sent!";
+        //echo "Solicitud Enviada";
+        return "Solicitud Enviada";
     }
 }

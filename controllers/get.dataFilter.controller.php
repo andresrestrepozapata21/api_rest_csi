@@ -157,15 +157,13 @@ class GetController
 
             $distancia = GetController::distance($valor["latitud_$suffix"], $valor["longitud_$suffix"], $latitud, $longitud, "K");
 
-            if ($distancia <= 100) {
-                if (round($distancia * 1000) <= 1000) {
+            if (round($distancia * 1000) <= 2000) {
 
-                    $valor["distancia"] = '' . round(($distancia * 1000)) . '';
-                    $valor["minutos"] = '' . GetController::contarMinutos(date('Y-m-d H:i:s'), $valor["date_created_$suffix"]) . '';
+                $valor["distancia"] = '' . round(($distancia * 1000)) . '';
+                $valor["minutos"] = '' . GetController::contarMinutos(date('Y-m-d H:i:s'), $valor["date_created_$suffix"]) . '';
 
-                    if ($valor["minutos"] <= 60) {
-                        $filasPosiciones[] = $valor;
-                    }
+                if ($valor["minutos"] <= 60) {
+                    $filasPosiciones[] = $valor;
                 }
             }
         }
@@ -204,7 +202,7 @@ class GetController
             }
             // Consultar un apellido aleatorio de la tabla nombres_agentes_fake
             $consultaApellido = "SELECT apellido FROM nombres_agentes_fake ORDER BY RAND() LIMIT 1";
-            $resultadoApellido = mysqli_query($conexion,$consultaApellido);
+            $resultadoApellido = mysqli_query($conexion, $consultaApellido);
             // Verificar si se encontró un resultado para el apellido
             if (mysqli_num_rows($resultadoApellido) > 0) {
                 $filaApellido = mysqli_fetch_assoc($resultadoApellido);
@@ -219,8 +217,8 @@ class GetController
                 'lng' => $randomLng,
             );
             //defino las variables adicionales que necestio
-            $title = 'Agente CSI '. $nombreAleatorio . ' ' . $apellidoAleatorio;
-            $snippet = 'Vigilando Zona';
+            $title = 'Agente CSI Líder ' . $nombreAleatorio . ' ' . $apellidoAleatorio;
+            $snippet = 'Listo para ayudarte';
             $iconUrl = '/assets/pointer.png';
             $iconSize = array(
                 'width' => 48,
@@ -692,13 +690,11 @@ class GetController
 
             $distancia = GetController::distance($valor["latitud_zona"], $valor["longitud_zona"], $latitud, $longitud, "K");
 
-            if ($distancia <= 100) {
-                if (round($distancia * 1000) <= $valor["radio_zona"]) {
+            if (round($distancia * 1000) <= $valor["radio_zona"]) {
 
-                    $valor["distancia"] = '' . round(($distancia * 1000)) . '';
+                $valor["distancia"] = '' . round(($distancia * 1000)) . '';
 
-                    $filasZonas[] = $valor;
-                }
+                $filasZonas[] = $valor;
             }
         }
 

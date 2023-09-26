@@ -63,7 +63,7 @@ if (mysqli_num_rows($query_vistima) > 0) {
         if ($fecha > $fecha_5min_despues_creacion_reaccion) {
             # ------------- SMS con el link para que confirme y push notification----------------- #
             //defino los mensajes sms y push
-            $mensaje = "Hola %nombre% %apellido%, por favor confirmanos que el usuario %nombre2% %apellido2% atendio tu emergencia, INGRESA AQUI -> https://apicsi.mipgenlinea.com/reacciones/confirmarVictima.php?id_reaccion=$id_reaccion_cliente_cliente";
+            $mensaje = "Hola %nombre% %apellido%, por favor confirmanos que el usuario %nombre2% %apellido2% atendio tu emergencia, INGRESA AQUI -> https://apicsi.csisecurity.co/reacciones/confirmarVictima.php?id_reaccion=$id_reaccion_cliente_cliente";
             $mensaje = str_replace("%nombre%", $nombre_cliente_victima, $mensaje);
             $mensaje = str_replace("%apellido%", $apellido_cliente_victima, $mensaje);
             $mensaje = str_replace("%nombre2%", $nombre_usuario_cliente_reaccion, $mensaje);
@@ -78,7 +78,7 @@ if (mysqli_num_rows($query_vistima) > 0) {
                 //Llamo mi metodo para enviar el SMS con los datos correspondiente
                 enviarSMS($mensaje, $telefono_cliente_victima, "VICTIMA");
                 # ------------- push notification para el usuario que este en cada iteracion ----------------- #
-                $url_push = "https://apicsi.mipgenlinea.com/reacciones/confirmarVictima.php?id_reaccion=$id_reaccion_cliente_cliente";
+                $url_push = "https://apicsi.csisecurity.co/reacciones/confirmarVictima.php?id_reaccion=$id_reaccion_cliente_cliente";
                 $title = "Atención Confirma la Asistencia a tu Emergencia";
                 $resut_push_notification = sendGCM($tokenDeviceVistima, $body, $title, $url_push);
                 file_put_contents('./log_confirmacion_reacciones' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " PUSH API VICTIMA -> $resut_push_notification\n\r", FILE_APPEND);
@@ -92,7 +92,7 @@ if (mysqli_num_rows($query_vistima) > 0) {
                     //Llamo mi metodo para enviar el SMS con los datos correspondiente
                     enviarSMS($mensaje, $telefono_cliente_victima, "VICTIMA");
                     # ------------- push notification para el usuario que este en cada iteracion ----------------- #
-                    $url_push = "https://apicsi.mipgenlinea.com/reacciones/confirmarVictima.php?id_reaccion=$id_reaccion_cliente_cliente";
+                    $url_push = "https://apicsi.csisecurity.co/reacciones/confirmarVictima.php?id_reaccion=$id_reaccion_cliente_cliente";
                     $title = "Atención Confirma la Asistencia a tu Emergencia";
                     $resut_push_notification = sendGCM($tokenDeviceVistima, $body, $title, $url_push);
                     file_put_contents('./log_confirmacion_reacciones' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " PUSH API VICTIMA -> $resut_push_notification\n\r", FILE_APPEND);
@@ -161,7 +161,7 @@ if (mysqli_num_rows($query_reaccion) > 0) {
         //Condicion que valida si pasaron 5 minutos despues de la creacion de la reaccion.
         if ($fecha > $fecha_5min_despues_creacion_reaccion) {
             # ------------- SMS con el link para que confirme -----------------
-            $mensaje = "Hola %nombre2% %apellido2%, por favor confirmanos que has atendido la emergencia de %nombre% %apellido%, INGRESA AQUI -> https://apicsi.mipgenlinea.com/reacciones/confirmarReaccion.php?id_reaccion=$id_reaccion_cliente_cliente";
+            $mensaje = "Hola %nombre2% %apellido2%, por favor confirmanos que has atendido la emergencia de %nombre% %apellido%, INGRESA AQUI -> https://apicsi.csisecurity.co/reacciones/confirmarReaccion.php?id_reaccion=$id_reaccion_cliente_cliente";
             $mensaje = str_replace("%nombre%", $nombre_cliente_victima, $mensaje);
             $mensaje = str_replace("%apellido%", $apellido_cliente_victima, $mensaje);
             $mensaje = str_replace("%nombre2%", $nombre_usuario_cliente_reaccion, $mensaje);
@@ -176,7 +176,7 @@ if (mysqli_num_rows($query_reaccion) > 0) {
                 //Llamo mi metodo para enviar el SMS con los datos correspondiente
                 enviarSMS($mensaje, $telefono_usuario_cliente_reaccion, "REACCION");
                 # ------------- push notification para el usuario que este en cada iteracion ----------------- #
-                $url_push = "https://apicsi.mipgenlinea.com/reacciones/confirmarReaccion.php?id_reaccion=$id_reaccion_cliente_cliente";
+                $url_push = "https://apicsi.csisecurity.co/reacciones/confirmarReaccion.php?id_reaccion=$id_reaccion_cliente_cliente";
                 $title = "Atención Confirma que Reaccionaste a esta Emergencia";
                 $resut_push_notification = sendGCM($tokenDeviceReaccion, $body, $title, $url_push);
                 file_put_contents('./log_confirmacion_reacciones' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " PUSH API REACCION -> $resut_push_notification\n\r", FILE_APPEND);
@@ -190,7 +190,7 @@ if (mysqli_num_rows($query_reaccion) > 0) {
                     //Llamo mi metodo para enviar el SMS con los datos correspondiente
                     enviarSMS($mensaje, $telefono_usuario_cliente_reaccion, "REACCION");
                     # ------------- push notification para el usuario que este en cada iteracion ----------------- #
-                    $url_push = "https://apicsi.mipgenlinea.com/reacciones/confirmarReaccion.php?id_reaccion=$id_reaccion_cliente_cliente";
+                    $url_push = "https://apicsi.csisecurity.co/reacciones/confirmarReaccion.php?id_reaccion=$id_reaccion_cliente_cliente";
                     $title = "Atención Confirma que Reaccionaste a esta Emergencia";
                     $resut_push_notification = sendGCM($tokenDeviceReaccion, $body, $title, $url_push);
                     file_put_contents('./log_confirmacion_reacciones' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " PUSH API REACCION -> $resut_push_notification\n\r", FILE_APPEND);

@@ -1,7 +1,7 @@
 <?php
 date_default_timezone_set("America/Bogota");
 include("conexion.php");
-include("correos/utilidad_enviar_correo.php");
+include("utilidad_enviar_correo.php");
 
 /////////////////////////////////Data////////////////////////////////////// 
 $file = fopen("data.txt", "a");
@@ -76,7 +76,6 @@ if (mysqli_num_rows($resultado_busqueda) > 0) {
 }
 
 $sentencia = "INSERT INTO payu_confirmaciones(date,shipping_city,sign,operation_date,payment_method,transaction_id,transaction_date,test,exchange_rate,ip,reference_pol,cc_holder,pse_bank,transaction_type,state_pol,billing_city,phone,cus,description,merchant_id,authorization_code,value,transaction_bank_id,billing_countrycardType,email_buyer,payment_method_id,response_message_pol,account_id,bank_referenced_code,reference_sale,additional_value,fecha)values ('$date','$shipping_city','$sign','$operation_date','$payment_method','$transaction_id','$transaction_date','$test','$exchange_rate','$ip','$reference_pol','$cc_holder','$pse_bank','$transaction_type','$state_pol','$billing_city','$phone','$cus','$description','$merchant_id','$authorization_code','$value','$transaction_bank_id','$billing_country','$cardType','$payment_method_name','$email_buyer','$payment_method_id','$response_message_pol','$account_id','$bank_referenced_code','$reference_sale','$additional_value','$fecha')";
-
 $resultado = mysqli_query($conexion, $sentencia);
 if (!$resultado) {
     echo "Error insertando confirmacion " . mysqli_error($conexion) . " - " . $sentencia;
@@ -92,5 +91,5 @@ $nombre = $fila_usuario["nombre_usuario_cliente"];
 $apellido = $fila_usuario["apellido_usuario_cliente"];
 $nombre_completo = $nombre . " " . $apellido;
 
-enviar_correo_confirmacion($correo_usuario, $nombre_completo);
-file_put_contents('./correos_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "ID_usuario_cliente: " . $fk_id_usuario_cliente_plan_comprado . " correo enviado a -> " . $correo_usuario . "\n\r", FILE_APPEND);
+$resultado_correo = enviar_correo_confirmacion($correo_usuario, $nombre_completo);
+file_put_contents('log_correos_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . " ID_usuario_cliente: " . $fk_id_usuario_cliente_plan_comprado . " correo enviado a -> " . $correo_usuario . " Resultado: " . $resultado_correo . "\n\r", FILE_APPEND);

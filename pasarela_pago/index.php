@@ -32,14 +32,14 @@ $test = "0";
 $buyerEmail = $correo_usuario;
 
 //URLs especificas para el flujo del landing de LAP
-$responseUrl = "http://localhost/api_rest_csi/pasarela_pago/respuesta_payu_csi.php";
-$confirmationUrl = "http://localhost/api_rest_csi/pasarela_pago/confirmacion_payu.php";
-//$responseUrl = "https://apicsi.mipgenlinea.com/pasarela_pago/respuesta_payu_csi.php";
-//$confirmationUrl = "https://apicsi.mipgenlinea.com/pasarela_pago/confirmacion_payu.php";
+//$responseUrl = "http://localhost/api_rest_csi/pasarela_pago/respuesta_payu_csi.php";
+//$confirmationUrl = "http://localhost/api_rest_csi/pasarela_pago/confirmacion_payu.php";
+$responseUrl = "https://apicsi.csisecurity.co/pasarela_pago/respuesta_payu_csi.php";
+$confirmationUrl = "https://apicsi.csisecurity.co/pasarela_pago/server/confirmacion_payu.php";
 
 //URL Sandbox o Produccion
-$url_pagos = "https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/";
-//$url_pagos = "https://checkout.payulatam.com/ppp-web-gateway-payu/";
+//$url_pagos = "https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/";
+$url_pagos = "https://checkout.payulatam.com/ppp-web-gateway-payu/";
 
 ?>
 <!DOCTYPE html>
