@@ -112,7 +112,8 @@ class GetController
                 if ($time < $timestamp) {
 
                     $fecha = date('Y-m-d H:i:s');
-                    $sentencia_plan_codigo_zona = "INSERT INTO `planes_comprados`(`activo_plan_comprado`, `fk_id_plan_plan_comprado`, `fk_id_usuario_cliente_plan_comprado`, `date_created_plan_comprado`) VALUES (1,19,$data->id_usuario_cliente,'$fecha')";
+                    $fk_id_plan = $valor["fk_id_plan_codigo_zona"];
+                    $sentencia_plan_codigo_zona = "INSERT INTO `planes_comprados`(`activo_plan_comprado`, `fk_id_plan_plan_comprado`, `fk_id_usuario_cliente_plan_comprado`, `date_created_plan_comprado`) VALUES (1,$fk_id_plan,$data->id_usuario_cliente,'$fecha')";
                     $consulta_plan_codigo_zona = mysqli_query($conexion, $sentencia_plan_codigo_zona);
 
                     $codigo_valido = true;

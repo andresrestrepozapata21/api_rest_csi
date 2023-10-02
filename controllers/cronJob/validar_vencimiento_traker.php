@@ -88,7 +88,7 @@ while ($fila = mysqli_fetch_assoc($consulta)) {
                     $urlAudio = "https://csi.mipgenlinea.com/audiosAlerta/xml-message-csi.xml";
                     $datos = ['usuario' => 'smsFoxUser', 'password' => 'rhjIMEI3*', 'telefono' => $telefono, 'mensaje' => $urlAudio, 'fecha' => 'NA', 'aplicacion' => 'CSI LLAMADA'];
                     $result_call = CallAPIIVR("POST", $url, json_encode($datos));
-                    file_put_contents('./llamadas_traker_' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "IVR API -> TELEFONO:" . $telefono . " - " . $result_call . ",\n\r", FILE_APPEND);
+                    file_put_contents('./log_push_expired_tracker' . date("j.n.Y") . '.txt', '[' . date('Y-m-d H:i:s') . ']' . "IVR API -> TELEFONO:" . $telefono . " - " . $result_call . ",\n\r", FILE_APPEND);
 
                     //Insertamos en la base de datos
                     $sentencia_2 = "UPDATE viajes SET notificaciones_viaje = 3, fecha_ult_notificacion_viaje = '$fecha' WHERE id_viaje = $id_viaje";

@@ -19,18 +19,20 @@ class PostController
         $contacto_contacto = str_replace(")", "", $contacto_contacto);
         $contacto_contacto = str_replace("-", "", $contacto_contacto);
         $contacto_contacto = str_replace(" ", "", $contacto_contacto);
-
         $contacto_contacto = PostController::validarYCorregirNumero($contacto_contacto);
-
         $data->telefono_contacto = $contacto_contacto;
-
         /*=============================================
         Validamos que el telefono No exista en base de datos
         =============================================*/
-        $response = GetModel::getDataFilter("contactos", "id_contacto, email_contacto, telefono_contacto", "telefono_contacto", $data->telefono_contacto);
-
+        //instacion la conexion a la BD
+        $conexion = Connection::conexionAlternativa();
+        /*=============================================
+        Consultamos cuales son las alertas cercanas
+        =============================================*/
+        $sentencia_existente = "SELECT * FROM `contactos` WHERE telefono_contacto LIKE '$data->telefono_contacto' AND fk_id_usuario_cliente_contacto  = $data->fk_id_usuario_cliente_contacto";
+        $resultado_existente = mysqli_query($conexion, $sentencia_existente);
         //si el telefono efectivamente no esta en base de datos podemos registrarlo
-        if (empty($response)) {
+        if ($resultado_existente && mysqli_num_rows($resultado_existente) < 1) {
             //llamo el modelo para registrar
             $response = PostModel::postData($data);
             //retorno el JSON response

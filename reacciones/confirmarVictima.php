@@ -127,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['btn'])) {
                     <h3>CSI Seguridad es una Marca de BE SOLUTIONS SAS</h3>
                 </div>
                 <div class="footer_1">
-                    <a href="">
+                    <a href="https://csisecurity.co/tc/index.html">
                         <h3>Términos y Condiciones Política de Privacidad de Datos_reaccion</h3>
                     </a>
                 </div>

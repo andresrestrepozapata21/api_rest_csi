@@ -146,6 +146,7 @@
   margin: 0 auto;
   border: 1px solid #000;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 .info_usuario table th, td {
@@ -165,6 +166,39 @@
 
 .info_usuario table tr:hover {
   background-color: #e5e5e5;
+}
+
+@media screen and (max-width: 480px) {
+  .info_usuario {
+    flex-direction: column;
+  }
+
+  .info_usuario i {
+    margin-bottom: 20px;
+    display: none;
+  }
+
+  .info_usuario table{
+    width: 90%;
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .info_usuario {
+    flex-direction: column;
+  }
+
+  .info_usuario i {
+    margin-bottom: 20px;
+    display: none;
+
+  }
+
+  .info_usuario table{
+    width: 100%;
+    font-size: 8px;
+  }
 }
 
 

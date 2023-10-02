@@ -254,12 +254,6 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $select = "*";
             $id = "fk_id_usuario_cliente_contacto";
             include "services/post.php";
-        } else if ($table == "reactionAgentAlert") {
-
-            $userToken = "usuarios_agentes";
-            $table = "reacciones_agentes";
-            $suffix = "reaccion_agente";
-            include "services/post.php";
         } else if ($table == "reactionCustomerAlert") {
 
             $userToken = "usuarios_clientes";
@@ -495,19 +489,6 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $ruta = "src/perfile_pictures/clients/" . $id . "/";
 
             include "services/put.toUpdate.php";
-        } else if ($table == "putAgent") {
-
-            $userToken = "usuarios_agentes";
-            $table = "usuarios_agentes";
-            $suffix = "usuario_agente";
-            $select = "id_usuario_agente";
-            $id = $_POST["id_usuario_agente"];
-            $file = $_FILES['file'];
-            $data = '{"token":"' . $_POST["token"] . '","id_usuario_agente":"' . $_POST["id_usuario_agente"] . '","Enfermedades_base":"' . $_POST["Enfermedades_base"] . '","nombre_usuario_agente":"' . $_POST["nombre_usuario_agente"] . '","apellido_usuario_agente":"' . $_POST["apellido_usuario_agente"] . '","telefono_usuario_agente":' . $_POST["telefono_usuario_agente"] . ',"cedula_usuario_agente":"' . $_POST["cedula_usuario_agente"] . '","tipo_de_sangre":"' . $_POST["tipo_de_sangre"] . '","direccion_usuario_agente":"' . $_POST["direccion_usuario_agente"] . '","email":"' . $_POST["email"] . '","arl":"' . $_POST["arl"] . '","password":' . $_POST["password"] . ',"alergias":"' . $_POST["alergias"] . '","eps":"' . $_POST["eps"] . '","fk_id_tipo_usuario_usuario_agente":"' . $_POST["fk_id_tipo_usuario_usuario_agente"] . '"}';
-            $data = json_decode($data);
-            $ruta = "src/perfile_pictures/agents/" . $id . "/";
-
-            include "services/put.toUpdate.php";
         } else {
             //Retorno el caso de error
             $json  = array(
@@ -605,14 +586,6 @@ if (count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])) {
             $table = "paradas";
             $nameId = "id_parada";
             $id = $data->id_parada;
-            include "services/delete.php";
-        } else if ($table == "deleteAgent") {
-
-            $userToken = "administradores";
-            $table = "usuarios_agentes";
-            $nameId = "id_usuario_agente";
-            $id = $data->id_usuario_agente;
-            $suffix = "usuario_agente";
             include "services/delete.php";
         } else if ($table == "deletePlan") {
 

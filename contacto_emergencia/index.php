@@ -12,7 +12,6 @@ $datos = mysqli_fetch_assoc($consulta);
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSI</title>
 
@@ -69,20 +68,20 @@ $datos = mysqli_fetch_assoc($consulta);
                         </table>
                     </div>
                     <div class="imagenes">
-                    <?php
-                    if ($datos["ruta1_imagen_alerta"] != "") { ?>
-                        <img src="../<?php echo $datos["ruta1_imagen_alerta"] ?>" alt="">
-                    <?php
-                    }
-                    if ($datos["ruta2_imagen_alerta"] != "") { ?>
-                        <img src="../<?php echo $datos["ruta2_imagen_alerta"] ?>" alt="">
-                    <?php
-                    }
-                    if ($datos["ruta3_imagen_alerta"] != "") { ?>
-                        <img src="../<?php echo $datos["ruta3_imagen_alerta"] ?>" alt="">
-                    <?php
-                    }
-                    ?>
+                        <?php
+                        if ($datos["ruta1_imagen_alerta"] != "") { ?>
+                            <img src="../<?php echo $datos["ruta1_imagen_alerta"] ?>" alt="">
+                        <?php
+                        }
+                        if ($datos["ruta2_imagen_alerta"] != "") { ?>
+                            <img src="../<?php echo $datos["ruta2_imagen_alerta"] ?>" alt="">
+                        <?php
+                        }
+                        if ($datos["ruta3_imagen_alerta"] != "") { ?>
+                            <img src="../<?php echo $datos["ruta3_imagen_alerta"] ?>" alt="">
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </article>
@@ -91,7 +90,7 @@ $datos = mysqli_fetch_assoc($consulta);
                     <h3>CSI Seguridad es una Marca de BE SOLUTIONS SAS</h3>
                 </div>
                 <div class="footer_1">
-                    <a href="">
+                    <a href="https://csisecurity.co/tc/index.html">
                         <h3>Términos y Condiciones Política de Privacidad de Datos</h3>
                     </a>
                 </div>
